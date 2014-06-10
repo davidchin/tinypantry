@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609073803) do
+ActiveRecord::Schema.define(version: 20140610134208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20140609073803) do
     t.string   "name"
     t.string   "url"
     t.string   "rss"
-    t.datetime "last_fetched"
+    t.datetime "last_imported"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 20140609073803) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "feed_id"
   end
+
+  add_index "recipes", ["feed_id"], name: "index_recipes_on_feed_id", using: :btree
 
 end
