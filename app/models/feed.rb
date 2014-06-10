@@ -1,4 +1,4 @@
-require 'open-uri'
+require 'cgi'
 
 class Feed < ActiveRecord::Base
   has_many :recipes
@@ -6,33 +6,23 @@ class Feed < ActiveRecord::Base
   def parse_rss
     # TODO: async process, as downloading data might take some time
     xml_file = open(rss)
-    xml = Nokogiri::XML(xml_file)
+    Nokogiri::XML(xml_file)
   end
 
   def import_rss
-    new_recipes = fresh_items.map do |item|
-      title = item.at_xpath('.//title'),
-      link = item.at_xpath('.//link'),
-      description = item.at_xpath('.//description')
-
-      data = {
-        name: title.try(:content),
-        url: link.try(:content),
-        description: description.try(:content)
-      }
-
-      recipes.new(data)
+    new_recipes = find_fresh_items.map do |item|
+      recipes.new(extract_recipe_data(item))
     end
 
-    if new_recipes.any?
-      Feed.transaction do
-        new_recipes.each(&:save)
-        update(last_imported: Time.zone.now)
-      end
+    return if new_recipes.empty?
+
+    Feed.transaction do
+      new_recipes.each(&:save)
+      update(last_imported: Time.zone.now)
     end
   end
 
-  def fresh_items
+  def find_fresh_items
     urls = recipes.pluck(:url)
 
     parse_rss.xpath('//item').reject do |item|
@@ -40,5 +30,29 @@ class Feed < ActiveRecord::Base
 
       urls.include?(link.try(:content))
     end
+  end
+
+  private
+
+  def find_img_src(node)
+    return if node.blank?
+
+    html = CGI.unescapeHTML(node.to_html)
+    html = Nokogiri::HTML.fragment(html)
+    html.at_xpath('.//img/@src').try(:value)
+  end
+
+  def extract_recipe_data(node)
+    title = node.at_xpath('.//title')
+    link = node.at_xpath('.//link')
+    description = node.at_xpath('.//description')
+
+    {
+      name: title.try(:content),
+      url: link.try(:content),
+      description: description.try(:content),
+      content_xml: node.to_xml,
+      remote_image_url: find_img_src(description)
+    }
   end
 end

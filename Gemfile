@@ -13,3 +13,4 @@ gem 'spring', group: :development
 gem 'rubocop', require: false
 gem 'paperclip', '~> 4.1'
 gem 'nokogiri', '~> 1.6.2'
+gem 'aws-sdk', '~> 1.42.0'
