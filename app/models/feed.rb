@@ -32,6 +32,10 @@ class Feed < ActiveRecord::Base
     end
   end
 
+  def self.import_all
+    all.map(&:import_rss)
+  end
+
   private
 
   def find_img_src(node)
