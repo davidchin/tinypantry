@@ -32,6 +32,10 @@ class Feed < ActiveRecord::Base
     end
   end
 
+  def recent_recipes(time_ago = 7.days.ago)
+    recipes.where('created_at >= ?', time_ago)
+  end
+
   def self.import_all
     all.map(&:import_rss)
   end

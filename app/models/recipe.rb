@@ -8,5 +8,6 @@ class Recipe < ActiveRecord::Base
 
   def remote_image_url=(url)
     self.image = URI.parse(url)
+    super
   end
 end
