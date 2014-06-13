@@ -36,7 +36,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Paperclip config
-  config.paperclip_defaults = {
-    storage: :filesystem
-  }
+  # config.paperclip_defaults = {
+  #   storage: :filesystem
+  # }
 end
