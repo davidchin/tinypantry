@@ -4,7 +4,6 @@ class Feed < ActiveRecord::Base
   has_many :recipes
 
   def parse_rss
-    # TODO: async process, as downloading data might take some time
     xml_file = open(rss)
     Nokogiri::XML(xml_file)
   end
@@ -37,7 +36,9 @@ class Feed < ActiveRecord::Base
   end
 
   def self.import_all
-    all.map(&:import_rss)
+    all.map do |feed|
+      feed.delay.import_rss
+    end
   end
 
   private

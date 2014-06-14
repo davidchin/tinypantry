@@ -24,6 +24,10 @@ gem 'paperclip', '~> 4.1'
 # Parser
 gem 'nokogiri', '~> 1.6.2'
 
+# Background processes
+gem 'delayed_job', '~> 4.0.1'
+gem 'delayed_job_active_record', '~> 4.0.1'
+
 # 3rd-party service
 gem 'aws-sdk', '~> 1.42.0'
 
