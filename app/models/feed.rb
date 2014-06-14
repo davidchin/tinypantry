@@ -1,7 +1,7 @@
 require 'cgi'
 
 class Feed < ActiveRecord::Base
-  has_many :recipes
+  has_many :recipes, dependent: :destroy
 
   def parse_rss
     xml_file = open(rss)
@@ -21,6 +21,10 @@ class Feed < ActiveRecord::Base
     end
   end
 
+  def delay_import_rss
+    delay.import_rss
+  end
+
   def find_fresh_items
     urls = recipes.pluck(:url)
 
@@ -31,14 +35,8 @@ class Feed < ActiveRecord::Base
     end
   end
 
-  def recent_recipes(time_ago = 7.days.ago)
-    recipes.where('created_at >= ?', time_ago)
-  end
-
   def self.import_all
-    all.map do |feed|
-      feed.delay.import_rss
-    end
+    all.map(&:delay_import_rss)
   end
 
   private
@@ -55,13 +53,16 @@ class Feed < ActiveRecord::Base
     title = node.at_xpath('.//title')
     link = node.at_xpath('.//link')
     description = node.at_xpath('.//description')
+    pub_date = node.at_xpath('.//pubDate')
 
     {
       name: title.try(:content),
       url: link.try(:content),
       description: description.try(:content),
+      published_at: pub_date.try(:content),
+      imported_at: Time.zone.now,
       content_xml: node.to_xml,
-      remote_image_url: find_img_src(description)
+      remote_image_url: find_img_src(description),
     }
   end
 end

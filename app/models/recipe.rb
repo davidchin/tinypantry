@@ -1,4 +1,4 @@
-require 'open-uri'
+require 'uri'
 
 class Recipe < ActiveRecord::Base
   has_attached_file :image, styles: { thumb: '100x100>' }
@@ -7,7 +7,16 @@ class Recipe < ActiveRecord::Base
   belongs_to :feed
 
   def remote_image_url=(url)
-    self.image = URI.parse(url)
-    super
+    begin
+      url = URI.encode(url) if url.present?
+      self.image = URI.parse(url)
+      super
+    rescue URI::Error
+      false
+    end
+  end
+
+  def self.recent(time_ago = 7.days.ago)
+    where('created_at >= ?', time_ago)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613235720) do
+ActiveRecord::Schema.define(version: 20140614020804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20140613235720) do
     t.integer  "feed_id"
     t.text     "content_xml"
     t.string   "remote_image_url"
+    t.datetime "published_at"
+    t.datetime "imported_at"
   end
 
   add_index "recipes", ["feed_id"], name: "index_recipes_on_feed_id", using: :btree

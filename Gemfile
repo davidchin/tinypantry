@@ -31,7 +31,7 @@ gem 'delayed_job_active_record', '~> 4.0.1'
 # 3rd-party service
 gem 'aws-sdk', '~> 1.42.0'
 
-# Monitor
+# Analystics
 gem 'newrelic_rpm'
 
 # Dev tool
