@@ -38,3 +38,4 @@ gem 'newrelic_rpm'
 gem 'foreman', group: :development
 gem 'spring', group: :development
 gem 'rubocop', require: false
+gem 'hirb', require: false

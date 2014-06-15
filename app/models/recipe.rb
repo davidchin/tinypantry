@@ -5,6 +5,9 @@ class Recipe < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   belongs_to :feed
+  has_many :categorisations, as: :keywordable
+  has_many :keywords, through: :categorisations
+  has_many :categories, through: :keywords
 
   def remote_image_url=(url)
     begin

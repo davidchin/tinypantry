@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140614020804) do
+ActiveRecord::Schema.define(version: 20140615004616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categorisations", force: true do |t|
+    t.integer  "keywordable_id"
+    t.string   "keywordable_type"
+    t.integer  "keyword_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categorisations", ["keyword_id"], name: "index_categorisations_on_keyword_id", using: :btree
+  add_index "categorisations", ["keywordable_id", "keywordable_type"], name: "index_categorisations_on_keywordable_id_and_keywordable_type", using: :btree
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -37,6 +54,12 @@ ActiveRecord::Schema.define(version: 20140614020804) do
     t.string   "url"
     t.string   "rss"
     t.datetime "last_imported"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "keywords", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
