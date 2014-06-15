@@ -37,5 +37,6 @@ gem 'newrelic_rpm'
 # Dev tool
 gem 'foreman', group: :development
 gem 'spring', group: :development
+gem 'rails_best_practices', group: :development
 gem 'rubocop', require: false
 gem 'hirb', require: false

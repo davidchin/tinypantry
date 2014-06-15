@@ -9,13 +9,13 @@ class Feed < ActiveRecord::Base
   end
 
   def import_rss
-    new_recipes = find_fresh_items.map do |item|
+    new_recipes = fresh_items.map do |item|
       recipes.new(extract_recipe_data(item))
     end
 
     return if new_recipes.empty?
 
-    Feed.transaction do
+    transaction do
       new_recipes.each(&:save)
       update(last_imported: Time.zone.now)
     end
@@ -25,7 +25,7 @@ class Feed < ActiveRecord::Base
     delay.import_rss
   end
 
-  def find_fresh_items
+  def fresh_items
     urls = recipes.pluck(:url)
 
     parse_rss.xpath('//item').reject do |item|
@@ -36,12 +36,12 @@ class Feed < ActiveRecord::Base
   end
 
   def self.import_all
-    all.map(&:delay_import_rss)
+    find_each(&:delay_import_rss)
   end
 
   private
 
-  def find_img_src(node)
+  def extract_img_src(node)
     return if node.blank?
 
     html = CGI.unescapeHTML(node.to_html)
@@ -62,7 +62,7 @@ class Feed < ActiveRecord::Base
       published_at: pub_date.try(:content),
       imported_at: Time.zone.now,
       content_xml: node.to_xml,
-      remote_image_url: find_img_src(description),
+      remote_image_url: extract_img_src(description)
     }
   end
 end
