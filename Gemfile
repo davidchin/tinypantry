@@ -34,6 +34,9 @@ gem 'aws-sdk', '~> 1.42.0'
 # Analystics
 gem 'newrelic_rpm'
 
+# Search
+gem 'pg_search'
+
 # Dev tool
 gem 'foreman', group: :development
 gem 'spring', group: :development

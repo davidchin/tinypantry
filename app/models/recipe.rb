@@ -1,6 +1,8 @@
 require 'uri'
 
 class Recipe < ActiveRecord::Base
+  include PgSearch
+
   has_attached_file :image, styles: { thumb: '100x100>' }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
@@ -9,12 +11,24 @@ class Recipe < ActiveRecord::Base
   belongs_to :feed
   has_many :categorisations, as: :keywordable, dependent: :destroy
   has_many :keywords, through: :categorisations
-  has_many :categories, -> { group('categories.id').order('count(categories.id) desc') },
+  has_many :categories,
+           -> { group('categories.id').order('count(categories.id) desc') },
            through: :keywords
 
   scope :recent, -> (time_ago = 7.days.ago) { where('created_at >= ?', time_ago) }
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where.not(approved: true) }
+
+  pg_search_scope :search_content,
+                  against: {
+                    name: 'A',
+                    description: 'B'
+                  },
+                  using: {
+                    tsearch: {
+                      dictionary: 'english'
+                    }
+                  }
 
   def remote_image_url=(url)
     url = URI.encode(url) if url.present?
