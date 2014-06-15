@@ -13,6 +13,8 @@ class Recipe < ActiveRecord::Base
            through: :keywords
 
   scope :recent, -> (time_ago = 7.days.ago) { where('created_at >= ?', time_ago) }
+  scope :approved, -> { where(approved: true) }
+  scope :unapproved, -> { where.not(approved: true) }
 
   def remote_image_url=(url)
     url = URI.encode(url) if url.present?
