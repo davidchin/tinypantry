@@ -28,7 +28,7 @@ gem 'nokogiri', '~> 1.6.2'
 gem 'delayed_job', '~> 4.0.1'
 gem 'delayed_job_active_record', '~> 4.0.1'
 
-# 3rd-party service
+# AWS
 gem 'aws-sdk', '~> 1.42.0'
 
 # Analystics
@@ -36,6 +36,9 @@ gem 'newrelic_rpm'
 
 # Search
 gem 'pg_search'
+
+# Pagination
+gem 'kaminari', '~> 0.16.1'
 
 # Dev tool
 gem 'foreman', group: :development
