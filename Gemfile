@@ -43,6 +43,10 @@ gem 'kaminari', '~> 0.16.1'
 # URL
 gem 'friendly_id', '~> 5.0.4'
 
+# Auth
+gem 'devise', '~> 3.2.4'
+gem 'cancan', '~> 1.6.10'
+
 # Dev tool
 gem 'foreman', group: :development
 gem 'spring', group: :development
