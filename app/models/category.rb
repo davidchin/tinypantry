@@ -1,4 +1,6 @@
 class Category < ActiveRecord::Base
+  include FriendlyId
+
   has_many :categorisations, as: :keywordable, dependent: :destroy
   has_many :keywords, through: :categorisations
   has_many :recipes,
@@ -6,4 +8,6 @@ class Category < ActiveRecord::Base
            through: :keywords
 
   validates :name, uniqueness: true
+
+  friendly_id :name, use: :slugged
 end

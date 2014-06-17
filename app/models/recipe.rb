@@ -2,6 +2,7 @@ require 'uri'
 
 class Recipe < ActiveRecord::Base
   include PgSearch
+  extend FriendlyId
 
   has_attached_file :image, styles: { thumb: '100x100>' }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
@@ -30,6 +31,8 @@ class Recipe < ActiveRecord::Base
                     }
                   }
 
+  friendly_id :slug_candidates, use: :slugged
+
   def remote_image_url=(url)
     url = URI.encode(url) if url.present?
     self.image = URI.parse(url)
@@ -57,5 +60,12 @@ class Recipe < ActiveRecord::Base
       regexp = /\b(?:#{ keyword_name }|#{ keyword_name.pluralize })\b/i
       regexp.match(name) || regexp.match(description)
     end
+  end
+
+  def slug_candidates
+    [
+      :name,
+      [:name, -> { feed.name }]
+    ]
   end
 end
