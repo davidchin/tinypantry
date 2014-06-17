@@ -4,4 +4,6 @@ class Category < ActiveRecord::Base
   has_many :recipes,
            -> { group('recipes.id').order('count(recipes.id) desc') },
            through: :keywords
+
+  validates :name, uniqueness: true
 end

@@ -8,4 +8,6 @@ class Keyword < ActiveRecord::Base
            through: :categorisations,
            source: :keywordable,
            source_type: 'Category'
+
+  validates :name, uniqueness: true
 end
