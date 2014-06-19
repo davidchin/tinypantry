@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140619135223) do
+ActiveRecord::Schema.define(version: 20140619213917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20140619135223) do
     t.datetime "imported_at"
     t.boolean  "approved",           default: false
     t.string   "slug"
+    t.integer  "bookmarks_count",    default: 0
   end
 
   add_index "recipes", ["feed_id"], name: "index_recipes_on_feed_id", using: :btree

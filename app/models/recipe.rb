@@ -21,6 +21,7 @@ class Recipe < ActiveRecord::Base
   has_many :bookmarked_users, through: :bookmarks, source: :user
 
   scope :recent, -> (time_ago = 7.days.ago) { where('created_at >= ?', time_ago) }
+  scope :popular, -> { order(bookmarks_count: :desc, created_at: :desc) }
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where.not(approved: true) }
 
