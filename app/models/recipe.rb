@@ -10,11 +10,15 @@ class Recipe < ActiveRecord::Base
   after_create :categorise
 
   belongs_to :feed
+
   has_many :categorisations, as: :keywordable, dependent: :destroy
   has_many :keywords, through: :categorisations
   has_many :categories,
            -> { group('categories.id').order('count(categories.id) desc') },
            through: :keywords
+
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmarked_users, through: :bookmarks, source: :user
 
   scope :recent, -> (time_ago = 7.days.ago) { where('created_at >= ?', time_ago) }
   scope :approved, -> { where(approved: true) }
