@@ -17,6 +17,11 @@ class Recipe < ActiveRecord::Base
            -> { group('categories.id').order('count(categories.id) desc') },
            through: :keywords
 
+  has_many :related_recipes,
+           -> (recipe) { where.not(id: recipe.id) },
+           through: :keywords,
+           source: :recipes
+
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_users, through: :bookmarks, source: :user
 
