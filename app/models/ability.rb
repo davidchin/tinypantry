@@ -4,8 +4,6 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    if user.role?(:admin)
-      can :manage, :all
-    end
+    can :manage, :all if user.role?(:admin)
   end
 end

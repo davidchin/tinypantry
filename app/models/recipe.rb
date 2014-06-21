@@ -1,4 +1,5 @@
 require 'uri'
+require 'fuzzy_match'
 
 class Recipe < ActiveRecord::Base
   include PgSearch
@@ -65,11 +66,8 @@ class Recipe < ActiveRecord::Base
   private
 
   def matched_keywords
-    Keyword.all.select do |keyword|
-      keyword_name = Regexp.escape(keyword.name)
-      regexp = /\b(?:#{ keyword_name }|#{ keyword_name.pluralize })\b/i
-      regexp.match(name) || regexp.match(description)
-    end
+    matcher = FuzzyMatch.new(Keyword.all, read: :name, threshold: 0.25)
+    (matcher.find_all(name) + matcher.find_all(description)).uniq
   end
 
   def slug_candidates

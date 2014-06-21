@@ -10,6 +10,6 @@ class User < ActiveRecord::Base
   has_many :bookmarked_recipes, through: :bookmarks, source: :recipe
 
   def role?(role_symbol)
-    !!roles.find_by(name: role_symbol.to_s.camelize)
+    roles.find_by(name: role_symbol.to_s.camelize).present?
   end
 end

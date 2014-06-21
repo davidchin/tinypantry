@@ -36,6 +36,7 @@ gem 'newrelic_rpm'
 
 # Search
 gem 'pg_search'
+gem 'fuzzy_match', '~> 2.0.4'
 
 # Pagination
 gem 'kaminari', '~> 0.16.1'
