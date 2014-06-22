@@ -34,6 +34,9 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.7)
+    bourbon (3.2.3)
+      sass (~> 3.2)
+      thor
     builder (3.2.2)
     cancan (1.6.10)
     chronic (0.10.2)
@@ -63,6 +66,7 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    diff-lcs (1.2.5)
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
@@ -96,7 +100,12 @@ GEM
     mini_portile (0.6.0)
     minitest (5.3.4)
     multi_json (1.10.1)
+    neat (1.5.1)
+      bourbon (>= 3.1)
+      sass (~> 3.2.19)
     newrelic_rpm (3.8.1.221)
+    ngmin-rails (0.4.0)
+      rails (>= 3.1)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
@@ -149,6 +158,22 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     require_all (1.3.2)
+    rspec-core (3.0.2)
+      rspec-support (~> 3.0.0)
+    rspec-expectations (3.0.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.0.0)
+    rspec-mocks (3.0.2)
+      rspec-support (~> 3.0.0)
+    rspec-rails (3.0.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 3.0.0)
+      rspec-expectations (~> 3.0.0)
+      rspec-mocks (~> 3.0.0)
+      rspec-support (~> 3.0.0)
+    rspec-support (3.0.2)
     rubocop (0.23.0)
       json (>= 1.7.7, < 2)
       parser (~> 2.1.9)
@@ -166,6 +191,9 @@ GEM
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
     sexp_processor (4.4.3)
+    slim (2.0.2)
+      temple (~> 0.6.6)
+      tilt (>= 1.3.3, < 2.1)
     slop (3.5.0)
     spring (1.1.3)
     sprockets (2.11.0)
@@ -177,14 +205,13 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    temple (0.6.7)
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.2.2)
-      coffee-rails
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
     uglifier (2.5.0)
@@ -205,6 +232,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk (~> 1.42.0)
+  bourbon (~> 3.2.3)
   cancan (~> 1.6.10)
   coffee-rails (~> 4.0.0)
   dalli
@@ -219,18 +247,21 @@ DEPENDENCIES
   jquery-rails
   kaminari (~> 0.16.1)
   memcachier
+  neat (~> 1.5.1)
   newrelic_rpm
+  ngmin-rails
   nokogiri (~> 1.6.2)
   paperclip (~> 4.1)
   pg
   pg_search
   rails (= 4.1.1)
   rails_best_practices
+  rspec-rails (~> 3.0.1)
   rubocop
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  slim (~> 2.0.2)
   spring
-  turbolinks
   uglifier (>= 1.3.0)
   unicorn
   whenever

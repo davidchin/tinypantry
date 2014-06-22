@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title TinyPantry
+
+    = stylesheet_link_tag 'application', media: 'all'
+
+    script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'
+    script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js'
+    script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js'
+    script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.min.js'
+    = javascript_include_tag 'application'
+
+    = csrf_meta_tags
+
+  body
+    = yield

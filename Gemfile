@@ -8,17 +8,23 @@ gem 'pg'
 gem 'unicorn'
 
 # Front-end
-gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
-gem 'turbolinks'
+gem 'ngmin-rails'
+gem 'sass-rails', '~> 4.0.3'
+gem 'bourbon', '~> 3.2.3'
+gem 'neat', '~> 1.5.1'
 
 # View
 gem 'jbuilder', '~> 2.0'
+gem 'slim', '~> 2.0.2'
 
 # Doc
 gem 'sdoc', '~> 0.4.0', group: :doc
+
+# Test
+gem 'rspec-rails', '~> 3.0.1'
 
 # Asset
 gem 'paperclip', '~> 4.1'
@@ -31,7 +37,7 @@ gem 'delayed_job', '~> 4.0.1'
 gem 'delayed_job_active_record', '~> 4.0.1'
 
 # Cron
-gem 'whenever', :require => false
+gem 'whenever', require: false
 
 # AWS
 gem 'aws-sdk', '~> 1.42.0'
@@ -58,8 +64,8 @@ gem 'dalli'
 gem 'memcachier'
 
 # Dev tool
-gem 'foreman', group: :development
 gem 'spring', group: :development
-gem 'rails_best_practices', group: :development
+gem 'rails_best_practices', require: false
+gem 'foreman', require: false
 gem 'rubocop', require: false
 gem 'hirb', require: false
