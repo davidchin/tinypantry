@@ -4,17 +4,20 @@ html
     title TinyPantry
 
     = stylesheet_link_tag 'application', media: 'all'
-
-    javascript:
-      ASSET_MANIFEST = JSON.parse("#{ escape_javascript(asset_manifest_json) }");
-
-    script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'
-    script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js'
-    script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js'
-    script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.min.js'
-    = javascript_include_tag 'application'
-
     = csrf_meta_tags
 
   body
     = yield
+
+    - if Rails.env == 'development'
+      script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js'
+      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'
+      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js'
+      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js'
+    - else
+      script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'
+      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js'
+      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js'
+      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.min.js'
+
+    = javascript_include_tag 'application'

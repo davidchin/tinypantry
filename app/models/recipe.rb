@@ -30,6 +30,7 @@ class Recipe < ActiveRecord::Base
   scope :popular, -> { order(bookmarks_count: :desc, created_at: :desc) }
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where.not(approved: true) }
+  scope :by_category, -> (category) { joins(:categories).where('categories.slug = ?', category) }
 
   pg_search_scope :search_content,
                   against: {

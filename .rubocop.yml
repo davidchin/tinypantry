@@ -6,3 +6,6 @@ LineLength:
 
 MethodLength:
   Max: 20
+
+ClassAndModuleChildren:
+  EnforcedStyle: compact

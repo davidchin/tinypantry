@@ -28,5 +28,8 @@ module Tinypantry
         secret_access_key: Rails.application.secrets.s3_secret
       }
     }
+
+    config.generators.assets = false
+    config.generators.helper = false
   end
 end

@@ -42,4 +42,7 @@ Rails.application.configure do
   config.paperclip_defaults = {
     storage: :filesystem
   }
+
+  # Slim config
+  Slim::Engine.set_default_options pretty: true, sort_attrs: false
 end
