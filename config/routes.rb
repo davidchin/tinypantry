@@ -9,7 +9,10 @@ Rails.application.routes.draw do
       end
 
       resources :categories, only: [:index, :show]
+
       resources :feeds, only: [:index, :show]
+
+      resources :users, only: :show
     end
   end
 
