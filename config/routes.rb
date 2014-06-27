@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
-
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      devise_for :users
+
       resources :recipes, only: [:index, :show] do
         get :related, on: :member
         get :search, on: :collection
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
       resources :feeds, only: [:index, :show]
 
-      resources :users, only: :show
+      resources :users, only: [:index, :show]
     end
   end
 

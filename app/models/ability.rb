@@ -4,6 +4,11 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    can :manage, :all if user.role?(:admin)
+    if user.role?(:admin)
+      can :manage, :all
+    else
+      can :read, [Recipe, Category]
+      can [:create, :show, :update], User, id: user.id
+    end
   end
 end
