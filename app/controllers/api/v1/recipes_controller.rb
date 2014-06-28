@@ -1,7 +1,7 @@
 module Api
   module V1
     class RecipesController < Api::V1::ApiController
-      before_action :authenticate_user! #, only: :bookmark
+      before_action :authenticate_user!, only: [:bookmark, :create, :update, :destroy]
 
       before_action :find_recipes, only: [:index]
       before_action :find_recipe, only: [:show, :related]
@@ -27,6 +27,15 @@ module Api
       end
 
       def bookmark
+      end
+
+      def create
+      end
+
+      def update
+      end
+
+      def destroy
       end
 
       private

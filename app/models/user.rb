@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -24,8 +26,14 @@ class User < ActiveRecord::Base
     save(validate: false)
   end
 
+  def valid_auth_token?(auth_token)
+    bcrypt = BCrypt::Password.new(encrypted_auth_token)
+    auth_token = BCrypt::Engine.hash_secret(auth_token, bcrypt)
+    Devise.secure_compare(encrypted_auth_token, auth_token)
+  end
+
   def self.encrypt_auth_token(auth_token)
-    Digest::SHA1.hexdigest(auth_token.to_s)
+    BCrypt::Password.create(auth_token, cost: 10).to_s
   end
 
   private

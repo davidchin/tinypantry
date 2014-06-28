@@ -3,7 +3,8 @@ angular.module('tinyPantry', [
   'navigation',
   'recipe',
   'resource',
-  'route'
+  'route',
+  'session'
 ])
 
 angular.module('category', [
@@ -23,5 +24,9 @@ angular.module('resource', [
 ])
 
 angular.module('route', [
+  'ngRoute'
+])
+
+angular.module('session', [
   'ngRoute'
 ])

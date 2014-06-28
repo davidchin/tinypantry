@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
-  scope 'api/v1' do
-    devise_for :users,
-      skip: :all,
-      defaults: { format: :json },
-      constraints: { format: :json }
+  api_route_options = {
+    defaults: { format: :json },
+    constraints: { format: :json },
+    except: [:new, :edit]
+  }
+
+  scope 'api/v1', api_route_options do
+    devise_for :users, skip: :all
 
     devise_scope :user do
-      resources :sessions, only: [:create, :destroy], controller: 'api/v1/sessions'
-      resources :users, only: [:index, :show]
+      resources :sessions, only: [:create, :destroy],
+                           controller: 'api/v1/sessions'
 
       scope module: 'devise' do
         resources :passwords, only: [:create, :update]
@@ -16,18 +19,18 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :api, defaults: { format: :json }, constraints: { format: :json } do
+  namespace :api, api_route_options do
     namespace :v1 do
-      resources :recipes, only: [:index, :show] do
+      resources :recipes do
         get :related, on: :member
         get :search, on: :collection
       end
 
-      resources :categories, only: [:index, :show]
+      resources :categories
 
-      resources :feeds, only: [:index, :show]
+      resources :feeds
 
-      resources :users, only: [:index, :show]
+      resources :users, except: [:new, :edit, :create]
     end
   end
 

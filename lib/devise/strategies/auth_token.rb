@@ -7,9 +7,8 @@ module Devise
 
       def authenticate!
         user = User.find_by(email: params[:email])
-        auth_token = User.encrypt_auth_token(params[:auth_token])
 
-        if user && Devise.secure_compare(user.encrypted_auth_token, auth_token)
+        if user && user.valid_auth_token?(params[:auth_token])
           success!(user)
         else
           fail
