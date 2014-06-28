@@ -1,6 +1,18 @@
-class Api::V1::ApiController < ApplicationController
-  respond_to :json
+module Api
+  module V1
+    class ApiController < ApplicationController
+      respond_to :json
 
-  check_authorization
-  load_and_authorize_resource
+      prepend_before_filter :skip_devise_trackable
+
+      load_and_authorize_resource
+      check_authorization
+
+      private
+
+      def skip_devise_trackable
+        request.env['devise.skip_trackable'] = true if params[:auth_token].present?
+      end
+    end
+  end
 end

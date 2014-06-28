@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  respond_to :html, :json
+
+  # protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
 
   after_action :set_csrf_cookie_for_angular
 
