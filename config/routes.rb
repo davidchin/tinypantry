@@ -15,8 +15,9 @@ Rails.application.routes.draw do
       end
 
       scope module: 'devise' do
-        resources :passwords, only: [:create, :update]
-        resources :registrations, only: [:create, :update, :destroy]
+        resource :password, only: [:create, :update]
+        resources :users, only: [:create, :update, :destroy],
+                          controller: 'registrations'
       end
     end
   end
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
 
       resources :feeds
 
-      resources :users, except: [:new, :edit, :create]
+      resources :users, only: [:show, :index]
     end
   end
 

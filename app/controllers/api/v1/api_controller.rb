@@ -3,7 +3,7 @@ module Api
     class ApiController < ApplicationController
       respond_to :json
 
-      prepend_before_filter :skip_devise_trackable
+      prepend_before_action :skip_devise_trackable
 
       load_and_authorize_resource
       check_authorization

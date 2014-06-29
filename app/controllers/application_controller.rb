@@ -1,10 +1,9 @@
 class ApplicationController < ActionController::Base
   respond_to :html, :json
 
-  # protect_from_forgery with: :exception
-  protect_from_forgery with: :null_session
+  protect_from_forgery with: :exception
 
-  after_action :set_csrf_cookie_for_angular
+  skip_before_action :verify_authenticity_token, if: :api_request?
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -12,13 +11,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def set_csrf_cookie_for_angular
-    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
-  end
-
   protected
 
-  def verified_request?
-    super || form_authenticity_token == request.headers['X-XSRF-TOKEN']
+  def api_request?
+    request.format.json?
   end
 end
