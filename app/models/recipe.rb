@@ -1,8 +1,6 @@
-require 'uri'
-require 'fuzzy_match'
-
 class Recipe < ActiveRecord::Base
   include PgSearch
+
   extend FriendlyId
 
   has_attached_file :image, styles: { thumb: '100x100>' }

@@ -232,6 +232,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk (~> 1.42.0)
+  bcrypt (~> 3.1.7)
   bourbon (~> 3.2.3)
   cancan (~> 1.6.10)
   coffee-rails (~> 4.0.0)

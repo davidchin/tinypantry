@@ -1,5 +1,3 @@
-require 'cgi'
-
 class Feed < ActiveRecord::Base
   has_many :recipes, dependent: :destroy
 

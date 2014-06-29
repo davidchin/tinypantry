@@ -9,8 +9,10 @@ Rails.application.routes.draw do
     devise_for :users, skip: :all
 
     devise_scope :user do
-      resources :sessions, only: [:create, :destroy],
-                           controller: 'api/v1/sessions'
+      scope module: 'api/v1' do
+        post 'login', to: 'sessions#create'
+        delete 'logout', to: 'sessions#destroy'
+      end
 
       scope module: 'devise' do
         resources :passwords, only: [:create, :update]

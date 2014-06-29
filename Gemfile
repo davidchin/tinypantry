@@ -59,6 +59,9 @@ gem 'friendly_id', '~> 5.0.4'
 gem 'devise', '~> 3.2.4'
 gem 'cancan', '~> 1.6.10'
 
+# Hash
+gem 'bcrypt', '~> 3.1.7'
+
 # Cache
 gem 'dalli'
 gem 'memcachier'

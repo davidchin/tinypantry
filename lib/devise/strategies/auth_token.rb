@@ -21,3 +21,5 @@ module Devise
     end
   end
 end
+
+Warden::Strategies.add(:auth_token, Devise::Strategies::AuthToken)
