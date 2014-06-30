@@ -5,20 +5,24 @@ html
 
     = csrf_meta_tag
 
-    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag "application", media: "all"
 
   body
     = yield
 
-    - if Rails.env == 'development'
-      script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js'
-      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js'
-      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.js'
-      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.js'
+    - if Rails.env == "development"
+      script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.js"
+      script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular.js"
+      script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-route.js"
+      script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-resource.js"
+      script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-cookies.min.js"
+      script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-messages.min.js"
     - else
-      script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js'
-      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js'
-      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-route.min.js'
-      script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular-resource.min.js'
+      script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"
+      script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular.min.js"
+      script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-route.min.js"
+      script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-resource.min.js"
+      script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-cookies.min.js"
+      script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-messages.min.js"
 
-    = javascript_include_tag 'application'
+    = javascript_include_tag "application"

@@ -1,0 +1,10 @@
+angular.module('recipe')
+  .config ($routeProvider) ->
+    $routeProvider
+      .when '/recipes',
+        templateUrl: '<%= asset_path("/assets/recipes/index.html") %>'
+        controller: 'RecipesIndexController'
+
+      .when '/recipes/:id',
+        templateUrl: '<%= asset_path("/assets/recipes/show.html") %>'
+        controller:  'RecipesShowController'

@@ -1,0 +1,6 @@
+angular.module('session')
+  .config ($routeProvider) ->
+    $routeProvider
+      .when '/login',
+        templateUrl: '<%= asset_path("/assets/sessions/new.html") %>'
+        controller: 'SessionsNewController'

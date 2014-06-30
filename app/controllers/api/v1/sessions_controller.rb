@@ -3,6 +3,8 @@ module Api
     class SessionsController < Devise::SessionsController
       respond_to :json
 
+      wrap_parameters :user
+
       def create
         self.resource = warden.authenticate!(auth_options)
         sign_in(resource_name, resource)
