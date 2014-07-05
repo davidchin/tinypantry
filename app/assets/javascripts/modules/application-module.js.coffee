@@ -14,10 +14,11 @@ angular.module 'category', [
 ]
 
 angular.module 'core', [
+  'LocalStorageModule'
+  'model'
   'ngCookies'
   'ngResource'
   'ngRoute'
-  'model'
 ]
 
 angular.module 'config', [

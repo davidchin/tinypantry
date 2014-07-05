@@ -1,5 +1,5 @@
 angular.module('model')
-  .factory 'Model', ($q, $cookieStore) ->
+  .factory 'Model', ($q, localStorageService) ->
     class Model
       constructor: (config) ->
         @status = {}
@@ -13,14 +13,14 @@ angular.module('model')
 
       store: (key, value) ->
         if value?
-          $cookieStore.put(key, value)
+          localStorageService.set(key, value)
         else
-          $cookieStore.remove(key)
+          localStorageService.remove(key)
 
         return value
 
       retrieve: (key) ->
-        $cookieStore.get(key)
+        localStorageService.get(key)
 
       show: (params) ->
         @request('show', params, data)
