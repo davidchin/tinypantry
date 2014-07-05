@@ -1,24 +1,14 @@
 angular.module('session')
-  .factory 'sessionService', ($http, $cookieStore) ->
+  .factory 'sessionService', ($http) ->
     create: (params, data) ->
       $http.post('/api/v1/login', data)
-        .success (response) =>
-          @store('auth_token', response.auth_token) if response.auth_token?
+        .then (response) -> response.data
 
-    destroy: ->
-      $http.delete('/api/v1/logout', { auth_token: @authToken() })
-        .success ->
-          $cookieStore.remove('auth_token')
+    destroy: (params, data) ->
+      $http.delete('/api/v1/logout', data)
+        .then (response) -> response.data
 
-    store: (key, value) ->
-      $cookieStore.put(key, value)
-
-      return value
-
-    authToken: ->
-      return $cookieStore.get('auth_token')
-
-  .factory 'Session', (sessionService, Model) ->
+  .factory 'Session', ($q, sessionService, Model) ->
     class Session extends Model
       constructor: (config) ->
         defaults =
@@ -27,5 +17,25 @@ angular.module('session')
         config = _.extend(defaults, config)
 
         super(config)
+
+      create: ->
+        super.then (response) =>
+          if response.auth_token_secret?
+            @store('auth_token', response.auth_token_secret)
+
+          return response
+
+      destroy: ->
+        super.finally (response) =>
+          @store('auth_token', null)
+
+      verify: ->
+        auth_token = @token()
+
+        # TODO: Make an API call to validate the current auth token
+        if auth_token? then $q.when() else $q.reject()
+
+      token: ->
+        @retrieve('auth_token')
 
     return Session

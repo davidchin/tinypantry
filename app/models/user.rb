@@ -15,11 +15,15 @@ class User < ActiveRecord::Base
     roles.find_by(name: role_symbol.to_s.camelize).present?
   end
 
+  def generate_auth_token
+    auth_token = auth_tokens.create
+    @auth_token_secret = auth_token.secret
+  end
+
   def generate_auth_token!
     auth_tokens.stale.destroy_all
 
-    auth_token = auth_tokens.create
-    @auth_token_secret = auth_token.secret
+    generate_auth_token
   end
 
   def destroy_auth_token!(secret)

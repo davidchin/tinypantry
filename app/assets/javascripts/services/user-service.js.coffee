@@ -10,7 +10,7 @@ angular.module('user')
 
     return User
 
-  .factory 'currentUser', ($cookies, userService, User, Session) ->
+  .factory 'CurrentUser', (userService, User, Session) ->
     class CurrentUser extends User
       constructor: ->
         @session = new Session
@@ -19,10 +19,18 @@ angular.module('user')
 
       login: (email = @email, password = @password) ->
         @session.create({}, { email, password })
+          .finally =>
+            @password = null
 
       logout: ->
-        @session.destroy()
+        @session.destroy({ auth_token: @session.token() })
 
-    user = new CurrentUser
+    return CurrentUser
 
-    return user
+  .factory 'currentUser', ($rootScope, CurrentUser) ->
+    currentUser = new CurrentUser
+
+    $rootScope.$on '$routeChangeSuccess', ->
+      currentUser.status.loggedIn = currentUser.session.token()?
+
+    return currentUser

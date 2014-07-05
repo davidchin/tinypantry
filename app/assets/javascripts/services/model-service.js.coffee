@@ -2,6 +2,7 @@ angular.module('model')
   .factory 'Model', ($q, $cookieStore) ->
     class Model
       constructor: (config) ->
+        @status = {}
         @configure(config)
 
       set: (data) ->
@@ -11,12 +12,15 @@ angular.module('model')
         @data = null
 
       store: (key, value) ->
-        @cookieStore.put(key, value)
+        if value?
+          $cookieStore.put(key, value)
+        else
+          $cookieStore.remove(key)
 
         return value
 
       retrieve: (key) ->
-        @cookieStore.get(key)
+        $cookieStore.get(key)
 
       show: (params) ->
         @request('show', params, data)
