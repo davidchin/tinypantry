@@ -4,11 +4,14 @@ angular.module('recipe')
       .when '/',
         templateUrl: '<%= asset_path("/assets/recipes/index.html") %>'
         controller: 'RecipesIndexController'
+        controllerAs: 'recipesIndex'
 
       .when '/recipes',
         templateUrl: '<%= asset_path("/assets/recipes/index.html") %>'
         controller: 'RecipesIndexController'
+        controllerAs: 'recipesIndex'
 
       .when '/recipes/:id',
         templateUrl: '<%= asset_path("/assets/recipes/show.html") %>'
         controller:  'RecipesShowController'
+        controllerAs: 'recipesShow'

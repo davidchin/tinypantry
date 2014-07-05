@@ -1,14 +1,24 @@
-RecipesIndexController = (recipeResource) ->
-  recipeResource.index().$promise
-    .then (response) ->
-      console.log(response)
-
-RecipesShowController = (recipeResource, $routeParams) ->
-  recipeResource.show({ id: $routeParams.id }).$promise
-    .then (response) ->
-      console.log(response)
-
-# Register controllers
 angular.module('recipe')
-  .controller('RecipesIndexController', RecipesIndexController)
-  .controller('RecipesShowController', RecipesShowController)
+  .controller 'RecipesIndexController', (Recipes) ->
+    class RecipesIndexController
+      constructor: ->
+        @recipes = new Recipes
+
+        @get()
+
+      get: ->
+        @recipes.read()
+
+    return new RecipesIndexController
+
+  .controller 'RecipesShowController', ($routeParams, Recipe) ->
+    class RecipesShowController
+      constructor: ->
+        @recipe = new Recipe
+
+        @get()
+
+      get: ->
+        @recipe.show({ id: $routeParams.id })
+
+    return new RecipesShowController

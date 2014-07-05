@@ -11,12 +11,10 @@ angular.module('session')
   .factory 'Session', ($q, sessionService, Model) ->
     class Session extends Model
       constructor: (config) ->
-        defaults =
+        @config =
           resource: sessionService
 
-        config = _.extend(defaults, config)
-
-        super(config)
+        super
 
       create: ->
         super.then (response) =>

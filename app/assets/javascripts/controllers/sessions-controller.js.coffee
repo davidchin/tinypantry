@@ -1,32 +1,30 @@
 angular.module('session')
-  .controller 'SessionsNewController', ($scope, $location, $log, currentUser) ->
-    controller =
-      init: ->
-        currentUser.session.verify()
-          .then =>
-            $log.debug('Already logged in')
-            @redirect('/')
+  .controller 'SessionsNewController', ($location, currentUser) ->
+    class SessionsNewController
+      constructor: ->
+        @currentUser = currentUser
 
-        return this
+        @currentUser.session.verify()
+          .then =>
+            $location.path('/')
 
       login: ->
-        currentUser.login()
+        @currentUser.login()
           .then (response) ->
-            $location.path('/')
+            $location.path('/') && response
 
-            return response
+    return new SessionsNewController
 
-      redirect: (path) ->
-        $location.path(path)
+  .controller 'SessionsDestroyController', ($location, currentUser) ->
+    class SessionsDestroyController
+      constructor: ->
+        @currentUser = currentUser
 
-    $scope.currentUser = currentUser
-    $scope.controller = controller.init()
+        @logout()
 
-  .controller 'SessionsDestroyController', ($scope, $location, currentUser) ->
-    controller =
-      init: ->
-        currentUser.logout()
-          .then ->
-            $location.path('/')
+      logout: ->
+        @currentUser.logout()
+          .then (response) ->
+            $location.path('/') && response
 
-    $scope.controller = controller.init()
+    return new SessionsDestroyController

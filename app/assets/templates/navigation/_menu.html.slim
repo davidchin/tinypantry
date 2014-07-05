@@ -1,7 +1,7 @@
-div ng-controller="NavigationController"
+div ng-controller="NavigationController as navigation"
 
-  div ng-show="currentUser.status.loggedIn"
+  div ng-show="navigation.currentUser.status.loggedIn"
     a ng-href="/logout" Logout
 
-  div ng-hide="currentUser.status.loggedIn"
+  div ng-hide="navigation.currentUser.status.loggedIn"
     a ng-href="/login" Login
