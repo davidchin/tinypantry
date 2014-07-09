@@ -1,12 +1,13 @@
 angular.module('navigation')
-  .controller 'NavigationController', (Categories) ->
+  .controller 'NavigationController', (currentUser, Categories) ->
     class NavigationController
       constructor: ->
         @categories = new Categories
+        @currentUser = currentUser
 
-        @get()
+        @read()
 
-      get: ->
+      read: ->
         @categories.read()
 
     return new NavigationController

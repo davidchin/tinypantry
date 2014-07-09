@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       scope module: 'api/v1' do
         post 'login', to: 'sessions#create'
         delete 'logout', to: 'sessions#destroy'
+        get 'verify', to: 'sessions#verify'
       end
 
       scope module: 'devise' do

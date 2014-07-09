@@ -4,7 +4,6 @@ angular.module 'application', [
   'config'
   'navigation'
   'recipe'
-  'resource'
   'session'
   'user'
 ]
@@ -19,6 +18,7 @@ angular.module 'core', [
   'ngCookies'
   'ngResource'
   'ngRoute'
+  'resource'
 ]
 
 angular.module 'config', [
@@ -44,6 +44,7 @@ angular.module 'resource', [
 
 angular.module 'session', [
   'core'
+  'user'
 ]
 
 angular.module 'user', [

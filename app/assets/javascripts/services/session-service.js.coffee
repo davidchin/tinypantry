@@ -8,6 +8,21 @@ angular.module('session')
       $http.delete('/api/v1/logout', data)
         .then (response) -> response.data
 
+    verify: ->
+      $http.get('/api/v1/verify')
+        .then (response) -> response.data
+
+  .factory 'sessionHttpInterceptor', ($injector) ->
+    request: (config) ->
+      return config unless /^\/api\//i.test(config.url)
+
+      currentUser = $injector.get('currentUser')
+
+      if { secret, key } = currentUser.session.token()
+        config.headers['Authorization'] = "Token token=\"#{ secret }\", email=\"#{ key }\""
+
+      return config
+
   .factory 'Session', ($q, sessionService, Model) ->
     class Session extends Model
       constructor: (config) ->
@@ -18,22 +33,25 @@ angular.module('session')
 
       create: ->
         super.then (response) =>
-          if response.auth_token_secret?
-            @store('auth_token', response.auth_token_secret)
+          @store('auth_token', response.auth_token_secret) if response.auth_token_secret?
+          @store('user', _.pick(response, 'id', 'email'))
 
           return response
 
       destroy: ->
-        super.finally (response) =>
+        super.finally =>
           @store('auth_token', null)
+          @store('user', null)
 
       verify: ->
-        auth_token = @token()
+        return $q.reject() unless @token()?.secret
 
-        # TODO: Make an API call to validate the current auth token
-        if auth_token? then $q.when() else $q.reject()
+        @request('verify')
 
       token: ->
-        @retrieve('auth_token')
+        return unless @retrieve('auth_token')
+
+        secret: @retrieve('auth_token')
+        key: @retrieve('user')?.email
 
     return Session

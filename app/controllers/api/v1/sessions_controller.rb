@@ -3,11 +3,13 @@ module Api
     class SessionsController < Devise::SessionsController
       respond_to :json
 
+      skip_before_action :skip_devise_trackable, only: :create
+
       wrap_parameters :user
 
       def create
-        # Always re-authenticate instead of fetching from the current session
-        sign_out(resource_name)
+        # Skip storage
+        request.env['devise.skip_storage'] = true
 
         self.resource = warden.authenticate!(auth_options)
         sign_in(resource_name, resource)
@@ -22,6 +24,12 @@ module Api
       def destroy
         self.resource = warden.authenticate(auth_options)
         super
+      end
+
+      def verify
+        resource = warden.authenticate!(auth_options)
+
+        respond_with(resource, only: :email)
       end
     end
   end

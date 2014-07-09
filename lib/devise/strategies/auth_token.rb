@@ -1,14 +1,16 @@
+require 'devise/auth_token_header'
+
 module Devise
   module Strategies
     class AuthToken < Base
       def valid?
-        params[:email].present? && params[:auth_token].present?
+        auth_token_header.valid?
       end
 
       def authenticate!
-        user = User.find_by(email: params[:email])
+        user = User.find_by(email: auth_token_header.email)
 
-        if user && user.valid_auth_token?(params[:auth_token])
+        if user && user.valid_auth_token?(auth_token_header.auth_token)
           success!(user)
         else
           fail
@@ -17,6 +19,12 @@ module Devise
 
       def store?
         false
+      end
+
+      private
+
+      def auth_token_header
+        @auth_token_header ||= Devise::AuthTokenHeader.new(request)
       end
     end
   end

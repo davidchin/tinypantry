@@ -4,9 +4,9 @@ angular.module('recipe')
       constructor: ->
         @recipes = new Recipes
 
-        @get()
+        @read()
 
-      get: ->
+      read: ->
         @recipes.read()
 
     return new RecipesIndexController
@@ -16,9 +16,9 @@ angular.module('recipe')
       constructor: ->
         @recipe = new Recipe
 
-        @get()
+        @read()
 
-      get: ->
-        @recipe.show({ id: $routeParams.id })
+      read: ->
+        @recipe.read({ id: $routeParams.id })
 
     return new RecipesShowController

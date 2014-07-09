@@ -11,7 +11,7 @@ module Api
       private
 
       def skip_devise_trackable
-        request.env['devise.skip_trackable'] = true if params[:auth_token].present?
+        request.env['devise.skip_trackable'] = true
       end
     end
   end

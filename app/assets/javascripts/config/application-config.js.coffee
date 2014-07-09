@@ -4,3 +4,6 @@ angular.module('config')
 
   .config (localStorageServiceProvider) ->
     localStorageServiceProvider.setPrefix('tinypantry')
+
+  .config ($httpProvider) ->
+    $httpProvider.interceptors.push('sessionHttpInterceptor')

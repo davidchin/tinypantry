@@ -10,20 +10,14 @@ angular.module('model')
       set: (data) ->
         @data = data
 
-        return this
-
       unset: ->
         @data = null
-
-        return this
 
       store: (key, value) ->
         if value?
           localStorageService.set(key, value)
         else
           localStorageService.remove(key)
-
-        return this
 
       retrieve: (key) ->
         localStorageService.get(key)
@@ -45,7 +39,7 @@ angular.module('model')
 
       destroy: (params, data) ->
         @request('destroy', params, data)
-          .then (response) => @unset()
+          .then (response) => @unset() && response
 
       request: (action, params, data) ->
         output = @config.resource[action]?(params, data)
@@ -69,6 +63,9 @@ angular.module('model')
 
         @data[key]
 
+      pick: (attrs...) ->
+        _.pick(@data, attrs...)
+
       read: (params) ->
         @request('show', params)
           .then (response) => @set(response)
@@ -83,7 +80,7 @@ angular.module('model')
       destroy: (params, data) ->
         if @data.$destroy?
           @data.$destroy(data)
-            .then (response) => @unset()
+            .then (response) => @unset() && response
         else
           super
 
@@ -107,6 +104,15 @@ angular.module('model')
 
         super(data)
 
+      find: (params) ->
+        _.find(@data, params)
+
+      where: (params) ->
+        _.where(@data, params)
+
+      pluck: (attr) ->
+        _.pluck(@data, attr)
+
       read: (params) ->
         @request('index', params)
           .then (response) => @set(response)
@@ -114,13 +120,9 @@ angular.module('model')
       add: (model) ->
         @data.push(model)
 
-        return this
-
       remove: (model) ->
         index = _.indexOf(@data, model)
 
         @data.splice(index, 1) if index > -1
-
-        return this
 
     return Collection

@@ -5,8 +5,13 @@ angular.module('user')
 
     return $resource(path, params)
 
-  .factory 'User', (Model) ->
+  .factory 'User', (userService, Model) ->
     class User extends Model
+      constructor: (config) ->
+        @config =
+          resource: userService
+
+        super
 
     return User
 
@@ -17,13 +22,21 @@ angular.module('user')
 
         super
 
+      read: ->
+        params = { id: @retrieve('user').id }
+
+        super(params).then (response) =>
+          @status.loggedIn = true && response
+
       login: (email = @email, password = @password) ->
         @session.create({}, { email, password })
           .finally =>
             @password = null
 
       logout: ->
-        @session.destroy({ auth_token: @session.token() })
+        @session.destroy()
+          .finally =>
+            @status.loggedIn = false
 
     return CurrentUser
 
@@ -31,6 +44,7 @@ angular.module('user')
     currentUser = new CurrentUser
 
     $rootScope.$on '$routeChangeSuccess', ->
-      currentUser.status.loggedIn = currentUser.session.token()?
+      currentUser.read() if currentUser.session.token()?
 
     return currentUser
+
