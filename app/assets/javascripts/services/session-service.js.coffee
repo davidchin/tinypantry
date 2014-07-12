@@ -18,7 +18,7 @@ angular.module('session')
 
       currentUser = $injector.get('currentUser')
 
-      if { secret, key } = currentUser.session.token()
+      if { secret, key } = currentUser.session.token()?
         config.headers['Authorization'] = "Token token=\"#{ secret }\", email=\"#{ key }\""
 
       return config
