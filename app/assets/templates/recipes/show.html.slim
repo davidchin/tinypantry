@@ -1,1 +1,5 @@
-div show
+h1 {{ recipesShow.recipe.data.name }}
+
+p ng-bind-html="recipesShow.recipe.data.description"
+
+button type="button" ng-click="recipesShow.bookmark()" Bookmark

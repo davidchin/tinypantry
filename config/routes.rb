@@ -26,8 +26,12 @@ Rails.application.routes.draw do
   namespace :api, api_route_options do
     namespace :v1 do
       resources :recipes do
-        get :related, on: :member
         get :search, on: :collection
+
+        member do
+          get :related
+          post :bookmark
+        end
       end
 
       resources :categories

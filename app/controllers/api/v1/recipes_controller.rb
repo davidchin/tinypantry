@@ -4,7 +4,9 @@ module Api
       before_action :authenticate_user!, only: [:bookmark, :create, :update, :destroy]
 
       before_action :find_recipes, only: [:index]
-      before_action :find_recipe, only: [:show, :related]
+      before_action :find_recipe, only: [:show, :related, :bookmark]
+
+      load_and_authorize_resource
 
       def index
         respond_with(@recipes)
@@ -15,7 +17,7 @@ module Api
       end
 
       def search
-        @recipes = Recipe.search_content(params[:q])
+        @recipes = Recipe.search_content(params[:query])
 
         respond_with(@recipes)
       end
@@ -27,15 +29,21 @@ module Api
       end
 
       def bookmark
+        @recipe.bookmarks.create(user: current_user)
+
+        respond_with(@recipe)
       end
 
       def create
+        # TODO
       end
 
       def update
+        # TODO
       end
 
       def destroy
+        # TODO
       end
 
       private

@@ -113,10 +113,6 @@ angular.module('model')
       pluck: (attr) ->
         _.pluck(@data, attr)
 
-      read: (params) ->
-        @request('index', params)
-          .then (response) => @set(response)
-
       add: (model) ->
         @data.push(model)
 
@@ -124,5 +120,9 @@ angular.module('model')
         index = _.indexOf(@data, model)
 
         @data.splice(index, 1) if index > -1
+
+      read: (params) ->
+        @request('index', params)
+          .then (response) => @set(response)
 
     return Collection

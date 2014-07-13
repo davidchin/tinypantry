@@ -3,6 +3,8 @@ module Api
     class UsersController < Api::V1::ApiController
       before_action :authenticate_user!
 
+      load_and_authorize_resource
+
       def index
         @users = User.all.page(params[:page])
 
@@ -16,9 +18,11 @@ module Api
       end
 
       def update
+        # TODO
       end
 
       def destroy
+        # TODO
       end
     end
   end

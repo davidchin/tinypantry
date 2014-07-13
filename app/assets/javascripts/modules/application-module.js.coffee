@@ -18,7 +18,9 @@ angular.module 'core', [
   'ngCookies'
   'ngResource'
   'ngRoute'
+  'ngSanitize'
   'resource'
+  'utility'
 ]
 
 angular.module 'config', [
@@ -50,4 +52,8 @@ angular.module 'session', [
 angular.module 'user', [
   'core'
   'session'
+]
+
+angular.module 'utility', [
+  'core'
 ]

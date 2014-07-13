@@ -1,12 +1,15 @@
 angular.module('recipe')
   .factory 'recipeResource', ($resource) ->
-    path = "/api/v1/recipes/:id"
+    path = '/api/v1/recipes/:id'
     params = { id: '@id' }
     actions =
       search:
         method: 'GET'
         isArray: true
-        path: "/api/v1/recipes/search"
+        url: '/api/v1/recipes/search'
+      bookmark:
+        method: 'POST'
+        url: '/api/v1/recipes/:id/bookmark'
 
     return $resource(path, params, actions)
 
@@ -18,6 +21,9 @@ angular.module('recipe')
 
         super
 
+      bookmark: (params) ->
+        @request('bookmark', _.extend({ id: @data.id }, params))
+
     return Recipe
 
   .factory 'Recipes', (recipeResource, Collection, Recipe) ->
@@ -28,5 +34,9 @@ angular.module('recipe')
           model: Recipe
 
         super
+
+      search: (params) ->
+        @request('search', params)
+          .then (response) => @set(response)
 
     return Recipes

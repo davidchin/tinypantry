@@ -3,6 +3,8 @@ module Api
     class FeedsController < ApplicationController
       before_action :authenticate_user!, only: [:create, :update, :destroy]
 
+      load_and_authorize_resource
+
       def index
         @feeds = Feed.all
 
@@ -16,12 +18,15 @@ module Api
       end
 
       def create
+        # TODO
       end
 
       def update
+        # TODO
       end
 
       def destroy
+        # TODO
       end
     end
   end

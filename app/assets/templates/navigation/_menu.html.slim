@@ -1,7 +1,12 @@
 div ng-controller="NavigationController as navigation"
 
-  div ng-show="navigation.currentUser.status.loggedIn"
-    a ng-href="/logout" Logout
+  div class="user-navigation"
+    div ng-show="navigation.currentUser.status.loggedIn"
+      a ng-href="/logout" Logout
 
-  div ng-hide="navigation.currentUser.status.loggedIn"
-    a ng-href="/login" Login
+    div ng-hide="navigation.currentUser.status.loggedIn"
+      a ng-href="/login" Login
+
+  div class="category-navigation"
+    div ng-repeat="category in navigation.categories.data"
+      a ng-href="/category/{{ category.data.slug }}" {{ category.data.name }}

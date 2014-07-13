@@ -5,7 +5,6 @@ module Api
 
       prepend_before_action :skip_devise_trackable
 
-      load_and_authorize_resource
       check_authorization
 
       private

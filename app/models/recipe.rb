@@ -62,6 +62,12 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def image_urls
+    image.styles.each_with_object(original: image.url) do |(key, style), result|
+      result[key] = style.attachment.url
+    end
+  end
+
   private
 
   def matched_keywords

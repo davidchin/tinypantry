@@ -1,1 +1,9 @@
 h1 Recipes
+
+div class="recipe-search" ng-submit="recipesIndex.search()"
+  form name="form"
+    input type="text" placeholder="Search" ng-model="recipesIndex.recipes.query"
+
+div ng-repeat="recipe in recipesIndex.recipes.data"
+  h2 {{ recipe.data.name }}
+  p ng-bind-html="recipe.data.description"

@@ -28,7 +28,7 @@ angular.module('user')
         super(params).then (response) =>
           @status.loggedIn = true && response
 
-      login: (email = @email, password = @password) ->
+      login: (email = @data.email, password = @data.password) ->
         @session.create({}, { email, password })
           .finally =>
             @password = null
@@ -40,11 +40,12 @@ angular.module('user')
 
     return CurrentUser
 
-  .factory 'currentUser', ($rootScope, CurrentUser) ->
+  .factory 'currentUser', ($rootScope, $location, CurrentUser) ->
     currentUser = new CurrentUser
 
     $rootScope.$on '$routeChangeSuccess', ->
-      currentUser.read() if currentUser.session.token()?
+      if currentUser.session.token()? && $location.path() != '/logout'
+        currentUser.read()
 
     return currentUser
 

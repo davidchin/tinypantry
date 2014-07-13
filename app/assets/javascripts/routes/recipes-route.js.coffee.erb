@@ -15,3 +15,8 @@ angular.module('recipe')
         templateUrl: '<%= asset_path("/assets/recipes/show.html") %>'
         controller:  'RecipesShowController'
         controllerAs: 'recipesShow'
+
+      .when '/category/:category',
+        templateUrl: '<%= asset_path("/assets/recipes/index.html") %>'
+        controller: 'RecipesIndexController'
+        controllerAs: 'recipesIndex'

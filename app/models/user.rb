@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_recipes, through: :bookmarks, source: :recipe
 
+  delegate :can?, :cannot?, to: :ability
+
   attr_reader :auth_token_secret
 
   def role?(role_symbol)

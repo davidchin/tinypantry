@@ -14,12 +14,12 @@ angular.module('session')
 
   .factory 'sessionHttpInterceptor', ($injector) ->
     request: (config) ->
-      return config unless /^\/api\//i.test(config.url)
+      if /^\/api\//i.test(config.url)
+        currentUser = $injector.get('currentUser')
+        token = currentUser.session.token()
 
-      currentUser = $injector.get('currentUser')
-
-      if { secret, key } = currentUser.session.token()?
-        config.headers['Authorization'] = "Token token=\"#{ secret }\", email=\"#{ key }\""
+        if token?
+          config.headers['Authorization'] = "Token token=\"#{ token.secret }\", email=\"#{ token.key }\""
 
       return config
 
