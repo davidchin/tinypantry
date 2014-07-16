@@ -8,13 +8,13 @@ module Api
       def index
         @users = User.all.page(params[:page])
 
-        respond_with(@users)
+        respond_with(:api, :v1, @users)
       end
 
       def show
         @user = User.find(params[:id])
 
-        respond_with(@user)
+        respond_with(:api, :v1, @user)
       end
 
       def update

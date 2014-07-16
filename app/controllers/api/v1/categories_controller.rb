@@ -8,13 +8,13 @@ module Api
       def index
         @categories = Category.all
 
-        respond_with(@categories)
+        respond_with(:api, :v1, @categories)
       end
 
       def show
         @category = Category.find(params[:id])
 
-        respond_with(@category)
+        respond_with(:api, :v1, @category)
       end
 
       def create

@@ -9,29 +9,29 @@ module Api
       load_and_authorize_resource
 
       def index
-        respond_with(@recipes)
+        respond_with(:api, :v1, @recipes)
       end
 
       def show
-        respond_with(@recipe)
+        respond_with(:api, :v1, @recipe)
       end
 
       def search
         @recipes = Recipe.search_content(params[:query])
 
-        respond_with(@recipes)
+        respond_with(:api, :v1, @recipes)
       end
 
       def related
         @recipes = @recipe.related_recipes
 
-        respond_with(@recipes)
+        respond_with(:api, :v1, @recipes)
       end
 
       def bookmark
-        @recipe.bookmarks.create(user: current_user)
+        @recipe.bookmarks.create!(user: current_user)
 
-        respond_with(@recipe)
+        respond_with(:api, :v1, @recipe)
       end
 
       def create

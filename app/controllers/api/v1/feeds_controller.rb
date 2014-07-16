@@ -8,13 +8,13 @@ module Api
       def index
         @feeds = Feed.all
 
-        respond_with(@feeds)
+        respond_with(:api, :v1, @feeds)
       end
 
       def show
         @feed = Feed.find(params[:id])
 
-        respond_with(@feed)
+        respond_with(:api, :v1, @feed)
       end
 
       def create
