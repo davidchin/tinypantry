@@ -24,6 +24,11 @@ angular.module('recipe')
       bookmark: (params) ->
         @request('bookmark', _.extend({ id: @data.id }, params))
 
+      bookmarked: (user) ->
+        user.bookmarks()
+          .then (bookmarks) =>
+            @status.bookmarked = _.any(bookmarks, { recipe_id: @data.id })
+
     return Recipe
 
   .factory 'Recipes', (recipeResource, Collection, Recipe) ->
@@ -37,6 +42,6 @@ angular.module('recipe')
 
       search: (params) ->
         @request('search', params)
-          .then (response) => @set(response)
+          .then (recipes) => @set(recipes)
 
     return Recipes

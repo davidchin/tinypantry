@@ -8,6 +8,7 @@ class Ability
 
     can :read, [Recipe, Category]
     can :bookmark, Recipe
+    can :bookmarks, User
     can [:create, :show, :update], User, id: user.id
 
     if user.role?(:admin)

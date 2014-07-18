@@ -6,4 +6,5 @@ div class="recipe-search" ng-submit="recipesIndex.search()"
 
 div ng-repeat="recipe in recipesIndex.recipes.data"
   h2 {{ recipe.data.name }}
-  p ng-bind-html="recipe.data.description"
+  strong ng-show="recipe.status.bookmarked" Bookmarked
+  / p ng-bind-html="recipe.data.description"

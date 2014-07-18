@@ -2,21 +2,22 @@ angular.module('recipe')
   .config ($routeProvider) ->
     $routeProvider
       .when '/',
-        templateUrl: '<%= asset_path("/assets/recipes/index.html") %>'
-        controller: 'RecipesIndexController'
-        controllerAs: 'recipesIndex'
+        redirectTo: '/recipes'
 
       .when '/recipes',
         templateUrl: '<%= asset_path("/assets/recipes/index.html") %>'
         controller: 'RecipesIndexController'
         controllerAs: 'recipesIndex'
+        resolve: -> 'readCurrentUser'
 
       .when '/recipes/:id',
         templateUrl: '<%= asset_path("/assets/recipes/show.html") %>'
         controller:  'RecipesShowController'
         controllerAs: 'recipesShow'
+        resolve: -> 'readCurrentUser'
 
       .when '/category/:category',
         templateUrl: '<%= asset_path("/assets/recipes/index.html") %>'
         controller: 'RecipesIndexController'
         controllerAs: 'recipesIndex'
+        resolve: -> 'readCurrentUser'

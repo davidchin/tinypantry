@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .controller 'RecipesIndexController', ($routeParams, $location, Recipes) ->
+  .controller 'RecipesIndexController', ($routeParams, $location, currentUser, Recipes) ->
     class RecipesIndexController
       constructor: ->
         @recipes = new Recipes
@@ -12,14 +12,22 @@ angular.module('recipe')
       read: ->
         params = _.pick($routeParams, 'category', 'query')
 
-        if params.query?
+        promise = if params.query?
           @recipes.search(params)
         else
           @recipes.read(params)
 
+        promise
+          .then => @bookmarked()
+          .then => @recipes.data
+
+      bookmarked: ->
+        for recipe in @recipes.data
+          recipe.bookmarked(currentUser)
+
     return new RecipesIndexController
 
-  .controller 'RecipesShowController', ($routeParams, Recipe) ->
+  .controller 'RecipesShowController', ($routeParams, currentUser, Recipe) ->
     class RecipesShowController
       constructor: ->
         @recipe = new Recipe
@@ -28,6 +36,8 @@ angular.module('recipe')
 
       read: ->
         @recipe.read({ id: $routeParams.id })
+          .then => @recipe.bookmarked(currentUser)
+          .then => @recipe.data
 
       bookmark: ->
         @recipe.bookmark()

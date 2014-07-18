@@ -38,7 +38,9 @@ Rails.application.routes.draw do
 
       resources :feeds
 
-      resources :users, only: [:show, :index]
+      resources :users, only: [:show, :index] do
+        get :bookmarks, on: :member
+      end
     end
   end
 

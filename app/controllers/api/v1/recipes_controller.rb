@@ -29,9 +29,9 @@ module Api
       end
 
       def bookmark
-        @recipe.bookmarks.create!(user: current_user)
+        bookmark = @recipe.bookmarks.create!(user: current_user)
 
-        respond_with(:api, :v1, @recipe)
+        respond_with(:api, :v1, bookmark)
       end
 
       def create

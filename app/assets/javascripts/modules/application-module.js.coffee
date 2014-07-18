@@ -13,14 +13,11 @@ angular.module 'category', [
 ]
 
 angular.module 'core', [
-  'LocalStorageModule'
   'model'
-  'ngCookies'
-  'ngResource'
-  'ngRoute'
-  'ngSanitize'
   'resource'
+  'route'
   'utility'
+  'storage'
 ]
 
 angular.module 'config', [
@@ -28,7 +25,7 @@ angular.module 'config', [
 ]
 
 angular.module 'model', [
-  'core'
+  'storage'
 ]
 
 angular.module 'navigation', [
@@ -41,12 +38,21 @@ angular.module 'recipe', [
 ]
 
 angular.module 'resource', [
-  'core'
+  'ngResource'
+]
+
+angular.module 'route', [
+  'ngRoute'
 ]
 
 angular.module 'session', [
   'core'
   'user'
+]
+
+angular.module 'storage', [
+  'LocalStorageModule'
+  'ngCookies'
 ]
 
 angular.module 'user', [
@@ -55,5 +61,5 @@ angular.module 'user', [
 ]
 
 angular.module 'utility', [
-  'core'
+  'ngSanitize'
 ]

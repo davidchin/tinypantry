@@ -1,4 +1,10 @@
 angular.module('session')
+  .run ($rootScope, $cacheFactory) ->
+    $rootScope.$on '$routeChangeSuccess', ->
+      httpCache = $cacheFactory.get('$http')
+
+      httpCache.removeAll()
+
   .factory 'sessionService', ($http) ->
     create: (params, data) ->
       $http.post('/api/v1/login', data)
@@ -9,7 +15,7 @@ angular.module('session')
         .then (response) -> response.data
 
     verify: ->
-      $http.get('/api/v1/verify')
+      $http.get('/api/v1/verify', { cache: true })
         .then (response) -> response.data
 
   .factory 'sessionHttpInterceptor', ($injector) ->
@@ -32,11 +38,11 @@ angular.module('session')
         super
 
       create: ->
-        super.then (response) =>
-          @store('auth_token', response.auth_token_secret) if response.auth_token_secret?
-          @store('user', _.pick(response, 'id', 'email'))
+        super.then (user) =>
+          @store('auth_token', user.auth_token_secret) if user.auth_token_secret?
+          @store('user', _.pick(user, 'id', 'email'))
 
-          return response
+          return user
 
       destroy: ->
         super.finally =>

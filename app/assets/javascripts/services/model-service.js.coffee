@@ -8,7 +8,7 @@ angular.module('model')
         @configure(config)
 
       set: (data) ->
-        @data = data
+        @data = data if data?
 
       unset: ->
         @data = null
@@ -45,6 +45,9 @@ angular.module('model')
         output = @config.resource[action]?(params, data)
 
         output && output.$promise || $q.when(output)
+
+      reject: (rejection) ->
+        $q.reject(rejection)
 
     return ModelBase
 

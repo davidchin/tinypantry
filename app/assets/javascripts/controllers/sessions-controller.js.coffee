@@ -10,8 +10,8 @@ angular.module('session')
 
       login: ->
         @currentUser.login()
-          .then (response) ->
-            $location.path('/') && response
+          .then (user) ->
+            $location.path('/') && user
 
     return new SessionsNewController
 
@@ -24,7 +24,7 @@ angular.module('session')
 
       logout: ->
         @currentUser.logout()
-          .then (response) ->
-            $location.path('/') && response
+          .then (user) ->
+            $location.path('/') && user
 
     return new SessionsDestroyController

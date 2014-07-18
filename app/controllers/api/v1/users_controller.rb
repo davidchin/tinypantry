@@ -3,6 +3,8 @@ module Api
     class UsersController < Api::V1::ApiController
       before_action :authenticate_user!
 
+      before_action :find_user, only: [:show, :update, :destroy, :bookmarks]
+
       load_and_authorize_resource
 
       def index
@@ -12,8 +14,6 @@ module Api
       end
 
       def show
-        @user = User.find(params[:id])
-
         respond_with(:api, :v1, @user)
       end
 
@@ -23,6 +23,16 @@ module Api
 
       def destroy
         # TODO
+      end
+
+      def bookmarks
+        respond_with(:api, :v1, @user.bookmarks)
+      end
+
+      private
+
+      def find_user
+        @user = User.find(params[:id])
       end
     end
   end
