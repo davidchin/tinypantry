@@ -1,9 +1,4 @@
 angular.module('user')
-  .run ($rootScope, $location, currentUser) ->
-    $rootScope.$on '$routeChangeSuccess', ->
-      if currentUser.session.token()? && $location.path() != '/logout'
-        currentUser.read()
-
   .factory 'userService', ($resource) ->
     path = '/api/v1/users/:id'
     params = { id: '@id' }
@@ -20,9 +15,6 @@ angular.module('user')
 
     return user
 
-  .factory 'readCurrentUser', (currentUser) ->
-    currentUser.read()
-
   .factory 'User', (userService, Model) ->
     class User extends Model
       constructor: (config) ->
@@ -38,14 +30,22 @@ angular.module('user')
 
     return User
 
-  .factory 'CurrentUser', (userService, User, Session) ->
+  .factory 'CurrentUser', ($q, userService, User, Session) ->
     class CurrentUser extends User
       constructor: ->
         @session = new Session
 
         super
 
+      ready: ->
+        if !@requests.read
+          @read()
+        else
+          $q.when(@requests.read)
+
       read: ->
+        return $q.reject() unless @session.token()?
+
         params = { id: @retrieve('user').id }
 
         super(params).then (user) =>

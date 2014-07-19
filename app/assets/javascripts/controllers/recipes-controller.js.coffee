@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .controller 'RecipesIndexController', ($routeParams, $location, currentUser, Recipes) ->
+  .controller 'RecipesIndexController', ($routeParams, $location, $q, currentUser, Recipes) ->
     class RecipesIndexController
       constructor: ->
         @recipes = new Recipes
@@ -22,8 +22,11 @@ angular.module('recipe')
           .then => @recipes.data
 
       bookmarked: ->
-        for recipe in @recipes.data
-          recipe.bookmarked(currentUser)
+        currentUser.ready().then =>
+          promises = for recipe in @recipes.data
+            recipe.bookmarked(currentUser)
+
+          $q.all(promises)
 
     return new RecipesIndexController
 
@@ -36,7 +39,9 @@ angular.module('recipe')
 
       read: ->
         @recipe.read({ id: $routeParams.id })
-          .then => @recipe.bookmarked(currentUser)
+          .then =>
+            currentUser.ready().then =>
+              @recipe.bookmarked(currentUser)
           .then => @recipe.data
 
       bookmark: ->

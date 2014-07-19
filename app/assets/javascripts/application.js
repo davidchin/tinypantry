@@ -4,6 +4,7 @@
 //= require es5-shim/es5-sham
 //= require lodash/dist/lodash
 //= require moment/moment
+//= require underscore.string/dist/underscore.string.min
 
 //= require_tree ./modules
 //= require_tree ./config

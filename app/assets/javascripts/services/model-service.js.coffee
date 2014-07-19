@@ -4,6 +4,8 @@ angular.module('model')
       constructor: (config) ->
         @config ||= {}
         @status ||= {}
+        @requests ||= {}
+        @requestStatus ||= {}
 
         @configure(config)
 
@@ -44,10 +46,41 @@ angular.module('model')
       request: (action, params, data) ->
         output = @config.resource[action]?(params, data)
 
-        output && output.$promise || $q.when(output)
+        if output
+          promise = output.$promise || $q.when(output)
 
-      reject: (rejection) ->
-        $q.reject(rejection)
+          @flag(action, 'pending')
+
+          @requests[action] = promise.then (response) =>
+            @flag(action, 'success') && response
+          , (response) =>
+            @flag(action, 'error') && response
+
+        else
+          $q.reject()
+
+      flag: (action, status) ->
+        flags =
+          pending:
+            pending: true
+            complete: false
+            success: false
+            error: false
+          success:
+            pending: false
+            complete: true
+            success: true
+            error: false
+          error:
+            pending: false
+            complete: true
+            success: false
+            error: true
+
+        for flag, value of flags[status]
+          @requestStatus["#{ action }#{ _.string.capitalize(flag) }"] = value
+
+        return @requestStatus
 
     return ModelBase
 
