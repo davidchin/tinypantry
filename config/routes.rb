@@ -41,7 +41,10 @@ Rails.application.routes.draw do
       resources :feeds
 
       resources :users, only: [:show, :index] do
-        get :bookmarks, on: :member
+        member do
+          get :bookmarks
+          get :bookmarked_recipes, path: 'bookmarked-recipes'
+        end
       end
     end
   end

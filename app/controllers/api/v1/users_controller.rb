@@ -3,7 +3,7 @@ module Api
     class UsersController < Api::V1::ApiController
       before_action :authenticate_user!
 
-      before_action :find_user, only: [:show, :update, :destroy, :bookmarks]
+      before_action :find_user, except: [:index]
 
       load_and_authorize_resource
 
@@ -26,7 +26,15 @@ module Api
       end
 
       def bookmarks
-        respond_with(:api, :v1, @user.bookmarks)
+        @bookmarks = @user.bookmarks
+
+        respond_with(:api, :v1, @bookmarks)
+      end
+
+      def bookmarked_recipes
+        @bookmarked_recipes = @user.bookmarked_recipes.page(params[:page])
+
+        respond_with(:api, :v1, @bookmarked_recipes)
       end
 
       private
