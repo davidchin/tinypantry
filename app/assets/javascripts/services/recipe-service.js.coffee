@@ -1,15 +1,15 @@
 angular.module('recipe')
   .factory 'recipeResource', ($resource) ->
-    path = '/api/v1/recipes/:id'
+    path = '/api/recipes/:id'
     params = { id: '@id' }
     actions =
       search:
         method: 'GET'
         isArray: true
-        url: '/api/v1/recipes/search'
+        url: '/api/recipes/search'
       bookmark:
         method: 'POST'
-        url: '/api/v1/recipes/:id/bookmark'
+        url: '/api/recipes/:id/bookmark'
 
     return $resource(path, params, actions)
 

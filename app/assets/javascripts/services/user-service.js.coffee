@@ -1,12 +1,12 @@
 angular.module('user')
   .factory 'userService', ($resource) ->
-    path = '/api/v1/users/:id'
+    path = '/api/users/:id'
     params = { id: '@id' }
     actions =
       bookmarks:
         method: 'GET'
         isArray: true
-        url: '/api/v1/users/:id/bookmarks'
+        url: '/api/users/:id/bookmarks'
 
     return $resource(path, params, actions)
 

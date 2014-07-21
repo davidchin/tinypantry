@@ -7,15 +7,15 @@ angular.module('session')
 
   .factory 'sessionService', ($http) ->
     create: (params, data) ->
-      $http.post('/api/v1/login', data)
+      $http.post('/api/login', data)
         .then (response) -> response.data
 
     destroy: (params, data) ->
-      $http.delete('/api/v1/logout', data)
+      $http.delete('/api/logout', data)
         .then (response) -> response.data
 
     verify: ->
-      $http.get('/api/v1/verify', { cache: true })
+      $http.get('/api/verify', { cache: true })
         .then (response) -> response.data
 
   .factory 'sessionHttpInterceptor', ($injector) ->
