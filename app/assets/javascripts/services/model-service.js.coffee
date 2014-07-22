@@ -2,6 +2,7 @@ angular.module('model')
   .factory 'ModelBase', ($q, localStorageService) ->
     class ModelBase
       constructor: (config) ->
+        @data || {}
         @config ||= {}
         @status ||= {}
         @requests ||= {}
@@ -10,7 +11,7 @@ angular.module('model')
         @configure(config)
 
       set: (data) ->
-        @data = data if data?
+        _.merge(@data, data) if data?
 
       unset: ->
         @data = null
@@ -24,8 +25,20 @@ angular.module('model')
       retrieve: (key) ->
         localStorageService.get(key)
 
-      configure: (config) ->
-        _.extend(@config, config)
+      configure: (config = {}) ->
+        @config ||= {}
+
+        _.extend(@config, _.omit(config, 'dependency'))
+        _.defaults(this, config.dependency)
+
+      params: ->
+        {}
+
+      ready: (params) ->
+        if !@requests.read
+          @read(params)
+        else
+          $q.when(@requests.read)
 
       read: (params) ->
         @request('get', params)
@@ -44,6 +57,7 @@ angular.module('model')
           .then (response) => @unset() && response
 
       request: (action, params, data) ->
+        params = _.defaults({}, params, @params())
         output = @config.resource[action]?(params, data)
 
         if output
@@ -141,13 +155,19 @@ angular.module('model')
         super(data)
 
       find: (params) ->
-        _.find(@data, params)
+        _.find(@data, { data: params })
 
       where: (params) ->
-        _.where(@data, params)
+        _.where(@data, { data: params })
+
+      any: (params) ->
+        _.any(@data, { data: params })
 
       pluck: (attr) ->
         _.pluck(@data, attr)
+
+      invoke: (method, params...) ->
+        _.invoke(@data, method, params...)
 
       add: (model) ->
         @data.push(model)

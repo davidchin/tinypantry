@@ -1,4 +1,5 @@
 angular.module 'application', [
+  'bookmark'
   'category'
   'core'
   'config'
@@ -6,6 +7,10 @@ angular.module 'application', [
   'recipe'
   'session'
   'user'
+]
+
+angular.module 'bookmark', [
+  'core'
 ]
 
 angular.module 'category', [
@@ -56,6 +61,7 @@ angular.module 'storage', [
 ]
 
 angular.module 'user', [
+  'bookmark'
   'core'
   'session'
 ]

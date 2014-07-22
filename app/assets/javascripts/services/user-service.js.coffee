@@ -2,31 +2,22 @@ angular.module('user')
   .factory 'userService', ($resource) ->
     path = '/api/users/:id'
     params = { id: '@id' }
-    actions =
-      bookmarks:
-        method: 'GET'
-        isArray: true
-        url: '/api/users/:id/bookmarks'
 
-    return $resource(path, params, actions)
+    return $resource(path, params)
 
   .factory 'currentUser', (CurrentUser) ->
     user = new CurrentUser
 
     return user
 
-  .factory 'User', (userService, Model) ->
+  .factory 'User', (userService, Model, Bookmarks) ->
     class User extends Model
-      constructor: (config) ->
-        @config =
-          resource: userService
+      constructor: ->
+        @configure(resource: userService)
+
+        @bookmarks = new Bookmarks(dependency: { user: this })
 
         super
-
-      bookmarks: (params) ->
-        params = _.extend({ id: @data.id }, params)
-
-        @request('bookmarks', params)
 
     return User
 
@@ -36,12 +27,6 @@ angular.module('user')
         @session = new Session
 
         super
-
-      ready: ->
-        if !@requests.read
-          @read()
-        else
-          $q.when(@requests.read)
 
       read: ->
         return $q.reject() unless @session.token()?

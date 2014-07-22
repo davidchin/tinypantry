@@ -8,18 +8,19 @@ angular.module('category')
   .factory 'Category', (categoryResource, Model) ->
     class Category extends Model
       constructor: ->
-        @config =
-          resource: categoryResource
+        @configure(resource: categoryResource)
 
         super
 
     return Category
 
-  .factory 'Categories', (categoryResource, Collection) ->
+  .factory 'Categories', (categoryResource, Collection, Category) ->
     class Categories extends Collection
       constructor: ->
-        @config =
+        @configure {
           resource: categoryResource
+          model: Category
+        }
 
         super
 

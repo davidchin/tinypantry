@@ -16,27 +16,24 @@ angular.module('recipe')
   .factory 'Recipe', (recipeResource, Model) ->
     class Recipe extends Model
       constructor: ->
-        @config =
-          resource: recipeResource
+        @configure(resource: recipeResource)
 
         super
 
-      bookmark: (params) ->
-        @request('bookmark', _.extend({ id: @data.id }, params))
-
       bookmarked: (user) ->
-        user.bookmarks()
-          .then (bookmarks) =>
-            @status.bookmarked = _.any(bookmarks, { recipe_id: @data.id })
+        user.bookmarks.bookmarked(this)
+          .then (bookmarked) =>
+            @status.bookmarked = bookmarked
 
     return Recipe
 
   .factory 'Recipes', (recipeResource, Collection, Recipe) ->
     class Recipes extends Collection
       constructor: ->
-        @config =
+        @configure {
           resource: recipeResource
           model: Recipe
+        }
 
         super
 

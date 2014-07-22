@@ -22,11 +22,8 @@ angular.module('recipe')
           .then => @recipes.data
 
       bookmarked: ->
-        currentUser.ready().then =>
-          promises = for recipe in @recipes.data
-            recipe.bookmarked(currentUser)
-
-          $q.all(promises)
+        currentUser.ready()
+          .then => $q.all(@recipes.invoke('bookmarked', currentUser))
 
     return new RecipesIndexController
 
@@ -40,12 +37,12 @@ angular.module('recipe')
       read: ->
         @recipe.read({ id: $routeParams.id })
           .then =>
-            currentUser.ready().then =>
-              @recipe.bookmarked(currentUser)
+            currentUser.ready().then => @recipe.bookmarked(currentUser)
           .then => @recipe.data
 
       bookmark: ->
-        @recipe.bookmark()
+        currentUser.ready()
+          .then => currentUser.bookmarks.create({ recipe_id: @recipe.data.id })
           .then => @read()
 
     return new RecipesShowController

@@ -29,11 +29,7 @@ Rails.application.routes.draw do
     scope module: :v1, constraints: Api::RouteContraint.new(version: 1, default: true) do
       resources :recipes do
         get :search, on: :collection
-
-        member do
-          get :related
-          post :bookmark
-        end
+        get :related, on: :member
       end
 
       resources :categories
@@ -41,9 +37,8 @@ Rails.application.routes.draw do
       resources :feeds
 
       resources :users, only: [:show, :index] do
-        member do
-          get :bookmarks
-          get :bookmarked_recipes, path: 'bookmarked-recipes'
+        resources :bookmarks, only: [:index, :create, :destroy] do
+          get :recipes, on: :collection
         end
       end
     end

@@ -32,8 +32,7 @@ angular.module('session')
   .factory 'Session', ($q, sessionService, Model) ->
     class Session extends Model
       constructor: (config) ->
-        @config =
-          resource: sessionService
+        @configure(resource: sessionService)
 
         super
 

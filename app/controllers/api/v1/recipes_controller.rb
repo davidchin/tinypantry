@@ -1,10 +1,10 @@
 module Api
   module V1
     class RecipesController < Api::V1::ApiController
-      before_action :authenticate_user!, only: [:bookmark, :create, :update, :destroy]
+      before_action :authenticate_user!, only: [:create, :update, :destroy]
 
       before_action :find_recipes, only: [:index]
-      before_action :find_recipe, only: [:show, :related, :bookmark]
+      before_action :find_recipe, only: [:show, :related]
 
       load_and_authorize_resource
 
@@ -26,12 +26,6 @@ module Api
         @recipes = @recipe.related_recipes
 
         respond_with(:api, :v1, @recipes)
-      end
-
-      def bookmark
-        bookmark = @recipe.bookmarks.create!(user: current_user)
-
-        respond_with(:api, :v1, bookmark)
       end
 
       def create

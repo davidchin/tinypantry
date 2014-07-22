@@ -25,18 +25,6 @@ module Api
         # TODO
       end
 
-      def bookmarks
-        @bookmarks = @user.bookmarks
-
-        respond_with(:api, :v1, @bookmarks)
-      end
-
-      def bookmarked_recipes
-        @bookmarked_recipes = @user.bookmarked_recipes.page(params[:page])
-
-        respond_with(:api, :v1, @bookmarked_recipes)
-      end
-
       private
 
       def find_user
