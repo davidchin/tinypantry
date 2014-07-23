@@ -1,10 +1,10 @@
 module Api
   module V1
     class RecipesController < Api::V1::ApiController
-      before_action :authenticate_user!, only: [:create, :update, :destroy]
+      before_action :authenticate_user!, except: [:index, :show, :related]
 
       before_action :find_recipes, only: [:index]
-      before_action :find_recipe, only: [:show, :related]
+      before_action :find_recipe, only: [:show, :update, :destroy, :related]
 
       load_and_authorize_resource
 
@@ -29,15 +29,19 @@ module Api
       end
 
       def create
-        # TODO
+        @recipe = Recipe.create(params[:recipe])
+
+        respond_with(:api, :v1, @recipe)
       end
 
       def update
-        # TODO
+        @recipe.update(params[:recipe])
+
+        respond_with(:api, :v1, @recipe)
       end
 
       def destroy
-        # TODO
+        respond_with(:api, :v1, @recipe.destroy)
       end
 
       private

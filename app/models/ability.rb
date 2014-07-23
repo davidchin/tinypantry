@@ -11,8 +11,6 @@ class Ability
     can [:create, :destroy], Bookmark, user_id: user.id
     can [:create, :show, :update], User, id: user.id
 
-    if user.role?(:admin)
-      can :manage, :all
-    end
+    can :manage, :all if user.role?(:admin)
   end
 end

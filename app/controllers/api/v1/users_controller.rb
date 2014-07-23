@@ -1,9 +1,9 @@
 module Api
   module V1
     class UsersController < Api::V1::ApiController
-      before_action :authenticate_user!
+      before_action :authenticate_user!, except: [:index, :show]
 
-      before_action :find_user, except: [:index]
+      before_action :find_user, only: [:show, :update, :destroy]
 
       load_and_authorize_resource
 
@@ -18,11 +18,13 @@ module Api
       end
 
       def update
-        # TODO
+        @user.update(params[:user])
+
+        respond_with(:api, :v1, @user)
       end
 
       def destroy
-        # TODO
+        respond_with(:api, :v1, @user.destroy)
       end
 
       private

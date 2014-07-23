@@ -1,7 +1,9 @@
 module Api
   module V1
     class FeedsController < ApplicationController
-      before_action :authenticate_user!, only: [:create, :update, :destroy]
+      before_action :authenticate_user!, except: [:index, :show]
+
+      before_action :find_feed, only: [:show, :update, :destroy]
 
       load_and_authorize_resource
 
@@ -12,21 +14,29 @@ module Api
       end
 
       def show
-        @feed = Feed.find(params[:id])
-
         respond_with(:api, :v1, @feed)
       end
 
       def create
-        # TODO
+        @feed = Feed.create(params[:feed])
+
+        respond_with(:api, :v1, @feed)
       end
 
       def update
-        # TODO
+        @feed.update(params[:feed])
+
+        respond_with(:api, :v1, @feed)
       end
 
       def destroy
-        # TODO
+        respond_with(:api, :v1, @feed.destroy)
+      end
+
+      private
+
+      def find_feed
+        @feed = Feed.find(params[:id])
       end
     end
   end
