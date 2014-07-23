@@ -53,6 +53,8 @@ class Feed < ActiveRecord::Base
     description = node.at_xpath('.//description')
     pub_date = node.at_xpath('.//pubDate')
 
+    description.search('.//img').remove if description.present?
+
     {
       name: title.try(:content),
       url: link.try(:content),
