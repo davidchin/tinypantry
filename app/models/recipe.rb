@@ -3,9 +3,12 @@ class Recipe < ActiveRecord::Base
 
   extend FriendlyId
 
+  MIN_REMOTE_IMAGE_SIZE = 500 * 500
+
   has_attached_file :image, styles: { thumb: '100x100>' }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
+  before_create :ensure_remote_image_size
   after_create :categorise
 
   belongs_to :feed
@@ -44,8 +47,10 @@ class Recipe < ActiveRecord::Base
   friendly_id :slug_candidates, use: :slugged
 
   def remote_image_url=(url)
-    url = URI.encode(url) if url.present?
-    self.image = URI.parse(url)
+    if remote_image_url != url && url.present?
+      self.image = URI.parse(URI.encode(url))
+    end
+
     super
 
     rescue URI::Error
@@ -82,5 +87,30 @@ class Recipe < ActiveRecord::Base
       :name,
       [:name, -> { feed.name }]
     ]
+  end
+
+  def remote_image_area(url)
+    FastImage.size(url).try(:reduce, :*) || 0
+  end
+
+  def remote_image_file_size(url)
+    response = Net::HTTP.get_response(URI(url))
+    response['content-length'].to_i || 0
+  end
+
+  def ensure_remote_image_size
+    return if remote_image_area(remote_image_url) >= MIN_REMOTE_IMAGE_SIZE
+
+    # Grab all img urls
+    doc = Nokogiri::HTML(open(url))
+    srcs = doc.xpath('.//img/@src').map(&:value).unshift(remote_image_url)
+
+    # Look for the largest img
+    srcs.sort_by! do |src|
+      remote_image_area(src) + remote_image_file_size(src)
+    end.reverse!
+
+    # Set remote image url
+    self.remote_image_url = srcs.first
   end
 end
