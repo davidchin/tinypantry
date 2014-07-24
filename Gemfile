@@ -27,8 +27,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Test
 gem 'rspec-rails', '~> 3.0.1'
 
-# Asset
+# Image
 gem 'paperclip', '~> 4.1'
+gem 'fastimage', '~> 1.6.3'
 
 # Parser
 gem 'nokogiri', '~> 1.6.2'

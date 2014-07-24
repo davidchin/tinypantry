@@ -6,6 +6,7 @@ class Recipe < ActiveRecord::Base
   has_attached_file :image, styles: { thumb: '100x100>' }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
+  before_create :ensure_image_size
   after_create :categorise
 
   belongs_to :feed
@@ -82,5 +83,26 @@ class Recipe < ActiveRecord::Base
       :name,
       [:name, -> { feed.name }]
     ]
+  end
+
+  def ensure_image_size
+    min_size = 500 * 500
+
+    return if FastImage.size(remote_image_url).reduce(:*) >= min_size
+
+    file_name = File.basename(remote_image_url, '.*')
+    doc = Nokogiri::HTML(open(url))
+
+    # Grab all img urls
+    srcs = doc.xpath('.//img/@src').map(&:value).unshift(remote_image_url)
+
+    # Look for the largest img
+    srcs.sort_by do |src|
+      size = FastImage.size(src).reduce(:*)
+      size * 2 if size >= min_size && src.include?(file_name)
+    end.reverse!
+
+    # Set remote image url
+    self.remote_image_url = srcs.first if srcs.any?
   end
 end
