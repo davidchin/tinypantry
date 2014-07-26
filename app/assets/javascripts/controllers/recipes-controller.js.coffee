@@ -47,7 +47,7 @@ angular.module('recipe')
 
     return new RecipesShowController
 
-  .controller 'RecipesEditController', ($routeParams, Recipe) ->
+  .controller 'RecipesEditController', ($routeParams, $location, Recipe) ->
     class RecipesEditController
       constructor: ->
         @recipe = new Recipe

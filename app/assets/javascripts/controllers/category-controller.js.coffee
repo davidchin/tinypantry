@@ -34,10 +34,12 @@ angular.module('category')
 
       read: ->
         @category.read({ id: $routeParams.id })
+          .then =>
+            @category.data.keywords.push({ name: '' })
 
     return new CategoriesShowController
 
-  .controller 'CategoriesEditController', ($routeParams, Category) ->
+  .controller 'CategoriesEditController', ($routeParams, $location, Category) ->
     class CategoriesEditController
       constructor: ->
         @category = new Category
@@ -46,6 +48,8 @@ angular.module('category')
 
       read: ->
         @category.read({ id: $routeParams.id })
+          .then =>
+            @category.data.keywords.push({ name: '' })
 
       submit: ->
         @category.update()

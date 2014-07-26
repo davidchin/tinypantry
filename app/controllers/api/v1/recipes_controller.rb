@@ -29,13 +29,13 @@ module Api
       end
 
       def create
-        @recipe = Recipe.create(params[:recipe])
+        @recipe = Recipe.create(recipe_params)
 
         respond_with(:api, :v1, @recipe)
       end
 
       def update
-        @recipe.update(params[:recipe])
+        @recipe.update(recipe_params)
 
         respond_with(:api, :v1, @recipe)
       end
@@ -57,6 +57,10 @@ module Api
         else
           @recipes = Recipe.page(params[:page]).per(50)
         end
+      end
+
+      def recipe_params
+        params.require(:recipe).permit(:name, :description, :url, :image, :remote_image_url, :approved)
       end
     end
   end

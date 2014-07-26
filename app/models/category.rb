@@ -10,4 +10,6 @@ class Category < ActiveRecord::Base
   validates :name, uniqueness: true
 
   friendly_id :name, use: :slugged
+
+  accepts_nested_attributes_for :keywords, allow_destroy: true
 end

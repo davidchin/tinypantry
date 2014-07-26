@@ -37,7 +37,7 @@ angular.module('feed')
 
     return new FeedsShowController
 
-  .controller 'FeedsEditController', ($routeParams, Feed) ->
+  .controller 'FeedsEditController', ($routeParams, $location, Feed) ->
     class FeedsEditController
       constructor: ->
         @feed = new Feed

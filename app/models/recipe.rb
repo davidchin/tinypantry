@@ -89,6 +89,10 @@ class Recipe < ActiveRecord::Base
     ]
   end
 
+  def remote_page
+    @remote_page ||= Nokogiri::HTML(open(url))
+  end
+
   def remote_image_area(url)
     FastImage.size(url).try(:reduce, :*) || 0
   end
@@ -98,19 +102,17 @@ class Recipe < ActiveRecord::Base
     response['content-length'].to_i || 0
   end
 
+  def remote_image_srcs
+    @remote_image_srcs ||= remote_page.xpath('.//img/@src').map(&:value).unshift(remote_image_url)
+  end
+
   def ensure_remote_image_size
     return if remote_image_area(remote_image_url) >= MIN_REMOTE_IMAGE_SIZE
 
-    # Grab all img urls
-    doc = Nokogiri::HTML(open(url))
-    srcs = doc.xpath('.//img/@src').map(&:value).unshift(remote_image_url)
-
-    # Look for the largest img
-    srcs.sort_by! do |src|
+    srcs = remote_image_srcs.sort_by do |src|
       remote_image_area(src) + remote_image_file_size(src)
-    end.reverse!
+    end.reverse
 
-    # Set remote image url
     self.remote_image_url = srcs.first
   end
 end

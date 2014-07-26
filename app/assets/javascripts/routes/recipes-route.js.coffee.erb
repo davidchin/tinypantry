@@ -19,8 +19,3 @@ angular.module('recipe')
         controller:  'RecipesEditController'
         controllerAs: 'recipesEdit'
         resolve: authorize: (authorize) -> authorize('admin')
-
-      .when '/category/:category',
-        templateUrl: '<%= asset_path("recipes/index.html") %>'
-        controller: 'RecipesIndexController'
-        controllerAs: 'recipesIndex'

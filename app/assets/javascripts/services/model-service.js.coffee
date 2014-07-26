@@ -64,12 +64,24 @@ angular.module('model')
           .then (response) => @unset() && response
 
       request: (action, params, data) ->
+        # Params
         params ||= @params()
+
+        # Data - set additional keys for nested attributes
+        data = _.reduce data, (output, value, attr) ->
+          if _.isArray(value) || _.isObject(value)
+            output["#{ attr }_attributes"] = value
+
+          return output
+        , _.pick(data, (value, attr) -> /^(?!\$)/.test(attr))
+
+        # Call ngResource
         output = @config.resource[action]?(params, data)
 
         if output
           promise = output.$promise || $q.when(output)
 
+          # Flag status
           @flag(action, 'pending')
 
           @requests[action] = promise.then (response) =>
@@ -133,18 +145,10 @@ angular.module('model')
         super(params, data)
 
       update: (params, data) ->
-        if @data.$update?
-          @data.$update(data)
-            .then (response) => @set(response)
-        else
-          super
+        data ||= @data
 
-      destroy: (params) ->
-        if @data.$destroy?
-          @data.$destroy()
-            .then (response) => @unset() && response
-        else
-          super
+        super(params, data)
+          .then (response) => @set(response)
 
     return Model
 

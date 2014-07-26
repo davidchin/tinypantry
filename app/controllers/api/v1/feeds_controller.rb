@@ -18,13 +18,13 @@ module Api
       end
 
       def create
-        @feed = Feed.create(params[:feed])
+        @feed = Feed.create(feed_params)
 
         respond_with(:api, :v1, @feed)
       end
 
       def update
-        @feed.update(params[:feed])
+        @feed.update(feed_params)
 
         respond_with(:api, :v1, @feed)
       end
@@ -37,6 +37,10 @@ module Api
 
       def find_feed
         @feed = Feed.find(params[:id])
+      end
+
+      def feed_params
+        params.require(:feed).permit(:name, :url, :rss)
       end
     end
   end
