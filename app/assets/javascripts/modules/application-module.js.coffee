@@ -3,6 +3,7 @@ angular.module 'application', [
   'category'
   'core'
   'config'
+  'feed'
   'navigation'
   'recipe'
   'session'
@@ -26,6 +27,10 @@ angular.module 'core', [
 ]
 
 angular.module 'config', [
+  'core'
+]
+
+angular.module 'feed', [
   'core'
 ]
 

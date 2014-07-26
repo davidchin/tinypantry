@@ -11,10 +11,13 @@ angular.module('model')
         @configure(config)
 
       set: (data) ->
-        _.merge(@data, data) if data?
+        @data = data if data?
 
       unset: ->
         @data = null
+
+      merge: (data) ->
+        _.merge(@data, data) if data?
 
       store: (key, value) ->
         if value?
@@ -48,16 +51,20 @@ angular.module('model')
         @request('update', params, data)
           .then (response) => @set(response)
 
+      patch: (params, data) ->
+        @request('patch', params, data)
+          .then (response) => @set(response)
+
       create: (params, data) ->
         @request('create', params, data)
           .then (response) => @set(response)
 
-      destroy: (params, data) ->
-        @request('destroy', params, data)
+      destroy: (params) ->
+        @request('destroy', params)
           .then (response) => @unset() && response
 
       request: (action, params, data) ->
-        params = _.defaults({}, params, @params())
+        params ||= @params()
         output = @config.resource[action]?(params, data)
 
         if output
@@ -107,7 +114,7 @@ angular.module('model')
 
       attr: (key, value) ->
         if _.isObject(key)
-          return _.merge(@data, key)
+          return @merge(key)
         else if arguments.length > 1
           @data[key] = value
 
@@ -120,6 +127,11 @@ angular.module('model')
         @request('show', params)
           .then (response) => @set(response)
 
+      create: (params, data) ->
+        data ||= @data
+
+        super(params, data)
+
       update: (params, data) ->
         if @data.$update?
           @data.$update(data)
@@ -127,9 +139,9 @@ angular.module('model')
         else
           super
 
-      destroy: (params, data) ->
+      destroy: (params) ->
         if @data.$destroy?
-          @data.$destroy(data)
+          @data.$destroy()
             .then (response) => @unset() && response
         else
           super

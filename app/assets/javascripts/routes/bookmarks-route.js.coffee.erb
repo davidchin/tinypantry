@@ -2,6 +2,6 @@ angular.module('bookmark')
   .config ($routeProvider) ->
     $routeProvider
       .when '/bookmarks',
-        templateUrl: '<%= asset_path("/assets/bookmarks/index.html") %>'
+        templateUrl: '<%= asset_path("bookmarks/index.html") %>'
         controller: 'BookmarksIndexController'
         controllerAs: 'bookmarksIndex'

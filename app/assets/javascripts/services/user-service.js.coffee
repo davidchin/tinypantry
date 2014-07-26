@@ -34,7 +34,9 @@ angular.module('user')
         params = { id: @retrieve('user').id }
 
         super(params).then (user) =>
-          @status.loggedIn = true && user
+          @status.loggedIn = true
+
+          return user
 
       login: (email = @data.email, password = @data.password) ->
         @session.create({}, { email, password })
@@ -46,4 +48,17 @@ angular.module('user')
           .finally =>
             @status.loggedIn = false
 
+      hasRole: (roleName) ->
+        _.any @data.roles, (role) ->
+          role.name?.toLowerCase == roleName?.toLowerCase
+
     return CurrentUser
+
+  .factory 'authorize', ($q, $location, currentUser) ->
+    authorize = (role) ->
+      currentUser.ready()
+        .then ->
+          unless currentUser.hasRole(role)
+            $location.path('/').replace()
+
+            return $q.reject('Unauthorized')

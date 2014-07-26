@@ -46,3 +46,29 @@ angular.module('recipe')
           .then => @read()
 
     return new RecipesShowController
+
+  .controller 'RecipesEditController', ($routeParams, Recipe) ->
+    class RecipesEditController
+      constructor: ->
+        @recipe = new Recipe
+
+        @read()
+
+      read: ->
+        @recipe.read({ id: $routeParams.id })
+
+      submit: ->
+        @recipe.update()
+          .then (recipe) ->
+            $location.path('/recipes')
+
+            return recipe
+
+      destroy: ->
+        @recipe.destroy
+          .then (recipe) ->
+            $location.path('/recipes')
+
+            return recipe
+
+    return new RecipesEditController

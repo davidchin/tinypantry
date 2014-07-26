@@ -2,11 +2,11 @@ angular.module('session')
   .config ($routeProvider) ->
     $routeProvider
       .when '/login',
-        templateUrl: '<%= asset_path("/assets/sessions/new.html") %>'
+        templateUrl: '<%= asset_path("sessions/new.html") %>'
         controller: 'SessionsNewController'
         controllerAs: 'sessionsNew'
 
       .when '/logout',
-        templateUrl: '<%= asset_path("/assets/sessions/destroy.html") %>'
+        templateUrl: '<%= asset_path("sessions/destroy.html") %>'
         controller: 'SessionsDestroyController'
         controllerAs: 'sessionsDestroy'

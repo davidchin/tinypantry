@@ -1,0 +1,3 @@
+h1 Edit {{ recipesEdit.recipe.data.name }}
+
+div ng-include="'#{ asset_path('recipes/_form.html') }'" onload="controller = recipesEdit"

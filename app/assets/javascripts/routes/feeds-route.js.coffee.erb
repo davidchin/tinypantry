@@ -1,0 +1,26 @@
+angular.module('feed')
+  .config ($routeProvider) ->
+    $routeProvider
+      .when '/feeds',
+        templateUrl: '<%= asset_path("feeds/index.html") %>'
+        controller: 'FeedsIndexController'
+        controllerAs: 'feedsIndex'
+        resolve: authorize: (authorize) -> authorize('admin')
+
+      .when '/feeds/new',
+        templateUrl: '<%= asset_path("feeds/new.html") %>'
+        controller: 'FeedsNewController'
+        controllerAs: 'feedsNew'
+        resolve: authorize: (authorize) -> authorize('admin')
+
+      .when '/feeds/:id',
+        templateUrl: '<%= asset_path("feeds/show.html") %>'
+        controller: 'FeedsShowController'
+        controllerAs: 'feedsShow'
+        resolve: authorize: (authorize) -> authorize('admin')
+
+      .when '/feeds/:id/edit',
+        templateUrl: '<%= asset_path("feeds/edit.html") %>'
+        controller: 'FeedsEditController'
+        controllerAs: 'feedsEdit'
+        resolve: authorize: (authorize) -> authorize('admin')

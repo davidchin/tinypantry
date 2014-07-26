@@ -5,16 +5,22 @@ angular.module('recipe')
         redirectTo: '/recipes'
 
       .when '/recipes',
-        templateUrl: '<%= asset_path("/assets/recipes/index.html") %>'
+        templateUrl: '<%= asset_path("recipes/index.html") %>'
         controller: 'RecipesIndexController'
         controllerAs: 'recipesIndex'
 
       .when '/recipes/:id',
-        templateUrl: '<%= asset_path("/assets/recipes/show.html") %>'
+        templateUrl: '<%= asset_path("recipes/show.html") %>'
         controller:  'RecipesShowController'
         controllerAs: 'recipesShow'
 
+      .when '/recipes/:id/edit',
+        templateUrl: '<%= asset_path("recipes/edit.html") %>'
+        controller:  'RecipesEditController'
+        controllerAs: 'recipesEdit'
+        resolve: authorize: (authorize) -> authorize('admin')
+
       .when '/category/:category',
-        templateUrl: '<%= asset_path("/assets/recipes/index.html") %>'
+        templateUrl: '<%= asset_path("recipes/index.html") %>'
         controller: 'RecipesIndexController'
         controllerAs: 'recipesIndex'

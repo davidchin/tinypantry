@@ -1,0 +1,12 @@
+h1 {{ categoriesShow.category.data.name }}
+
+ul
+  li
+    strong Name
+    p {{ categoriesShow.category.data.name }}
+  li
+    strong Keywords
+    p ng-repeat="keyword in categoriesShow.category.data.keywords"
+      | {{ keyword.name }}
+
+a ng-href="/categories/{{ categoriesShow.category.data.id }}/edit" Edit

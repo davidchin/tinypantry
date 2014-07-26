@@ -1,0 +1,3 @@
+h1 Edit {{ feedsEdit.feed.data.name }}
+
+div ng-include="'#{ asset_path('feeds/_form.html') }'" onload="controller = feedsEdit"

@@ -1,0 +1,26 @@
+angular.module('category')
+  .config ($routeProvider) ->
+    $routeProvider
+      .when '/categories',
+        templateUrl: '<%= asset_path("categories/index.html") %>'
+        controller: 'CategoriesIndexController'
+        controllerAs: 'categoriesIndex'
+        resolve: authorize: (authorize) -> authorize('admin')
+
+      .when '/categories/new',
+        templateUrl: '<%= asset_path("categories/new.html") %>'
+        controller: 'CategoriesNewController'
+        controllerAs: 'categoriesNew'
+        resolve: authorize: (authorize) -> authorize('admin')
+
+      .when '/categories/:id',
+        templateUrl: '<%= asset_path("categories/show.html") %>'
+        controller: 'CategoriesShowController'
+        controllerAs: 'categoriesShow'
+        resolve: authorize: (authorize) -> authorize('admin')
+
+      .when '/categories/:id/edit',
+        templateUrl: '<%= asset_path("categories/edit.html") %>'
+        controller: 'CategoriesEditController'
+        controllerAs: 'categoriesEdit'
+        resolve: authorize: (authorize) -> authorize('admin')
