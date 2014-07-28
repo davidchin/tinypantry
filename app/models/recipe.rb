@@ -1,5 +1,6 @@
 class Recipe < ActiveRecord::Base
   include PgSearch
+  include Cacheable
 
   extend FriendlyId
 

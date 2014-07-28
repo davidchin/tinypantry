@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/*path', to: 'pages#app'
+  get '/*path', to: 'pages#app', constraints: { path: /(?!\bapi\b\/?).*/ }
 
   root to: 'pages#app'
 end

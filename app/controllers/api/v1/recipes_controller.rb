@@ -60,7 +60,9 @@ module Api
       end
 
       def recipe_params
-        params.require(:recipe).permit(:name, :description, :url, :image, :remote_image_url, :approved)
+        params.require(:recipe)
+              .permit(:name, :description, :url,
+                      :image, :remote_image_url, :approved)
       end
     end
   end
