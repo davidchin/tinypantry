@@ -7,7 +7,7 @@ module Api
 
       wrap_parameters :category, include: [*Category.attribute_names, :keywords_attributes]
 
-      load_and_authorize_resource
+      authorize_resource
 
       def index
         @categories = Category.all

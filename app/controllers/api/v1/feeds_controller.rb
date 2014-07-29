@@ -5,7 +5,7 @@ module Api
 
       before_action :find_feed, only: [:show, :update, :destroy]
 
-      load_and_authorize_resource
+      authorize_resource
 
       def index
         @feeds = Feed.all

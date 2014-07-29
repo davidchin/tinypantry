@@ -5,7 +5,7 @@ module Api
 
       before_action :find_user
 
-      load_and_authorize_resource
+      authorize_resource
 
       def index
         @bookmarks = @user.bookmarks
