@@ -10,11 +10,11 @@ module Api
       def index
         @feeds = Feed.all
 
-        respond_with(:api, :v1, @feeds)
+        respond_with(:api, :v1, @feeds) if stale? @feeds
       end
 
       def show
-        respond_with(:api, :v1, @feed)
+        respond_with(:api, :v1, @feed) if stale? @feed
       end
 
       def create
