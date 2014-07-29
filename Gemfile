@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 
 # Core
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.3'
 gem 'pg'
 gem 'unicorn'
 
@@ -74,3 +74,4 @@ gem 'rails_best_practices', require: false
 gem 'foreman', require: false
 gem 'rubocop', require: false
 gem 'hirb', require: false
+gem 'brakeman', require: false
