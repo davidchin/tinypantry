@@ -44,6 +44,11 @@ Rails.application.routes.draw do
     end
   end
 
+  # Exceptions
+  get '/404', to: 'errors#not_found'
+  get '/422', to: 'errors#unprocessable'
+  get '/500', to: 'errors#error'
+
   get '/*path', to: 'pages#app', constraints: { path: /(?!\bapi\b\/?).*/ }
 
   root to: 'pages#app'

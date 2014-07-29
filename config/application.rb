@@ -29,6 +29,10 @@ module Tinypantry
       }
     }
 
+    # Exception handling
+    config.exceptions_app = self.routes
+
+    # Generators config
     config.generators.assets = false
     config.generators.helper = false
   end
