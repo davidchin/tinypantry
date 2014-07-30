@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
-      format.json { render json: { error: exception.message }, status: 403 }
+      format.json { render json: { error: exception.message }, status: :forbidden }
     end
   end
 

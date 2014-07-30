@@ -1,22 +1,18 @@
-class ErrorsController < ApplicationController
-  def not_found
-    respond_to do |format|
-      format.json { render json: { error: 'Not Found', status: 404 }, status: 404 }
-      format.html { render file: 'public/404.html', status: 404 }
-    end
-  end
+class ErrorsController < ActionController::Base
+  def show
+    @exception = env['action_dispatch.exception']
+    @status_code = ActionDispatch::ExceptionWrapper.new(env, @exception).status_code
 
-  def unprocessable
     respond_to do |format|
-      format.json { render json: { error: 'Unprocessable Entity', status: 422 }, status: 422 }
-      format.html { render file: 'public/422.html', status: 422 }
-    end
-  end
+      format.html {
+        render file: "public/#{ @status_code }.html",
+               status: @status_code
+      }
 
-  def error
-    respond_to do |format|
-      format.json { render json: { error: 'Application Error', status: 500 }, status: 500 }
-      format.html { render file: 'public/500.html', status: 500 }
+      format.json {
+        render json: { error: @exception.message, status: @status_code },
+               status: @status_code
+      }
     end
   end
 end

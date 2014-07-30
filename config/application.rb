@@ -30,7 +30,9 @@ module Tinypantry
     }
 
     # Exception handling
-    config.exceptions_app = self.routes
+    config.exceptions_app = lambda do |env|
+      ErrorsController.action(:show).call(env)
+    end
 
     # Generators config
     config.generators.assets = false
