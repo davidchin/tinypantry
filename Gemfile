@@ -75,3 +75,4 @@ gem 'foreman', require: false
 gem 'rubocop', require: false
 gem 'hirb', require: false
 gem 'brakeman', require: false
+gem 'scss-lint', require: false

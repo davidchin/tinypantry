@@ -70,6 +70,7 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     colored (1.2)
+    colorize (0.7.3)
     dalli (2.7.2)
     delayed_job (4.0.1)
       activesupport (>= 3.0, < 4.2)
@@ -215,6 +216,9 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
+    scss-lint (0.7.0)
+      colorize
+      sass
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
@@ -292,6 +296,7 @@ DEPENDENCIES
   rspec-rails (~> 3.0.1)
   rubocop
   sass-rails (~> 4.0.3)
+  scss-lint
   sdoc (~> 0.4.0)
   slim (~> 2.0.2)
   spring
