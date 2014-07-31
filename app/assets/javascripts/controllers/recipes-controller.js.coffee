@@ -27,7 +27,7 @@ angular.module('recipe')
 
     return new RecipesIndexController
 
-  .controller 'RecipesShowController', ($routeParams, currentUser, Recipe) ->
+  .controller 'RecipesShowController', ($routeParams, currentUser, flash, Recipe) ->
     class RecipesShowController
       constructor: ->
         @recipe = new Recipe
@@ -43,7 +43,9 @@ angular.module('recipe')
       bookmark: ->
         currentUser.ready()
           .then => currentUser.bookmarks.create({ recipe_id: @recipe.data.id })
-          .then => @read()
+          .then =>
+            flash.set('Recipe is successfully bookmarked')
+            @read()
 
     return new RecipesShowController
 
