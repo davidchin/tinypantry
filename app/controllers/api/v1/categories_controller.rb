@@ -12,27 +12,27 @@ module Api
       def index
         @categories = Category.all
 
-        respond_with(:api, :v1, @categories) if stale? @categories
+        respond_with(@categories) if stale? @categories
       end
 
       def show
-        respond_with(:api, :v1, @category) if stale? @category
+        respond_with(@category) if stale? @category
       end
 
       def create
         @category = Category.create(category_params)
 
-        respond_with(:api, :v1, @category)
+        respond_with(@category)
       end
 
       def update
         @category.update(category_params)
 
-        respond_with(:api, :v1, @category)
+        respond_with(@category)
       end
 
       def destroy
-        respond_with(:api, :v1, @category.destroy)
+        respond_with(@category.destroy)
       end
 
       private

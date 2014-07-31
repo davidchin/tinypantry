@@ -1,3 +1,5 @@
+require 'api/responder'
+
 module Api
   module V1
     class ApiController < ApplicationController
@@ -6,6 +8,8 @@ module Api
       prepend_before_action :skip_devise_trackable
 
       check_authorization
+
+      self.responder = Api::Responder
 
       private
 

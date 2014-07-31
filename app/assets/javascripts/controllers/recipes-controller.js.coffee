@@ -27,7 +27,7 @@ angular.module('recipe')
 
     return new RecipesIndexController
 
-  .controller 'RecipesShowController', ($routeParams, currentUser, Recipe) ->
+  .controller 'RecipesShowController', ($routeParams, currentUser, flash, Recipe) ->
     class RecipesShowController
       constructor: ->
         @recipe = new Recipe
@@ -43,11 +43,13 @@ angular.module('recipe')
       bookmark: ->
         currentUser.ready()
           .then => currentUser.bookmarks.create({ recipe_id: @recipe.data.id })
-          .then => @read()
+          .then =>
+            flash.set('Recipe was successfully bookmarked.')
+            @read()
 
     return new RecipesShowController
 
-  .controller 'RecipesEditController', ($routeParams, $location, Recipe) ->
+  .controller 'RecipesEditController', ($routeParams, $location, flash, Recipe) ->
     class RecipesEditController
       constructor: ->
         @recipe = new Recipe
@@ -60,6 +62,7 @@ angular.module('recipe')
       submit: ->
         @recipe.update()
           .then (recipe) ->
+            flash.set('Feed was successfully updated.')
             $location.path('/recipes')
 
             return recipe
@@ -67,6 +70,7 @@ angular.module('recipe')
       destroy: ->
         @recipe.destroy
           .then (recipe) ->
+            flash.set('Feed was successfully destroyed.')
             $location.path('/recipes')
 
             return recipe

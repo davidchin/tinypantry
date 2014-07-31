@@ -65,7 +65,7 @@ angular.module('model')
 
       request: (action, params, data) ->
         # Params
-        params ||= @params()
+        params = _.extend({}, @params(), params)
 
         # Data - set additional keys for nested attributes
         data = _.reduce data, (output, value, attr) ->

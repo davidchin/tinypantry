@@ -20,6 +20,7 @@ angular.module 'category', [
 
 angular.module 'core', [
   'model'
+  'flash'
   'resource'
   'route'
   'utility'
@@ -33,6 +34,8 @@ angular.module 'config', [
 angular.module 'feed', [
   'core'
 ]
+
+angular.module 'flash', []
 
 angular.module 'model', [
   'storage'

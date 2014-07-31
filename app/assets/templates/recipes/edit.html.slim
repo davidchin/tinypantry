@@ -1,3 +1,5 @@
 h1 Edit {{ recipesEdit.recipe.data.name }}
 
+flash name="app"
+
 div ng-include="'#{ asset_path('recipes/_form.html') }'" onload="controller = recipesEdit"

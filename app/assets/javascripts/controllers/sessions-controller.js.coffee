@@ -1,5 +1,5 @@
 angular.module('session')
-  .controller 'SessionsNewController', ($location, currentUser) ->
+  .controller 'SessionsNewController', ($location, currentUser, flash) ->
     class SessionsNewController
       constructor: ->
         @currentUser = currentUser
@@ -11,11 +11,12 @@ angular.module('session')
       login: ->
         @currentUser.login()
           .then (user) ->
+            flash.set('You are successfully logged in.')
             $location.path('/') && user
 
     return new SessionsNewController
 
-  .controller 'SessionsDestroyController', ($location, currentUser) ->
+  .controller 'SessionsDestroyController', ($location, currentUser, flash) ->
     class SessionsDestroyController
       constructor: ->
         @currentUser = currentUser
@@ -25,6 +26,7 @@ angular.module('session')
       logout: ->
         @currentUser.logout()
           .then (user) ->
+            flash.set('You are successfully logged out.')
             $location.path('/') && user
 
     return new SessionsDestroyController

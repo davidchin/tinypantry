@@ -9,4 +9,4 @@ div ng-controller="NavigationController as navigation"
 
   div class="category-navigation"
     div ng-repeat="category in navigation.categories.data"
-      a ng-href="/category/{{ category.data.slug }}" {{ category.data.name }}
+      a ng-href="/recipes?category={{ category.data.slug }}" {{ category.data.name }}

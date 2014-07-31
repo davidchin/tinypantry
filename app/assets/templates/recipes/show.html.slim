@@ -1,5 +1,7 @@
 h1 {{ recipesShow.recipe.data.name }}
 
+flash name="app"
+
 / p ng-bind-html="recipesShow.recipe.data.description"
 
 button type="button" ng-click="recipesShow.bookmark()" ng-disabled="recipesShow.recipe.status.bookmarked"

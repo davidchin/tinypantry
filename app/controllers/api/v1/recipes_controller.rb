@@ -9,39 +9,39 @@ module Api
       authorize_resource
 
       def index
-        respond_with(:api, :v1, @recipes) if stale? @recipes
+        respond_with(@recipes) if stale? @recipes
       end
 
       def show
-        respond_with(:api, :v1, @recipe) if stale? @recipe
+        respond_with(@recipe) if stale? @recipe
       end
 
       def search
         @recipes = Recipe.search_content(params[:query])
 
-        respond_with(:api, :v1, @recipes) if stale? @recipes
+        respond_with(@recipes) if stale? @recipes
       end
 
       def related
         @recipes = @recipe.related_recipes
 
-        respond_with(:api, :v1, @recipes) if stale? @recipes
+        respond_with(@recipes) if stale? @recipes
       end
 
       def create
         @recipe = Recipe.create(recipe_params)
 
-        respond_with(:api, :v1, @recipe)
+        respond_with(@recipe)
       end
 
       def update
         @recipe.update(recipe_params)
 
-        respond_with(:api, :v1, @recipe)
+        respond_with(@recipe)
       end
 
       def destroy
-        respond_with(:api, :v1, @recipe.destroy)
+        respond_with(@recipe.destroy)
       end
 
       private

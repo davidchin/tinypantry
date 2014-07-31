@@ -11,7 +11,7 @@ angular.module('feed')
 
     return new FeedsIndexController
 
-  .controller 'FeedsNewController', (Feed) ->
+  .controller 'FeedsNewController', (flash, Feed) ->
     class FeedsNewController
       constructor: ->
         @feed = new Feed
@@ -19,13 +19,14 @@ angular.module('feed')
       submit: ->
         @feed.create()
           .then (feed) ->
+            flash.set('Feed was successfully created.')
             $location.path('/feeds')
 
             return feed
 
     return new FeedsNewController
 
-  .controller 'FeedsShowController', ($routeParams, Feed) ->
+  .controller 'FeedsShowController', ($routeParams, flash, Feed) ->
     class FeedsShowController
       constructor: ->
         @feed = new Feed
@@ -37,7 +38,7 @@ angular.module('feed')
 
     return new FeedsShowController
 
-  .controller 'FeedsEditController', ($routeParams, $location, Feed) ->
+  .controller 'FeedsEditController', ($routeParams, $location, flash, Feed) ->
     class FeedsEditController
       constructor: ->
         @feed = new Feed
@@ -50,6 +51,7 @@ angular.module('feed')
       submit: ->
         @feed.update()
           .then (feed) ->
+            flash.set('Feed was successfully updated.')
             $location.path('/feeds')
 
             return feed
@@ -57,6 +59,7 @@ angular.module('feed')
       destroy: ->
         @feed.destroy
           .then (feed) ->
+            flash.set('Feed was successfully destroyed.')
             $location.path('/feeds')
 
             return feed

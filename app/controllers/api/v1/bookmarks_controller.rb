@@ -10,25 +10,25 @@ module Api
       def index
         @bookmarks = @user.bookmarks
 
-        respond_with(:api, :v1, @bookmarks)
+        respond_with(@bookmarks)
       end
 
       def create
         @bookmark = @user.bookmarks.create!(recipe_id: params[:recipe_id])
 
-        respond_with(:api, :v1, @bookmark)
+        respond_with(@bookmark)
       end
 
       def destroy
         @bookmark = @user.bookmarks.find_by(recipe_id: params[:recipe_id])
 
-        respond_with(:api, :v1, @bookmark.destroy!)
+        respond_with(@bookmark.destroy!)
       end
 
       def recipes
         @recipes = @user.bookmarked_recipes.page(params[:page])
 
-        respond_with(:api, :v1, @recipes)
+        respond_with(@recipes)
       end
 
       private

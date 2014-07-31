@@ -1,10 +1,13 @@
 h1 Recipes
 
+flash name="app"
+
 div class="recipe-search" ng-submit="recipesIndex.search()"
   form name="form"
     input type="text" placeholder="Search" ng-model="recipesIndex.recipes.query"
 
 div ng-repeat="recipe in recipesIndex.recipes.data"
-  h2 {{ recipe.data.name }}
-  strong ng-show="recipe.status.bookmarked" Bookmarked
-  / p ng-bind-html="recipe.data.description"
+  a ng-href="/recipes/{{ recipe.data.slug }}"
+    h2 {{ recipe.data.name }}
+    strong ng-show="recipe.status.bookmarked" Bookmarked
+    / p ng-bind-html="recipe.data.description"

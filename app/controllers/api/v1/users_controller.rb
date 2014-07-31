@@ -10,21 +10,21 @@ module Api
       def index
         @users = User.all.page(params[:page])
 
-        respond_with(:api, :v1, @users) if stale? @users
+        respond_with(@users) if stale? @users
       end
 
       def show
-        respond_with(:api, :v1, @user) if stale? @user
+        respond_with(@user) if stale? @user
       end
 
       def update
         @user.update(params[:user])
 
-        respond_with(:api, :v1, @user)
+        respond_with(@user)
       end
 
       def destroy
-        respond_with(:api, :v1, @user.destroy)
+        respond_with(@user.destroy)
       end
 
       private
