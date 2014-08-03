@@ -1,7 +1,7 @@
 fieldset {
   background: lighten($base-border-color, 10);
   border: 1px solid $base-border-color;
-  margin: 0 0 ($base-line-height / 2) 0;
+  margin: 0 0 ($base-line-height / 2);
   padding: $base-line-height;
 }
 
@@ -32,13 +32,13 @@ select[multiple=multiple] {
   @include box-sizing(border-box);
   @include transition(border-color);
   background-color: white;
-  border-radius: $form-border-radius;
   border: 1px solid $form-border-color;
+  border-radius: $form-border-radius;
   box-shadow: $form-box-shadow;
   font-family: $form-font-family;
   font-size: $form-font-size;
   margin-bottom: $base-line-height / 2;
-  padding: ($base-line-height / 3) ($base-line-height / 3);
+  padding: $base-line-height / 3;
   width: 100%;
 
   &:hover {
@@ -60,7 +60,8 @@ input[type="search"] {
   @include appearance(none);
 }
 
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   display: inline;
   margin-right: $base-line-height / 4;
 }
@@ -72,7 +73,7 @@ input[type="file"] {
 }
 
 select {
-  width: auto;
-  max-width: 100%;
   margin-bottom: $base-line-height;
+  max-width: 100%;
+  width: auto;
 }

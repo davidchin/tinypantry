@@ -7,7 +7,12 @@ body {
   line-height: $unitless-line-height;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: $header-font-family;
   line-height: $header-line-height;
   margin: 0;
@@ -51,7 +56,8 @@ a {
     color: $hover-link-color;
   }
 
-  &:active, &:focus {
+  &:active,
+  &:focus {
     color: $hover-link-color;
     outline: none;
   }
@@ -59,9 +65,9 @@ a {
 
 hr {
   border-bottom: 1px solid $base-border-color;
-  border-left: none;
-  border-right: none;
-  border-top: none;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
   margin: $base-line-height 0;
 }
 

@@ -1,0 +1,13 @@
+.app-navigation {
+  background: $dark-gray;
+}
+
+.app-navigation__item-link {
+  color: $white;
+  display: block;
+  padding: 10px 15px;
+
+  &:hover {
+    color: darken($white, 20%);
+  }
+}

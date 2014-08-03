@@ -1,0 +1,11 @@
+.app-container {
+  @include outer-container;
+}
+
+.app-aside {
+  @include span-columns(4);
+}
+
+.app-body {
+  @include span-columns(8);
+}

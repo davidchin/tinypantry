@@ -1,12 +1,14 @@
-div ng-controller="NavigationController as navigation"
+header class="app-header" ng-controller="NavigationController as navigation"
 
-  div class="user-navigation"
+  a href="/" class="app-header__logo" tinypantry.com
+
+  nav class="user-navigation"
     div ng-show="navigation.currentUser.status.loggedIn"
       a ng-href="/logout" Logout
 
     div ng-hide="navigation.currentUser.status.loggedIn"
       a ng-href="/login" Login
 
-  div class="category-navigation"
-    div ng-repeat="category in navigation.categories.data"
-      a ng-href="/recipes?category={{ category.data.slug }}" {{ category.data.name }}
+  nav class="app-navigation"
+    div class="app-navigation__item" ng-repeat="category in navigation.categories.data"
+      a class="app-navigation__item-link" ng-href="/recipes?category={{ category.data.slug }}" {{ category.data.name }}

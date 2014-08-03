@@ -1,5 +1,5 @@
-div ng-app="application"
+div class="app-container" ng-app="application"
 
-  div ng-include="'#{ asset_path('navigation/_menu.html') }'"
+  aside class="app-aside" ng-include="'#{ asset_path('navigation/_menu.html') }'"
 
-  div ng-view=""
+  section class="app-body" ng-view=""
