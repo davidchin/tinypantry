@@ -28,3 +28,10 @@ html
       script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.13/angular-sanitize.min.js"
 
     = javascript_include_tag "application"
+
+    script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"
+
+    coffee:
+      WebFont.load
+        google:
+          families: ['Noto Serif:400', 'Noto Serif:400italic', 'Noto Serif:700', 'Noto Serif:700italic']
