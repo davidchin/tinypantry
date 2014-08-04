@@ -16,6 +16,7 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'bourbon', '~> 3.2.3'
 gem 'neat', '~> 1.5.1'
 gem 'bitters', '~> 0.10.0'
+gem 'font-awesome-sass', '~> 4.1.0'
 
 # View
 gem 'jbuilder', '~> 2.1.3'
