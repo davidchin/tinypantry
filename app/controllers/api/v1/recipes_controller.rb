@@ -1,10 +1,10 @@
 module Api
   module V1
     class RecipesController < Api::V1::ApiController
-      before_action :authenticate_user!, except: [:index, :show, :related]
+      before_action :authenticate_user!, except: [:index, :show, :related, :track]
 
       before_action :find_recipes, only: [:index]
-      before_action :find_recipe, only: [:show, :update, :destroy, :related]
+      before_action :find_recipe, only: [:show, :update, :destroy, :related, :track]
 
       authorize_resource
 
@@ -42,6 +42,15 @@ module Api
 
       def destroy
         respond_with(@recipe.destroy)
+      end
+
+      def track
+        @recipe.visits.create(user: current_user,
+                              request_uuid: request.uuid,
+                              ip_address: request.remote_ip,
+                              referrer: request.referer)
+
+        respond_with(@recipe)
       end
 
       private

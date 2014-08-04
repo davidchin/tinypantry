@@ -7,6 +7,7 @@ class Ability
     user ||= User.new
 
     can :read, [Recipe, Category]
+    can :track, Recipe
     can [:read, :recipes], Bookmark
     can [:create, :destroy], Bookmark, user_id: user.id
     can [:create, :show, :update], User, id: user.id

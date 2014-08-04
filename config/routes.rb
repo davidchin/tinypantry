@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :recipes do
         get :search, on: :collection
         get :related, on: :member
+        get :track, on: :member
       end
 
       resources :categories

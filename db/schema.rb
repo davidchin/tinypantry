@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140629032633) do
+ActiveRecord::Schema.define(version: 20140804133626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20140629032633) do
     t.boolean  "approved",           default: false
     t.string   "slug"
     t.integer  "bookmarks_count",    default: 0
+    t.integer  "visits_count",       default: 0
   end
 
   add_index "recipes", ["feed_id"], name: "index_recipes_on_feed_id", using: :btree
@@ -140,5 +141,19 @@ ActiveRecord::Schema.define(version: 20140629032633) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "visits", force: true do |t|
+    t.integer  "visitable_id"
+    t.string   "visitable_type"
+    t.integer  "user_id"
+    t.string   "request_uuid"
+    t.string   "ip_address"
+    t.string   "referrer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "visits", ["user_id"], name: "index_visits_on_user_id", using: :btree
+  add_index "visits", ["visitable_id", "visitable_type"], name: "index_visits_on_visitable_id_and_visitable_type", using: :btree
 
 end
