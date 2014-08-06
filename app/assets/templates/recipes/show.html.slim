@@ -4,5 +4,8 @@ flash name="app"
 
 / p ng-bind-html="recipesShow.recipe.data.description"
 
+a target="_blank" ng-href="{{ recipesShow.recipe.data.url }}" analytics-outbound="{ category: 'Recipe', action: 'View original', label: recipesShow.recipe.data.slug }"
+  | {{ recipesShow.recipe.data.url }}
+
 button type="button" ng-click="recipesShow.bookmark()" ng-disabled="recipesShow.recipe.status.bookmarked"
   | Bookmark

@@ -47,6 +47,7 @@ gem 'aws-sdk', '~> 1.42.0'
 
 # Analystics
 gem 'newrelic_rpm'
+gem 'google-api-client', '~> 0.7.1'
 
 # Search
 gem 'pg_search'

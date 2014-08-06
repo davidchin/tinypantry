@@ -15,7 +15,7 @@ class Feed < ActiveRecord::Base
 
     transaction do
       new_recipes.each(&:save)
-      update(last_imported: Time.zone.now)
+      update(last_imported: Time.now.in_time_zone)
     end
   end
 
@@ -60,7 +60,7 @@ class Feed < ActiveRecord::Base
       url: link.try(:content),
       description: description.try(:content),
       published_at: pub_date.try(:content),
-      imported_at: Time.zone.now,
+      imported_at: Time.now.in_time_zone,
       content_xml: node.to_xml,
       remote_image_url: extract_img_src(description)
     }
