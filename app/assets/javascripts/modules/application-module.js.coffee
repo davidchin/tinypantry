@@ -10,6 +10,8 @@ angular.module 'application', [
   'user'
 ]
 
+angular.module 'analytics', []
+
 angular.module 'bookmark', [
   'core'
 ]
@@ -19,6 +21,7 @@ angular.module 'category', [
 ]
 
 angular.module 'core', [
+  'analytics'
   'model'
   'flash'
   'resource'
