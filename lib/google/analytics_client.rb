@@ -17,7 +17,7 @@ module Google
 
     def get(params = {})
       params = params.reverse_merge(
-        'ids'        => Rails.application.secrets.ga_profile_id,
+        'ids'        => "ga:#{ Rails.application.secrets.ga_profile_id }",
         'metrics'    => 'ga:pageviews',
         'start-date' => 7.days.ago.in_time_zone.strftime('%Y-%m-%d'),
         'end-date'   => Time.now.in_time_zone.strftime('%Y-%m-%d')

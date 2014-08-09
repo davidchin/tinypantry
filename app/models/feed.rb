@@ -1,6 +1,10 @@
 class Feed < ActiveRecord::Base
   has_many :recipes, dependent: :destroy
 
+  def self.import_all
+    find_each(&:delay_import_rss)
+  end
+
   def parse_rss
     xml_file = open(rss)
     Nokogiri::XML(xml_file)
@@ -31,10 +35,6 @@ class Feed < ActiveRecord::Base
 
       urls.include?(link.try(:content))
     end
-  end
-
-  def self.import_all
-    find_each(&:delay_import_rss)
   end
 
   private

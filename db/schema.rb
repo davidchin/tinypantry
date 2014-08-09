@@ -144,7 +144,6 @@ ActiveRecord::Schema.define(version: 20140808141418) do
   create_table "visits", force: true do |t|
     t.integer  "visitable_id"
     t.string   "visitable_type"
-    t.integer  "last_7_days_count",  default: 0
     t.integer  "last_30_days_count", default: 0
     t.integer  "total_count",        default: 0
     t.datetime "created_at"
