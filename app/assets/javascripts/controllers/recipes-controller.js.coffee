@@ -27,7 +27,7 @@ angular.module('recipe')
 
     return new RecipesIndexController
 
-  .controller 'RecipesShowController', ($routeParams, currentUser, flash, Recipe) ->
+  .controller 'RecipesShowController', ($routeParams, currentUser, flash, ga, Recipe) ->
     class RecipesShowController
       constructor: ->
         @recipe = new Recipe
@@ -36,6 +36,10 @@ angular.module('recipe')
 
       read: ->
         @recipe.read({ id: $routeParams.id })
+          .then =>
+            # NOTE: This 'then' block is for testing - to be removed later
+            { category, action, label } = @recipe.data.trackingParams
+            ga.event(category, action, label)
           .then =>
             currentUser.ready().then => @recipe.bookmarked(currentUser)
           .then => @recipe.data
