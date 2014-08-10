@@ -1,9 +1,32 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
 .app-container {
   @include outer-container;
+  height: 100%;
+  margin-left: 0;
+  position: relative;
 }
 
 .app-aside {
   @include span-columns(4);
+  height: 100%;
+
+  &:before {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+    height: 100%;
+    position: absolute;
+  }
 }
 
 .app-body {

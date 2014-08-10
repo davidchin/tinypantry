@@ -1,28 +1,34 @@
 // Typography
-$sans-serif: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$sans-serif: Lato, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $serif: Bitter, Georgia, Cambria, Times, serif;
-$base-font-family: $serif;
-$header-font-family: $base-font-family;
+$base-font-family: $sans-serif;
+$header-font-family: $serif;
 
 // Sizes
-$base-font-size: 1em;
-$base-line-height: $base-font-size * 1.5;
-$unitless-line-height: $base-line-height / ($base-line-height * 0 + 1); // Strip units from line-height: https://developer.mozilla.org/en-US/docs/Web/CSS/line-height#Prefer_unitless_numbers_for_line-height_values
-$header-line-height: $base-font-size * 1.25;
+$unitless-line-height: 1.5;
+$unitless-header-line-height: 1.25;
+$base-font-size: 16px;
+$base-line-height: $base-font-size * $unitless-line-height;
 $base-border-radius: em(3);
 
 // Colors
 $white: #fff;
+$black: #000;
 $blue: #477dca;
 $dark-gray: #333;
 $medium-gray: #999;
-$light-gray: #ddd;
+$light-gray: #efefef;
 $light-red: #fbe3e4;
 $light-yellow: #fff6bf;
 $light-green: #e6efc2;
+$yellow: #ffd600;
 
 // Background Color
-$base-background-color: white;
+$base-background-color: $light-gray;
+$header-background-color: $black;
+
+// Brand color
+$base-brand-color: $yellow;
 
 // Font Colors
 $base-font-color: $dark-gray;

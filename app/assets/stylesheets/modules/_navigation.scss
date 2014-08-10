@@ -1,10 +1,11 @@
 .app-navigation {
-  background: $dark-gray;
+  background: $header-background-color;
 }
 
 .app-navigation__item-link {
   color: $white;
   display: block;
+  font: 300 1.2em $sans-serif;
   padding: 10px 15px;
 
   &:hover {
