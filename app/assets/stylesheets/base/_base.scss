@@ -8,12 +8,10 @@
 @import 'grid-settings';
 
 // Mixins
-@import 'mixins/flash';
+@import 'mixins/mixins';
 
 // Extends
-@import 'extends/button';
-@import 'extends/clearfix';
-@import 'extends/hide-text';
+@import 'extends/extends';
 
 // Typography and Elements
 @import 'typography';

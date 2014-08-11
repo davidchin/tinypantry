@@ -10,28 +10,30 @@ $unitless-header-line-height: 1.25;
 $base-font-size: 16px;
 $base-line-height: $base-font-size * $unitless-line-height;
 $base-border-radius: em(3);
+$small-font-size: $base-font-size * .85;
 
 // Colors
 $white: #fff;
 $black: #000;
-$blue: #477dca;
+$blue: #156cee;
 $dark-gray: #333;
 $medium-gray: #999;
-$light-gray: #efefef;
+$light-gray: #ddd;
 $light-red: #fbe3e4;
 $light-yellow: #fff6bf;
 $light-green: #e6efc2;
 $yellow: #ffd600;
+$whitesmoke: #efefef;
 
 // Background Color
-$base-background-color: $light-gray;
+$base-background-color: $whitesmoke;
 $header-background-color: $black;
 
 // Brand color
 $base-brand-color: $yellow;
 
 // Font Colors
-$base-font-color: $dark-gray;
+$base-font-color: $black;
 $base-accent-color: $blue;
 
 // Link Colors
@@ -58,3 +60,6 @@ $form-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .06);
 $form-box-shadow-focus: $form-box-shadow, 0 0 5px rgba(darken($form-border-color-focus, 5), .7);
 $form-font-size: $base-font-size;
 $form-font-family: $base-font-family;
+
+// Icons
+$icon-margin: em(5);

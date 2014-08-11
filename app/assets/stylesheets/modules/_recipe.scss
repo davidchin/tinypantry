@@ -1,0 +1,38 @@
+.recipe-tile {
+  @include row(table);
+  background: $white;
+
+  &,
+  a {
+    color: $base-font-color;
+  }
+}
+
+.recipe-tile__image {
+  display: block;
+}
+
+.recipe-tile__aside {
+  @include span-columns(6);
+}
+
+.recipe-tile__body {
+  @include span-columns(6);
+  padding: $gutter / 2;
+  vertical-align: middle;
+}
+
+.recipe-tile__title {
+  font-size: em(20, $base-font-size);
+  text-align: center;
+}
+
+.recipe-title__meta {
+  font-size: em(13, $base-font-size);
+  margin-top: $base-line-height / 2;
+  text-align: center;
+
+  .fa {
+    margin-right: $icon-margin;
+  }
+}

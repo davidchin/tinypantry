@@ -1,14 +1,43 @@
 .app-navigation {
   background: $header-background-color;
+  border-top: 1px solid $dark-gray;
 }
 
 .app-navigation__item-link {
-  color: $white;
+  @extend %link--white;
+  @include transition (border-width .3s ease-in-out);
   display: block;
-  font: 300 1.2em $sans-serif;
+  font: 300 1.2em $serif;
   padding: 10px 15px;
+  position: relative;
 
   &:hover {
-    color: darken($white, 20%);
+    border-left: 6px solid $base-brand-color;
+  }
+
+  &.is-active {
+    border-left: 0;
+    color: $base-brand-color;
+
+    &:before {
+      @extend %icon;
+      content: $fa-var-angle-right;
+      float: right;
+    }
+  }
+}
+
+.user-navigation {
+  background: $header-background-color;
+}
+
+.user-navigation__item-link {
+  @extend %link--white;
+  display: block;
+  font-size: $small-font-size;
+  padding: 10px 15px;
+
+  .fa {
+    margin-right: $icon-margin;
   }
 }

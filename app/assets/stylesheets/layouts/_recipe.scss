@@ -1,0 +1,7 @@
+.app-body {
+  .recipe-tile {
+    @include span-columns(6);
+    @include omega(2n);
+    margin-bottom: $gutter;
+  }
+}

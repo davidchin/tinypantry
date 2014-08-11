@@ -2,10 +2,17 @@ header class="app-header" ng-controller="NavigationController as navigation"
 
   a href="/" class="app-header__logo" tinypantry.com
 
-  nav class="app-navigation"
-    / div class="app-navigation__item"
-    /   a class="app-navigation__item-link" ng-href="/logout" ng-show="navigation.currentUser.status.loggedIn" Logout
-    /   a class="app-navigation__item-link" ng-href="/login" ng-hide="navigation.currentUser.status.loggedIn" Login
+  nav class="user-navigation"
+    div class="user-navigation__item"
+      a class="user-navigation__item-link" ng-href="/logout" ng-show="navigation.currentUser.status.loggedIn"
+        i class="fa fa-user"
+        | Logout
+      a class="user-navigation__item-link" ng-href="/login" ng-hide="navigation.currentUser.status.loggedIn"
+        i class="fa fa-user"
+        | Login
 
+  nav class="app-navigation"
+    div class="app-navigation__item"
+      a class="app-navigation__item-link is-active" href="/recipes" All
     div class="app-navigation__item" ng-repeat="category in navigation.categories.data"
       a class="app-navigation__item-link" ng-href="/recipes?category={{ category.data.slug }}" {{ category.data.name }}

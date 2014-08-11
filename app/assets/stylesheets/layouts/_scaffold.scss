@@ -1,0 +1,27 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.app-container {
+  height: 100%;
+  margin-left: 0;
+  position: relative;
+}
+
+.app-aside {
+  height: 100%;
+  overflow: auto;
+  position: fixed;
+  width: golden-ratio(1em, 6);
+}
+
+.app-body {
+  @include outer-container;
+  margin-left: golden-ratio(1em, 6);
+  padding: $gutter;
+}
