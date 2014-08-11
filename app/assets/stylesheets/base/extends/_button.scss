@@ -1,5 +1,5 @@
 %button {
-  -webkit-font-smoothing: antialiased;
+  @include prefixer(font-smoothing, antialiased, webkit spec);
   border-radius: $base-border-radius;
   display: inline-block;
   font-size: $base-font-size;
@@ -12,11 +12,11 @@
   &:disabled,
   &:disabled:hover {
     background-color: $base-button-color;
-    color: white;
+    color: $white;
   }
 
   &:hover {
     background-color: $hover-button-color;
-    color: white;
+    color: $white;
   }
 }
