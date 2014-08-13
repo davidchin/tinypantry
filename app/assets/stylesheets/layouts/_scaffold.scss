@@ -24,4 +24,10 @@ body {
   @include outer-container;
   margin-left: golden-ratio(1em, 6);
   padding: $gutter;
+  position: relative;
+
+  .app-search {
+    margin: -$gutter;
+    margin-bottom: $gutter;
+  }
 }

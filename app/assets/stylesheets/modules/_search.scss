@@ -1,0 +1,9 @@
+.app-search {
+  background: transparentize($base-background-color, .3);
+  border-bottom: 1px solid $light-gray;
+  padding: $gutter;
+
+  .app-search__input {
+    margin: 0;
+  }
+}

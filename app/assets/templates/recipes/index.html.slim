@@ -1,8 +1,8 @@
 flash name="app"
 
-div class="recipe-search" ng-submit="recipesIndex.search()"
+div class="app-search" ng-submit="recipesIndex.search()"
   form name="form"
-    input type="text" placeholder="Search" ng-model="recipesIndex.recipes.query"
+    input type="text" placeholder="Search" class="app-search__input" ng-model="recipesIndex.recipes.query"
 
 div class="recipe-tile" ng-repeat="recipe in recipesIndex.recipes.data"
   a ng-href="/recipes/{{ recipe.data.slug }}"
