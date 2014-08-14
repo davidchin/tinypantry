@@ -35,12 +35,13 @@ angular.module('recipe')
 
     return Recipe
 
-  .factory 'Recipes', (recipeResource, Collection, Recipe) ->
+  .factory 'Recipes', (recipeResource, Collection, Recipe, RecipeOrderTypes) ->
     class Recipes extends Collection
       constructor: ->
         @configure {
           resource: recipeResource
           model: Recipe
+          orderTypes: RecipeOrderTypes
         }
 
         super
@@ -50,3 +51,9 @@ angular.module('recipe')
           .then (recipes) => @set(recipes)
 
     return Recipes
+
+  .value 'RecipeOrderTypes', [
+    { key: 'date', name: 'Date' }
+    { key: 'bookmark', name: 'Bookmark' }
+    { key: 'view', name: 'View' }
+  ]

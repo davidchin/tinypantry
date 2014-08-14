@@ -1,18 +1,31 @@
 flash name="app"
 
-div class="app-search" ng-submit="recipesIndex.search()"
-  form name="form"
-    input type="text" placeholder="Search" class="app-search__input" ng-model="recipesIndex.recipes.query"
+section class="recipe-nav-bar"
+  div class="recipe-filters"
+    | Order by
+    ul class="recipe-filter-list"
+      li ng-repeat="type in recipesIndex.recipes.config.orderTypes"
+        a class="recipe-filter" ng-class="{ 'is-active': $index == 0 }" ng-click="recipesIndex.recipes.orderBy(type)"
+          | {{ type.name }}
 
-div class="recipe-tile" ng-repeat="recipe in recipesIndex.recipes.data"
-  a ng-href="/recipes/{{ recipe.data.slug }}"
-    div class="recipe-tile__aside"
-      img class="recipe-tile__image" src="{{ recipe.data.image_urls.original }}"
-    div class="recipe-tile__body"
-      h2 class="recipe-tile__title" {{ recipe.data.name }}
-      p class="recipe-title__meta"
-        span
-          i class="fa fa-bookmark"
-          | {{ recipe.data.bookmarks_count }}
-      / strong ng-show="recipe.status.bookmarked" Bookmarked
-      / p ng-bind-html="recipe.data.description"
+  div class="recipe-search" ng-submit="recipesIndex.search()"
+    form name="form"
+      div class="search-input-container"
+        input type="text" placeholder="Search" class="search-input" autocorrect="false" autocapitalize="off" ng-model="recipesIndex.recipes.query"
+
+section class="recipe-tiles"
+  div class="recipe-tile" ng-repeat="recipe in recipesIndex.recipes.data"
+    a class="recipe-tile__link" ng-href="/recipes/{{ recipe.data.slug }}"
+      div class="recipe-tile__aside"
+        img class="recipe-tile__image" src="{{ recipe.data.image_urls.original }}"
+      div class="recipe-tile__body"
+        h2 class="recipe-tile__title" {{ recipe.data.name }}
+        p class="recipe-title__meta"
+          span class="recipe-title__meta-item"
+            i class="fa fa-bookmark"
+            | {{ recipe.data.bookmarks_count || 0 }}
+          span class="recipe-title__meta-item"
+            i class="fa fa-eye"
+            | {{ recipe.data.visits_count || 0 }}
+        / strong ng-show="recipe.status.bookmarked" Bookmarked
+        / p ng-bind-html="recipe.data.description"

@@ -11,6 +11,7 @@ $base-font-size: 16px;
 $base-line-height: $base-font-size * $unitless-line-height;
 $base-border-radius: em(3);
 $small-font-size: $base-font-size * .85;
+$mini-font-size: $base-font-size * .75;
 
 // Colors
 $white: #fff;
@@ -18,12 +19,13 @@ $black: #000;
 $blue: #156cee;
 $dark-gray: #333;
 $medium-gray: #999;
-$light-gray: #ddd;
+$gray: #bbb;
+$light-gray: #ccc;
 $light-red: #fbe3e4;
 $light-yellow: #fff6bf;
 $light-green: #e6efc2;
 $yellow: #ffd600;
-$whitesmoke: #efefef;
+$whitesmoke: #eee;
 
 // Background Color
 $base-background-color: $whitesmoke;
@@ -43,7 +45,8 @@ $base-button-color: $base-link-color;
 $hover-button-color: $hover-link-color;
 
 // Border color
-$base-border-color: $light-gray;
+$base-border-color: $gray;
+$recipe-tile-border-color: transparentize($light-gray, .4);
 
 // Flash Colors
 $alert-color: $light-yellow;

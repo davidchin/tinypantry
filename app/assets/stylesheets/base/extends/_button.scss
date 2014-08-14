@@ -20,3 +20,51 @@
     color: $white;
   }
 }
+
+%pill {
+  @include prefixer(font-smoothing, antialiased, webkit spec);
+  border-radius: $base-font-size;
+  display: inline-block;
+  padding: .2em .8em;
+  vertical-align: middle;
+
+  &,
+  &:disabled,
+  &:disabled:hover {
+    background-color: $base-button-color;
+    color: $white;
+  }
+
+  &:hover {
+    background-color: $hover-button-color;
+    color: $white;
+  }
+}
+
+%pill--gray {
+  &,
+  &:disabled,
+  &:disabled:hover {
+    background-color: $light-gray;
+    color: $dark-gray;
+  }
+
+  &:hover {
+    background-color: darken($light-gray, 10);
+    color: $dark-gray;
+  }
+}
+
+%pill--white {
+  &,
+  &:disabled,
+  &:disabled:hover {
+    background-color: $white;
+    color: $base-button-color;
+  }
+
+  &:hover {
+    background-color: darken($white, 10);
+    color: $hover-button-color;
+  }
+}

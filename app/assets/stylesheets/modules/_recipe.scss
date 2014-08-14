@@ -1,10 +1,75 @@
+.recipe-nav-bar {
+  @include box-sizing(border-box);
+  background: transparentize($base-background-color, .2);
+  border-bottom: 1px solid $light-gray;
+  max-width: $max-width;
+  padding: em(21px) $gutter;
+  z-index: 100;
+
+  .recipe-search,
+  .recipe-filters {
+    @include span-columns(6);
+  }
+
+  .recipe-filters {
+    font-size: $small-font-size;
+    margin-top: 9px;
+  }
+}
+
+.recipe-filter-list {
+  &,
+  > li {
+    display: inline-block;
+  }
+
+  > li {
+    margin-left: $base-font-size / 3;
+  }
+}
+
+.recipe-filter {
+  @extend %pill;
+  @extend %pill--gray;
+  font-size: $mini-font-size;
+  text-transform: uppercase;
+
+  &.is-active {
+    @extend %pill--white;
+
+    &:after {
+      @extend %icon;
+      content: $fa-var-angle-down;
+      margin-left: $icon-margin;
+    }
+  }
+}
+
+.recipe-tiles {
+  @include clearfix;
+}
+
 .recipe-tile {
-  @include row(table);
   background: $white;
+  border: 1px solid $recipe-tile-border-color;
+  position: relative;
 
   &,
   a {
     color: $base-font-color;
+  }
+
+  .recipe-tile__link {
+    display: block;
+  }
+
+  .recipe-title__meta {
+    bottom: 0;
+    left: 50%;
+    padding-left: $gutter;
+    padding-right: $gutter;
+    position: absolute;
+    right: 0;
   }
 }
 
@@ -12,27 +77,38 @@
   display: block;
 }
 
-.recipe-tile__aside {
-  @include span-columns(6);
+.recipe-tile__aside,
+.recipe-tile__body {
+  display: block;
+  float: left;
+  width: 50%;
 }
 
 .recipe-tile__body {
-  @include span-columns(6);
-  padding: $gutter / 2;
-  vertical-align: middle;
+  padding: $gutter;
+  vertical-align: top;
 }
 
 .recipe-tile__title {
   font-size: em(20, $base-font-size);
-  text-align: center;
 }
 
 .recipe-title__meta {
+  border-top: 1px solid $recipe-tile-border-color;
   font-size: em(13, $base-font-size);
   margin-top: $base-line-height / 2;
-  text-align: center;
+  padding-top: $base-line-height / 2;
 
   .fa {
     margin-right: $icon-margin;
+  }
+}
+
+.recipe-title__meta-item {
+  display: inline-block;
+  margin-left: $icon-margin * 2;
+
+  &:first-child {
+    margin-left: 0;
   }
 }

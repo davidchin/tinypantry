@@ -4,4 +4,15 @@
     @include omega(2n);
     margin-bottom: $gutter;
   }
+
+  .recipe-nav-bar {
+    left: golden-ratio(1em, 6);
+    position: fixed;
+    right: 0;
+    top: 0;
+
+    + * {
+      margin-top: em(80px);
+    }
+  }
 }
