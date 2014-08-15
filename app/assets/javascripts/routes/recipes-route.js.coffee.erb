@@ -7,15 +7,12 @@ angular.module('recipe')
       .when '/recipes',
         templateUrl: '<%= asset_path("recipes/index.html") %>'
         controller: 'RecipesIndexController'
-        controllerAs: 'recipesIndex'
 
       .when '/recipes/:id',
         templateUrl: '<%= asset_path("recipes/show.html") %>'
         controller:  'RecipesShowController'
-        controllerAs: 'recipesShow'
 
       .when '/recipes/:id/edit',
         templateUrl: '<%= asset_path("recipes/edit.html") %>'
         controller:  'RecipesEditController'
-        controllerAs: 'recipesEdit'
         resolve: authorize: (authorize) -> authorize('admin')

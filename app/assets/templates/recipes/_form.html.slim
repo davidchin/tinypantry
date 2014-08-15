@@ -1,12 +1,12 @@
-form ng-submit="controller.submit()"
+form ng-submit="submit()"
   label Name
-  input type="text" ng-model="controller.recipe.data.name"
+  input type="text" ng-model="recipe.data.name"
 
   label Description
-  input type="text" ng-model="controller.recipe.data.description"
+  input type="text" ng-model="recipe.data.description"
 
   label URL
-  input type="url" ng-model="controller.recipe.data.url"
+  input type="url" ng-model="recipe.data.url"
 
   button type="submit" Submit
-  button type="button" ng-show="controller.recipe.data.id" ng-click="controller.destroy()" Delete
+  button type="button" ng-show="recipe.data.id" ng-click="destroy()" Delete

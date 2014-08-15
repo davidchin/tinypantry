@@ -4,9 +4,7 @@ angular.module('session')
       .when '/login',
         templateUrl: '<%= asset_path("sessions/new.html") %>'
         controller: 'SessionsNewController'
-        controllerAs: 'sessionsNew'
 
       .when '/logout',
         templateUrl: '<%= asset_path("sessions/destroy.html") %>'
         controller: 'SessionsDestroyController'
-        controllerAs: 'sessionsDestroy'

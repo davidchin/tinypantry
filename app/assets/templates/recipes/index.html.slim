@@ -4,17 +4,17 @@ section class="recipe-nav-bar"
   div class="recipe-filters"
     | Order by
     ul class="recipe-filter-list"
-      li ng-repeat="type in recipesIndex.recipes.config.orderTypes"
-        a class="recipe-filter" ng-class="{ 'is-active': $index == 0 }" ng-click="recipesIndex.recipes.orderBy(type)"
+      li ng-repeat="type in recipes.config.orderTypes"
+        a class="recipe-filter" ng-class="{ 'is-active': $index == 0 }" ng-click="recipes.orderBy(type)"
           | {{ type.name }}
 
-  div class="recipe-search" ng-submit="recipesIndex.search()"
+  div class="recipe-search" ng-submit="search()"
     form name="form"
       div class="search-input-container"
-        input type="text" placeholder="Search" class="search-input" autocorrect="false" autocapitalize="off" ng-model="recipesIndex.recipes.query"
+        input type="text" placeholder="Search" class="search-input" autocorrect="false" autocapitalize="off" ng-model="recipes.query"
 
 section class="recipe-tiles"
-  div class="recipe-tile" ng-repeat="recipe in recipesIndex.recipes.data"
+  div class="recipe-tile" ng-repeat="recipe in recipes.data"
     a class="recipe-tile__link" ng-href="/recipes/{{ recipe.data.slug }}"
       div class="recipe-tile__aside"
         img class="recipe-tile__image" src="{{ recipe.data.image_urls.original }}"

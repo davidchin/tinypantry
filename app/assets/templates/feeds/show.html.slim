@@ -1,14 +1,14 @@
-h1 {{ feedsShow.feed.data.name }}
+h1 {{ feed.data.name }}
 
 ul
   li
     strong URL
-    p {{ feedsShow.feed.data.url }}
+    p {{ feed.data.url }}
   li
     strong RSS
-    p {{ feedsShow.feed.data.rss }}
+    p {{ feed.data.rss }}
   li
     strong Last imported
-    p {{ feedsShow.feed.data.last_imported }}
+    p {{ feed.data.last_imported }}
 
-a ng-href="/feeds/{{ feedsShow.feed.data.id }}/edit" Edit
+a ng-href="/feeds/{{ feed.data.id }}/edit" Edit

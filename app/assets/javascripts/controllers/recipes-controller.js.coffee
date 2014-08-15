@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .controller 'RecipesIndexController', ($routeParams, $location, $q, currentUser, Recipes) ->
+  .controller 'RecipesIndexController', ($scope, $routeParams, $location, $q, currentUser, Recipes) ->
     class RecipesIndexController
       constructor: ->
         @recipes = new Recipes
@@ -25,7 +25,7 @@ angular.module('recipe')
         currentUser.ready()
           .then => $q.all(@recipes.invoke('bookmarked', currentUser))
 
-    return new RecipesIndexController
+    _.extend($scope, new RecipesIndexController)
 
   .controller 'RecipesShowController', ($routeParams, currentUser, flash, ga, Recipe) ->
     class RecipesShowController
@@ -51,7 +51,7 @@ angular.module('recipe')
             flash.set('Recipe was successfully bookmarked.')
             @read()
 
-    return new RecipesShowController
+    _.extend($scope, new RecipesShowController)
 
   .controller 'RecipesEditController', ($routeParams, $location, flash, Recipe) ->
     class RecipesEditController
@@ -79,4 +79,4 @@ angular.module('recipe')
 
             return recipe
 
-    return new RecipesEditController
+    _.extend($scope, new RecipesEditController)

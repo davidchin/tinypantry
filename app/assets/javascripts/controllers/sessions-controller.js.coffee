@@ -1,12 +1,11 @@
 angular.module('session')
-  .controller 'SessionsNewController', ($location, currentUser, flash) ->
+  .controller 'SessionsNewController', ($scope, $location, currentUser, flash) ->
     class SessionsNewController
       constructor: ->
         @currentUser = currentUser
 
         @currentUser.session.verify()
-          .then =>
-            $location.path('/')
+          .then -> $location.path('/')
 
       login: ->
         @currentUser.login()
@@ -14,9 +13,9 @@ angular.module('session')
             flash.set('You are successfully logged in.')
             $location.path('/') && user
 
-    return new SessionsNewController
+    _.extend($scope, new SessionsNewController)
 
-  .controller 'SessionsDestroyController', ($location, currentUser, flash) ->
+  .controller 'SessionsDestroyController', ($scope, $location, currentUser, flash) ->
     class SessionsDestroyController
       constructor: ->
         @currentUser = currentUser
@@ -29,4 +28,4 @@ angular.module('session')
             flash.set('You are successfully logged out.')
             $location.path('/') && user
 
-    return new SessionsDestroyController
+    _.extend($scope, new SessionsDestroyController)

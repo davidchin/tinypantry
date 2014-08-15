@@ -1,5 +1,5 @@
 angular.module('navigation')
-  .controller 'NavigationController', (currentUser, Categories) ->
+  .controller 'NavigationController', ($scope, currentUser, Categories) ->
     class NavigationController
       constructor: ->
         @categories = new Categories
@@ -10,4 +10,4 @@ angular.module('navigation')
       read: ->
         @categories.read()
 
-    return new NavigationController
+    _.extend($scope, new NavigationController)

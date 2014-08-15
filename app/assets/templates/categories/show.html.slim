@@ -1,12 +1,12 @@
-h1 {{ categoriesShow.category.data.name }}
+h1 {{ category.data.name }}
 
 ul
   li
     strong Name
-    p {{ categoriesShow.category.data.name }}
+    p {{ category.data.name }}
   li
     strong Keywords
-    p ng-repeat="keyword in categoriesShow.category.data.keywords"
+    p ng-repeat="keyword in category.data.keywords"
       | {{ keyword.name }}
 
-a ng-href="/categories/{{ categoriesShow.category.data.id }}/edit" Edit
+a ng-href="/categories/{{ category.data.id }}/edit" Edit

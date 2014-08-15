@@ -1,5 +1,5 @@
 angular.module('category')
-  .controller 'CategoriesIndexController', (Categories) ->
+  .controller 'CategoriesIndexController', ($scope, Categories) ->
     class CategoriesIndexController
       constructor: ->
         @categories = new Categories
@@ -9,9 +9,9 @@ angular.module('category')
       read: ->
         @categories.read()
 
-    return new CategoriesIndexController
+    _.extend($scope, new CategoriesIndexController)
 
-  .controller 'CategoriesNewController', (Category) ->
+  .controller 'CategoriesNewController', ($scope, Category) ->
     class CategoriesNewController
       constructor: ->
         @category = new Category
@@ -23,9 +23,9 @@ angular.module('category')
 
             return category
 
-    return new CategoriesNewController
+    _.extend($scope, new CategoriesNewController)
 
-  .controller 'CategoriesShowController', ($routeParams, Category) ->
+  .controller 'CategoriesShowController', ($scope, $routeParams, Category) ->
     class CategoriesShowController
       constructor: ->
         @category = new Category
@@ -37,9 +37,9 @@ angular.module('category')
           .then =>
             @category.data.keywords.push({ name: '' })
 
-    return new CategoriesShowController
+    _.extend($scope, new CategoriesShowController)
 
-  .controller 'CategoriesEditController', ($routeParams, $location, Category) ->
+  .controller 'CategoriesEditController', ($scope, $routeParams, $location, Category) ->
     class CategoriesEditController
       constructor: ->
         @category = new Category
@@ -65,4 +65,4 @@ angular.module('category')
 
             return category
 
-    return new CategoriesEditController
+    _.extend($scope, new CategoriesEditController)

@@ -1,5 +1,5 @@
 angular.module('feed')
-  .controller 'FeedsIndexController', (Feeds) ->
+  .controller 'FeedsIndexController', ($scope, Feeds) ->
     class FeedsIndexController
       constructor: ->
         @feeds = new Feeds
@@ -9,9 +9,9 @@ angular.module('feed')
       read: ->
         @feeds.read()
 
-    return new FeedsIndexController
+    _.extend($scope, new FeedsIndexController)
 
-  .controller 'FeedsNewController', (flash, Feed) ->
+  .controller 'FeedsNewController', ($scope, flash, Feed) ->
     class FeedsNewController
       constructor: ->
         @feed = new Feed
@@ -24,9 +24,9 @@ angular.module('feed')
 
             return feed
 
-    return new FeedsNewController
+    _.extend($scope, new FeedsNewController)
 
-  .controller 'FeedsShowController', ($routeParams, flash, Feed) ->
+  .controller 'FeedsShowController', ($scope, $routeParams, flash, Feed) ->
     class FeedsShowController
       constructor: ->
         @feed = new Feed
@@ -36,9 +36,9 @@ angular.module('feed')
       read: ->
         @feed.read({ id: $routeParams.id })
 
-    return new FeedsShowController
+    _.extend($scope, new FeedsShowController)
 
-  .controller 'FeedsEditController', ($routeParams, $location, flash, Feed) ->
+  .controller 'FeedsEditController', ($scope, $routeParams, $location, flash, Feed) ->
     class FeedsEditController
       constructor: ->
         @feed = new Feed
@@ -64,4 +64,4 @@ angular.module('feed')
 
             return feed
 
-    return new FeedsEditController
+    _.extend($scope, new FeedsEditController)

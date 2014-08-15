@@ -1,5 +1,5 @@
 angular.module('bookmark')
-  .controller 'BookmarksIndexController', (currentUser, Bookmarks) ->
+  .controller 'BookmarksIndexController', ($scope, currentUser, Bookmarks) ->
     class BookmarksIndexController
       constructor: ->
         @user = currentUser
@@ -11,4 +11,4 @@ angular.module('bookmark')
         @user.ready()
           .then => @bookmarks.recipes()
 
-    return new BookmarksIndexController
+    _.extend($scope, new BookmarksIndexController)
