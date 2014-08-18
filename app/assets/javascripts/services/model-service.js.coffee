@@ -1,5 +1,9 @@
 angular.module('model')
   .factory 'ModelBase', ($q, localStorageService) ->
+    # TODO
+    # Remove @data, merge data as direct attributes of model
+    # Ability to specify not to send certain attributes
+
     class ModelBase
       constructor: (config) ->
         @data || {}

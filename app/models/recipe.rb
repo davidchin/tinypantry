@@ -31,7 +31,9 @@ class Recipe < ActiveRecord::Base
   has_many :visits, as: :visitable
 
   scope :recent, -> (time_ago = 7.days.ago) { where('created_at >= ?', time_ago) }
-  scope :popular, -> { order(bookmarks_count: :desc, created_at: :desc) }
+  scope :most_bookmarked, -> { order(bookmarks_count: :desc, created_at: :desc) }
+  scope :most_viewed, -> { order(bookmarks_count: :desc, created_at: :desc) } # TODO
+  scope :most_recent, -> { order(created_at: :desc) }
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where.not(approved: true) }
   scope :by_category, -> (category) { joins(:categories).where('categories.slug = ?', category) }

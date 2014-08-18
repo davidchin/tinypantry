@@ -3,7 +3,7 @@
   background: transparentize($base-background-color, .2);
   border-bottom: 1px solid $light-gray;
   max-width: $max-width;
-  padding: em(21px) $gutter;
+  padding: em(21px) $base-padding;
   z-index: 100;
 
   .recipe-search,
@@ -63,11 +63,11 @@
     display: block;
   }
 
-  .recipe-title__meta {
+  .recipe-tile__meta {
     bottom: 0;
     left: 50%;
-    padding-left: $gutter;
-    padding-right: $gutter;
+    padding-left: $base-padding;
+    padding-right: $base-padding;
     position: absolute;
     right: 0;
   }
@@ -85,7 +85,7 @@
 }
 
 .recipe-tile__body {
-  padding: $gutter;
+  padding: $base-padding;
   vertical-align: top;
 }
 
@@ -93,7 +93,7 @@
   font-size: em(20, $base-font-size);
 }
 
-.recipe-title__meta {
+.recipe-tile__meta {
   border-top: 1px solid $recipe-tile-border-color;
   font-size: em(13, $base-font-size);
   margin-top: $base-line-height / 2;
@@ -104,7 +104,7 @@
   }
 }
 
-.recipe-title__meta-item {
+.recipe-tile__meta-item {
   display: inline-block;
   margin-left: $icon-margin * 2;
 

@@ -50,6 +50,13 @@ angular.module('recipe')
         @request('search', params)
           .then (recipes) => @set(recipes)
 
+      orderBy: (type) ->
+        @read({ order_by: type.key })
+          .then (recipes) =>
+            @status.orderedBy = type
+
+            return recipes
+
     return Recipes
 
   .value 'RecipeOrderTypes', [

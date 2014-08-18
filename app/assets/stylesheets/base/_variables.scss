@@ -27,11 +27,11 @@ $light-green: #e6efc2;
 $yellow: #ffd600;
 $whitesmoke: #eee;
 
-// Background Color
+// Background Colors
 $base-background-color: $whitesmoke;
 $header-background-color: $black;
 
-// Brand color
+// Brand Colors
 $base-brand-color: $yellow;
 
 // Font Colors
@@ -44,7 +44,7 @@ $hover-link-color: darken($base-accent-color, 15);
 $base-button-color: $base-link-color;
 $hover-button-color: $hover-link-color;
 
-// Border color
+// Border Colors
 $base-border-color: $gray;
 $recipe-tile-border-color: transparentize($light-gray, .4);
 
@@ -66,3 +66,6 @@ $form-font-family: $base-font-family;
 
 // Icons
 $icon-margin: em(5);
+
+// Paddings
+$base-padding: 25px;

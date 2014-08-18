@@ -5,7 +5,7 @@ section class="recipe-nav-bar"
     | Order by
     ul class="recipe-filter-list"
       li ng-repeat="type in recipes.config.orderTypes"
-        a class="recipe-filter" ng-class="{ 'is-active': $index == 0 }" ng-click="recipes.orderBy(type)"
+        a class="recipe-filter" ng-class="{ 'is-active': type == recipes.status.orderedBy }" ng-click="recipes.orderBy(type)"
           | {{ type.name }}
 
   div class="recipe-search" ng-submit="search()"
@@ -20,11 +20,11 @@ section class="recipe-tiles"
         img class="recipe-tile__image" src="{{ recipe.data.image_urls.original }}"
       div class="recipe-tile__body"
         h2 class="recipe-tile__title" {{ recipe.data.name }}
-        p class="recipe-title__meta"
-          span class="recipe-title__meta-item"
+        p class="recipe-tile__meta"
+          span class="recipe-tile__meta-item"
             i class="fa fa-bookmark"
             | {{ recipe.data.bookmarks_count || 0 }}
-          span class="recipe-title__meta-item"
+          span class="recipe-tile__meta-item"
             i class="fa fa-eye"
             | {{ recipe.data.visits_count || 0 }}
         / strong ng-show="recipe.status.bookmarked" Bookmarked

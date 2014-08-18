@@ -57,6 +57,16 @@ module Api
         else
           @recipes = Recipe.page(params[:page]).per(50)
         end
+
+        # Sort recipes
+        @recipes = case params[:order_by]
+          when 'bookmark'
+            @recipes.most_bookmarked
+          when 'view'
+            @recipes.most_viewed
+          else
+            @recipes.most_recent
+        end
       end
 
       def recipe_params
