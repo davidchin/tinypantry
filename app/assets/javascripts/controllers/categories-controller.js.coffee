@@ -1,20 +1,24 @@
 angular.module('category')
-  .controller 'CategoriesIndexController', ($scope, Categories) ->
-    class CategoriesIndexController
+  .controller 'CategoriesIndexController', ($scope, BaseController, Categories) ->
+    class CategoriesIndexController extends BaseController
       constructor: ->
         @categories = new Categories
 
         @read()
 
+        super($scope)
+
       read: ->
         @categories.read()
 
-    _.extend($scope, new CategoriesIndexController)
+    new CategoriesIndexController
 
-  .controller 'CategoriesNewController', ($scope, Category) ->
-    class CategoriesNewController
+  .controller 'CategoriesNewController', ($scope, BaseController, Category) ->
+    class CategoriesNewController extends BaseController
       constructor: ->
         @category = new Category
+
+        super($scope)
 
       submit: ->
         @category.create()
@@ -23,28 +27,32 @@ angular.module('category')
 
             return category
 
-    _.extend($scope, new CategoriesNewController)
+    new CategoriesNewController
 
-  .controller 'CategoriesShowController', ($scope, $routeParams, Category) ->
-    class CategoriesShowController
+  .controller 'CategoriesShowController', ($scope, $routeParams, BaseController, Category) ->
+    class CategoriesShowController extends BaseController
       constructor: ->
         @category = new Category
 
         @read()
+
+        super($scope)
 
       read: ->
         @category.read({ id: $routeParams.id })
           .then =>
             @category.data.keywords.push({ name: '' })
 
-    _.extend($scope, new CategoriesShowController)
+    new CategoriesShowController
 
-  .controller 'CategoriesEditController', ($scope, $routeParams, $location, Category) ->
-    class CategoriesEditController
+  .controller 'CategoriesEditController', ($scope, $routeParams, $location, BaseController, Category) ->
+    class CategoriesEditController extends BaseController
       constructor: ->
         @category = new Category
 
         @read()
+
+        super($scope)
 
       read: ->
         @category.read({ id: $routeParams.id })
@@ -65,4 +73,4 @@ angular.module('category')
 
             return category
 
-    _.extend($scope, new CategoriesEditController)
+    new CategoriesEditController

@@ -50,10 +50,17 @@ angular.module('recipe')
         @request('search', params)
           .then (recipes) => @set(recipes)
 
-      orderBy: (type) ->
-        @read({ order_by: type.key })
+      read: (params) ->
+        promise = if params?.query?
+          @search(params)
+        else
+          super
+
+        promise
           .then (recipes) =>
-            @status.orderedBy = type
+            defaultOrder = _.first(@config.orderTypes)
+
+            @status.orderedBy = params?.order_by || defaultOrder.key
 
             return recipes
 

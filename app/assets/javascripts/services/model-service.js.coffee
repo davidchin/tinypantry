@@ -1,10 +1,10 @@
 angular.module('model')
-  .factory 'ModelBase', ($q, localStorageService) ->
+  .factory 'BaseModel', ($q, localStorageService) ->
     # TODO
     # Remove @data, merge data as direct attributes of model
     # Ability to specify not to send certain attributes
 
-    class ModelBase
+    class BaseModel
       constructor: (config) ->
         @data || {}
         @config ||= {}
@@ -119,10 +119,10 @@ angular.module('model')
 
         return @requestStatus
 
-    return ModelBase
+    return BaseModel
 
-  .factory 'Model', (ModelBase) ->
-    class Model extends ModelBase
+  .factory 'Model', (BaseModel) ->
+    class Model extends BaseModel
       constructor: (config) ->
         @data ||= {}
 
@@ -156,8 +156,8 @@ angular.module('model')
 
     return Model
 
-  .factory 'Collection', (ModelBase, Model) ->
-    class Collection extends ModelBase
+  .factory 'Collection', (BaseModel, Model) ->
+    class Collection extends BaseModel
       constructor: (config) ->
         @data ||= []
 

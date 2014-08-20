@@ -1,20 +1,24 @@
 angular.module('feed')
-  .controller 'FeedsIndexController', ($scope, Feeds) ->
-    class FeedsIndexController
+  .controller 'FeedsIndexController', ($scope, BaseController, Feeds) ->
+    class FeedsIndexController extends BaseController
       constructor: ->
         @feeds = new Feeds
 
         @read()
 
+        super($scope)
+
       read: ->
         @feeds.read()
 
-    _.extend($scope, new FeedsIndexController)
+    new FeedsIndexController
 
-  .controller 'FeedsNewController', ($scope, flash, Feed) ->
-    class FeedsNewController
+  .controller 'FeedsNewController', ($scope, flash, BaseController, Feed) ->
+    class FeedsNewController extends BaseController
       constructor: ->
         @feed = new Feed
+
+        super($scope)
 
       submit: ->
         @feed.create()
@@ -24,26 +28,30 @@ angular.module('feed')
 
             return feed
 
-    _.extend($scope, new FeedsNewController)
+    new FeedsNewController
 
-  .controller 'FeedsShowController', ($scope, $routeParams, flash, Feed) ->
-    class FeedsShowController
+  .controller 'FeedsShowController', ($scope, $routeParams, flash, BaseController, Feed) ->
+    class FeedsShowController extends BaseController
       constructor: ->
         @feed = new Feed
 
         @read()
+
+        super($scope)
 
       read: ->
         @feed.read({ id: $routeParams.id })
 
-    _.extend($scope, new FeedsShowController)
+    new FeedsShowController
 
-  .controller 'FeedsEditController', ($scope, $routeParams, $location, flash, Feed) ->
-    class FeedsEditController
+  .controller 'FeedsEditController', ($scope, $routeParams, $location, flash, BaseController, Feed) ->
+    class FeedsEditController extends BaseController
       constructor: ->
         @feed = new Feed
 
         @read()
+
+        super($scope)
 
       read: ->
         @feed.read({ id: $routeParams.id })
@@ -64,4 +72,4 @@ angular.module('feed')
 
             return feed
 
-    _.extend($scope, new FeedsEditController)
+    new FeedsEditController

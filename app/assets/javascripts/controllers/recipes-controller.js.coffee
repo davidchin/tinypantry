@@ -1,38 +1,41 @@
 angular.module('recipe')
-  .controller 'RecipesIndexController', ($scope, $routeParams, $location, $q, currentUser, Recipes) ->
-    class RecipesIndexController
+  .controller 'RecipesIndexController', ($scope, $routeParams, $location, $q, currentUser, BaseController, Recipes) ->
+    class RecipesIndexController extends BaseController
       constructor: ->
         @recipes = new Recipes
 
         @read()
 
+        super($scope)
+
       search: ->
         $location.path('/recipes').search({ query: @recipes.query })
 
-      read: ->
-        params = _.pick($routeParams, 'category', 'query')
+      read: (params) ->
+        routeParams = _.pick($routeParams, 'category', 'query')
+        params = _.defaults({}, params, routeParams)
 
-        promise = if params.query?
-          @recipes.search(params)
-        else
-          @recipes.read(params)
-
-        promise
+        @recipes.read(params)
           .then => @bookmarked()
           .then => @recipes.data
+
+      orderBy: (key) ->
+        @read({ order_by: key })
 
       bookmarked: ->
         currentUser.ready()
           .then => $q.all(@recipes.invoke('bookmarked', currentUser))
 
-    _.extend($scope, new RecipesIndexController)
+    new RecipesIndexController
 
   .controller 'RecipesShowController', ($routeParams, currentUser, flash, ga, Recipe) ->
-    class RecipesShowController
+    class RecipesShowController extends BaseController
       constructor: ->
         @recipe = new Recipe
 
         @read()
+
+        super($scope)
 
       read: ->
         @recipe.read({ id: $routeParams.id })
@@ -51,14 +54,16 @@ angular.module('recipe')
             flash.set('Recipe was successfully bookmarked.')
             @read()
 
-    _.extend($scope, new RecipesShowController)
+    new RecipesShowController
 
   .controller 'RecipesEditController', ($routeParams, $location, flash, Recipe) ->
-    class RecipesEditController
+    class RecipesEditController extends BaseController
       constructor: ->
         @recipe = new Recipe
 
         @read()
+
+        super($scope)
 
       read: ->
         @recipe.read({ id: $routeParams.id })
@@ -79,4 +84,4 @@ angular.module('recipe')
 
             return recipe
 
-    _.extend($scope, new RecipesEditController)
+    new RecipesEditController

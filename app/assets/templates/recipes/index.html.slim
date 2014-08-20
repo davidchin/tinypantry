@@ -5,7 +5,7 @@ section class="recipe-nav-bar"
     | Order by
     ul class="recipe-filter-list"
       li ng-repeat="type in recipes.config.orderTypes"
-        a class="recipe-filter" ng-class="{ 'is-active': type == recipes.status.orderedBy }" ng-click="recipes.orderBy(type)"
+        a class="recipe-filter" ng-class="{ 'is-active': type.key == recipes.status.orderedBy }" ng-click="orderBy(type.key)"
           | {{ type.name }}
 
   div class="recipe-search" ng-submit="search()"
