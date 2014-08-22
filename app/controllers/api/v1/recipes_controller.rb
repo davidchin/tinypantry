@@ -59,7 +59,8 @@ module Api
         end
 
         # Sort recipes
-        @recipes = case params[:order_by]
+        @recipes =
+          case params[:order_by]
           when 'bookmark'
             @recipes.most_bookmarked
           when 'view'

@@ -2,7 +2,7 @@ Documentation:
   Enabled: false
 
 LineLength:
-  Max: 100
+  Max: 150
 
 MethodLength:
   Max: 20
