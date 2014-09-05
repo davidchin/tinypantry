@@ -28,7 +28,7 @@ angular.module('recipe')
 
     new RecipesIndexController
 
-  .controller 'RecipesShowController', ($routeParams, currentUser, flash, ga, Recipe) ->
+  .controller 'RecipesShowController', ($scope, $routeParams, currentUser, flash, ga, BaseController, Recipe) ->
     class RecipesShowController extends BaseController
       constructor: ->
         @recipe = new Recipe
@@ -56,7 +56,7 @@ angular.module('recipe')
 
     new RecipesShowController
 
-  .controller 'RecipesEditController', ($routeParams, $location, flash, Recipe) ->
+  .controller 'RecipesEditController', ($scope, $routeParams, $location, flash, BaseController, Recipe) ->
     class RecipesEditController extends BaseController
       constructor: ->
         @recipe = new Recipe

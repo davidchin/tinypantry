@@ -4,9 +4,8 @@ flash name="app"
 
 / p ng-bind-html="recipe.data.description"
 
-p
-  a target="_blank" ng-href="{{ recipe.data.url }}" analytics-outbound="recipe.data.trackingParams"
-    | {{ recipe.data.url }}
+a target="_blank" class="button" ng-href="{{ recipe.data.url }}" analytics-outbound="recipe.data.trackingParams"
+  | View
 
 button type="button" ng-click="bookmark()" ng-disabled="recipe.status.bookmarked"
   | Bookmark
