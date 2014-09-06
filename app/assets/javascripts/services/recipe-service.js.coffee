@@ -21,12 +21,13 @@ angular.module('recipe')
         super
 
       set: ->
-        _.tap super, =>
-          @attr 'trackingParams', {
-            category: 'Recipe'
-            action: 'Outbound'
-            label: @data?.id
-          }
+        @trackingParams = {
+          category: 'Recipe'
+          action: 'Outbound'
+          label: @id
+        }
+
+        super
 
       bookmarked: (user) ->
         user.bookmarks.bookmarked(this)

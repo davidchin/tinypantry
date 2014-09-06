@@ -1,10 +1,10 @@
-h1 {{ recipe.data.name }}
+h1 {{ recipe.name }}
 
 flash name="app"
 
-/ p ng-bind-html="recipe.data.description"
+/ p ng-bind-html="recipe.description"
 
-a target="_blank" class="button" ng-href="{{ recipe.data.url }}" analytics-outbound="recipe.data.trackingParams"
+a target="_blank" class="button" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams"
   | View
 
 button type="button" ng-click="bookmark()" ng-disabled="recipe.status.bookmarked"

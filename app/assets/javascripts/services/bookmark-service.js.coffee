@@ -31,13 +31,13 @@ angular.module('bookmark')
 
       bookmarked: (recipe) ->
         @read()
-          .then => @any({ recipe_id: recipe.data.id })
+          .then => @any({ recipe_id: recipe.id })
 
       recipes: (params) ->
         @request('recipes', params)
           .then (response) => @set(response)
 
       params: ->
-        { user_id: @user?.data.id }
+        { user_id: @user?.id }
 
     return Bookmarks

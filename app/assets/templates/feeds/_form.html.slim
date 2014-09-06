@@ -1,9 +1,9 @@
 form ng-submit="submit()"
   label URL
-  input type="url" ng-model="feed.data.url"
+  input type="url" ng-model="feed.url"
 
   label RSS
-  input type="url" ng-model="feed.data.rss"
+  input type="url" ng-model="feed.rss"
 
   button type="submit" Submit
-  button type="button" ng-show="feed.data.id" ng-click="destroy()" Delete
+  button type="button" ng-show="feed.id" ng-click="destroy()" Delete

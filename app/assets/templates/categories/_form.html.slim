@@ -1,10 +1,10 @@
 form ng-submit="submit()"
   label Name
-  input type="text" ng-model="category.data.name"
+  input type="text" ng-model="category.name"
 
   label Keywords
-  p ng-repeat="keyword in category.data.keywords"
+  p ng-repeat="keyword in category.keywords"
     input type="text" placeholder="Keyword" ng-model="keyword.name"
 
   button type="submit" Submit
-  button type="button" ng-show="category.data.id" ng-click="destroy()" Delete
+  button type="button" ng-show="category.id" ng-click="destroy()" Delete

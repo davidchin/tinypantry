@@ -1,27 +1,29 @@
 angular.module('model')
   .factory 'BaseModel', ($q, localStorageService) ->
-    # TODO
-    # Remove @data, merge data as direct attributes of model
-    # Ability to specify not to send certain attributes
-
     class BaseModel
       constructor: (config) ->
-        @data || {}
         @config ||= {}
         @status ||= {}
         @requests ||= {}
-        @requestStatus ||= {}
+        @dataAttrs ||= []
 
         @configure(config)
 
       set: (data) ->
-        @data = data if data?
+        for attr, value of data
+          continue if _.isFunction(@[attr]) || _.isFunction(value) || /^\$/.test(attr)
+
+          # Keep track of which attributes are data attributes
+          @dataAttrs.push(attr) unless _.contains(@dataAttrs, attr)
+
+          # Set attribute
+          @[attr] = value
 
       unset: ->
-        @data = null
+        delete @[attr] for attr in @dataAttrs
 
-      merge: (data) ->
-        _.merge(@data, data) if data?
+      data: ->
+        _.pick(@, @dataAttrs)
 
       store: (key, value) ->
         if value?
@@ -115,41 +117,28 @@ angular.module('model')
             error: true
 
         for flag, value of flags[status]
-          @requestStatus["#{ action }#{ _.string.capitalize(flag) }"] = value
+          @status["#{ action }#{ _.string.capitalize(flag) }"] = value
 
-        return @requestStatus
+        return @status
 
     return BaseModel
 
   .factory 'Model', (BaseModel) ->
     class Model extends BaseModel
-      constructor: (config) ->
-        @data ||= {}
-
-        super
-
-      attr: (key, value) ->
-        if _.isObject(key)
-          return @merge(key)
-        else if arguments.length > 1
-          @data[key] = value
-
-        @data[key]
-
       pick: (attrs...) ->
-        _.pick(@data, attrs...)
+        _.pick(@data(), attrs...)
 
       read: (params) ->
         @request('show', params)
           .then (response) => @set(response)
 
       create: (params, data) ->
-        data ||= @data
+        data ||= @data()
 
         super(params, data)
 
       update: (params, data) ->
-        data ||= @data
+        data ||= @data()
 
         super(params, data)
           .then (response) => @set(response)
@@ -159,9 +148,12 @@ angular.module('model')
   .factory 'Collection', (BaseModel, Model) ->
     class Collection extends BaseModel
       constructor: (config) ->
-        @data ||= []
+        @items ||= []
 
         super
+
+      data: ->
+        @items.slice()
 
       set: (data) ->
         data = for item in data
@@ -172,30 +164,31 @@ angular.module('model')
 
           model.set(item) && model
 
-        super(data)
+        @items.length = 0
+        @items.push.apply(@items, data)
 
       find: (params) ->
-        _.find(@data, { data: params })
+        _.find(@items, { data: params })
 
       where: (params) ->
-        _.where(@data, { data: params })
+        _.where(@items, { data: params })
 
       any: (params) ->
-        _.any(@data, { data: params })
+        _.any(@items, { data: params })
 
       pluck: (attr) ->
-        _.pluck(@data, attr)
+        _.pluck(@items, attr)
 
       invoke: (method, params...) ->
-        _.invoke(@data, method, params...)
+        _.invoke(@items, method, params...)
 
       add: (model) ->
-        @data.push(model)
+        @items.push(model)
 
       remove: (model) ->
-        index = _.indexOf(@data, model)
+        index = _.indexOf(@items, model)
 
-        @data.splice(index, 1) if index > -1
+        @items.splice(index, 1) if index > -1
 
       read: (params) ->
         @request('index', params)

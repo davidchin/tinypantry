@@ -14,5 +14,5 @@ header class="app-header" ng-controller="NavigationController"
   nav class="app-navigation"
     div class="app-navigation__item"
       a class="app-navigation__item-link is-active" href="/recipes" All
-    div class="app-navigation__item" ng-repeat="category in categories.data"
-      a class="app-navigation__item-link" ng-href="/recipes?category={{ category.data.slug }}" {{ category.data.name }}
+    div class="app-navigation__item" ng-repeat="category in categories.items"
+      a class="app-navigation__item-link" ng-href="/recipes?category={{ category.slug }}" {{ category.name }}

@@ -41,7 +41,7 @@ angular.module('category')
       read: ->
         @category.read({ id: $routeParams.id })
           .then =>
-            @category.data.keywords.push({ name: '' })
+            @category.keywords.push({ name: '' })
 
     new CategoriesShowController
 
@@ -57,7 +57,7 @@ angular.module('category')
       read: ->
         @category.read({ id: $routeParams.id })
           .then =>
-            @category.data.keywords.push({ name: '' })
+            @category.keywords.push({ name: '' })
 
       submit: ->
         @category.update()

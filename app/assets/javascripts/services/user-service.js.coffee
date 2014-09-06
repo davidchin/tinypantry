@@ -38,7 +38,7 @@ angular.module('user')
 
           return user
 
-      login: (email = @data.email, password = @data.password) ->
+      login: (email = @email, password = @password) ->
         @session.create({}, { email, password })
           .finally =>
             @password = null
@@ -49,7 +49,7 @@ angular.module('user')
             @status.loggedIn = false
 
       hasRole: (roleName) ->
-        _.any @data.roles, (role) ->
+        _.any @roles, (role) ->
           role.name?.toLowerCase == roleName?.toLowerCase
 
     return CurrentUser

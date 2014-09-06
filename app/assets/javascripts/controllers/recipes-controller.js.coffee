@@ -17,7 +17,7 @@ angular.module('recipe')
 
         @recipes.read(params)
           .then => @bookmarked()
-          .then => @recipes.data
+          .then => @recipes.data()
 
       orderBy: (key) ->
         @read({ order_by: key })
@@ -41,15 +41,15 @@ angular.module('recipe')
         @recipe.read({ id: $routeParams.id })
           .then =>
             # NOTE: This 'then' block is for testing - to be removed later
-            { category, action, label } = @recipe.data.trackingParams
+            { category, action, label } = @recipe.trackingParams
             ga.event(category, action, label)
           .then =>
             currentUser.ready().then => @recipe.bookmarked(currentUser)
-          .then => @recipe.data
+          .then => @recipe.data()
 
       bookmark: ->
         currentUser.ready()
-          .then => currentUser.bookmarks.create({ recipe_id: @recipe.data.id })
+          .then => currentUser.bookmarks.create({ recipe_id: @recipe.id })
           .then =>
             flash.set('Recipe was successfully bookmarked.')
             @read()

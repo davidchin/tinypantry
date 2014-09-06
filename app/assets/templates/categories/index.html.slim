@@ -1,4 +1,4 @@
 h1 Categories
 
-div ng-repeat="category in categories.data"
-  a ng-href="/categories/{{ category.data.id }}" {{ category.data.name }}
+div ng-repeat="category in categories.items"
+  a ng-href="/categories/{{ category.id }}" {{ category.name }}
