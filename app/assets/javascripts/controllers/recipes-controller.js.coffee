@@ -20,7 +20,7 @@ angular.module('recipe')
           .then => @recipes.data()
 
       orderBy: (key) ->
-        @read({ order_by: key })
+        @read({ orderBy: key })
 
       bookmarked: ->
         currentUser.ready()
@@ -49,7 +49,7 @@ angular.module('recipe')
 
       bookmark: ->
         currentUser.ready()
-          .then => currentUser.bookmarks.create({ recipe_id: @recipe.id })
+          .then => currentUser.bookmarks.create({ recipeId: @recipe.id })
           .then =>
             flash.set('Recipe was successfully bookmarked.')
             @read()

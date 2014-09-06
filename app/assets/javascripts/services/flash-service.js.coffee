@@ -69,7 +69,7 @@ angular.module('flash')
       clear: ->
         flash.clear() for flash in @flashes
 
-    $rootScope.$on '$routeChangeSuccess', =>
+    $rootScope.$on '$routeChangeSuccess', ->
       flashFactory.show()
 
     return flashFactory

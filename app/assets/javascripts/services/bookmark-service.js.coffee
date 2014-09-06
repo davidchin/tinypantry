@@ -1,12 +1,12 @@
 angular.module('bookmark')
   .factory 'bookmarkResource', ($resource) ->
-    path = '/api/users/:user_id/bookmarks'
-    params = { user_id: '@user_id' }
+    path = '/api/users/:userId/bookmarks'
+    params = { userId: '@userId' }
     actions =
       recipes:
         method: 'GET'
         isArray: true
-        url: '/api/users/:user_id/bookmarks/recipes'
+        url: '/api/users/:userId/bookmarks/recipes'
 
     return $resource(path, params, actions)
 
@@ -31,13 +31,13 @@ angular.module('bookmark')
 
       bookmarked: (recipe) ->
         @read()
-          .then => @any({ recipe_id: recipe.id })
+          .then => @any({ recipeId: recipe.id })
 
       recipes: (params) ->
         @request('recipes', params)
           .then (response) => @set(response)
 
       params: ->
-        { user_id: @user?.id }
+        { userId: @user?.id }
 
     return Bookmarks

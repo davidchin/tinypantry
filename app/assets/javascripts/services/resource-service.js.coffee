@@ -27,7 +27,7 @@ angular.module('resource')
         $delegate(url, params, actions)
 
   .config ($httpProvider) ->
-    $httpProvider.interceptors.unshift('attributeInterceptor');
+    $httpProvider.interceptors.unshift('attributeInterceptor')
 
   .factory 'attributeInterceptor', ->
     transformRequest = (config) ->

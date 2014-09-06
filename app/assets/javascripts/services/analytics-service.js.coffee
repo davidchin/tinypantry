@@ -6,11 +6,11 @@ angular.module('analytics')
   .factory 'ga', ($window, $q) ->
     send: (args...) ->
       deferred = $q.defer()
-      last_arg = args[-1..][0]
+      lastArg = args[-1..][0]
 
       options = { hitCallback: -> deferred.resolve(args) }
 
-      _.extend(options, last_arg) if _.isObject(last_arg)
+      _.extend(options, lastArg) if _.isObject(lastArg)
 
       $window.ga.apply($window, args[0..-2].concat([options]))
 

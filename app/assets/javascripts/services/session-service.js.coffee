@@ -38,14 +38,14 @@ angular.module('session')
 
       create: ->
         super.then (user) =>
-          @store('auth_token', user.auth_token_secret) if user.auth_token_secret?
+          @store('authToken', user.authTokenSecret) if user.authTokenSecret?
           @store('user', _.pick(user, 'id', 'email'))
 
           return user
 
       destroy: ->
         super.finally =>
-          @store('auth_token', null)
+          @store('authToken', null)
           @store('user', null)
 
       verify: ->
@@ -54,9 +54,9 @@ angular.module('session')
         @request('verify')
 
       token: ->
-        return unless @retrieve('auth_token')
+        return unless @retrieve('authToken')
 
-        secret: @retrieve('auth_token')
+        secret: @retrieve('authToken')
         key: @retrieve('user')?.email
 
     return Session

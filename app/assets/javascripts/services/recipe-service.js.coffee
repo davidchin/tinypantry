@@ -61,7 +61,7 @@ angular.module('recipe')
           .then (recipes) =>
             defaultOrder = _.first(@config.orderTypes)
 
-            @status.orderedBy = params?.order_by || defaultOrder.key
+            @status.orderedBy = params?.orderBy || defaultOrder.key
 
             return recipes
 
