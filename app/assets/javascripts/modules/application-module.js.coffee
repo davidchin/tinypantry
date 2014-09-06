@@ -23,6 +23,7 @@ angular.module 'category', [
 angular.module 'core', [
   'analytics'
   'controller'
+  'modal'
   'model'
   'flash'
   'resource'
@@ -42,6 +43,8 @@ angular.module 'feed', [
 ]
 
 angular.module 'flash', []
+
+angular.module 'modal', []
 
 angular.module 'model', [
   'storage'
