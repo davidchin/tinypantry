@@ -10,7 +10,7 @@ angular.module('modal')
       find: (name) ->
         @routes[name]
 
-      $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache) ->
+      $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, modalStack) ->
         provider = this
 
         class Modal
@@ -32,12 +32,16 @@ angular.module('modal')
             return promise
 
           open: (name, params) ->
-            return $q.when() if @element
+            if modalStack.has(this)
+              return @close()
+                .then => @open(name, params)
 
             _.defaults(@config, provider.find(name))
 
             @getTemplate()
               .then (template) =>
+                lastElement = modalStack.last()?.element
+
                 @scope = @config.scope.$new() || $rootScope.$new()
                 @element = angular.element(template)
 
@@ -50,18 +54,59 @@ angular.module('modal')
                 # Compile
                 $compile(@element)(@scope)
 
+                # Add to stack
+                modalStack.push(this)
+
                 # Attach
-                $animate.enter(@element, angular.element(@config.parent))
+                $animate.enter(@element, angular.element(@config.parent), lastElement)
 
           close: ->
-            return $q.when() unless @element
+            return $q.when() unless modalStack.has(this)
 
             $animate.leave(@element)
               .then =>
                 # Clean up
                 @scope.$destroy()
 
+                # Remove from stack
+                modalStack.remove(this)
+
                 delete @element
                 delete @scope
 
+          show: ->
+            $animate.removeClass(@element, 'ng-hide') if @element
+
+          hide: ->
+            $animate.addClass(@element, 'ng-hide') if @element
+
     new ModalProvider
+
+  .factory 'modalStack', ->
+    class ModalStack
+      constructor: ->
+        @modals = []
+
+      push: (modal) ->
+        item.hide() for item in @modals
+
+        @modals.splice(@index(modal), 1) if @has(modal)
+        @modals.push(modal)
+
+      remove: (modal) ->
+        index = @index(modal)
+
+        @modals.splice(index, 1) if index != -1
+        @last()?.show()
+
+      index: (modal) ->
+        @modals.indexOf(modal)
+
+      has: (modal) ->
+        modal in @modals
+
+      last: ->
+        @modals[@modals.length - 1]
+
+
+    return new ModalStack
