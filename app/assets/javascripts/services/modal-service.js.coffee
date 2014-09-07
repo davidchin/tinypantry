@@ -10,7 +10,7 @@ angular.module('modal')
       find: (name) ->
         @routes[name]
 
-      $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, modalStack) ->
+      $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, modalStack, modalBackground) ->
         provider = this
 
         class Modal
@@ -41,6 +41,7 @@ angular.module('modal')
             @getTemplate()
               .then (template) =>
                 lastElement = modalStack.last()?.element
+                parentElement = angular.element(@config.parent)
 
                 @scope = @config.scope.$new() || $rootScope.$new()
                 @element = angular.element(template)
@@ -57,11 +58,17 @@ angular.module('modal')
                 # Add to stack
                 modalStack.push(this)
 
+                # Attach background
+                modalBackground.enter(parentElement)
+
                 # Attach
-                $animate.enter(@element, angular.element(@config.parent), lastElement)
+                $animate.enter(@element, parentElement, lastElement)
 
           close: ->
             return $q.when() unless modalStack.has(this)
+
+            # Detach background
+            modalBackground.leave()
 
             $animate.leave(@element)
               .then =>
@@ -81,6 +88,20 @@ angular.module('modal')
             $animate.addClass(@element, 'ng-hide') if @element
 
     new ModalProvider
+
+  .factory 'modalBackground', ($animate) ->
+    class ModalBackground
+      enter: (parent) ->
+        unless @element?
+          html = '<div class="modal-overlay"></div>'
+          @element = angular.element(html)
+
+        $animate.enter(@element, parent)
+
+      leave: ->
+        $animate.leave(@element)
+
+    return new ModalBackground
 
   .factory 'modalStack', ->
     class ModalStack
