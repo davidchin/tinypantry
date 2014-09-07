@@ -4,8 +4,4 @@ angular.module('flash')
     scope: true
     templateUrl: '<%= asset_path("shared/_flash.html") %>'
     link: (scope, element, attrs) ->
-      class FlashDirective
-        constructor: ->
-          @flash = flashFactory.get(attrs.name || 'app')
-
-      _.extend(scope, new FlashDirective)
+      scope.flash = flashFactory.get(attrs.name)

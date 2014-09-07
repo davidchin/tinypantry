@@ -1,8 +1,9 @@
 angular.module('recipe')
-  .controller 'RecipesIndexController', ($scope, $routeParams, $location, $q, currentUser, BaseController, Recipes) ->
+  .controller 'RecipesIndexController', ($scope, $routeParams, $location, $q, currentUser, BaseController, Recipes, Modal) ->
     class RecipesIndexController extends BaseController
       constructor: ->
         @recipes = new Recipes
+        @recipeModal = new Modal({ scope: $scope })
 
         @read()
 
@@ -10,6 +11,12 @@ angular.module('recipe')
 
       search: ->
         $location.path('/recipes').search({ query: @recipes.query })
+
+      open: (recipe) ->
+        @recipeModal.open('recipe', { id: recipe.id })
+
+      close: ->
+        @recipeModal.close()
 
       read: (params) ->
         routeParams = _.pick($routeParams, 'category', 'query')

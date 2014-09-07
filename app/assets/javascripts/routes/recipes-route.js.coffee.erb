@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .config ($routeProvider) ->
+  .config ($routeProvider, ModalProvider) ->
     $routeProvider
       .when '/',
         redirectTo: '/recipes'
@@ -16,3 +16,8 @@ angular.module('recipe')
         templateUrl: '<%= asset_path("recipes/edit.html") %>'
         controller:  'RecipesEditController'
         resolve: authorize: (authorize) -> authorize('admin')
+
+    ModalProvider
+      .when 'recipe',
+        templateUrl: '<%= asset_path("recipes/show-modal.html") %>'
+        controller:  'RecipesShowController'

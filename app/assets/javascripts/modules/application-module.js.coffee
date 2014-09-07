@@ -3,6 +3,7 @@ angular.module 'application', [
   'category'
   'core'
   'config'
+  'modal'
   'feed'
   'navigation'
   'recipe'
@@ -23,7 +24,6 @@ angular.module 'category', [
 angular.module 'core', [
   'analytics'
   'controller'
-  'modal'
   'model'
   'flash'
   'resource'

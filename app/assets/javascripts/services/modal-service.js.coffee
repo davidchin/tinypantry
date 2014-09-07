@@ -1,53 +1,67 @@
 angular.module('modal')
-  .factory 'Modal', ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache) ->
-    class Modal
-      constructor: (config) ->
-        defaultConfig = {
-          parent: 'body'
-        }
+  .provider 'Modal', ->
+    class ModalProvider
+      constructor: ->
+        @routes = {}
 
-        @config = _.defaults(config, defaultConfig)
+      when: (name, config) ->
+        @routes[name] = _.extend({}, config)
 
-      getTemplate: ->
-        if @config.templateUrl
-          promise = $http.get(@config.templateUrl, { cache: $templateCache })
-            .then (response) -> response.data
-        else
-          deferred = $q.defer()
-          deferred.resolve(@config.template)
+      find: (name) ->
+        @routes[name]
 
-          promise = deferred.promise
+      $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache) ->
+        provider = this
 
-        return promise
+        class Modal
+          constructor: (config) ->
+            @config = _.extend {
+              parent: 'body'
+            }, config
 
-      open: ->
-        return $q.when() if @element
+          getTemplate: ->
+            if @config.templateUrl
+              promise = $http.get(@config.templateUrl, { cache: $templateCache })
+                .then (response) -> response.data
+            else
+              deferred = $q.defer()
+              deferred.resolve(@config.template)
 
-        @getTemplate()
-          .then (template) =>
-            @scope = @config.scope || $rootScope.$new()
-            @element = angular.element(template)
+              promise = deferred.promise
 
-            # Controller
-            if @config.controller
-              controller = $controller(@config.controller, { $scope: @scope })
-              @scope[@config.controllerAs] = controller if @config.controllerAs
+            return promise
 
-            # Compile
-            $compile(@element)(@scope)
+          open: (name, params) ->
+            return $q.when() if @element
 
-            # Attach
-            $animate.enter(@element, angular.element(@config.parent))
+            _.defaults(@config, provider.find(name))
 
-      close: ->
-        return $q.when() unless @element
+            @getTemplate()
+              .then (template) =>
+                @scope = @config.scope.$new() || $rootScope.$new()
+                @element = angular.element(template)
 
-        $animate.leave(@element)
-          .then =>
-            # Clean up
-            $scope.$destroy()
+                # Controller
+                if @config.controller
+                  locals = { $scope: @scope, $routeParams: params }
+                  controller = $controller(@config.controller, locals)
+                  @scope[@config.controllerAs] = controller if @config.controllerAs
 
-            delete @element
-            delete @scope
+                # Compile
+                $compile(@element)(@scope)
 
-    return Modal
+                # Attach
+                $animate.enter(@element, angular.element(@config.parent))
+
+          close: ->
+            return $q.when() unless @element
+
+            $animate.leave(@element)
+              .then =>
+                # Clean up
+                @scope.$destroy()
+
+                delete @element
+                delete @scope
+
+    new ModalProvider

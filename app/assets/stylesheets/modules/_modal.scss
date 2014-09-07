@@ -1,0 +1,12 @@
+.modal {
+  @include transform(translateX(-50%) translateY(-50%));
+  background: $white;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  max-width: 550px;
+  min-width: 330px;
+  height: auto;
+  z-index: 2000;
+}
