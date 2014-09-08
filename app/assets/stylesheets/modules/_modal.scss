@@ -1,6 +1,6 @@
 .modal {
   @include transform(translateX(-50%) translateY(-50%));
-  background: $white;
+  background: $modal-background-color;
   height: auto;
   left: 50%;
   max-width: 550px;
@@ -9,6 +9,28 @@
   top: 50%;
   width: 50%;
   z-index: 2000;
+}
+
+.modal__header {
+  border-bottom: 1px solid $modal-header-border-color;
+  padding: 15px $modal-padding;
+  text-align: center;
+}
+
+.modal__footer {
+  background: $modal-footer-background-color;
+  padding: 15px $modal-padding;
+}
+
+.modal__body {
+  padding: $modal-padding;
+}
+
+.modal__close-btn {
+  color: $base-font-color;
+  position: absolute;
+  right: $modal-padding / 2;
+  top: $modal-padding / 2;
 }
 
 .modal-overlay {
