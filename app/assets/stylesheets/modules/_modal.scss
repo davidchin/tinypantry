@@ -3,12 +3,27 @@
   background: $modal-background-color;
   height: auto;
   left: 50%;
-  max-width: 550px;
-  min-width: 330px;
+  max-width: 600px;
+  min-width: 300px;
   position: fixed;
   top: 50%;
   width: 50%;
   z-index: 2000;
+
+  &.ng-enter,
+  &.ng-leave {
+    @include transition(opacity .5s ease-out);
+  }
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    opacity: 0;
+  }
+
+  &.ng-enter.ng-enter-active,
+  &.ng-leave {
+    opacity: 1;
+  }
 }
 
 .modal__header {
@@ -41,4 +56,19 @@
   top: 0;
   width: 100%;
   z-index: 1999;
+
+  &.ng-enter,
+  &.ng-leave {
+    @include transition(opacity .5s ease-out);
+  }
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    opacity: 0;
+  }
+
+  &.ng-enter.ng-enter-active,
+  &.ng-leave {
+    opacity: 1;
+  }
 }

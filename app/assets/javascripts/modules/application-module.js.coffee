@@ -84,5 +84,6 @@ angular.module 'user', [
 ]
 
 angular.module 'utility', [
+  'ngAnimate'
   'ngSanitize'
 ]
