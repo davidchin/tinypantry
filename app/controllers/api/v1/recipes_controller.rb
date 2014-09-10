@@ -1,7 +1,7 @@
 module Api
   module V1
     class RecipesController < Api::V1::ApiController
-      before_action :authenticate_user!, except: [:index, :show, :related]
+      before_action :authenticate_user!, except: [:index, :show, :search, :related]
 
       before_action :find_recipes, only: [:index]
       before_action :find_recipe, only: [:show, :update, :destroy, :related]
@@ -19,7 +19,7 @@ module Api
       def search
         @recipes = Recipe.search_content(params[:query])
 
-        respond_with(@recipes) if stale? @recipes
+        respond_with(@recipes)
       end
 
       def related
