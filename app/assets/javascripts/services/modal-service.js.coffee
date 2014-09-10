@@ -16,7 +16,7 @@ angular.module('modal')
         class Modal
           constructor: (config) ->
             @config = _.extend {
-              parent: 'body'
+              parent: '.app-body'
             }, config
 
           getTemplate: ->
