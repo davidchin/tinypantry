@@ -2,8 +2,7 @@
   @include prefixer(font-smoothing, antialiased, webkit spec);
   border-radius: $base-border-radius;
   display: inline-block;
-  font-size: $base-font-size;
-  font-weight: bold;
+  font: bold $base-font-size $serif;
   line-height: 1;
   padding: .75em 1em;
   text-decoration: none;

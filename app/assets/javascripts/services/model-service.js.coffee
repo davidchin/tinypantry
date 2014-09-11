@@ -5,6 +5,7 @@ angular.module('model')
         @config ||= {}
         @status ||= {}
         @requests ||= {}
+        @headers ||= {}
         @dataAttrs ||= []
 
         @configure(config)
@@ -83,8 +84,8 @@ angular.module('model')
 
         # Call ngResource
         onSuccess = (response, headers) =>
-          @headers ||= {}
           @headers[action] = headers
+          @pagination = pagination if (pagination = headers?('pagination'))
 
         output = @config.resource[action]?(params, data, onSuccess)
 

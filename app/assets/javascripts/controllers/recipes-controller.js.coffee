@@ -26,6 +26,11 @@ angular.module('recipe')
           .then => @bookmarked()
           .then => @recipes.data()
 
+      next: (params) ->
+        params = _.defaults({ page: @pagination.nextPage }, params)
+
+        @read(params)
+
       orderBy: (key) ->
         @read({ orderBy: key })
 
