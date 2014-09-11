@@ -1,4 +1,12 @@
 .button {
   @extend %button;
-  vertical-align: middle;
+}
+
+.button--light {
+  @extend %button--light;
+}
+
+.button-block {
+  display: block;
+  width: 100%;
 }
