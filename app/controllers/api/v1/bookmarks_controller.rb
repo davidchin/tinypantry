@@ -5,6 +5,8 @@ module Api
 
       before_action :find_user
 
+      set_pagination_header :recipes, only: [:recipes]
+
       authorize_resource
 
       def index

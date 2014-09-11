@@ -82,7 +82,11 @@ angular.module('model')
         , _.pick(data, (value, attr) -> /^(?!\$)/.test(attr))
 
         # Call ngResource
-        output = @config.resource[action]?(params, data)
+        onSuccess = (response, headers) =>
+          @headers ||= {}
+          @headers[action] = headers
+
+        output = @config.resource[action]?(params, data, onSuccess)
 
         if output
           promise = output.$promise || $q.when(output)

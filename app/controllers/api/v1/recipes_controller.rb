@@ -6,6 +6,8 @@ module Api
       before_action :find_recipes, only: [:index]
       before_action :find_recipe, only: [:show, :update, :destroy, :related]
 
+      set_pagination_header :recipes, only: [:index, :search, :related]
+
       authorize_resource
 
       def index
@@ -67,7 +69,7 @@ module Api
             @recipes.most_viewed
           else
             @recipes.most_recent
-        end
+          end
       end
 
       def recipe_params

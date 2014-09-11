@@ -5,6 +5,8 @@ module Api
 
       before_action :find_user, only: [:show, :update, :destroy]
 
+      set_pagination_header :users, only: [:index]
+
       authorize_resource
 
       def index
