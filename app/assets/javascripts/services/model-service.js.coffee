@@ -161,16 +161,17 @@ angular.module('model')
         @items.slice()
 
       set: (data) ->
-        data = for item in data
-          model = if @config.model?
-            new @config.model(@config.modelConfig)
-          else
-            new Model
-
-          model.set(item) && model
-
         @items.length = 0
-        @items.push.apply(@items, data)
+
+        @add(@transform(item)) for item in data
+
+      transform: (item) ->
+        model = if @config.model?
+          new @config.model(@config.modelConfig)
+        else
+          new Model
+
+        model.set(item) && model
 
       find: (params) ->
         _.find(@items, { data: params })
@@ -187,16 +188,25 @@ angular.module('model')
       invoke: (method, params...) ->
         _.invoke(@items, method, params...)
 
-      add: (model) ->
-        @items.push(model)
+      add: (models...) ->
+        for model in models
+          @items.push(model) if !_.contains(@items, model)
 
-      remove: (model) ->
-        index = _.indexOf(@items, model)
+      remove: (models...) ->
+        for model in models
+          index = @indexOf(model)
+          @items.splice(index, 1) if index >= 0
 
-        @items.splice(index, 1) if index > -1
+      indexOf: (model) ->
+        _.indexOf(@items, model)
 
       read: (params) ->
         @request('index', params)
           .then (response) => @set(response)
+
+      append: (params) ->
+        @request('index', params)
+          .then (response) =>
+            @add(@transform(item)) for item in response
 
     return Collection

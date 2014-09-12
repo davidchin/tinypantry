@@ -18,18 +18,19 @@ angular.module('recipe')
       close: ->
         @recipeModal.close()
 
-      read: (params) ->
+      read: (params, append) ->
         routeParams = _.pick($routeParams, 'category', 'query')
         params = _.defaults({}, params, routeParams)
+        method = if append then 'append' else 'read'
 
-        @recipes.read(params)
+        @recipes[method](params)
           .then => @bookmarked()
           .then => @recipes.data()
 
       next: (params) ->
-        params = _.defaults({ page: @pagination.nextPage }, params)
+        params = _.defaults({ page: @recipes.pagination.nextPage }, params)
 
-        @read(params)
+        @read(params, true) if params.page
 
       orderBy: (key) ->
         @read({ orderBy: key })

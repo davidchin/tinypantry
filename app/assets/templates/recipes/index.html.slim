@@ -31,4 +31,4 @@ section class="recipe-tiles"
         / p ng-bind-html="recipe.description"
 
 section
-  button class="button-block" Load More
+  button class="button-block" ng-show="recipes.pagination.nextPage" ng-click="next()" Load More
