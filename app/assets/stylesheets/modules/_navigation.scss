@@ -28,14 +28,23 @@
 }
 
 .user-navigation {
+  @include clearfix;
   background: $header-background-color;
+  padding: 10px 0;
+}
+
+.user-navigation--col-2 {
+  .user-navigation__item {
+    @include span-columns(6);
+    @include omega(2n);
+  }
 }
 
 .user-navigation__item-link {
   @extend %link--white;
   display: block;
   font-size: $small-font-size;
-  padding: 10px 15px;
+  padding: 5px 15px;
 
   .fa {
     margin-right: $icon-margin;

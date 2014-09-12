@@ -10,6 +10,10 @@ header class="app-header" ng-controller="NavigationController"
       a class="user-navigation__item-link" ng-href="/login" ng-hide="currentUser.status.loggedIn"
         i class="fa fa-user"
         | Login
+    div class="user-navigation__item"
+      a class="user-navigation__item-link" ng-href="/bookmarks" ng-show="currentUser.status.loggedIn"
+        i class="fa fa-bookmark"
+        | Bookmarks
 
   nav class="app-navigation"
     div class="app-navigation__item"
