@@ -1,2 +1,2 @@
-div ng-repeat="bookmark in bookmarks.items"
-  h2 {{ bookmark.name }}
+section class="recipe-tiles"
+  div class="recipe-tile" ng-repeat="bookmark in bookmarks.items" ng-init="recipe = bookmark.recipe" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"

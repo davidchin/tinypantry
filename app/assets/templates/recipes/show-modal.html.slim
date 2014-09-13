@@ -1,11 +1,11 @@
 div class="modal"
   div class="modal__header"
     | {{ recipe.name }}
-    a class="modal__close-btn" ng-click="close()"
+    a class="modal__close-btn" ng-click="closeRecipe()"
       i class="fa fa-times"
 
   div class="modal__body"
     div ng-include="'#{ asset_path('recipes/show.html') }'"
 
   div class="modal__footer"
-    button type="button" ng-click="close()" Close
+    button type="button" ng-click="closeRecipe()" Close

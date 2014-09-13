@@ -11,6 +11,6 @@ angular.module('bookmark')
 
       read: ->
         @user.ready()
-          .then => @bookmarks.recipes()
+          .then => @bookmarks.read()
 
     new BookmarksIndexController

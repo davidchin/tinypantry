@@ -14,21 +14,7 @@ section class="recipe-nav-bar"
         input type="text" placeholder="Search" class="search-input" autocorrect="false" autocapitalize="off" ng-model="recipes.query"
 
 section class="recipe-tiles"
-  div class="recipe-tile" ng-repeat="recipe in recipes.items"
-    a class="recipe-tile__link" ng-click="open(recipe)"
-      div class="recipe-tile__aside"
-        img class="recipe-tile__image" ng-src="{{ recipe.imageUrls.original }}"
-      div class="recipe-tile__body"
-        h2 class="recipe-tile__title" {{ recipe.name }}
-        p class="recipe-tile__meta"
-          span class="recipe-tile__meta-item"
-            i class="fa fa-bookmark"
-            | {{ recipe.bookmarks_count || 0 }}
-          span class="recipe-tile__meta-item"
-            i class="fa fa-eye"
-            | {{ recipe.visitsCount || 0 }}
-        / strong ng-show="recipe.status.bookmarked" Bookmarked
-        / p ng-bind-html="recipe.description"
+  div class="recipe-tile" ng-repeat="recipe in recipes.items" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"
 
 section
   button class="button-block" ng-show="recipes.pagination.nextPage" ng-click="next()" Load More

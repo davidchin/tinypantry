@@ -2,13 +2,8 @@ angular.module('bookmark')
   .factory 'bookmarkResource', ($resource) ->
     path = '/api/users/:userId/bookmarks'
     params = { userId: '@userId' }
-    actions =
-      recipes:
-        method: 'GET'
-        isArray: true
-        url: '/api/users/:userId/bookmarks/recipes'
 
-    return $resource(path, params, actions)
+    return $resource(path, params)
 
   .factory 'Bookmark', (bookmarkResource, Model) ->
     class Bookmark extends Model
@@ -19,7 +14,7 @@ angular.module('bookmark')
 
     return Bookmark
 
-  .factory 'Bookmarks', (bookmarkResource, Collection, Bookmark) ->
+  .factory 'Bookmarks', (bookmarkResource, Collection, Bookmark, Recipe) ->
     class Bookmarks extends Collection
       constructor: ->
         @configure {
@@ -29,13 +24,17 @@ angular.module('bookmark')
 
         super
 
-      bookmarked: (recipe) ->
-        @read()
-          .then => @any({ recipeId: recipe.id })
+      read: (params) ->
+        super
+          .then (bookmarks) =>
+            for bookmark in bookmarks
+              bookmark.recipe = @transform(bookmark.recipe, { model: Recipe })
 
-      recipes: (params) ->
-        @request('recipes', params)
-          .then (response) => @set(response)
+            return bookmarks
+
+      bookmarked: (recipe) ->
+        # @read()
+        #   .then => @any({ recipeId: recipe.id })
 
       params: ->
         { userId: @user?.id }

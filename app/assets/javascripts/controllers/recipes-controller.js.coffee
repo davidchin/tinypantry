@@ -12,10 +12,10 @@ angular.module('recipe')
       search: ->
         $location.path('/recipes').search({ query: @recipes.query })
 
-      open: (recipe) ->
+      openRecipe: (recipe) ->
         @recipeModal.open('recipe', { id: recipe.id })
 
-      close: ->
+      closeRecipe: ->
         @recipeModal.close()
 
       read: (params, append) ->

@@ -70,7 +70,10 @@ angular.module('model')
 
       destroy: (params) ->
         @request('destroy', params)
-          .then (response) => @unset() && response
+          .then (response) =>
+            @unset()
+
+            return response
 
       request: (action, params, data) ->
         # Params
@@ -98,9 +101,13 @@ angular.module('model')
           @flag(action, 'pending')
 
           @requests[action] = promise.then (response) =>
-            @flag(action, 'success') && response
+            @flag(action, 'success')
+
+            return response
           , (response) =>
-            @flag(action, 'error') && response
+            @flag(action, 'error')
+
+            return response
 
         else
           $q.reject()
@@ -167,13 +174,17 @@ angular.module('model')
 
         @add(@transform(item)) for item in data
 
-      transform: (item) ->
-        model = if @config.model?
-          new @config.model(@config.modelConfig)
+      transform: (item, config) ->
+        config ||= @config
+
+        model = if config.model?
+          new config.model(config.modelConfig)
         else
           new Model
 
-        model.set(item) && model
+        model.set(item)
+
+        return model
 
       find: (params) ->
         _.find(@items, { data: params })

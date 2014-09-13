@@ -5,12 +5,12 @@ module Api
 
       before_action :find_user
 
-      set_pagination_header :recipes, only: [:recipes]
+      set_pagination_header :bookmarks, only: [:index]
 
       authorize_resource
 
       def index
-        @bookmarks = @user.bookmarks
+        @bookmarks = @user.bookmarks.page(params[:page])
 
         respond_with(@bookmarks)
       end
@@ -25,12 +25,6 @@ module Api
         @bookmark = @user.bookmarks.find_by(recipe_id: params[:recipe_id])
 
         respond_with(@bookmark.destroy!)
-      end
-
-      def recipes
-        @recipes = @user.bookmarked_recipes.page(params[:page])
-
-        respond_with(@recipes)
       end
 
       private

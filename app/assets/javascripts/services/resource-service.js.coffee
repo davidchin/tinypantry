@@ -40,10 +40,7 @@ angular.module('resource')
       config
 
     transformResponse = (response) ->
-      if _.isArray(response.data)
-        response.data[i] = _.camelizeObj(obj) for obj, i in response.data
-      else if _.isPlainObject(response.data)
-        response.data = _.camelizeObj(response.data)
+      response.data = _.camelizeObj(response.data)
 
       # Override header getter
       headersGetter = response.headers
@@ -52,12 +49,7 @@ angular.module('resource')
         header = headersGetter(args...)
         header = headerObj if (headerObj = fromJson(header))
 
-        if _.isArray(header)
-          header[i] = _.camelizeObj(obj) for obj, i in header
-        else if _.isPlainObject(header)
-          _.camelizeObj(header)
-        else
-          header
+        _.camelizeObj(header)
 
       response
 
