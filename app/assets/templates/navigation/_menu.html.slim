@@ -7,7 +7,7 @@ header class="app-header" ng-controller="NavigationController"
       a class="user-navigation__item-link" ng-href="/logout" ng-show="currentUser.status.loggedIn"
         i class="fa fa-user"
         | Logout
-      a class="user-navigation__item-link" ng-click="login()" ng-hide="currentUser.status.loggedIn"
+      a class="user-navigation__item-link" ng-click="openLogin()" ng-hide="currentUser.status.loggedIn"
         i class="fa fa-user"
         | Login
     div class="user-navigation__item"

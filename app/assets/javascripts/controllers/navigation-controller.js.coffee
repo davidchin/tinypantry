@@ -10,7 +10,7 @@ angular.module('navigation')
 
         super($scope)
 
-      login: ->
+      openLogin: ->
         @loginModal.open('login')
 
       closeLogin: ->

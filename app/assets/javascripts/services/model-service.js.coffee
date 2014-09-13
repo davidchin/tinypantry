@@ -20,6 +20,8 @@ angular.module('model')
           # Set attribute
           @[attr] = value
 
+        return data
+
       unset: ->
         delete @[attr] for attr in @dataAttrs
 
@@ -189,13 +191,10 @@ angular.module('model')
         _.invoke(@items, method, params...)
 
       add: (models...) ->
-        for model in models
-          @items.push(model) if !_.contains(@items, model)
+        @items.push(model) for model in models when !_.contains(@items, model)
 
       remove: (models...) ->
-        for model in models
-          index = @indexOf(model)
-          @items.splice(index, 1) if index >= 0
+        @items.splice(index, 1) for model in models when (index = @indexOf(model)) >= 0
 
       indexOf: (model) ->
         _.indexOf(@items, model)
