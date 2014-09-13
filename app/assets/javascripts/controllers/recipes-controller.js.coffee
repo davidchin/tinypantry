@@ -56,8 +56,10 @@ angular.module('recipe')
             # NOTE: This 'then' block is for testing - to be removed later
             { category, action, label } = @recipe.trackingParams
             ga.event(category, action, label)
+            @recipe
           .then =>
-            currentUser.ready().then => @recipe.bookmarked(currentUser)
+            currentUser.ready()
+              .then => @recipe.bookmarked(currentUser)
           .then => @recipe.data()
 
       bookmark: ->

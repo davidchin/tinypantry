@@ -37,7 +37,9 @@ Rails.application.routes.draw do
       resources :feeds
 
       resources :users, only: [:show, :index] do
-        resources :bookmarks, only: [:index, :create, :destroy]
+        resources :bookmarks, only: [:index, :create, :destroy] do
+          get :summary, on: :collection
+        end
       end
     end
   end

@@ -1,6 +1,8 @@
 %button {
   @include prefixer(font-smoothing, antialiased, webkit spec);
+  background-color: $base-button-color;
   border-radius: $base-border-radius;
+  color: $white;
   display: inline-block;
   font: bold $base-font-size $serif;
   line-height: 1;
@@ -8,16 +10,15 @@
   text-decoration: none;
   vertical-align: middle;
 
-  &,
-  &:disabled,
-  &:disabled:hover {
-    background-color: $base-button-color;
-    color: $white;
-  }
-
   &:hover {
     background-color: $hover-button-color;
     color: $white;
+  }
+
+  &:disabled,
+  &:disabled:hover {
+    background-color: $disabled-button-color;
+    color: darken($disabled-button-color, 20%);
   }
 }
 

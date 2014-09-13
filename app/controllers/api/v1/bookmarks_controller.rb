@@ -15,6 +15,12 @@ module Api
         respond_with(@bookmarks)
       end
 
+      def summary
+        @bookmarks = @user.bookmarks
+
+        respond_with(@bookmarks)
+      end
+
       def create
         @bookmark = @user.bookmarks.create!(recipe_id: params[:recipe_id])
 
