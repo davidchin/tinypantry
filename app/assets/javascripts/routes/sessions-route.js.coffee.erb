@@ -1,5 +1,5 @@
 angular.module('session')
-  .config ($routeProvider) ->
+  .config ($routeProvider, ModalProvider) ->
     $routeProvider
       .when '/login',
         templateUrl: '<%= asset_path("sessions/new.html") %>'
@@ -8,3 +8,8 @@ angular.module('session')
       .when '/logout',
         templateUrl: '<%= asset_path("sessions/destroy.html") %>'
         controller: 'SessionsDestroyController'
+
+    ModalProvider
+      .when 'login',
+        templateUrl: '<%= asset_path("sessions/new-modal.html") %>'
+        controller:  'SessionsNewController'
