@@ -1,11 +1,17 @@
 angular.module('session')
-  .config ($routeProvider, ModalProvider) ->
-    $routeProvider
-      .when '/login',
+  .config ($stateProvider, ModalProvider) ->
+    $stateProvider
+      .state 'sessions',
+        abstract: true
+        template: '<ui-view />'
+
+      .state 'sessions.new',
+        url: '/login'
         templateUrl: '<%= asset_path("sessions/new.html") %>'
         controller: 'SessionsNewController'
 
-      .when '/logout',
+      .state 'sessions.destroy',
+        url: '/logout'
         templateUrl: '<%= asset_path("sessions/destroy.html") %>'
         controller: 'SessionsDestroyController'
 

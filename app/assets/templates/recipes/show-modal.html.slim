@@ -5,7 +5,7 @@ div class="modal"
       i class="fa fa-times"
 
   div class="modal__body"
-    div ng-include="'#{ asset_path('recipes/show.html') }'"
+    ng-include src="'#{ asset_path('recipes/show.html') }'"
 
   div class="modal__footer"
     button type="button" ng-click="closeRecipe()" Close

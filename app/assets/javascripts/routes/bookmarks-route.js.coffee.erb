@@ -1,6 +1,11 @@
 angular.module('bookmark')
-  .config ($routeProvider) ->
-    $routeProvider
-      .when '/bookmarks',
+  .config ($stateProvider) ->
+    $stateProvider
+      .state 'bookmarks',
+        abstract: true
+        template: '<ui-view />'
+
+      .state 'bookmarks.index',
+        url: '/bookmarks?page'
         templateUrl: '<%= asset_path("bookmarks/index.html") %>'
         controller: 'BookmarksIndexController'

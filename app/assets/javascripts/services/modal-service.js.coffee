@@ -48,7 +48,7 @@ angular.module('modal')
 
                 # Controller
                 if @config.controller
-                  locals = { $scope: @scope, $routeParams: params }
+                  locals = { $scope: @scope, $stateParams: params }
                   controller = $controller(@config.controller, locals)
                   @scope[@config.controllerAs] = controller if @config.controllerAs
 

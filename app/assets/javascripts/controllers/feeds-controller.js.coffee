@@ -13,7 +13,7 @@ angular.module('feed')
 
     new FeedsIndexController
 
-  .controller 'FeedsNewController', ($scope, flash, BaseController, Feed) ->
+  .controller 'FeedsNewController', ($scope, $state, flash, BaseController, Feed) ->
     class FeedsNewController extends BaseController
       constructor: ->
         @feed = new Feed
@@ -24,13 +24,13 @@ angular.module('feed')
         @feed.create()
           .then (feed) ->
             flash.set('Feed was successfully created.')
-            $location.path('/feeds')
+            $state.go('feeds.index')
 
             return feed
 
     new FeedsNewController
 
-  .controller 'FeedsShowController', ($scope, $routeParams, flash, BaseController, Feed) ->
+  .controller 'FeedsShowController', ($scope, $state, flash, BaseController, Feed) ->
     class FeedsShowController extends BaseController
       constructor: ->
         @feed = new Feed
@@ -40,11 +40,11 @@ angular.module('feed')
         super($scope)
 
       read: ->
-        @feed.read({ id: $routeParams.id })
+        @feed.read({ id: $state.params.id })
 
     new FeedsShowController
 
-  .controller 'FeedsEditController', ($scope, $routeParams, $location, flash, BaseController, Feed) ->
+  .controller 'FeedsEditController', ($scope, $state, flash, BaseController, Feed) ->
     class FeedsEditController extends BaseController
       constructor: ->
         @feed = new Feed
@@ -54,13 +54,13 @@ angular.module('feed')
         super($scope)
 
       read: ->
-        @feed.read({ id: $routeParams.id })
+        @feed.read({ id: $state.params.id })
 
       submit: ->
         @feed.update()
           .then (feed) ->
             flash.set('Feed was successfully updated.')
-            $location.path('/feeds')
+            $state.go('feeds.index')
 
             return feed
 
@@ -68,7 +68,7 @@ angular.module('feed')
         @feed.destroy
           .then (feed) ->
             flash.set('Feed was successfully destroyed.')
-            $location.path('/feeds')
+            $state.go('feeds.index')
 
             return feed
 

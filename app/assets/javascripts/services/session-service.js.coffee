@@ -1,6 +1,6 @@
 angular.module('session')
   .run ($rootScope, $cacheFactory) ->
-    $rootScope.$on '$routeChangeSuccess', ->
+    $rootScope.$on '$stateChangeSuccess', ->
       httpCache = $cacheFactory.get('$http')
 
       httpCache.removeAll()

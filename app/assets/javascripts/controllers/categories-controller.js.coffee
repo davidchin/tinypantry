@@ -13,7 +13,7 @@ angular.module('category')
 
     new CategoriesIndexController
 
-  .controller 'CategoriesNewController', ($scope, BaseController, Category) ->
+  .controller 'CategoriesNewController', ($scope, $state, BaseController, Category) ->
     class CategoriesNewController extends BaseController
       constructor: ->
         @category = new Category
@@ -23,13 +23,13 @@ angular.module('category')
       submit: ->
         @category.create()
           .then (category) ->
-            $location.path('/categories')
+            $state.go('categories.index')
 
             return category
 
     new CategoriesNewController
 
-  .controller 'CategoriesShowController', ($scope, $routeParams, BaseController, Category) ->
+  .controller 'CategoriesShowController', ($scope, $state, BaseController, Category) ->
     class CategoriesShowController extends BaseController
       constructor: ->
         @category = new Category
@@ -39,13 +39,13 @@ angular.module('category')
         super($scope)
 
       read: ->
-        @category.read({ id: $routeParams.id })
+        @category.read({ id: $state.params.id })
           .then =>
             @category.keywords.push({ name: '' })
 
     new CategoriesShowController
 
-  .controller 'CategoriesEditController', ($scope, $routeParams, $location, BaseController, Category) ->
+  .controller 'CategoriesEditController', ($scope, $state, BaseController, Category) ->
     class CategoriesEditController extends BaseController
       constructor: ->
         @category = new Category
@@ -55,21 +55,21 @@ angular.module('category')
         super($scope)
 
       read: ->
-        @category.read({ id: $routeParams.id })
+        @category.read({ id: $state.params.id })
           .then =>
             @category.keywords.push({ name: '' })
 
       submit: ->
         @category.update()
           .then (category) ->
-            $location.path('/categories')
+            $state.go('categories.index')
 
             return category
 
       destroy: ->
         @category.destroy
           .then (category) ->
-            $location.path('/categories')
+            $state.go('categories.index')
 
             return category
 

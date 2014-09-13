@@ -1,22 +1,21 @@
 header class="app-header" ng-controller="NavigationController"
 
-  a href="/" class="app-header__logo" tinypantry.com
+  a ui-sref="home" class="app-header__logo" tinypantry.com
 
   nav class="user-navigation"
     div class="user-navigation__item"
-      a class="user-navigation__item-link" ng-href="/logout" ng-show="currentUser.status.loggedIn"
+      a class="user-navigation__item-link" ui-sref="sessions.destroy" ng-show="currentUser.status.loggedIn"
         i class="fa fa-user"
         | Logout
-      a class="user-navigation__item-link" ng-click="openLogin()" ng-hide="currentUser.status.loggedIn"
+      a class="user-navigation__item-link" ng-click="openLogin()" ng-show="!currentUser.status.loggedIn"
         i class="fa fa-user"
         | Login
-    div class="user-navigation__item"
-      a class="user-navigation__item-link" ng-href="/bookmarks" ng-show="currentUser.status.loggedIn"
-        i class="fa fa-bookmark"
-        | Bookmarks
 
   nav class="app-navigation"
     div class="app-navigation__item"
-      a class="app-navigation__item-link is-active" href="/recipes" All
+      a class="app-navigation__item-link" ui-sref="bookmarks.index" ui-sref-active-eq="is-active" ng-show="currentUser.status.loggedIn"
+        | Bookmarks
+    div class="app-navigation__item"
+      a class="app-navigation__item-link" ui-sref="recipes.index({ category: null })" ui-sref-active-eq="is-active" All
     div class="app-navigation__item" ng-repeat="category in categories.items"
-      a class="app-navigation__item-link" ng-href="/recipes?category={{ category.slug }}" {{ category.name }}
+      a class="app-navigation__item-link" ui-sref="recipes.index({ category: category.slug })" ui-sref-active="is-active" {{ category.name }}

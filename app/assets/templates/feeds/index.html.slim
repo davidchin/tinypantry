@@ -1,4 +1,4 @@
 h1 Feeds
 
 div ng-repeat="feed in feeds.items"
-  a ng-href="/feeds/{{ feed.id }}" {{ feed.name }}
+  a ui-sref="feeds.edit({ id: feed.id })" {{ feed.name }}

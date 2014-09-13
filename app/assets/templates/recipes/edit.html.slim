@@ -2,4 +2,4 @@ h1 Edit {{ recipe.name }}
 
 flash name="app"
 
-div ng-include="'#{ asset_path('recipes/_form.html') }'"
+ng-include src="'#{ asset_path('recipes/_form.html') }'"

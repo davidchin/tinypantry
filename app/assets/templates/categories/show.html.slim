@@ -9,4 +9,4 @@ ul
     p ng-repeat="keyword in category.keywords"
       | {{ keyword.name }}
 
-a ng-href="/categories/{{ category.id }}/edit" Edit
+a ui-sref="categories.edit({ id: category.id })" Edit

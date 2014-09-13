@@ -1,22 +1,30 @@
 angular.module('feed')
-  .config ($routeProvider) ->
-    $routeProvider
-      .when '/feeds',
+  .config ($stateProvider) ->
+    $stateProvider
+      .state 'feeds',
+        abstract: true
+        template: '<ui-view />'
+
+      .state 'feeds.index',
+        url: '/feeds?page'
         templateUrl: '<%= asset_path("feeds/index.html") %>'
         controller: 'FeedsIndexController'
         resolve: authorize: (authorize) -> authorize('admin')
 
-      .when '/feeds/new',
+      .state 'feeds.new',
+        url: '/feeds/new'
         templateUrl: '<%= asset_path("feeds/new.html") %>'
         controller: 'FeedsNewController'
         resolve: authorize: (authorize) -> authorize('admin')
 
-      .when '/feeds/:id',
+      .state 'feeds.show',
+        url: '/feeds/:id'
         templateUrl: '<%= asset_path("feeds/show.html") %>'
         controller: 'FeedsShowController'
         resolve: authorize: (authorize) -> authorize('admin')
 
-      .when '/feeds/:id/edit',
+      .state 'feeds.edit',
+        url: '/feeds/:id/edit'
         templateUrl: '<%= asset_path("feeds/edit.html") %>'
         controller: 'FeedsEditController'
         resolve: authorize: (authorize) -> authorize('admin')

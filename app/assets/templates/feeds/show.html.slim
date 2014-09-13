@@ -11,4 +11,4 @@ ul
     strong Last imported
     p {{ feed.lastImported }}
 
-a ng-href="/feeds/{{ feed.id }}/edit" Edit
+a ui-sref="feeds.edit({ id: feed.id })" Edit

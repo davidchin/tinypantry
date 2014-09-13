@@ -1,5 +1,5 @@
 angular.module('analytics')
-  .directive 'analyticsOutbound', (ga, $window, $location) ->
+  .directive 'analyticsOutbound', (ga, $window, $state, $location) ->
     restrict: 'A'
     scope:
       data: '=analyticsOutbound'
@@ -15,7 +15,12 @@ angular.module('analytics')
             event.preventDefault()
 
             promise.then ->
-              if /^https?:\/\//.test(attrs.href)
-                $window.location = attrs.href
+              href = if attrs.uiSref?
+                $state.href(attrs.uiSref)
               else
-                $location.path(attrs.href)
+                attrs.href
+
+              if /^https?:\/\//.test(href)
+                $window.location = href
+              else
+                $location.path(href)

@@ -1,3 +1,3 @@
 angular.module 'route', [
-  'ngRoute'
+  'ui.router'
 ]

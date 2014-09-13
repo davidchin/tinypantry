@@ -1,18 +1,22 @@
 angular.module('recipe')
-  .config ($routeProvider, ModalProvider) ->
-    $routeProvider
-      .when '/',
-        redirectTo: '/recipes'
+  .config ($stateProvider, ModalProvider) ->
+    $stateProvider
+      .state 'recipes',
+        abstract: true
+        template: '<ui-view />'
 
-      .when '/recipes',
+      .state 'recipes.index',
+        url: '/recipes?category&page&orderBy'
         templateUrl: '<%= asset_path("recipes/index.html") %>'
         controller: 'RecipesIndexController'
 
-      .when '/recipes/:id',
+      .state 'recipes.show',
+        url: '/recipes/:id'
         templateUrl: '<%= asset_path("recipes/show.html") %>'
         controller:  'RecipesShowController'
 
-      .when '/recipes/:id/edit',
+      .state 'recipes.edit',
+        url: '/recipes/:id/edit'
         templateUrl: '<%= asset_path("recipes/edit.html") %>'
         controller:  'RecipesEditController'
         resolve: authorize: (authorize) -> authorize('admin')

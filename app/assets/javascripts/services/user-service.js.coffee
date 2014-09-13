@@ -54,11 +54,11 @@ angular.module('user')
 
     return CurrentUser
 
-  .factory 'authorize', ($q, $location, currentUser) ->
+  .factory 'authorize', ($q, $state, currentUser) ->
     authorize = (role) ->
       currentUser.ready()
         .then ->
           unless currentUser.hasRole(role)
-            $location.path('/').replace()
+            $state.go('home', {}, { location: 'replace' })
 
             return $q.reject('Unauthorized')

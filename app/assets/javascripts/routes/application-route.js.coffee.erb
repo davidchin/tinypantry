@@ -1,0 +1,8 @@
+angular.module('application')
+  .config ($stateProvider, $urlRouterProvider) ->
+    $urlRouterProvider
+      .when '/', '/recipes'
+
+    $stateProvider
+      .state 'home',
+        url: '/'

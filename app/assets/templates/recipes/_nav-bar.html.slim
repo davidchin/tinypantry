@@ -1,0 +1,11 @@
+div class="recipe-filters"
+  | Order by
+  ul class="recipe-filter-list"
+    li ng-repeat="type in recipes.config.orderTypes"
+      a class="recipe-filter" ng-class="{ 'is-active': type.key == recipes.status.orderedBy }" ng-click="orderBy(type.key)"
+        | {{ type.name }}
+
+div class="recipe-search" ng-submit="search()"
+  form name="form"
+    div class="search-input-container"
+      input type="text" placeholder="Search" class="search-input" autocorrect="false" autocapitalize="off" ng-model="recipes.query"

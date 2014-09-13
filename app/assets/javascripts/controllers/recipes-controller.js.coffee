@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .controller 'RecipesIndexController', ($scope, $routeParams, $location, $q, currentUser, BaseController, Recipes, Modal) ->
+  .controller 'RecipesIndexController', ($scope, $state, $q, currentUser, BaseController, Recipes, Modal) ->
     class RecipesIndexController extends BaseController
       constructor: ->
         @recipes = new Recipes
@@ -10,7 +10,7 @@ angular.module('recipe')
         super($scope)
 
       search: ->
-        $location.path('/recipes').search({ query: @recipes.query })
+        $state.go('recipes.index', { query: @recipes.query })
 
       openRecipe: (recipe) ->
         @recipeModal.open('recipe', { id: recipe.id })
@@ -19,7 +19,7 @@ angular.module('recipe')
         @recipeModal.close()
 
       read: (params, append) ->
-        routeParams = _.pick($routeParams, 'category', 'query')
+        routeParams = _.pick($state.params, 'category', 'query', 'orderBy')
         params = _.defaults({}, params, routeParams)
         method = if append then 'append' else 'read'
 
@@ -33,7 +33,7 @@ angular.module('recipe')
         @read(params, true) if params.page
 
       orderBy: (key) ->
-        @read({ orderBy: key })
+        $state.go($state.current, { orderBy: key })
 
       bookmarked: ->
         currentUser.ready()
@@ -41,7 +41,7 @@ angular.module('recipe')
 
     new RecipesIndexController
 
-  .controller 'RecipesShowController', ($scope, $routeParams, currentUser, flash, ga, BaseController, Recipe) ->
+  .controller 'RecipesShowController', ($scope, $stateParams, currentUser, flash, ga, BaseController, Recipe) ->
     class RecipesShowController extends BaseController
       constructor: ->
         @recipe = new Recipe
@@ -51,7 +51,7 @@ angular.module('recipe')
         super($scope)
 
       read: ->
-        @recipe.read({ id: $routeParams.id })
+        @recipe.read({ id: $stateParams.id })
           .then =>
             # NOTE: This 'then' block is for testing - to be removed later
             { category, action, label } = @recipe.trackingParams
@@ -71,7 +71,7 @@ angular.module('recipe')
 
     new RecipesShowController
 
-  .controller 'RecipesEditController', ($scope, $routeParams, $location, flash, BaseController, Recipe) ->
+  .controller 'RecipesEditController', ($scope, $state, flash, BaseController, Recipe) ->
     class RecipesEditController extends BaseController
       constructor: ->
         @recipe = new Recipe
@@ -81,13 +81,13 @@ angular.module('recipe')
         super($scope)
 
       read: ->
-        @recipe.read({ id: $routeParams.id })
+        @recipe.read({ id: $state.params.id })
 
       submit: ->
         @recipe.update()
           .then (recipe) ->
             flash.set('Feed was successfully updated.')
-            $location.path('/recipes')
+            $state.go('recipes.index')
 
             return recipe
 
@@ -95,7 +95,7 @@ angular.module('recipe')
         @recipe.destroy
           .then (recipe) ->
             flash.set('Feed was successfully destroyed.')
-            $location.path('/recipes')
+            $state.go('recipes.index')
 
             return recipe
 
