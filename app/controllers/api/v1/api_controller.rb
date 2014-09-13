@@ -18,7 +18,7 @@ module Api
           scope = instance_variable_get("@#{ name }")
 
           headers['Pagination'] = {
-            total_items: scope.count,
+            total_items: scope.count(:all),
             total_pages: scope.total_pages,
             current_page: scope.current_page,
             previous_page: (scope.current_page - 1 unless scope.first_page?),

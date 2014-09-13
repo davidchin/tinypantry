@@ -20,6 +20,7 @@ module Api
 
       def search
         @recipes = Recipe.search_content(params[:query])
+                         .page(params[:page])
 
         respond_with(@recipes)
       end
@@ -55,9 +56,9 @@ module Api
       def find_recipes
         if params[:category]
           @recipes = Recipe.by_category(params[:category])
-                           .page(params[:page]).per(20)
+                           .page(params[:page])
         else
-          @recipes = Recipe.page(params[:page]).per(20)
+          @recipes = Recipe.page(params[:page])
         end
 
         # Sort recipes
