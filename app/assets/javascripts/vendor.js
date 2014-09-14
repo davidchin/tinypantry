@@ -7,3 +7,4 @@
 //= require lodash/lodash-mixin
 //= require moment/moment
 //= require underscore.string/dist/underscore.string.min
+//= require spin.js/spin

@@ -2,6 +2,7 @@ angular.module 'application', [
   # Global
   'animate'
   'config'
+  'loading'
   'sanitize'
 
   # Features
