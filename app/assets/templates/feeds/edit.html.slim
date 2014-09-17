@@ -1,3 +1,5 @@
 h1 Edit {{ feed.name }}
 
+loading-indicator model="feed.status.loaded" class="loading-indicator loading-indicator--large"
+
 ng-include src="'#{ asset_path('feeds/_form.html') }'"

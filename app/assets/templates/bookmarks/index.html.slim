@@ -1,2 +1,4 @@
+loading-indicator model="bookmarks.status.loaded" class="loading-indicator loading-indicator--large"
+
 section class="recipe-tiles"
   div class="recipe-tile" ng-repeat="bookmark in bookmarks.items" ng-init="recipe = bookmark.recipe" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"

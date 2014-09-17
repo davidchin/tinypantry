@@ -2,6 +2,8 @@ h1 {{ recipe.name }}
 
 flash name="app"
 
+loading-indicator model="recipe.status.loaded" class="loading-indicator loading-indicator--large"
+
 / p ng-bind-html="recipe.description"
 
 a target="_blank" class="button" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams"

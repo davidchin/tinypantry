@@ -1,51 +1,80 @@
 angular.module('loading')
   .directive 'loadingIndicator', ($window) ->
     restrict: 'EA'
+    transclude: true
     scope:
       model: '='
-    link: (scope, element, attrs) ->
-      Spinner = $window.Spinner
-      spinner = undefined
+    link: (scope, element, attrs, controller, transclude) ->
+      class LoadingIndicator
+        constructor: ->
+          @configure()
+          @transclude()
+          @watch()
 
-      fontColor = element.css('color')
-      fontSize = parseFloat(element.css('font-size')) * .8
-      lineWidth = Math.round(fontSize / 8)
-      lineLength = Math.round(fontSize / 6)
-      verticalOffset = Math.round(fontSize / 10)
-      radius = Math.round(fontSize / 2) + verticalOffset
-      innerRadius = radius - lineWidth - lineLength
-      width = radius * 2
-      height = radius * 2
-      lines = Math.min(Math.round(fontSize * 3 / 5), 12)
+        configure: ->
+          config = scope.$eval(attrs.config) || {}
 
-      defaultConfig =
-        lines: lines
-        length: lineLength
-        width: lineWidth
-        radius: innerRadius
-        color: fontColor
-        hwaccel: true
+          fontSize = config.size || parseFloat(element.css('font-size')) * .8
+          fontColor = element.css('color')
+          lineWidth = Math.round(fontSize / 8)
+          lineLength = Math.round(fontSize / 6)
+          verticalOffset = Math.round(fontSize / 8)
+          radius = Math.round(fontSize / 2) + verticalOffset
+          innerRadius = radius - lineWidth - lineLength
+          width = radius * 2
+          height = radius * 2
+          lines = Math.min(Math.round(fontSize * 3 / 5), 12)
 
-      config = _.extend({}, defaultConfig, scope.$eval(attrs.config))
+          defaultConfig =
+            lines: lines
+            length: lineLength
+            width: lineWidth
+            radius: innerRadius
+            color: fontColor
+            hwaccel: true
 
-      if attrs.type == 'inline'
-        elementStyle =
-          display: 'inline-block'
-          width: width
-          height: height
-          position: 'relative'
-          top: verticalOffset
+          if attrs.type == 'inline'
+            elementStyle =
+              display: 'inline-block'
+              width: width
+              height: height
+              position: 'relative'
+              top: verticalOffset
+          else
+            elementStyle = {}
 
-        element.css(elementStyle)
+          element
+            .css(elementStyle)
+            .addClass('loading-indicator')
 
-      scope.$watch 'model', (model) ->
-        if model
-          spinner.stop() if spinner
-          element.hide()
-        else
-          spinner = new Spinner(config) unless spinner
-          spinner.spin(element[0])
+          @config = _.extend({}, defaultConfig, config)
+
+        transclude: ->
+          transclude (clone) ->
+            element.append(clone)
+
+        start: ->
+          @spinner = new $window.Spinner(@config) unless @spinner
+          @spinner.spin(element[0])
           element.show()
 
-      scope.$on '$destroy', ->
-        spinner.stop()
+        stop: ->
+          @spinner.stop() if @spinner
+          element.hide()
+
+        watch: ->
+          scope.$watch 'model', (model) =>
+            if model
+              @stop()
+            else
+              @start()
+
+          scope.$on '$destroy', => @stop()
+
+          scope.$on 'start.loadingIndicator', (event, id) =>
+            @start() if id == attrs.name
+
+          scope.$on 'stop.loadingIndicator', (event, id) =>
+            @stop() if id == attrs.name
+
+      scope.loadingIndicator = new LoadingIndicator

@@ -3,6 +3,8 @@ nav class="recipe-nav-bar" ng-include="'#{ asset_path('recipes/_nav-bar.html') }
 div
   flash name="app"
 
+  loading-indicator model="recipes.status.loaded" class="loading-indicator loading-indicator--large"
+
   section class="recipe-tiles recipe-tiles--with-nav-bar"
     div class="recipe-tile" ng-repeat="recipe in recipes.items" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"
 

@@ -5,6 +5,8 @@ div class="modal"
       i class="fa fa-times"
 
   div class="modal__body"
+    loading-indicator model="recipe.status.loaded" class="loading-indicator loading-indicator--large"
+
     ng-include src="'#{ asset_path('recipes/show.html') }'"
 
   div class="modal__footer"

@@ -133,6 +133,9 @@ angular.module('model')
         for flag, value of flags[status]
           @status["#{ action }#{ _.string.capitalize(flag) }"] = value
 
+        if action in ['show', 'index'] && status == 'success'
+          @status.loaded = true
+
         return @status
 
     return BaseModel

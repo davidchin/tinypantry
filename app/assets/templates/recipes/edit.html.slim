@@ -2,4 +2,6 @@ h1 Edit {{ recipe.name }}
 
 flash name="app"
 
+loading-indicator model="recipe.status.loaded" class="loading-indicator loading-indicator--large"
+
 ng-include src="'#{ asset_path('recipes/_form.html') }'"

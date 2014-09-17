@@ -22,6 +22,7 @@ body {
 
 .app-body {
   @include outer-container;
+  height: 100%;
   margin-left: golden-ratio(1em, 6);
   padding: $gutter;
   position: relative;

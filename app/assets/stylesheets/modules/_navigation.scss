@@ -30,6 +30,7 @@
 .user-navigation {
   @include clearfix;
   background: $header-background-color;
+  color: $header-font-color;
   padding: 10px 0;
 }
 
