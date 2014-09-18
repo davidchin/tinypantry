@@ -41,7 +41,7 @@ Rails.application.routes.draw do
           collection do
             get :summary
             get :recipes
-            get :search_recipes
+            get :search_recipes, path: 'search-recipes'
           end
         end
       end

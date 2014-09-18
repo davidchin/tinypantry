@@ -8,6 +8,10 @@ angular.module('bookmark')
         isArray: true
         cache: true
         url: '/api/users/:userId/bookmarks/summary'
+      search:
+        method: 'GET'
+        isArray: true
+        url: '/api/users/:userId/bookmarks/search-recipes'
 
     return $resource(path, params, actions)
 
