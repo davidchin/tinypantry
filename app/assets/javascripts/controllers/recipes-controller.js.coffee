@@ -19,8 +19,7 @@ angular.module('recipe')
         @recipeModal.close()
 
       read: (params, append) ->
-        routeParams = _.pick($state.params, 'category', 'query', 'orderBy')
-        params = _.defaults({}, params, routeParams)
+        params = _.defaults({}, params, $state.params)
         method = if append then 'append' else 'read'
 
         @recipes[method](params)

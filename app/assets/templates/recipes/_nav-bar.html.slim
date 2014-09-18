@@ -1,8 +1,8 @@
 div class="recipe-filters"
   | Order by
   ul class="recipe-filter-list"
-    li ng-repeat="type in recipes.config.orderTypes"
-      a class="recipe-filter" ng-class="{ 'is-active': type.key == recipes.status.orderedBy }" ng-click="orderBy(type.key)"
+    li ng-repeat="type in (recipes || bookmarks).config.orderTypes"
+      a class="recipe-filter" ng-class="{ 'is-active': type.key == (recipes || bookmarks).status.orderedBy }" ng-click="orderBy(type.key)"
         | {{ type.name }}
 
 div class="recipe-search" ng-submit="search()"

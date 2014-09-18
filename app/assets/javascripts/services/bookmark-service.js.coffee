@@ -20,21 +20,37 @@ angular.module('bookmark')
 
     return Bookmark
 
-  .factory 'Bookmarks', (bookmarkResource, Collection, Bookmark, Recipe) ->
+  .factory 'Bookmarks', (bookmarkResource, Collection, Bookmark, Recipe, RecipeOrderTypes) ->
     class Bookmarks extends Collection
       constructor: ->
         @configure {
           resource: bookmarkResource
           model: Bookmark
+          orderTypes: RecipeOrderTypes
         }
 
         super
 
+      search: (params) ->
+        @request('search', params)
+          .then (bookmarks) => @set(bookmarks)
+
       read: (params) ->
-        super
+        promise = if params?.query?
+          @search(params)
+        else
+          super
+
+        promise
           .then (bookmarks) =>
             for bookmark in bookmarks
               bookmark.recipe = @transform(bookmark.recipe, { model: Recipe })
+
+            defaultOrder = _.first(@config.orderTypes)
+
+            @status.orderedBy = params?.orderBy || defaultOrder.key
+
+            console.log(@status.orderedBy)
 
             return bookmarks
 
