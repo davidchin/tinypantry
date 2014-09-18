@@ -21,12 +21,14 @@ module Api
       def search
         @recipes = Recipe.search_content(params[:query])
                          .page(params[:page])
+                         .order_by(params[:order_by])
 
         respond_with(@recipes)
       end
 
       def related
         @recipes = @recipe.related_recipes
+                          .order_by(params[:order_by])
 
         respond_with(@recipes) if stale? @recipes
       end
@@ -61,16 +63,7 @@ module Api
           @recipes = Recipe.page(params[:page])
         end
 
-        # Sort recipes
-        @recipes =
-          case params[:order_by]
-          when 'bookmark'
-            @recipes.most_bookmarked
-          when 'view'
-            @recipes.most_viewed
-          else
-            @recipes.most_recent
-          end
+        @recipes.order_by(params[:order_by])
       end
 
       def recipe_params

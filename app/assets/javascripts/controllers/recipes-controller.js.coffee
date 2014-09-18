@@ -68,6 +68,13 @@ angular.module('recipe')
             flash.set('Recipe was successfully bookmarked.')
             @read()
 
+      destroyBookmark: ->
+        currentUser.ready()
+          .then => currentUser.bookmarks.destroy({ recipeId: @recipe.id })
+          .then =>
+            flash.set('Bookmark was successfully removed.')
+            @read()
+
     new RecipesShowController
 
   .controller 'RecipesEditController', ($scope, $state, flash, BaseController, Recipe) ->

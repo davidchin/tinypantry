@@ -38,7 +38,11 @@ Rails.application.routes.draw do
 
       resources :users, only: [:show, :index] do
         resources :bookmarks, only: [:index, :create, :destroy] do
-          get :summary, on: :collection
+          collection do
+            get :summary
+            get :recipes
+            get :search_recipes
+          end
         end
       end
     end

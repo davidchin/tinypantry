@@ -54,6 +54,17 @@ class Recipe < ActiveRecord::Base
 
   friendly_id :slug_candidates, use: :slugged
 
+  def self.order_by(key = 'date')
+    case key
+    when 'bookmark'
+      most_bookmarked
+    when 'view'
+      most_viewed
+    else
+      most_recent
+    end
+  end
+
   def remote_image_url=(url)
     if remote_image_url != url && url.present?
       self.image = URI.parse(URI.encode(url))

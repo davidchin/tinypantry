@@ -42,7 +42,8 @@ module Api
       end
 
       def category_params
-        params.require(:category).permit(:name, keywords_attributes: [:id, :name])
+        params.require(:category)
+              .permit(:name, keywords_attributes: [:id, :name])
       end
     end
   end
