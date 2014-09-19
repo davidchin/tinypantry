@@ -1,0 +1,15 @@
+.flash {
+  @include clearfix;
+}
+
+.flash--alert {
+  @extend %flash-alert;
+}
+
+.flash--notice {
+  @extend %flash-notice;
+}
+
+.flash--success {
+  @extend %flash-success;
+}

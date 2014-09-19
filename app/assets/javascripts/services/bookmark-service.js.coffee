@@ -1,12 +1,11 @@
 angular.module('bookmark')
   .factory 'bookmarkResource', ($resource) ->
-    path = '/api/users/:userId/bookmarks'
+    path = '/api/users/:userId/bookmarks/:id'
     params = { userId: '@userId' }
     actions =
       summary:
         method: 'GET'
         isArray: true
-        cache: true
         url: '/api/users/:userId/bookmarks/summary'
 
     return $resource(path, params, actions)
@@ -52,7 +51,7 @@ angular.module('bookmark')
       bookmarked: (recipe) ->
         @request('summary')
           .then (bookmarks) ->
-            _.any(bookmarks, { recipeId: recipe.id })
+            _.find(bookmarks, { recipeId: recipe.id })
 
       params: ->
         { userId: @user?.id }

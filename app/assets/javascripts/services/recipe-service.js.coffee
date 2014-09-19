@@ -31,8 +31,9 @@ angular.module('recipe')
 
       bookmarked: (user) ->
         user.bookmarks.bookmarked(this)
-          .then (bookmarked) =>
-            @status.bookmarked = bookmarked
+          .then (bookmark) =>
+            @status.bookmarked = !!bookmark
+            @bookmark = bookmark
 
     return Recipe
 

@@ -2,6 +2,23 @@
   opacity: .3;
 }
 
+.loading-indicator--inline {
+  opacity: 1;
+
+  &:first-child {
+    margin-right: em(5);
+  }
+
+  &:last-child {
+    margin-left: em(5);
+  }
+
+  &:only-child {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 .loading-indicator--large {
   font-size: em(40);
 }

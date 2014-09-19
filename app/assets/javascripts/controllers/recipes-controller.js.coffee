@@ -43,6 +43,7 @@ angular.module('recipe')
   .controller 'RecipesShowController', ($scope, $stateParams, currentUser, flash, ga, BaseController, Recipe) ->
     class RecipesShowController extends BaseController
       constructor: ->
+        @currentUser = currentUser
         @recipe = new Recipe
 
         @read()
@@ -65,14 +66,18 @@ angular.module('recipe')
         currentUser.ready()
           .then => currentUser.bookmarks.create({ recipeId: @recipe.id })
           .then =>
-            flash.set('Recipe was successfully bookmarked.')
+            flash.set('Recipe was successfully bookmarked.', { requests: 0, type: 'success' })
+
+            @recipe.status.bookmarked = true
             @read()
 
       destroyBookmark: ->
         currentUser.ready()
-          .then => currentUser.bookmarks.destroy({ recipeId: @recipe.id })
+          .then => currentUser.bookmarks.destroy({ id: @recipe.bookmark?.id })
           .then =>
-            flash.set('Bookmark was successfully removed.')
+            flash.set('Bookmark was successfully removed.', { requests: 0, type: 'success' })
+
+            @recipe.status.bookmarked = false
             @read()
 
     new RecipesShowController

@@ -21,13 +21,13 @@ module Api
       end
 
       def create
-        @bookmark = @user.bookmarks.create!(bookmark_params)
+        @bookmark = @user.bookmarks.create!(recipe_id: params[:recipe_id])
 
         respond_with(@bookmark)
       end
 
       def destroy
-        @bookmark = @user.bookmarks.find_by(bookmark_params)
+        @bookmark = @user.bookmarks.find(params[:id])
 
         respond_with(@bookmark.destroy!)
       end

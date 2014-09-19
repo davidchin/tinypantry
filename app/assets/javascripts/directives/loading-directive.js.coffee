@@ -33,6 +33,9 @@ angular.module('loading')
             color: fontColor
             hwaccel: true
 
+          elementStyle = {}
+          elementClass = 'loading-indicator'
+
           if attrs.type == 'inline'
             elementStyle =
               display: 'inline-block'
@@ -40,12 +43,12 @@ angular.module('loading')
               height: height
               position: 'relative'
               top: verticalOffset
-          else
-            elementStyle = {}
+
+            elementClass = "#{ elementClass } loading-indicator--inline"
 
           element
             .css(elementStyle)
-            .addClass('loading-indicator')
+            .addClass(elementClass)
 
           @config = _.extend({}, defaultConfig, config)
 
