@@ -2,7 +2,6 @@ module Api
   module V1
     class RecipesController < Api::V1::ApiController
       before_action :authenticate_user!, except: [:index, :show, :search, :related]
-
       before_action :find_recipes, only: [:index]
       before_action :find_recipe, only: [:show, :update, :destroy, :related]
 
@@ -23,7 +22,9 @@ module Api
                          .page(params[:page])
                          .order_by(params[:order_by])
 
-        respond_with(@recipes)
+        respond_with(@recipes) do |format|
+          format.json { render :index }
+        end
       end
 
       def related

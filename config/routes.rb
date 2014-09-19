@@ -38,11 +38,11 @@ Rails.application.routes.draw do
 
       resources :users, only: [:show, :index] do
         resources :bookmarks, only: [:index, :create, :destroy] do
-          collection do
-            get :summary
-            get :recipes
-            get :search_recipes, path: 'search-recipes'
-          end
+          get :summary, on: :collection
+        end
+
+        resources :bookmarked_recipes, only: [:index], path: 'bookmarked-recipes' do
+          get :search, on: :collection
         end
       end
     end

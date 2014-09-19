@@ -6,6 +6,6 @@ angular.module('bookmark')
         template: '<ui-view />'
 
       .state 'bookmarks.index',
-        url: '/bookmarks?page'
+        url: '/bookmarks?category&page&orderBy&query'
         templateUrl: '<%= asset_path("bookmarks/index.html") %>'
         controller: 'BookmarksIndexController'

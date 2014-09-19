@@ -2,7 +2,6 @@ module Api
   module V1
     class FeedsController < ApplicationController
       before_action :authenticate_user!, except: [:index, :show]
-
       before_action :find_feed, only: [:show, :update, :destroy]
 
       authorize_resource

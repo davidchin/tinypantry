@@ -4,6 +4,8 @@ angular.module('bookmark')
       constructor: ->
         @user = currentUser
         @bookmarks = @user.bookmarks
+        @recipes = @user.bookmarkedRecipes
+
         @recipeModal = new Modal({ scope: $scope })
 
         @read()
@@ -11,7 +13,7 @@ angular.module('bookmark')
         super($scope)
 
       search: ->
-        $state.go('bookmarks.index', { query: @bookmarks.query })
+        $state.go('bookmarks.index', { query: @recipes.query })
 
       openRecipe: (recipe) ->
         @recipeModal.open('recipe', { id: recipe.id })
@@ -24,10 +26,10 @@ angular.module('bookmark')
         method = if append then 'append' else 'read'
 
         @user.ready()
-          .then => @bookmarks[method]()
+          .then => @recipes[method](params)
 
       next: (params) ->
-        params = _.defaults({ page: @bookmarks.pagination.nextPage }, params)
+        params = _.defaults({ page: @recipes.pagination.nextPage }, params)
 
         @read(params, true) if params.page
 

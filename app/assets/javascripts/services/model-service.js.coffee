@@ -20,9 +20,13 @@ angular.module('model')
           # Set attribute
           @[attr] = value
 
+        @status.set = true
+
         return data
 
       unset: ->
+        @status.set = false
+
         delete @[attr] for attr in @dataAttrs
 
       data: ->
@@ -133,9 +137,6 @@ angular.module('model')
         for flag, value of flags[status]
           @status["#{ action }#{ _.string.capitalize(flag) }"] = value
 
-        if action in ['show', 'index'] && status == 'success'
-          @status.loaded = true
-
         return @status
 
     return BaseModel
@@ -174,6 +175,7 @@ angular.module('model')
 
       set: (data) ->
         @items.length = 0
+        @status.set = true
 
         @add(@transform(item)) for item in data
 

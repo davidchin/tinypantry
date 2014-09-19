@@ -3,7 +3,7 @@ header class="app-header" ng-controller="NavigationController"
   a ui-sref="home" class="app-header__logo" tinypantry.com
 
   nav class="user-navigation"
-    loading-indicator model="categories.status.loaded" class="loading-indicator loading-indicator--large"
+    loading-indicator model="categories.status.set" class="loading-indicator loading-indicator--large"
 
     div class="user-navigation__item"
       a class="user-navigation__item-link" ui-sref="sessions.destroy" ng-show="currentUser.status.loggedIn"

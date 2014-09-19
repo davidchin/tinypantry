@@ -1,11 +1,10 @@
 module Api
   module V1
     class BookmarksController < Api::V1::ApiController
-      before_action :authenticate_user!, except: [:index, :recipes]
-
+      before_action :authenticate_user!, except: [:index]
       before_action :find_user
 
-      set_pagination_header :bookmarks, only: [:index, :search]
+      set_pagination_header :bookmarks, only: [:index]
 
       authorize_resource
 
@@ -13,21 +12,6 @@ module Api
         @bookmarks = @user.bookmarks.page(params[:page])
 
         respond_with(@bookmarks) if stale? @bookmarks
-      end
-
-      def recipes
-        @recipes = @user.bookmarked_recipes
-                        .order_by(params[:order_by])
-
-        respond_with(@recipes) if stale? @recipes
-      end
-
-      def search_recipes
-        @recipes = @user.bookmarked_recipes
-                        .search_content(params[:query])
-                        .order_by(params[:order_by])
-
-        respond_with(@recipes)
       end
 
       def summary

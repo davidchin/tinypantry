@@ -2,7 +2,6 @@ module Api
   module V1
     class UsersController < Api::V1::ApiController
       before_action :authenticate_user!, except: [:index, :show]
-
       before_action :find_user, only: [:show, :update, :destroy]
 
       set_pagination_header :users, only: [:index]

@@ -6,7 +6,7 @@ angular.module('recipe')
         template: '<ui-view />'
 
       .state 'recipes.index',
-        url: '/recipes?category&page&orderBy'
+        url: '/recipes?category&page&orderBy&query'
         templateUrl: '<%= asset_path("recipes/index.html") %>'
         controller: 'RecipesIndexController'
 

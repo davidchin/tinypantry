@@ -10,12 +10,13 @@ angular.module('user')
 
     return user
 
-  .factory 'User', (userService, Model, Bookmarks) ->
+  .factory 'User', (userService, Model, Bookmarks, BookmarkedRecipes) ->
     class User extends Model
       constructor: ->
         @configure(resource: userService)
 
         @bookmarks = new Bookmarks(dependency: { user: this })
+        @bookmarkedRecipes = new BookmarkedRecipes(dependency: { user: this })
 
         super
 
