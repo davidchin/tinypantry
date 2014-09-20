@@ -1,14 +1,14 @@
 .modal {
   @include transform(translateX(-50%) translateY(-50%));
-  background: $modal-background-color;
-  height: auto;
-  left: 50%;
-  max-width: 600px;
-  min-width: 300px;
   position: fixed;
   top: 50%;
-  width: 50%;
+  left: 50%;
   z-index: 2000;
+  background: $modal-background-color;
+  width: 50%;
+  min-width: 300px;
+  max-width: 600px;
+  height: auto;
 
   &.ng-enter,
   &.ng-leave {
@@ -38,25 +38,25 @@
 }
 
 .modal__body {
-  padding: $modal-padding;
   position: relative;
+  padding: $modal-padding;
 }
 
 .modal__close-btn {
-  color: $base-font-color;
   position: absolute;
-  right: $modal-padding / 2;
   top: $modal-padding / 2;
+  right: $modal-padding / 2;
+  color: $base-font-color;
 }
 
 .modal-overlay {
-  background: $modal-overlay-background-color;
-  height: 100%;
-  left: 0;
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
   z-index: 1999;
+  background: $modal-overlay-background-color;
+  width: 100%;
+  height: 100%;
 
   &.ng-enter,
   &.ng-leave {

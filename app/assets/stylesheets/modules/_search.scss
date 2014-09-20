@@ -3,11 +3,11 @@
 
   &:after {
     @extend %icon;
-    content: $fa-var-search;
-    left: $base-line-height / 2;
-    margin-top: $base-line-height / -2;
     position: absolute;
     top: 50%;
+    left: $base-line-height / 2;
+    margin-top: $base-line-height / -2;
+    content: $fa-var-search;
   }
 }
 

@@ -1,7 +1,7 @@
 fieldset {
-  background: lighten($base-border-color, 10);
-  border: 1px solid $base-border-color;
   margin: 0 0 ($base-line-height / 2);
+  border: 1px solid $base-border-color;
+  background: lighten($base-border-color, 10);
   padding: $base-line-height;
 }
 
@@ -14,8 +14,8 @@ select {
 }
 
 label {
-  font-weight: bold;
   margin-bottom: $base-line-height / 4;
+  font-weight: bold;
 
   &.required:after {
     content: '*';
@@ -31,24 +31,24 @@ textarea,
 select[multiple=multiple] {
   @include box-sizing(border-box);
   @include transition(border-color);
-  background-color: $white;
+  margin-bottom: $base-line-height / 2;
   border: 1px solid $form-border-color;
   border-radius: $form-border-radius;
   box-shadow: $form-box-shadow;
-  font-family: $form-font-family;
-  font-size: $form-font-size;
-  margin-bottom: $base-line-height / 2;
+  background-color: $white;
   padding: $base-line-height / 3;
   width: 100%;
+  font-family: $form-font-family;
+  font-size: $form-font-size;
 
   &:hover {
     border-color: $form-border-color-hover;
   }
 
   &:focus {
+    outline: none;
     border-color: $form-border-color-focus;
     box-shadow: $form-box-shadow-focus;
-    outline: none;
   }
 }
 
@@ -74,6 +74,6 @@ input[type="file"] {
 
 select {
   margin-bottom: $base-line-height;
-  max-width: 100%;
   width: auto;
+  max-width: 100%;
 }

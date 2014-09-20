@@ -1,14 +1,14 @@
 %button {
   @include prefixer(font-smoothing, antialiased, webkit spec);
-  background-color: $base-button-color;
-  border-radius: $base-border-radius;
-  color: $white;
   display: inline-block;
-  font: bold $base-font-size $serif;
-  line-height: 1;
+  border-radius: $base-border-radius;
+  background-color: $base-button-color;
   padding: .75em 1em;
-  text-decoration: none;
   vertical-align: middle;
+  text-decoration: none;
+  line-height: 1;
+  color: $white;
+  font: bold $base-font-size $serif;
 
   &:hover {
     background-color: $hover-button-color;
@@ -41,8 +41,8 @@
 
 %pill {
   @include prefixer(font-smoothing, antialiased, webkit spec);
-  border-radius: $base-font-size;
   display: inline-block;
+  border-radius: $base-font-size;
   padding: .2em .8em;
   vertical-align: middle;
 

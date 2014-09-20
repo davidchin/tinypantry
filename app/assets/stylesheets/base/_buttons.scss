@@ -4,9 +4,9 @@ input[type="submit"] {
   @include appearance(none);
   border: 0;
   cursor: pointer;
-  user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  user-select: none;
 
   &:disabled {
     cursor: default;

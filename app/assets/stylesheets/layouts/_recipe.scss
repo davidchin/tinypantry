@@ -6,10 +6,10 @@
   }
 
   .recipe-nav-bar {
-    left: golden-ratio(1em, 6);
     position: fixed;
-    right: 0;
     top: 0;
+    right: 0;
+    left: golden-ratio(1em, 6);
 
     + * {
       margin-top: em(80px);

@@ -8,22 +8,22 @@ body {
 }
 
 .app-container {
-  height: 100%;
-  margin-left: 0;
   position: relative;
+  margin-left: 0;
+  height: 100%;
 }
 
 .app-aside {
-  height: 100%;
-  overflow: auto;
   position: fixed;
   width: golden-ratio(1em, 6);
+  height: 100%;
+  overflow: auto;
 }
 
 .app-body {
   @include outer-container;
-  height: 100%;
+  position: relative;
   margin-left: golden-ratio(1em, 6);
   padding: $gutter;
-  position: relative;
+  height: 100%;
 }

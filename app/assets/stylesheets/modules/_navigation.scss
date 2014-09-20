@@ -1,15 +1,15 @@
 .app-navigation {
-  background: $header-background-color;
   border-top: 1px solid $dark-gray;
+  background: $header-background-color;
 }
 
 .app-navigation__item-link {
   @extend %link--white;
   @include transition (border-width .3s ease-in-out);
   display: block;
-  font: 300 1.2em $serif;
-  padding: 10px 15px;
   position: relative;
+  padding: 10px 15px;
+  font: 300 1.2em $serif;
 
   &:hover {
     border-left: 6px solid $base-brand-color;
@@ -21,8 +21,8 @@
 
     &:before {
       @extend %icon;
-      content: $fa-var-angle-right;
       float: right;
+      content: $fa-var-angle-right;
     }
   }
 }
@@ -30,8 +30,8 @@
 .user-navigation {
   @include clearfix;
   background: $header-background-color;
-  color: $header-font-color;
   padding: 10px 0;
+  color: $header-font-color;
 }
 
 .user-navigation--col-2 {
@@ -44,8 +44,8 @@
 .user-navigation__item-link {
   @extend %link--white;
   display: block;
-  font-size: $small-font-size;
   padding: 5px 15px;
+  font-size: $small-font-size;
 
   .fa {
     margin-right: $icon-margin;

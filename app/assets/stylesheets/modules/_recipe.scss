@@ -1,10 +1,10 @@
 .recipe-nav-bar {
   @include box-sizing(border-box);
-  background: transparentize($base-background-color, .2);
-  border-bottom: 1px solid $light-gray;
-  max-width: $max-width;
-  padding: em(21px) $base-padding;
   z-index: 100;
+  border-bottom: 1px solid $light-gray;
+  background: transparentize($base-background-color, .2);
+  padding: em(21px) $base-padding;
+  max-width: $max-width;
 
   .recipe-search,
   .recipe-filters {
@@ -12,8 +12,8 @@
   }
 
   .recipe-filters {
-    font-size: $small-font-size;
     margin-top: 9px;
+    font-size: $small-font-size;
   }
 }
 
@@ -31,16 +31,16 @@
 .recipe-filter {
   @extend %pill;
   @extend %pill--gray;
-  font-size: $mini-font-size;
   text-transform: uppercase;
+  font-size: $mini-font-size;
 
   &.is-active {
     @extend %pill--white;
 
     &:after {
       @extend %icon;
-      content: $fa-var-angle-down;
       margin-left: $icon-margin;
+      content: $fa-var-angle-down;
     }
   }
 }
@@ -50,9 +50,9 @@
 }
 
 .recipe-tile {
-  background: $white;
-  border: 1px solid $recipe-tile-border-color;
   position: relative;
+  border: 1px solid $recipe-tile-border-color;
+  background: $white;
 
   &,
   a {
@@ -64,13 +64,13 @@
   }
 
   .recipe-tile__meta {
-    bottom: 0;
-    color: $medium-gray;
-    left: 50%;
-    padding-left: $base-padding;
-    padding-right: $base-padding;
     position: absolute;
     right: 0;
+    bottom: 0;
+    left: 50%;
+    padding-right: $base-padding;
+    padding-left: $base-padding;
+    color: $medium-gray;
   }
 }
 
@@ -95,10 +95,10 @@
 }
 
 .recipe-tile__meta {
-  border-top: 1px solid $recipe-tile-border-color;
-  font-size: em(13, $base-font-size);
   margin-top: $base-line-height / 2;
+  border-top: 1px solid $recipe-tile-border-color;
   padding-top: $base-line-height / 2;
+  font-size: em(13, $base-font-size);
 
   .fa {
     margin-right: $icon-margin;

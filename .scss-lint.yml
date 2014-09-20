@@ -1,0 +1,4 @@
+linters:
+  PropertySortOrder:
+    order: concentric
+    ignore_unspecified: true

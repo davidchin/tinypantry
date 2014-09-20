@@ -1,10 +1,10 @@
 body {
   @include prefixer(font-smoothing, antialiased, webkit spec);
   background-color: $base-background-color;
+  line-height: $unitless-line-height;
   color: $base-font-color;
   font-family: $base-font-family;
   font-size: $base-font-size;
-  line-height: $unitless-line-height;
 }
 
 h1,
@@ -13,10 +13,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $header-font-family;
-  line-height: $unitless-header-line-height;
   margin: 0;
   text-rendering: optimizeLegibility; // Fix the character spacing for headings
+  line-height: $unitless-header-line-height;
+  font-family: $header-font-family;
 }
 
 h1 {
@@ -49,27 +49,27 @@ p {
 
 a {
   @include transition(color .1s linear);
-  color: $base-link-color;
   text-decoration: none;
+  color: $base-link-color;
 
   &:hover {
-    color: $hover-link-color;
     cursor: pointer;
+    color: $hover-link-color;
   }
 
   &:active,
   &:focus {
-    color: $hover-link-color;
     outline: none;
+    color: $hover-link-color;
   }
 }
 
 hr {
+  margin: $base-line-height 0;
+  border-top: 0;
+  border-right: 0;
   border-bottom: 1px solid $base-border-color;
   border-left: 0;
-  border-right: 0;
-  border-top: 0;
-  margin: $base-line-height 0;
 }
 
 img {
@@ -78,10 +78,10 @@ img {
 }
 
 blockquote {
-  border-left: 2px solid $base-border-color;
-  color: lighten($base-font-color, 15);
   margin: $base-line-height 0;
+  border-left: 2px solid $base-border-color;
   padding-left: $base-line-height / 2;
+  color: lighten($base-font-color, 15);
 }
 
 cite {
