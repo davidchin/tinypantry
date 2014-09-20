@@ -1,5 +1,5 @@
 .loading-indicator {
-  opacity: .3;
+  opacity: .4;
 }
 
 .loading-indicator--inline {
@@ -19,6 +19,19 @@
   }
 }
 
-.loading-indicator--large {
+.loading-indicator--large,
+.loading-indicator--overlay {
   font-size: em(40);
+}
+
+.loading-indicator--overlay {
+  background: $modal-overlay-background-color;
+  color: $gray;
+  height: 100%;
+  left: 0;
+  opacity: 1;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1999;
 }

@@ -1,1 +1,3 @@
-angular.module 'modal', []
+angular.module 'modal', [
+  'loading'
+]

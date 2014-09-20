@@ -50,7 +50,7 @@
 }
 
 .modal-overlay {
-  background: transparentize($black, .2);
+  background: $modal-overlay-background-color;
   height: 100%;
   left: 0;
   position: fixed;

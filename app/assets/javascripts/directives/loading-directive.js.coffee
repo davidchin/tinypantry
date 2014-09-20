@@ -9,6 +9,7 @@ angular.module('loading')
         constructor: ->
           @configure()
           @transclude()
+          @stop()
           @watch()
 
         configure: ->
@@ -66,11 +67,12 @@ angular.module('loading')
           element.hide()
 
         watch: ->
-          scope.$watch 'model', (model) =>
-            if model
-              @stop()
-            else
-              @start()
+          if attrs.hasOwnProperty('model')
+            scope.$watch 'model', (model) =>
+              if model
+                @stop()
+              else
+                @start()
 
           scope.$on '$destroy', => @stop()
 

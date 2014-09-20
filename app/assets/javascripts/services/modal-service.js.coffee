@@ -10,7 +10,7 @@ angular.module('modal')
       find: (name) ->
         @routes[name]
 
-      $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, modalStack, modalBackground) ->
+      $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, modalStack, modalBackground, loadingIndicatorManager) ->
         provider = this
 
         class Modal
@@ -38,6 +38,8 @@ angular.module('modal')
 
             _.defaults(@config, provider.find(name))
 
+            loadingIndicatorManager.start('app')
+
             @getTemplate()
               .then (template) =>
                 lastElement = modalStack.last()?.element
@@ -45,6 +47,9 @@ angular.module('modal')
 
                 @scope = @config.scope.$new() || $rootScope.$new()
                 @element = angular.element(template)
+
+                # Loading indicator
+                loadingIndicatorManager.stop('app')
 
                 # Controller
                 if @config.controller
