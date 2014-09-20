@@ -6,10 +6,11 @@ header class="app-header" ng-controller="NavigationController"
     loading-indicator model="categories.status.set" class="loading-indicator loading-indicator--large"
 
     div class="user-navigation__item"
-      a class="user-navigation__item-link" ui-sref="sessions.destroy" ng-show="currentUser.status.loggedIn"
+      a class="user-navigation__item-link ng-animate--disabled" ui-sref="sessions.destroy" ng-show="currentUser.status.loggedIn"
         i class="fa fa-user"
         | Logout
-      a class="user-navigation__item-link" ng-click="openLogin()" ng-show="!currentUser.status.loggedIn"
+      a class="user-navigation__item-link ng-animate--disabled" ng-click="openLogin()" ng-hide="currentUser.status.loggedIn"
+        loading-indicator model="categories.status.set" type="inline" class="loading-indicator"
         i class="fa fa-user"
         | Login
 

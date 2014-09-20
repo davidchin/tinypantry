@@ -18,5 +18,6 @@ angular.module('navigation')
 
       read: ->
         @categories.read()
+        @currentUser.read()
 
     new NavigationController

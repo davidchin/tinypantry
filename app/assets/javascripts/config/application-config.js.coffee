@@ -11,3 +11,6 @@ angular.module('config')
     $httpProvider.defaults.headers.common['Accept'] = "application/vnd.tinypantry.v1, #{ acceptHeader }"
 
     $httpProvider.interceptors.push('sessionHttpInterceptor')
+
+  .config ($animateProvider) ->
+    $animateProvider.classNameFilter(/^(?:(?!ng-animate--disabled).)*$/)
