@@ -9,8 +9,10 @@
   padding: 0 15px;
   text-align: center;
   text-transform: uppercase;
-  line-height: em(70px);
-  font: bold 18px $serif;
+  line-height: em(70);
+  font-family: $serif;
+  font-size: 18px;
+  font-weight: bold;
 
   &,
   &:hover {
