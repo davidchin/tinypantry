@@ -175,6 +175,7 @@ angular.module('model')
 
       set: (data) ->
         @items.length = 0
+        @status.empty = true
         @status.set = true
 
         @add(@transform(item)) for item in data
@@ -208,9 +209,15 @@ angular.module('model')
 
       add: (models...) ->
         @items.push(model) for model in models when !_.contains(@items, model)
+        @status.empty = @items.length == 0
+
+        return @items
 
       remove: (models...) ->
         @items.splice(index, 1) for model in models when (index = @indexOf(model)) >= 0
+        @status.empty = @items.length == 0
+
+        return @items
 
       indexOf: (model) ->
         _.indexOf(@items, model)

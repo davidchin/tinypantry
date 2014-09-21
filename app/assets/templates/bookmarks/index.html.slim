@@ -5,8 +5,12 @@ div
 
   loading-indicator model="recipes.status.set" class="loading-indicator loading-indicator--large"
 
-  section class="recipe-tiles"
-    div class="recipe-tile" ng-repeat="recipe in recipes.items" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"
+  div ng-hide="recipes.status.empty"
+    section class="recipe-tiles"
+      div class="recipe-tile" ng-repeat="recipe in recipes.items" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"
 
-  section
-    button class="button-block" ng-show="recipes.pagination.nextPage" ng-click="next()" Load More
+    section
+      button class="button-block" ng-show="recipes.pagination.nextPage" ng-click="next()" Load More
+
+  div ng-show="recipes.status.set && recipes.status.empty"
+    | Nothing to see here, move along&hellip;

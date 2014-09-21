@@ -2,5 +2,10 @@ h1 Categories
 
 loading-indicator model="categories.status.set" class="loading-indicator loading-indicator--large"
 
-div ng-repeat="category in categories.items"
-  a ui-sref="categories.show({ id: category.id })" {{ category.name }}
+section
+  div ng-hide="categories.status.empty"
+    div ng-repeat="category in categories.items"
+      a ui-sref="categories.show({ id: category.id })" {{ category.name }}
+
+  div ng-show="categories.status.set && categories.status.empty"
+    | Nothing to see here, move along&hellip;

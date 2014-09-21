@@ -2,5 +2,10 @@ h1 Feeds
 
 loading-indicator model="feeds.status.set" class="loading-indicator loading-indicator--large"
 
-div ng-repeat="feed in feeds.items"
-  a ui-sref="feeds.edit({ id: feed.id })" {{ feed.name }}
+section
+  div ng-hide="feeds.status.empty"
+    div ng-repeat="feed in feeds.items"
+      a ui-sref="feeds.edit({ id: feed.id })" {{ feed.name }}
+
+  div ng-show="feeds.status.set && feeds.status.empty"
+    | Nothing to see here, move along&hellip;
