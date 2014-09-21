@@ -26,10 +26,7 @@ angular.module('resource')
 
         $delegate(url, params, actions)
 
-  .config ($httpProvider) ->
-    $httpProvider.interceptors.unshift('attributeInterceptor')
-
-  .factory 'attributeInterceptor', ->
+  .factory 'attributeInterceptor', ($q) ->
     fromJson = (value) ->
       try obj = angular.fromJson(value)
       catch error then obj = null
@@ -53,6 +50,11 @@ angular.module('resource')
 
       response
 
+    transformResponseError = (response) ->
+      response = transformResponse(response)
+
+      $q.reject(response)
+
     request: transformRequest
     response: transformResponse
-    responseError: transformResponse
+    responseError: transformResponseError

@@ -111,7 +111,7 @@ angular.module('model')
           , (response) =>
             @flag(action, 'error')
 
-            return response
+            return $q.reject(response)
 
         else
           $q.reject()

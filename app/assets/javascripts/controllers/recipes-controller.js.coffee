@@ -40,7 +40,7 @@ angular.module('recipe')
 
     new RecipesIndexController
 
-  .controller 'RecipesShowController', ($scope, $stateParams, currentUser, flash, ga, BaseController, Recipe) ->
+  .controller 'RecipesShowController', ($scope, $state, $q, currentUser, flash, ga, catchNotFoundError, BaseController, Recipe) ->
     class RecipesShowController extends BaseController
       constructor: ->
         @currentUser = currentUser
@@ -51,7 +51,7 @@ angular.module('recipe')
         super($scope)
 
       read: ->
-        @recipe.read({ id: $stateParams.id })
+        @recipe.read({ id: $state.params.id })
           .then =>
             # NOTE: This 'then' block is for testing - to be removed later
             { category, action, label } = @recipe.trackingParams
@@ -61,6 +61,7 @@ angular.module('recipe')
             currentUser.ready()
               .then => @recipe.bookmarked(currentUser)
           .then => @recipe.data()
+          .catch(catchNotFoundError)
 
       bookmark: ->
         currentUser.ready()
@@ -82,7 +83,7 @@ angular.module('recipe')
 
     new RecipesShowController
 
-  .controller 'RecipesEditController', ($scope, $state, flash, BaseController, Recipe) ->
+  .controller 'RecipesEditController', ($scope, $state, flash, catchNotFoundError, BaseController, Recipe) ->
     class RecipesEditController extends BaseController
       constructor: ->
         @recipe = new Recipe
@@ -93,6 +94,7 @@ angular.module('recipe')
 
       read: ->
         @recipe.read({ id: $state.params.id })
+          .catch(catchNotFoundError)
 
       submit: ->
         @recipe.update()

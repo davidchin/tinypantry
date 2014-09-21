@@ -3,6 +3,9 @@ angular.module('application')
     $urlRouterProvider
       .when '/', '/recipes'
 
+    $urlRouterProvider
+      .otherwise '/errors/404'
+
     $stateProvider
       .state 'home',
         url: '/'

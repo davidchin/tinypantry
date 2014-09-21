@@ -1,0 +1,11 @@
+angular.module('error')
+  .config ($stateProvider) ->
+    $stateProvider
+      .state 'errors',
+        abstract: true
+        template: '<ui-view />'
+        controller: 'ErrorsController'
+
+      .state 'errors.404',
+        url: '/errors/404'
+        templateUrl: '<%= asset_path("errors/404.html") %>'
