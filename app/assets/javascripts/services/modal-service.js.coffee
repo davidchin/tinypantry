@@ -1,98 +1,96 @@
 angular.module('modal')
   .provider 'Modal', ->
-    class ModalProvider
-      constructor: ->
-        @routes = {}
+    routes: {},
 
-      when: (name, config) ->
-        @routes[name] = _.extend({}, config)
+    when: (name, config) ->
+      @routes[name] = _.extend({}, config)
 
-      find: (name) ->
-        @routes[name]
+    find: (name) ->
+      @routes[name]
 
-      $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, modalStack, modalBackground, loadingIndicatorManager) ->
-        provider = this
+    $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, modalStack, modalBackground, loadingIndicatorManager) ->
+      provider = this
 
-        class Modal
-          constructor: (config) ->
-            @config = _.extend {
-              parent: '.app-body'
-            }, config
+      class Modal
+        constructor: (config) ->
+          @config = _.extend {
+            parent: '.app-body'
+          }, config
 
-          getTemplate: ->
-            if @config.templateUrl
-              promise = $http.get(@config.templateUrl, { cache: $templateCache })
-                .then (response) -> response.data
-            else
-              deferred = $q.defer()
-              deferred.resolve(@config.template)
+        getTemplate: ->
+          if @config.templateUrl
+            promise = $http.get(@config.templateUrl, { cache: $templateCache })
+              .then (response) -> response.data
+          else
+            deferred = $q.defer()
+            deferred.resolve(@config.template)
 
-              promise = deferred.promise
+            promise = deferred.promise
 
-            return promise
+          return promise
 
-          open: (name, params) ->
-            if modalStack.has(this)
-              return @close()
-                .then => @open(name, params)
+        open: (name, params) ->
+          if modalStack.has(this)
+            return @close()
+              .then => @open(name, params)
 
-            _.defaults(@config, provider.find(name))
+          _.defaults(@config, provider.find(name))
 
-            loadingIndicatorManager.start('app')
+          loadingIndicatorManager.start('app')
 
-            @getTemplate()
-              .then (template) =>
-                lastElement = modalStack.last()?.element
-                parentElement = angular.element(@config.parent)
+          @getTemplate()
+            .then (template) =>
+              lastElement = modalStack.last()?.element
+              parentElement = angular.element(@config.parent)
 
-                @scope = @config.scope.$new() || $rootScope.$new()
-                @element = angular.element(template)
+              @scope = @config.scope.$new() || $rootScope.$new()
+              @element = angular.element(template)
 
-                # Loading indicator
-                loadingIndicatorManager.stop('app')
+              # Loading indicator
+              loadingIndicatorManager.stop('app')
 
-                # Controller
-                if @config.controller
-                  locals = { $scope: @scope, $stateParams: params }
-                  controller = $controller(@config.controller, locals)
-                  @scope[@config.controllerAs] = controller if @config.controllerAs
+              # Controller
+              if @config.controller
+                locals = { $scope: @scope, $stateParams: params }
+                controller = $controller(@config.controller, locals)
+                @scope[@config.controllerAs] = controller if @config.controllerAs
 
-                # Compile
-                $compile(@element)(@scope)
+              # Compile
+              $compile(@element)(@scope)
 
-                # Add to stack
-                modalStack.push(this)
+              # Add to stack
+              modalStack.push(this)
 
-                # Attach background
-                modalBackground.enter(parentElement)
+              # Attach background
+              modalBackground.enter(parentElement)
 
-                # Attach
-                $animate.enter(@element, parentElement, lastElement)
+              # Attach
+              $animate.enter(@element, parentElement, lastElement)
 
-          close: ->
-            return $q.when() unless modalStack.has(this)
+        close: ->
+          return $q.when() unless modalStack.has(this)
 
-            # Detach background
-            modalBackground.leave()
+          # Detach background
+          modalBackground.leave()
 
-            $animate.leave(@element)
-              .then =>
-                # Clean up
-                @scope.$destroy()
+          $animate.leave(@element)
+            .then =>
+              # Clean up
+              @scope.$destroy()
 
-                # Remove from stack
-                modalStack.remove(this)
+              # Remove from stack
+              modalStack.remove(this)
 
-                delete @element
-                delete @scope
+              delete @element
+              delete @scope
 
-          show: ->
-            $animate.removeClass(@element, 'ng-hide') if @element
+        show: ->
+          $animate.removeClass(@element, 'ng-hide') if @element
 
-          hide: ->
-            $animate.addClass(@element, 'ng-hide') if @element
+        hide: ->
+          $animate.addClass(@element, 'ng-hide') if @element
 
-    new ModalProvider
+      return Modal
 
   .factory 'modalBackground', ($animate) ->
     class ModalBackground
