@@ -40,7 +40,7 @@ angular.module('bookmark')
 
         super
 
-      read: (params) ->
+      read: ->
         super
           .then (bookmarks) =>
             for bookmark in bookmarks

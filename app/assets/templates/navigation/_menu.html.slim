@@ -14,6 +14,14 @@ header class="app-header" ng-controller="NavigationController"
         i class="fa fa-user"
         | Login
 
+  nav class="app-navigation" ng-if="currentUser.status.admin"
+    div class="app-navigation__item"
+      a class="app-navigation__item-link" ui-sref="feeds.index" ui-sref-active="is-active"
+        | Feeds
+    div class="app-navigation__item"
+      a class="app-navigation__item-link" ui-sref="categories.index" ui-sref-active="is-active"
+        | Categories
+
   nav class="app-navigation"
     div class="app-navigation__item"
       a class="app-navigation__item-link" ui-sref="bookmarks.index" ui-sref-active-eq="is-active" ng-show="currentUser.status.loggedIn"

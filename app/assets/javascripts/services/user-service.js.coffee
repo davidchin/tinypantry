@@ -20,6 +20,13 @@ angular.module('user')
 
         super
 
+      read: ->
+        super
+          .then (user) =>
+            @status.admin = _.any(user.roles, { name: 'Admin' })
+
+            return user
+
     return User
 
   .factory 'CurrentUser', ($q, userService, User, Session) ->
@@ -48,6 +55,7 @@ angular.module('user')
         @session.destroy()
           .finally =>
             @status.loggedIn = false
+            @status.admin = false
 
       hasRole: (roleName) ->
         _.any @roles, (role) ->

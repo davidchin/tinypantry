@@ -20,14 +20,16 @@ angular.module('recipe')
 
         super
 
-      set: ->
-        @trackingParams = {
-          category: 'Recipe'
-          action: 'Outbound'
-          label: @id
-        }
-
+      read: ->
         super
+          .then (recipe) =>
+            @trackingParams = {
+              category: 'Recipe'
+              action: 'Outbound'
+              label: recipe.id
+            }
+
+            return recipe
 
       bookmarked: (user) ->
         user.bookmarks.bookmarked(this)
