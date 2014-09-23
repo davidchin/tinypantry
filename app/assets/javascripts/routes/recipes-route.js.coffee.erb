@@ -2,21 +2,22 @@ angular.module('recipe')
   .config ($stateProvider, ModalProvider) ->
     $stateProvider
       .state 'recipes',
+        url: '/recipes'
         abstract: true
         template: '<ui-view />'
 
       .state 'recipes.index',
-        url: '/recipes?category&page&orderBy&query'
+        url: '?category&page&orderBy&query'
         templateUrl: '<%= asset_path("recipes/index.html") %>'
         controller: 'RecipesIndexController'
 
       .state 'recipes.show',
-        url: '/recipes/:id'
+        url: '/:id'
         templateUrl: '<%= asset_path("recipes/show.html") %>'
         controller:  'RecipesShowController'
 
       .state 'recipes.edit',
-        url: '/recipes/:id/edit'
+        url: '/:id/edit'
         templateUrl: '<%= asset_path("recipes/edit.html") %>'
         controller:  'RecipesEditController'
         resolve: authorize: (authorize) -> authorize('admin')

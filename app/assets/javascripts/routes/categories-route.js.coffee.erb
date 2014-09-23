@@ -2,29 +2,30 @@ angular.module('category')
   .config ($stateProvider) ->
     $stateProvider
       .state 'categories',
+        url: '/categories'
         abstract: true
         template: '<ui-view />'
 
       .state 'categories.index',
-        url: '/categories'
+        url: ''
         templateUrl: '<%= asset_path("categories/index.html") %>'
         controller: 'CategoriesIndexController'
         resolve: authorize: (authorize) -> authorize('admin')
 
       .state 'categories.new',
-        url: '/categories/new'
+        url: '/new'
         templateUrl: '<%= asset_path("categories/new.html") %>'
         controller: 'CategoriesNewController'
         resolve: authorize: (authorize) -> authorize('admin')
 
       .state 'categories.show',
-        url: '/categories/:id'
+        url: '/:id'
         templateUrl: '<%= asset_path("categories/show.html") %>'
         controller: 'CategoriesShowController'
         resolve: authorize: (authorize) -> authorize('admin')
 
       .state 'categories.edit',
-        url: '/categories/:id/edit'
+        url: '/:id/edit'
         templateUrl: '<%= asset_path("categories/edit.html") %>'
         controller: 'CategoriesEditController'
         resolve: authorize: (authorize) -> authorize('admin')
