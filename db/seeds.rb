@@ -1,5 +1,5 @@
 # Default Roles
-admin_role = Role.create(name: 'SuperAdmin')
+admin_role = Role.create(name: 'Admin')
 
 # Default users
 User.create(email: 'tinypantry.com@gmail.com', password: 'password', roles: [admin_role])
