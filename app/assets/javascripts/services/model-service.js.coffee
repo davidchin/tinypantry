@@ -30,7 +30,11 @@ angular.module('model')
         delete @[attr] for attr in @dataAttrs
 
       data: ->
-        _.pick(@, @dataAttrs)
+        if @dataAttrs?.length
+          _.pick(@, @dataAttrs)
+        else
+          self = _.omit(@, 'config', 'status', 'requests', 'headers', 'dataAttrs')
+          angular.fromJson(angular.toJson(self))
 
       store: (key, value) ->
         if value?

@@ -1,14 +1,15 @@
 module Api
   module V1
-    class FeedsController < ApplicationController
+    class FeedsController < Api::V1::ApiController
       before_action :authenticate_user!, except: [:index, :show]
+      before_action :find_feeds, only: [:index]
       before_action :find_feed, only: [:show, :update, :destroy]
+
+      set_pagination_header :feeds, only: [:index]
 
       authorize_resource
 
       def index
-        @feeds = Feed.all
-
         respond_with(@feeds) if stale? @feeds
       end
 
@@ -33,6 +34,10 @@ module Api
       end
 
       private
+
+      def find_feeds
+        @feeds = Feed.page(params[:page])
+      end
 
       def find_feed
         @feed = Feed.find(params[:id])
