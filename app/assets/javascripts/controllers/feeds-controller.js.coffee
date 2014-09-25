@@ -1,5 +1,5 @@
 angular.module('feed')
-  .controller 'FeedsIndexController', ($scope, BaseController, Feeds) ->
+  .controller 'FeedsIndexController', ($scope, $state, BaseController, Feeds) ->
     class FeedsIndexController extends BaseController
       constructor: ->
         @feeds = new Feeds
@@ -8,8 +8,16 @@ angular.module('feed')
 
         super($scope)
 
-      read: ->
-        @feeds.read()
+      read: (params, append) ->
+        params = _.defaults({}, params, $state.params)
+        method = if append then 'append' else 'read'
+
+        @feeds[method](params)
+
+      next: (params) ->
+        params = _.defaults({ page: @feeds.pagination.nextPage }, params)
+
+        @read(params, true) if params.page
 
     new FeedsIndexController
 

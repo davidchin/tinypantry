@@ -7,6 +7,8 @@ section
     div ng-repeat="feed in feeds.items"
       a ui-sref="feeds.edit({ id: feed.id })" {{ feed.name }}
 
+  button class="button-block" ng-show="feeds.pagination.nextPage" ng-click="next()" Load More
+
   div ng-show="feeds.status.set && feeds.status.empty"
     | Nothing to see here, move along&hellip;
 
