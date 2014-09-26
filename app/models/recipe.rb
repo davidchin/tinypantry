@@ -117,12 +117,22 @@ class Recipe < ActiveRecord::Base
   end
 
   def remote_image_file_size(url)
-    response = Net::HTTP.get_response(URI(url))
-    response['content-length'].to_i || 0
+    begin
+      response = Net::HTTP.get_response(URI(url))
+      response['content-length'].to_i || 0
+    rescue => error
+      0
+    end
   end
 
   def remote_image_srcs
-    @remote_image_srcs ||= remote_page.xpath('.//img/@src').map(&:value).unshift(remote_image_url)
+    return @remote_image_srcs if @remote_image_srcs
+
+    @remote_image_srcs = remote_page.xpath('.//img/@src').map do |src|
+      URI.join(url, src.value).to_s
+    end
+
+    @remote_image_srcs.unshift(remote_image_url)
   end
 
   def ensure_remote_image_size
@@ -132,6 +142,6 @@ class Recipe < ActiveRecord::Base
       remote_image_area(src) + remote_image_file_size(src)
     end.reverse
 
-    self.remote_image_url = srcs.first
+    self.remote_image_url = srcs.first unless srcs.empty?
   end
 end
