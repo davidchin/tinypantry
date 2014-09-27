@@ -52,6 +52,7 @@ class Feed < ActiveRecord::Base
     link = node.at_xpath('.//link')
     description = node.at_xpath('.//description')
     pub_date = node.at_xpath('.//pubDate')
+    img_src = extract_img_src(description)
 
     description.search('.//img').remove if description.present?
 
@@ -62,7 +63,7 @@ class Feed < ActiveRecord::Base
       published_at: pub_date.try(:content),
       imported_at: Time.now.in_time_zone,
       content_xml: node.to_xml,
-      remote_image_url: extract_img_src(description)
+      remote_image_url: img_src
     }
   end
 end
