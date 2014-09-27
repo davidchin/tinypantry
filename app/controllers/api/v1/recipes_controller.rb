@@ -53,18 +53,16 @@ module Api
       private
 
       def find_recipe
-        @recipe = Recipe.friendly.find(params[:id])
+        @recipe = Recipe
+        @recipe = @recipe.approved unless can?(:manage, :recipe)
+        @recipe = @recipe.friendly.find(params[:id])
       end
 
       def find_recipes
-        if params[:category]
-          @recipes = Recipe.by_category(params[:category])
-                           .page(params[:page])
-        else
-          @recipes = Recipe.page(params[:page])
-        end
-
-        @recipes.order_by(params[:order_by])
+        @recipes = Recipe
+        @recipes = @recipes.approved unless can?(:manage, :recipe)
+        @recipes = @recipes.by_category(params[:category]) if params[:category]
+        @recipes = @recipes.page(params[:page]).order_by(params[:order_by])
       end
 
       def recipe_params
