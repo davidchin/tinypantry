@@ -40,7 +40,7 @@ angular.module('recipe')
 
     new RecipesIndexController
 
-  .controller 'RecipesShowController', ($scope, $state, $q, currentUser, flash, ga, catchNotFoundError, BaseController, Recipe) ->
+  .controller 'RecipesShowController', ($scope, $state, $stateParams, $q, currentUser, flash, ga, catchNotFoundError, BaseController, Recipe) ->
     class RecipesShowController extends BaseController
       constructor: ->
         @currentUser = currentUser
@@ -51,7 +51,7 @@ angular.module('recipe')
         super($scope)
 
       read: ->
-        @recipe.read({ id: $state.params.id })
+        @recipe.read($stateParams)
           .then =>
             # NOTE: This 'then' block is for testing - to be removed later
             { category, action, label } = @recipe.trackingParams
