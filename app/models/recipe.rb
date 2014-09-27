@@ -141,7 +141,7 @@ class Recipe < ActiveRecord::Base
     end
 
     @remote_image_srcs = srcs.map do |src|
-      URI.join(url, src.value).to_s
+      URI.join(url, URI.encode(src.value)).to_s
     end
   end
 

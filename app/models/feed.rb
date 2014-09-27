@@ -44,7 +44,9 @@ class Feed < ActiveRecord::Base
 
     html = CGI.unescapeHTML(node.to_html)
     html = Nokogiri::HTML.fragment(html)
-    html.at_xpath('.//img/@src').try(:value)
+    src = html.at_xpath('.//img/@src').try(:value)
+
+    URI.encode(src) if src.present?
   end
 
   def extract_recipe_data(node)
