@@ -11,6 +11,7 @@ angular.module('config')
     $httpProvider.defaults.headers.common['Accept'] = "application/vnd.tinypantry.v1, #{ acceptHeader }"
 
     $httpProvider.interceptors.unshift('attributeInterceptor')
+    $httpProvider.interceptors.push('httpCacheInterceptor')
     $httpProvider.interceptors.push('sessionHttpInterceptor')
 
   .config ($animateProvider) ->

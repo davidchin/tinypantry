@@ -58,3 +58,16 @@ angular.module('resource')
     request: transformRequest
     response: transformResponse
     responseError: transformResponseError
+
+  .factory 'httpCacheInterceptor', ($cacheFactory) ->
+    transformRequest = (config) ->
+      return config if config.method == 'GET'
+
+      httpCache = $cacheFactory.get('$http')
+
+      # Sweep all local cache
+      httpCache.removeAll()
+
+      return config
+
+    request: transformRequest

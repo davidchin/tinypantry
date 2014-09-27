@@ -6,6 +6,7 @@ angular.module('bookmark')
       summary:
         method: 'GET'
         isArray: true
+        cache: true
         url: '/api/users/:userId/bookmarks/summary'
 
     return $resource(path, params, actions)
