@@ -1,5 +1,5 @@
 angular.module('bookmark')
-  .controller 'BookmarksIndexController', ($scope, $state, currentUser, BaseController, Bookmarks, Modal) ->
+  .controller 'BookmarksIndexController', ($scope, $state, $stateParams, currentUser, BaseController, Bookmarks, Modal) ->
     class BookmarksIndexController extends BaseController
       constructor: ->
         @user = currentUser
@@ -22,7 +22,7 @@ angular.module('bookmark')
         @recipeModal.close()
 
       read: (params, append) ->
-        params = _.defaults({}, params, $state.params)
+        params = _.defaults({}, params, $stateParams)
         method = if append then 'append' else 'read'
 
         @user.ready()

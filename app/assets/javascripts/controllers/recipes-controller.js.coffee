@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .controller 'RecipesIndexController', ($scope, $state, $q, currentUser, BaseController, Recipes, Modal) ->
+  .controller 'RecipesIndexController', ($scope, $state, $stateParams, $q, currentUser, BaseController, Recipes, Modal) ->
     class RecipesIndexController extends BaseController
       constructor: ->
         @recipes = new Recipes
@@ -19,7 +19,7 @@ angular.module('recipe')
         @recipeModal.close()
 
       read: (params, append) ->
-        params = _.defaults({}, params, $state.params)
+        params = _.defaults({}, params, $stateParams)
         method = if append then 'append' else 'read'
 
         @recipes[method](params)
@@ -83,7 +83,7 @@ angular.module('recipe')
 
     new RecipesShowController
 
-  .controller 'RecipesEditController', ($scope, $state, flash, catchNotFoundError, BaseController, Recipe) ->
+  .controller 'RecipesEditController', ($scope, $state, $stateParams, flash, catchNotFoundError, BaseController, Recipe) ->
     class RecipesEditController extends BaseController
       constructor: ->
         @recipe = new Recipe
@@ -93,7 +93,7 @@ angular.module('recipe')
         super($scope)
 
       read: ->
-        @recipe.read({ id: $state.params.id })
+        @recipe.read({ id: $stateParams.id })
           .catch(catchNotFoundError)
 
       submit: ->

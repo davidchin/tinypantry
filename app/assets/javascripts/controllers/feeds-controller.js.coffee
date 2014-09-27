@@ -1,5 +1,5 @@
 angular.module('feed')
-  .controller 'FeedsIndexController', ($scope, $state, BaseController, Feeds) ->
+  .controller 'FeedsIndexController', ($scope, $stateParams, BaseController, Feeds) ->
     class FeedsIndexController extends BaseController
       constructor: ->
         @feeds = new Feeds
@@ -9,7 +9,7 @@ angular.module('feed')
         super($scope)
 
       read: (params, append) ->
-        params = _.defaults({}, params, $state.params)
+        params = _.defaults({}, params, $stateParams)
         method = if append then 'append' else 'read'
 
         @feeds[method](params)
@@ -38,7 +38,7 @@ angular.module('feed')
 
     new FeedsNewController
 
-  .controller 'FeedsShowController', ($scope, $state, flash, catchNotFoundError, BaseController, Feed) ->
+  .controller 'FeedsShowController', ($scope, $stateParams, flash, catchNotFoundError, BaseController, Feed) ->
     class FeedsShowController extends BaseController
       constructor: ->
         @feed = new Feed
@@ -48,12 +48,12 @@ angular.module('feed')
         super($scope)
 
       read: ->
-        @feed.read({ id: $state.params.id })
+        @feed.read({ id: $stateParams.id })
           .catch(catchNotFoundError)
 
     new FeedsShowController
 
-  .controller 'FeedsEditController', ($scope, $state, flash, catchNotFoundError, BaseController, Feed) ->
+  .controller 'FeedsEditController', ($scope, $state, $stateParams, flash, catchNotFoundError, BaseController, Feed) ->
     class FeedsEditController extends BaseController
       constructor: ->
         @feed = new Feed
@@ -63,7 +63,7 @@ angular.module('feed')
         super($scope)
 
       read: ->
-        @feed.read({ id: $state.params.id })
+        @feed.read({ id: $stateParams.id })
           .catch(catchNotFoundError)
 
       submit: ->
