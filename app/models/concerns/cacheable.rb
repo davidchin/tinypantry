@@ -8,7 +8,7 @@ module Cacheable
     end
 
     def self.last_updated_at
-      maximum(:updated_at)
+      select(:updated_at).map(&:updated_at).max
     end
   end
 end

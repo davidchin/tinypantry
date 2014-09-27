@@ -2,6 +2,7 @@ module Api
   module V1
     class CategoriesController < Api::V1::ApiController
       before_action :authenticate_user!, except: [:index, :show]
+      before_action :find_categories, only: [:index]
       before_action :find_category, only: [:show, :update, :destroy]
 
       wrap_parameters :category, include: [*Category.attribute_names, :keywords_attributes]
@@ -9,8 +10,6 @@ module Api
       authorize_resource
 
       def index
-        @categories = Category.all
-
         respond_with(@categories) if stale? @categories
       end
 
@@ -35,6 +34,10 @@ module Api
       end
 
       private
+
+      def find_categories
+        @categories = Category.page(params[:page])
+      end
 
       def find_category
         @category = Category.find(params[:id])
