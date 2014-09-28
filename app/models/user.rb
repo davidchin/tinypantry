@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     roles.find_by(name: role_symbol.to_s.camelize).present?
   end
 
+  def role_names
+    roles.pluck(:name)
+  end
+
   def generate_auth_token
     auth_token = auth_tokens.create
     @auth_token_secret = auth_token.secret

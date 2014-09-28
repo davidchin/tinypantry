@@ -3,12 +3,18 @@ module Cacheable
 
   included do
     def self.cache_key
-      timestamp = last_updated_at.try(:utc).try(:to_s, :nsec)
-      "#{ model_name.cache_key }/all-#{ count(:all) }-#{ timestamp }"
+      scoped = where(nil)
+
+      keys = ['all']
+      keys << scoped.current_page if scoped.respond_to?(:current_page)
+      keys << count(:all)
+      keys << last_updated_at.utc.try(:to_s, :nsec) if last_updated_at.respond_to?(:utc)
+
+      "#{ model_name.cache_key }/#{ keys.join('-') }"
     end
 
     def self.last_updated_at
-      select(:updated_at).map(&:updated_at).max
+      @last_updated_at ||= pluck(:updated_at).max
     end
   end
 end
