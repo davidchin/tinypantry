@@ -3,6 +3,7 @@ angular.module 'application', [
   'animate'
   'config'
   'error'
+  'form'
   'loading'
   'sanitize'
 

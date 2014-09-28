@@ -3,6 +3,12 @@ a class="recipe-tile__link" ng-click="openRecipe(recipe)"
     img class="recipe-tile__image" ng-src="{{ recipe.imageUrls.original }}"
   div class="recipe-tile__body"
     h2 class="recipe-tile__title" {{ recipe.name }}
+
+    p ng-if="currentUser.status.admin"
+      a ui-sref="recipes.edit({ id: recipe.id })" Edit
+      label
+        input type="checkbox" name="recipeApproved{{ recipe.id }}" ng-model="recipe.approved" Approved
+
     p class="recipe-tile__meta"
       span class="recipe-tile__meta-item"
         i class="fa fa-bookmark"

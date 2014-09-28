@@ -206,13 +206,13 @@ angular.module('model')
         return model
 
       find: (params) ->
-        _.find(@items, { data: params })
+        _.find(@items, params)
 
       where: (params) ->
-        _.where(@items, { data: params })
+        _.where(@items, params)
 
       any: (params) ->
-        _.any(@items, { data: params })
+        _.any(@items, params)
 
       pluck: (attr) ->
         _.pluck(@items, attr)

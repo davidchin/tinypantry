@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .controller 'RecipesIndexController', ($scope, $state, $stateParams, $q, currentUser, BaseController, Recipes, Modal) ->
+  .controller 'RecipesIndexController', ($scope, $state, $stateParams, $q, currentUser, flash, BaseController, Recipes, Modal) ->
     class RecipesIndexController extends BaseController
       constructor: ->
         @recipes = new Recipes
@@ -38,6 +38,24 @@ angular.module('recipe')
       bookmarked: ->
         currentUser.ready()
           .then => $q.all(@recipes.invoke('bookmarked', currentUser))
+
+      approve: ->
+        return $q.reject() unless $scope.recipesForm
+
+        parseId = (control) ->
+          parseInt(/\d+$/.exec(control.$name), 10)
+
+        promises = (@recipes.find({ id: parseId(control) })?.update() \
+          for attr, control of $scope.recipesForm \
+          when control.$dirty)
+
+        promises.push($q.reject(error: 'Please select a recipe.')) unless _.any(promises)
+
+        $q.all(promises)
+          .then ->
+            flash.set('Recipe was successfully updated.', { requests: 0, type: 'success' })
+          .catch (response) ->
+            flash.set(response.error, { requests: 0, type: 'alert' })
 
     new RecipesIndexController
 
