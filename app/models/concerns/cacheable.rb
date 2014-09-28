@@ -13,6 +13,14 @@ module Cacheable
       "#{ model_name.cache_key }/#{ keys.join('-') }"
     end
 
+    def self.digest_cache_key
+      records = where(nil).load
+      Digest::MD5.hexdigest(Marshal.dump(records))
+
+    rescue
+      Digest::MD5.hexdigest(Marshal.dump(records.to_json))
+    end
+
     def self.last_updated_at
       @last_updated_at ||= pluck(:updated_at).max
     end

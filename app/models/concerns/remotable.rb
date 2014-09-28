@@ -26,8 +26,8 @@ module Remotable
       response = Net::HTTP.get_response(URI(url))
       response['content-length'].to_i || 0
 
-      rescue StandardError
-        0
+    rescue StandardError
+      0
     end
 
     def remote_image_srcs

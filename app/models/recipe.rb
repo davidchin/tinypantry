@@ -70,8 +70,8 @@ class Recipe < ActiveRecord::Base
 
     super
 
-    rescue URI::Error
-      false
+  rescue URI::Error
+    false
   end
 
   def categorise
