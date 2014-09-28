@@ -37,6 +37,10 @@ angular.module('recipe')
             @status.bookmarked = !!bookmark
             @bookmark = bookmark
 
+      approve: (approved = true) ->
+        @approved = approved
+        @update()
+
     return Recipe
 
   .factory 'Recipes', (recipeResource, Collection, Recipe, RecipeOrderTypes) ->

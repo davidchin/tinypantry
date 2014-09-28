@@ -4,6 +4,7 @@ angular.module('recipe')
       constructor: ->
         @recipes = new Recipes
         @recipeModal = new Modal({ scope: $scope })
+        @currentUser = currentUser
 
         @read()
 
@@ -99,7 +100,7 @@ angular.module('recipe')
       submit: ->
         @recipe.update()
           .then (recipe) ->
-            flash.set('Feed was successfully updated.')
+            flash.set('Recipe was successfully updated.')
             $state.go('recipes.index')
 
             return recipe
@@ -107,7 +108,7 @@ angular.module('recipe')
       destroy: ->
         @recipe.destroy
           .then (recipe) ->
-            flash.set('Feed was successfully destroyed.')
+            flash.set('Recipe was successfully destroyed.')
             $state.go('recipes.index')
 
             return recipe

@@ -11,6 +11,24 @@ angular.module('model')
         @configure(config)
 
       set: (data) ->
+        @attr(data)
+        @status.set = true
+
+        return data
+
+      unset: ->
+        @status.set = false
+
+        delete @[attr] for attr in @dataAttrs
+
+      attr: (attr, value) ->
+        data = {}
+
+        if _.isString(attr)
+          data[attr] = value
+        else
+          data = attr
+        
         for attr, value of data
           continue if _.isFunction(@[attr]) || _.isFunction(value) || /^\$/.test(attr)
 
@@ -20,14 +38,7 @@ angular.module('model')
           # Set attribute
           @[attr] = value
 
-        @status.set = true
-
-        return data
-
-      unset: ->
-        @status.set = false
-
-        delete @[attr] for attr in @dataAttrs
+        return @
 
       data: ->
         if @dataAttrs?.length
@@ -64,17 +75,15 @@ angular.module('model')
         @request('get', params)
           .then (response) => @set(response)
 
-      update: (params, data) ->
-        @request('update', params, data)
-          .then (response) => @set(response)
-
-      patch: (params, data) ->
-        @request('patch', params, data)
-          .then (response) => @set(response)
-
       create: (params, data) ->
         @request('create', params, data)
           .then (response) => @set(response)
+
+      update: (params, data) ->
+        @request('update', params, data)
+
+      patch: (params, data) ->
+        @request('patch', params, data)
 
       destroy: (params) ->
         @request('destroy', params)
