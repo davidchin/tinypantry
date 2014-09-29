@@ -10,6 +10,10 @@ angular.module('recipe')
       bookmark:
         method: 'POST'
         url: '/api/recipes/:id/bookmark'
+      related:
+        method: 'GET'
+        isArray: true
+        url: '/api/recipes/:id/related'
 
     return $resource(path, params, actions)
 
@@ -40,6 +44,11 @@ angular.module('recipe')
       approve: (approved = true) ->
         @approved = approved
         @update()
+
+      related: ->
+        @request('related', { @id })
+          .then (relatedRecipes) =>
+            @relatedRecipes = relatedRecipes
 
     return Recipe
 
