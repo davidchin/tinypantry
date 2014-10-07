@@ -7,6 +7,7 @@
     top: 50%;
     left: $base-line-height / 2;
     margin-top: $base-line-height / -2;
+    color: $medium-gray;
     content: $fa-var-search;
   }
 }
@@ -14,5 +15,5 @@
 .search-input,
 input.search-input {
   margin: 0;
-  padding-left: em(40px);
+  padding-left: em(35px);
 }

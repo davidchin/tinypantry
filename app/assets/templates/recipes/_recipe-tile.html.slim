@@ -1,6 +1,7 @@
 a class="recipe-tile__link" ng-click="openRecipe(recipe)"
-  div class="recipe-tile__aside"
-    img class="recipe-tile__image" ng-src="{{ recipe.imageUrls.original }}"
+  div class="recipe-tile__image"
+    img ng-src="{{ recipe.imageUrls.small }}"
+
   div class="recipe-tile__body"
     h2 class="recipe-tile__title" {{ recipe.name }}
 
@@ -17,4 +18,3 @@ a class="recipe-tile__link" ng-click="openRecipe(recipe)"
       span class="recipe-tile__meta-item"
         i class="fa fa-eye"
         | {{ recipe.visitsCount || 0 }}
-    / p ng-bind-html="recipe.description"

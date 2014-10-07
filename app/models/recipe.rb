@@ -5,7 +5,10 @@ class Recipe < ActiveRecord::Base
 
   extend FriendlyId
 
-  has_attached_file :image, styles: { thumb: '100x100>' }
+  has_attached_file :image, styles: { thumb: '160x160#',
+                                      small: '253x253#',
+                                      medium: '532x532#',
+                                      large: '810x810#' }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   after_create :categorise
@@ -85,8 +88,8 @@ class Recipe < ActiveRecord::Base
   end
 
   def image_urls
-    image.styles.each_with_object(original: image.url) do |(key, style), result|
-      result[key] = style.attachment.url
+    image.styles.keys.each_with_object({}) do |key, result|
+      result[key] = image.url(key)
     end
   end
 

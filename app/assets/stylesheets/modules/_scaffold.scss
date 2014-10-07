@@ -4,13 +4,12 @@
 
 .app-container {
   margin-bottom: -$footer-height;
-  padding-bottom: $footer-height;
+  padding-bottom: $footer-height + ($base-padding * 2);
   min-height: 100%;
 }
 
 .app-body {
   @extend %outer-container;
-  @include clearfix;
   padding: $base-padding 0;
 }
 

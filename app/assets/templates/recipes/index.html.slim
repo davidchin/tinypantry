@@ -1,20 +1,18 @@
 nav class="recipe-nav-bar" ng-include="'#{ asset_path('recipes/_nav-bar.html') }'"
 
-div
-  flash name="app"
-
+section class="app-body" ng-form="recipesForm"
   loading-indicator model="recipes.status.set" class="loading-indicator loading-indicator--large"
 
-  section
-    form name="recipesForm"
-      div ng-if="currentUser.status.admin"
-        button type="button" ng-click="approve()" Approve
+  div ng-if="currentUser.status.admin"
+    button type="button" ng-click="approve()" Approve
 
-      div ng-hide="recipes.status.empty"
-        div class="recipe-tiles recipe-tiles--with-nav-bar"
-          div class="recipe-tile" ng-repeat="recipe in recipes.items" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"
+  div ng-hide="recipes.status.empty"
+    div class="recipe-tiles recipe-tiles--with-nav-bar"
+      article class="recipe-tile" ng-repeat="recipe in recipes.items" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"
 
-        button class="button-block" ng-show="recipes.pagination.nextPage" ng-click="next()" Load More
+    button class="load-button" ng-show="recipes.pagination.nextPage" ng-click="next()"
+      loading-indicator model="!recipes.status.indexPending" type="inline" class="loading-indicator"
+      span More
 
-      div ng-show="recipes.status.set && recipes.status.empty"
-        | Nothing to see here, move along&hellip;
+  div ng-show="recipes.status.set && recipes.status.empty"
+    | Nothing to see here, please move along&hellip; for now.

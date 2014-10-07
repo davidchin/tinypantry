@@ -7,12 +7,13 @@ html
   body
     div class="app" ng-app="application"
 
-      section class="app-container"
+      div class="app-container"
 
         ng-include src="'#{ asset_path('shared/_header.html') }'"
 
-        div class="app-body"
-          / ui-view
+        flash name="app"
+
+        ui-view
 
         loading-indicator name="app" class="loading-indicator loading-indicator--overlay"
 

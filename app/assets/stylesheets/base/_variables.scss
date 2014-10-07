@@ -2,11 +2,12 @@
 $sans-serif: Lato, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $serif: Bitter, Georgia, Cambria, Times, serif;
 $base-font-family: $sans-serif;
-$header-font-family: $serif;
+$header-font-family: $sans-serif;
 
 // Sizes
 $unitless-line-height: 1.5;
-$unitless-header-line-height: 1.25;
+$unitless-small-line-height: 1.3;
+$unitless-header-line-height: $unitless-small-line-height;
 $base-font-size: 16px;
 $base-line-height: $base-font-size * $unitless-line-height;
 $base-border-radius: em(3);
@@ -18,6 +19,7 @@ $white: #fff;
 $black: #000;
 $light-aqua-blue: #c3f5fe;
 $aqua-blue: #73cde1;
+$dark-aqua-blue: #148296;
 $dark-gray: #333;
 $medium-gray: #999;
 $gray: #bbb;
@@ -26,7 +28,8 @@ $light-red: #fbe3e4;
 $light-yellow: #fff6bf;
 $light-green: #e6efc2;
 $yellow: #ffd600;
-$whitesmoke: #eee;
+$whitesmoke: #efefef;
+$light-whitesmoke: #f7f7f7;
 
 // Brand Colors
 $base-brand-color: $aqua-blue;
@@ -54,8 +57,7 @@ $hover-light-button-color: darken($light-button-color, 10);
 $disabled-button-color: $light-gray;
 
 // Border Colors
-$base-border-color: $gray;
-$recipe-tile-border-color: transparentize($light-gray, .4);
+$base-border-color: $light-gray;
 
 // Flash Colors
 $alert-color: $light-yellow;
@@ -90,6 +92,6 @@ $modal-header-border-color: $whitesmoke;
 $modal-padding: 30px;
 $modal-overlay-background-color: transparentize($black, .2);
 
-// Layouts
+// Dimensions
 $header-height: 50px;
 $footer-height: 55px;

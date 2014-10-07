@@ -1,59 +1,65 @@
 .recipe-nav-bar {
-  @include box-sizing(border-box);
-  z-index: 100;
   border-bottom: 1px solid $light-gray;
-  background: transparentize($base-background-color, .2);
-  padding: em(21px) $base-padding;
-  max-width: $max-width;
+  background: $light-whitesmoke;
 
-  .recipe-search,
-  .recipe-filters {
-    @include span-columns(6);
+  .recipe-nav-bar__container {
+    @extend %outer-container;
   }
 
   .recipe-filters {
-    margin-top: 9px;
-    font-size: $small-font-size;
+    @include span-columns(9);
+    margin-top: 12px;
+    margin-bottom: 12px;
+    color: $medium-gray;
+  }
+
+  .recipe-search {
+    @include span-columns(3);
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 }
 
-.recipe-filter-list {
+.recipe-filters__list {
   &,
   > li {
     display: inline-block;
   }
 
   > li {
-    margin-left: $base-font-size / 3;
+    margin-left: em($base-font-size);
   }
 }
 
-.recipe-filter {
-  @extend %pill;
-  @extend %pill--gray;
-  text-transform: uppercase;
-  font-size: $mini-font-size;
+.recipe-filters__link {
+  color: $base-font-color;
 
   &.is-active {
-    @extend %pill--white;
+    color: $dark-aqua-blue;
 
     &:after {
       @extend %icon;
       margin-left: $icon-margin;
-      content: $fa-var-angle-down;
+      content: $fa-var-caret-down;
     }
   }
 }
 
 .recipe-tiles {
-  @include clearfix;
+  @extend %outer-container;
+
+  .recipe-tile {
+    @include span-columns(3);
+    @include omega(4n);
+    margin-top: $base-padding * 2;
+
+    &:nth-of-type(-n+4) {
+      margin-top: 0;
+    }
+  }
 }
 
 .recipe-tile {
-  position: relative;
-  border: 1px solid $recipe-tile-border-color;
-  background: $white;
-
   &,
   a {
     color: $base-font-color;
@@ -64,41 +70,24 @@
   }
 
   .recipe-tile__meta {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 50%;
-    padding-right: $base-padding;
-    padding-left: $base-padding;
     color: $medium-gray;
   }
 }
 
 .recipe-tile__image {
   display: block;
-}
-
-.recipe-tile__aside,
-.recipe-tile__body {
-  display: block;
-  float: left;
-  width: 50%;
-}
-
-.recipe-tile__body {
-  padding: $base-padding;
-  vertical-align: top;
+  overflow: hidden;
 }
 
 .recipe-tile__title {
-  font-size: em(20, $base-font-size);
+  margin: em(6) 0;
+  font-size: em(16);
 }
 
 .recipe-tile__meta {
-  margin-top: $base-line-height / 2;
-  border-top: 1px solid $recipe-tile-border-color;
-  padding-top: $base-line-height / 2;
-  font-size: em(13, $base-font-size);
+  margin: em(6) 0;
+  line-height: $unitless-small-line-height;
+  font-size: em(14);
 
   .fa {
     margin-right: $icon-margin;
