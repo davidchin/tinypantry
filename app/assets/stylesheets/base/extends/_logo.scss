@@ -1,0 +1,13 @@
+@mixin logo($width, $height, $type:'white') {
+  @include hide-text;
+  display: inline-block;
+  background: image-url('shared/logo.svg') no-repeat 0 0;
+  background-size: cover;
+  width: $width;
+  height: $height;
+  vertical-align: middle;
+
+  @if $type == 'gray' {
+    background-position: 0 $height * -1;
+  }
+}

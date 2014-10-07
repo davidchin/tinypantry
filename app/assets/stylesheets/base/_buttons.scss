@@ -1,14 +1,4 @@
 button,
 input[type="submit"] {
-  @extend %button;
-  @include appearance(none);
-  border: 0;
-  cursor: pointer;
-  vertical-align: middle;
-  white-space: nowrap;
-  user-select: none;
-
-  &:disabled {
-    cursor: default;
-  }
+  @extend %button-link;
 }

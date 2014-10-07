@@ -1,29 +1,19 @@
-html,
-body {
+.app {
   height: 100%;
-}
-
-body {
-  margin: 0;
 }
 
 .app-container {
-  position: relative;
-  margin-left: 0;
-  height: 100%;
-}
-
-.app-aside {
-  position: fixed;
-  width: golden-ratio(1em, 6);
-  height: 100%;
-  overflow: auto;
+  margin-bottom: -$footer-height;
+  padding-bottom: $footer-height;
+  min-height: 100%;
 }
 
 .app-body {
-  @include outer-container;
-  position: relative;
-  margin-left: golden-ratio(1em, 6);
-  padding: $gutter;
-  height: 100%;
+  @extend %outer-container;
+  @include clearfix;
+  padding: $base-padding 0;
+}
+
+.app-footer {
+  margin-top: -$footer-height;
 }

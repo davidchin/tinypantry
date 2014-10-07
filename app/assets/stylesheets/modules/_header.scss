@@ -1,21 +1,53 @@
 .app-header {
+  @extend %clearfix;
   background: $header-background-color;
-  height: 100%;
+  height: $header-height;
+  vertical-align: middle;
+}
+
+.app-header__container {
+  @extend %outer-container;
 }
 
 .app-header__logo {
-  display: block;
-  background: $base-brand-color;
-  padding: 0 15px;
-  text-align: center;
-  text-transform: uppercase;
-  line-height: em(70);
-  font-family: $serif;
-  font-size: 18px;
-  font-weight: bold;
+  @include logo(144px, 28px);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin: ($header-height - 28px) * .5 0;
+  margin-left: -144px * .5;
 
   &,
   &:hover {
-    color: $black;
+    color: $header-font-color;
+  }
+}
+
+.app-header__link {
+  @extend %button-link;
+  margin-right: 1em;
+  padding: 0;
+  line-height: $header-height;
+  color: $header-link-color;
+
+  &:hover {
+    color: $header-hover-link-color;
+  }
+
+  > .fa {
+    margin-right: em(5);
+  }
+}
+
+.app-header__section-left {
+  float: left;
+}
+
+.app-header__section-right {
+  float: right;
+
+  .app-header__link {
+    margin-right: 0;
+    margin-left: 1em;
   }
 }

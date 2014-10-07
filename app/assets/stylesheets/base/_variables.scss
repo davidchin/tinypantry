@@ -10,13 +10,14 @@ $unitless-header-line-height: 1.25;
 $base-font-size: 16px;
 $base-line-height: $base-font-size * $unitless-line-height;
 $base-border-radius: em(3);
-$small-font-size: $base-font-size * .85;
-$mini-font-size: $base-font-size * .75;
+$small-font-size: round($base-font-size * .875);
+$mini-font-size: round($base-font-size * .8125);
 
 // Colors
 $white: #fff;
 $black: #000;
-$blue: #156cee;
+$light-aqua-blue: #c3f5fe;
+$aqua-blue: #73cde1;
 $dark-gray: #333;
 $medium-gray: #999;
 $gray: #bbb;
@@ -27,21 +28,23 @@ $light-green: #e6efc2;
 $yellow: #ffd600;
 $whitesmoke: #eee;
 
-// Background Colors
-$base-background-color: $whitesmoke;
-$header-background-color: $black;
-
 // Brand Colors
-$base-brand-color: $yellow;
+$base-brand-color: $aqua-blue;
+
+// Background Colors
+$base-background-color: $white;
+$header-background-color: $base-brand-color;
 
 // Font Colors
-$base-font-color: $black;
+$base-font-color: $dark-gray;
 $header-font-color: $white;
-$base-accent-color: $blue;
+$base-accent-color: $aqua-blue;
 
 // Link Colors
 $base-link-color: $base-accent-color;
 $hover-link-color: darken($base-accent-color, 15);
+$header-link-color: $header-font-color;
+$header-hover-link-color: $light-aqua-blue;
 
 // Button Colors
 $base-button-color: $base-link-color;
@@ -73,7 +76,11 @@ $form-font-family: $base-font-family;
 // Icons
 $icon-margin: em(5);
 
+// Grid
+$max-width: 1088px;
+
 // Paddings
+$small-padding: 15px;
 $base-padding: 25px;
 
 // Modal
@@ -82,3 +89,7 @@ $modal-footer-background-color: $whitesmoke;
 $modal-header-border-color: $whitesmoke;
 $modal-padding: 30px;
 $modal-overlay-background-color: transparentize($black, .2);
+
+// Layouts
+$header-height: 50px;
+$footer-height: 55px;

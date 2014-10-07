@@ -48,20 +48,7 @@ p {
 }
 
 a {
-  @include transition(color .1s linear);
-  text-decoration: none;
-  color: $base-link-color;
-
-  &:hover {
-    cursor: pointer;
-    color: $hover-link-color;
-  }
-
-  &:active,
-  &:focus {
-    outline: none;
-    color: $hover-link-color;
-  }
+  @extend %link;
 }
 
 hr {

@@ -5,12 +5,17 @@ html
     = render 'shared/head'
 
   body
-    div class="app-container" ng-app="application"
+    div class="app" ng-app="application"
 
-      aside class="app-aside" ng-include="'#{ asset_path('navigation/_menu.html') }'"
+      section class="app-container"
 
-      section class="app-body" ui-view=""
+        ng-include src="'#{ asset_path('shared/_header.html') }'"
 
-      loading-indicator name="app" class="loading-indicator loading-indicator--overlay"
+        div class="app-body"
+          / ui-view
+
+        loading-indicator name="app" class="loading-indicator loading-indicator--overlay"
+
+      ng-include src="'#{ asset_path('shared/_footer.html') }'"
 
     = render 'shared/scripts'

@@ -1,16 +1,19 @@
 %button {
   @include prefixer(font-smoothing, antialiased, webkit spec);
   display: inline-block;
+  border: 1px solid darken($base-button-color, 15%);
   border-radius: $base-border-radius;
   background-color: $base-button-color;
-  padding: .75em 1em;
+  padding: .65em 1.3em;
   vertical-align: middle;
   text-decoration: none;
   line-height: 1;
   color: $white;
-  font: bold $base-font-size $serif;
+  font: bold $base-font-size $base-font-family;
+  box-sizing: border-box;
 
-  &:hover {
+  &:hover,
+  &:active {
     background-color: $hover-button-color;
     color: $white;
   }
@@ -37,6 +40,31 @@
     background-color: $hover-light-button-color;
     color: $dark-gray;
   }
+}
+
+%button-unstyled {
+  @include appearance(none);
+  margin: 0;
+  outline: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+  font: inherit;
+  user-select: none;
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+%button-link {
+  @extend %button-unstyled;
+  @extend %link;
+  padding: .75em 1em;
+  font-weight: bold;
 }
 
 %pill {

@@ -1,0 +1,36 @@
+.app-footer {
+  border-top: 1px solid $light-gray;
+  padding: $small-padding 0;
+  height: $footer-height;
+  font-size: $mini-font-size;
+  box-sizing: border-box;
+
+  &,
+  a {
+    color: $medium-gray;
+  }
+}
+
+.app-footer__logo {
+  @include logo(113px, 22px, 'gray');
+  margin-right: 1.2em;
+}
+
+.app-footer__container {
+  @extend %outer-container;
+  @include clearfix;
+}
+
+.app-footer__section-left {
+  float: left;
+}
+
+.app-footer__section-right {
+  float: right;
+}
+
+.app-footer__link {
+  @extend %button-link;
+  padding-right: .7em;
+  padding-left: .7em;
+}

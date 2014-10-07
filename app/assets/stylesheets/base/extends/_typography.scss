@@ -1,3 +1,19 @@
+%link {
+  @include transition(color .2s linear);
+  text-decoration: none;
+  color: $base-link-color;
+
+  &:hover {
+    cursor: pointer;
+    color: $hover-link-color;
+  }
+
+  &:active {
+    outline: none;
+    color: $hover-link-color;
+  }
+}
+
 %link--white {
   color: $white;
 
