@@ -58,5 +58,3 @@ angular.module('session')
 
         secret: @retrieve('authToken')
         key: @retrieve('user')?.email
-
-    return Session

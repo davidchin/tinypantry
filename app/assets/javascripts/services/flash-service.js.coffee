@@ -42,8 +42,6 @@ angular.module('flash')
 
         return @messages
 
-    return Flash
-
   .factory 'flashFactory', ($rootScope, Flash) ->
     flashFactory =
       flashes: []

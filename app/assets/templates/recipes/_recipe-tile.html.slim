@@ -1,4 +1,4 @@
-a class="recipe-tile__link" ng-click="openRecipe(recipe)"
+a ui-sref="recipes.show({ id: recipe.id })" class="recipe-tile__link" ng-click="openRecipe(recipe, $event)"
   div class="recipe-tile__image"
     img ng-src="{{ recipe.imageUrls.small }}"
 
@@ -10,11 +10,11 @@ a class="recipe-tile__link" ng-click="openRecipe(recipe)"
       label
         input type="checkbox" name="recipeApproved{{ recipe.id }}" ng-model="recipe.approved" Approved
 
-    p class="recipe-tile__meta"
-      span class="recipe-tile__meta-item"
+    p class="recipe-meta"
+      span class="recipe-meta__item"
         i class="fa fa-bookmark"
         i class="fa fa-check" ng-show="recipe.status.bookmarked"
         | {{ recipe.bookmarks_count || 0 }}
-      span class="recipe-tile__meta-item"
+      span class="recipe-meta__item"
         i class="fa fa-eye"
         | {{ recipe.visitsCount || 0 }}

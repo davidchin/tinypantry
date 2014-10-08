@@ -1,6 +1,5 @@
-div class="modal"
-  div class="modal__header"
-    | {{ recipe.name }}
+div class="modal modal--large modal--footerless"
+  div class="modal__header modal__header--plain"
     a class="modal__close-btn" ng-click="closeRecipe()"
       i class="fa fa-times"
 
@@ -8,6 +7,3 @@ div class="modal"
     loading-indicator model="recipe.status.set" class="loading-indicator loading-indicator--large"
 
     ng-include src="'#{ asset_path('recipes/show.html') }'"
-
-  div class="modal__footer"
-    button type="button" ng-click="closeRecipe()" Close

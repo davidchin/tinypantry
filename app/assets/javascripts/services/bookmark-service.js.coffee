@@ -29,8 +29,6 @@ angular.module('bookmark')
 
         super
 
-    return Bookmark
-
   .factory 'Bookmarks', (bookmarkResource, Collection, Bookmark, Recipe) ->
     class Bookmarks extends Collection
       constructor: ->
@@ -56,8 +54,6 @@ angular.module('bookmark')
 
       params: ->
         { userId: @user?.id }
-
-    return Bookmarks
 
   .factory 'BookmarkedRecipes', (bookmarkedRecipeResource, Collection, Recipe, RecipeOrderTypes) ->
     class BookmarkedRecipes extends Collection
@@ -90,5 +86,3 @@ angular.module('bookmark')
             @status.orderedBy = params?.orderBy || defaultOrder.key
 
             return recipes
-
-    return BookmarkedRecipes

@@ -12,8 +12,6 @@ angular.module('feed')
 
         super
 
-    return Feed
-
   .factory 'Feeds', (feedResource, Collection, Feed) ->
     class Feeds extends Collection
       constructor: ->
@@ -23,5 +21,3 @@ angular.module('feed')
         }
 
         super
-
-    return Feeds

@@ -12,8 +12,6 @@ angular.module('category')
 
         super
 
-    return Category
-
   .factory 'Categories', (categoryResource, Collection, Category) ->
     class Categories extends Collection
       constructor: ->
@@ -23,5 +21,3 @@ angular.module('category')
         }
 
         super
-
-    return Categories

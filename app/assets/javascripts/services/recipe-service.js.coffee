@@ -50,8 +50,6 @@ angular.module('recipe')
           .then (relatedRecipes) =>
             @relatedRecipes = relatedRecipes
 
-    return Recipe
-
   .factory 'Recipes', (recipeResource, Collection, Recipe, RecipeOrderTypes) ->
     class Recipes extends Collection
       constructor: ->
@@ -80,8 +78,6 @@ angular.module('recipe')
             @status.orderedBy = params?.orderBy || defaultOrder.key
 
             return recipes
-
-    return Recipes
 
   .value 'RecipeOrderTypes', [
     { key: 'date', name: 'Date' }

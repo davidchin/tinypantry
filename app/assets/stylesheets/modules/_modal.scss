@@ -5,10 +5,11 @@
   left: 50%;
   z-index: 2000;
   background: $modal-background-color;
-  width: 50%;
+  width: strip-unit(flex-grid(6, $grid-columns)) * $max-width;
   min-width: 300px;
-  max-width: 600px;
+  max-width: $max-width;
   height: auto;
+  box-sizing: border-box;
 
   &.ng-enter,
   &.ng-leave {
@@ -26,10 +27,26 @@
   }
 }
 
+.modal--large {
+  width: strip-unit(flex-grid(12, $grid-columns)) * $max-width;
+}
+
+.modal--small {
+  width: strip-unit(flex-grid(4, $grid-columns)) * $max-width;
+}
+
+.modal--footerless {
+  padding-bottom: $modal-padding;
+}
+
 .modal__header {
   border-bottom: 1px solid $modal-header-border-color;
   padding: 15px $modal-padding;
   text-align: center;
+}
+
+.modal__header--plain {
+  border-bottom: 0;
 }
 
 .modal__footer {
@@ -40,6 +57,12 @@
 .modal__body {
   position: relative;
   padding: $modal-padding;
+  max-height: 600px;
+  overflow: auto;
+
+  .app-body {
+    padding: 0;
+  }
 }
 
 .modal__close-btn {

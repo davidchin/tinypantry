@@ -13,7 +13,8 @@ angular.module('recipe')
       search: ->
         $state.go('recipes.index', { query: @recipes.query })
 
-      openRecipe: (recipe) ->
+      openRecipe: (recipe, event) ->
+        event.preventDefault() if event?
         @recipeModal.open('recipe', { id: recipe.id })
 
       closeRecipe: ->
@@ -72,10 +73,7 @@ angular.module('recipe')
       read: ->
         @recipe.read($stateParams)
           .then =>
-            # NOTE: This 'then' block is for testing - to be removed later
-            { category, action, label } = @recipe.trackingParams
-            ga.event(category, action, label)
-            @recipe
+            @recipe.related()
           .then =>
             currentUser.ready()
               .then => @recipe.bookmarked(currentUser)

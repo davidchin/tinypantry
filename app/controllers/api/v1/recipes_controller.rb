@@ -29,6 +29,7 @@ module Api
 
       def related
         @recipes = @recipe.related_recipes
+                          .page(params[:page])
                           .order_by(params[:order_by])
 
         respond_with(@recipes) if stale? @recipes

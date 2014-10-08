@@ -27,8 +27,6 @@ angular.module('user')
 
             return user
 
-    return User
-
   .factory 'CurrentUser', ($q, userService, User, Session) ->
     class CurrentUser extends User
       constructor: ->
@@ -60,8 +58,6 @@ angular.module('user')
       hasRole: (roleName) ->
         _.any @roles, (role) ->
           role.name?.toLowerCase == roleName?.toLowerCase
-
-    return CurrentUser
 
   .factory 'authorize', ($q, $state, currentUser) ->
     authorize = (role) ->

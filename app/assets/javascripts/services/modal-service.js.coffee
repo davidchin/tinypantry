@@ -90,8 +90,6 @@ angular.module('modal')
         hide: ->
           $animate.addClass(@element, 'ng-hide') if @element
 
-      return Modal
-
   .factory 'modalBackground', ($animate) ->
     class ModalBackground
       enter: (parent) ->

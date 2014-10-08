@@ -21,3 +21,34 @@
     color: darken($white, 20%);
   }
 }
+
+%title {
+  margin-bottom: em($small-font-size);
+}
+
+%text {
+  line-height: $unitless-line-height;
+  color: $base-font-color;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+}
+
+%text--muted {
+  color: $muted-font-color;
+}
+
+%text--large {
+  font-size: $large-font-size;
+}
+
+%text--base {
+  font-size: $base-font-size;
+}
+
+%text--small {
+  font-size: $small-font-size;
+}
+
+%text--mini {
+  font-size: $mini-font-size;
+}

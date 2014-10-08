@@ -1,0 +1,9 @@
+%outer-container {
+  @include outer-container;
+}
+
+%app-section {
+  @extend %clearfix;
+  clear: both;
+  margin-top: $base-padding * 2;
+}

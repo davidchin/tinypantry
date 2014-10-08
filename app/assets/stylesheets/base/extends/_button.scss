@@ -23,17 +23,20 @@
     background-color: $disabled-button-color;
     color: darken($disabled-button-color, 20%);
   }
+
+  + %button {
+    margin-left: em(5);
+  }
 }
 
 %button--light {
-  background: $light-button-color;
-  color: $dark-gray;
+  border: 1px solid $light-gray;
 
   &,
   &:disabled,
   &:disabled:hover {
     background-color: $light-button-color;
-    color: $dark-gray;
+    color: $dark-medium-gray;
   }
 
   &:hover {

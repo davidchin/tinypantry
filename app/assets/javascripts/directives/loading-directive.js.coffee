@@ -1,5 +1,5 @@
 angular.module('loading')
-  .directive 'loadingIndicator', ($window) ->
+  .directive 'loadingIndicator', ($window, $timeout) ->
     restrict: 'EA'
     transclude: true
     scope:
@@ -7,16 +7,17 @@ angular.module('loading')
     link: (scope, element, attrs, controller, transclude) ->
       class LoadingIndicator
         constructor: ->
-          @configure()
-          @transclude()
-          @stop()
-          @watch()
+          $timeout =>
+            @configure()
+            @transclude()
+            @stop()
+            @watch()
 
         configure: ->
           config = scope.$eval(attrs.config) || {}
 
-          fontSize = config.size || parseFloat(element.css('font-size')) * .8
-          fontColor = element.css('color')
+          fontSize = config.size || parseFloat(element.css('font-size') || 16) * .8
+          fontColor = element.css('color') || rgb(0, 0, 0)
           lineWidth = Math.round(fontSize / 8)
           lineLength = Math.round(fontSize / 6)
           verticalOffset = Math.round(fontSize / 8)

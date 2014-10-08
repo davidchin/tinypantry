@@ -16,3 +16,11 @@
 .app-footer {
   margin-top: -$footer-height;
 }
+
+.app-section {
+  @extend %app-section;
+}
+
+.outer-container {
+  @extend %outer-container;
+}

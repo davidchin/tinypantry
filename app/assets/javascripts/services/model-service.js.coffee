@@ -152,8 +152,6 @@ angular.module('model')
 
         return @status
 
-    return BaseModel
-
   .factory 'Model', (BaseModel) ->
     class Model extends BaseModel
       pick: (attrs...) ->
@@ -173,8 +171,6 @@ angular.module('model')
 
         super(params, data)
           .then (response) => @set(response)
-
-    return Model
 
   .factory 'Collection', (BaseModel, Model) ->
     class Collection extends BaseModel
@@ -243,5 +239,3 @@ angular.module('model')
         @request('index', params)
           .then (response) =>
             @add(@transform(item)) for item in response
-
-    return Collection
