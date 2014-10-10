@@ -22,6 +22,10 @@
   }
 }
 
+%link--muted {
+  color: $muted-font-color;
+}
+
 %title {
   margin-bottom: em($small-font-size);
 }

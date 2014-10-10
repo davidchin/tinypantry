@@ -17,7 +17,7 @@ angular.module('loading')
           config = scope.$eval(attrs.config) || {}
 
           fontSize = config.size || parseFloat(element.css('font-size') || 16) * .8
-          fontColor = element.css('color') || rgb(0, 0, 0)
+          fontColor = element.css('color') || 'rgb(0, 0, 0)'
           lineWidth = Math.round(fontSize / 8)
           lineLength = Math.round(fontSize / 6)
           verticalOffset = Math.round(fontSize / 8)
@@ -77,10 +77,10 @@ angular.module('loading')
 
           scope.$on '$destroy', => @stop()
 
-          scope.$on 'start.loadingIndicator', (event, id) =>
+          scope.$on 'loadingIndicator:start', (event, id) =>
             @start() if id == attrs.name
 
-          scope.$on 'stop.loadingIndicator', (event, id) =>
+          scope.$on 'loadingIndicator:stop', (event, id) =>
             @stop() if id == attrs.name
 
       scope.loadingIndicator = new LoadingIndicator

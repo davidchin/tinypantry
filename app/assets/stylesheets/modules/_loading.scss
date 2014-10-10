@@ -28,10 +28,24 @@
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 1;
   z-index: 1999;
   background: $modal-overlay-background-color;
   width: 100%;
   height: 100%;
-  color: $gray;
+  color: $white;
+
+  &.ng-enter,
+  &.ng-leave {
+    @include transition(opacity .5s ease-out);
+  }
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    opacity: 0;
+  }
+
+  &.ng-enter.ng-enter-active,
+  &.ng-leave {
+    opacity: 1;
+  }
 }

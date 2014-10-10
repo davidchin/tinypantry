@@ -5,6 +5,13 @@
   vertical-align: middle;
 }
 
+.app-header--fixed {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
 .app-header__container {
   @extend %outer-container;
 }
@@ -50,4 +57,16 @@
     margin-right: 0;
     margin-left: 1em;
   }
+}
+
+.headroom {
+  @include transition(transform 200ms ease-in-out);
+}
+
+.headroom--pinned {
+  @include transform(translateY(0%));
+}
+
+.headroom--unpinned {
+  @include transform(translateY(-100%));
 }

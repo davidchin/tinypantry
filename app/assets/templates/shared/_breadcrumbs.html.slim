@@ -1,0 +1,4 @@
+nav class="app-breadcrumbs" ng-show="breadcrumbs.items.length" ng-controller="BreadcrumbsController"
+  ul
+    li class="app-breadcrumbs__item" ng-repeat="breadcrumb in breadcrumbs.items"
+      a ng-href="{{ breadcrumb.path }}" {{ breadcrumb.name }}

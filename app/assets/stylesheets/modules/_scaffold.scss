@@ -8,6 +8,10 @@
   min-height: 100%;
 }
 
+.app-container--fixed-header {
+  padding-top: $header-height;
+}
+
 .app-body {
   @extend %outer-container;
   padding: $base-padding 0;

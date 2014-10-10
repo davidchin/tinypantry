@@ -64,6 +64,9 @@ angular.module('modal')
               # Attach background
               modalBackground.enter(parentElement)
 
+              # Watch
+              @watch()
+
               # Attach
               $animate.enter(@element, parentElement, lastElement)
 
@@ -90,14 +93,23 @@ angular.module('modal')
         hide: ->
           $animate.addClass(@element, 'ng-hide') if @element
 
-  .factory 'modalBackground', ($animate) ->
-    class ModalBackground
-      enter: (parent) ->
-        unless @element?
-          html = '<div class="modal-overlay"></div>'
-          @element = angular.element(html)
+        watch: ->
+          @scope?.$on 'modalBackground:click', => @close()
 
+  .factory 'modalBackground', ($rootScope, $animate, $timeout) ->
+    class ModalBackground
+      constructor: ->
+        html = '<div class="modal-overlay"></div>'
+        @element = angular.element(html)
+
+      notify: (event, args...) ->
+        $rootScope.$broadcast("modalBackground:#{ event }", args...)
+
+      enter: (parent) ->
         $animate.enter(@element, parent)
+
+        @element.on 'click', =>
+          $timeout => @notify('click')
 
       leave: ->
         $animate.leave(@element)

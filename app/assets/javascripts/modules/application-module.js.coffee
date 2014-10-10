@@ -6,6 +6,7 @@ angular.module 'application', [
   'form'
   'loading'
   'sanitize'
+  'touch'
 
   # Features
   'bookmark'

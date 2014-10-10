@@ -116,7 +116,7 @@
 
 .recipe-meta__item {
   display: inline-block;
-  margin-left: $icon-margin * 2;
+  margin-left: $icon-margin * 3;
 
   &:first-child {
     margin-left: 0;
@@ -126,11 +126,21 @@
 // Recipe detail
 .recipe-detail {
   @extend %outer-container;
+
+  .app-breadcrumbs {
+    display: none;
+  }
 }
 
 .recipe-detail__image,
 .recipe-detail__body {
   @include span-columns(6);
+}
+
+.recipe-detail__image {
+  > img {
+    display: block;
+  }
 }
 
 .recipe-detail__description {

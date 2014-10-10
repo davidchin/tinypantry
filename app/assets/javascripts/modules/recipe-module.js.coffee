@@ -4,6 +4,7 @@ angular.module 'recipe', [
   'flash'
   'modal'
   'model'
+  'navigation'
   'resource'
   'route'
   'user'

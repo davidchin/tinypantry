@@ -8,3 +8,5 @@
 //= require moment/moment
 //= require underscore.string/dist/underscore.string.min
 //= require spin.js/spin
+//= require headroom.js/dist/headroom
+//= require headroom.js/dist/angular.headroom

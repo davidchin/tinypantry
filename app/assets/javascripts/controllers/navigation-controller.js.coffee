@@ -21,3 +21,13 @@ angular.module('navigation')
         @currentUser.read()
 
     new NavigationController
+
+  .controller 'BreadcrumbsController', ($scope, breadcrumbs, BaseController) ->
+    class BreadcrumbsController extends BaseController
+      constructor: ->
+        @breadcrumbs = breadcrumbs
+
+        super($scope)
+
+    new BreadcrumbsController
+

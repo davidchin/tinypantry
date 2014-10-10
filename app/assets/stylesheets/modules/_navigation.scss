@@ -1,3 +1,27 @@
+.app-breadcrumbs {
+  @extend %text--muted;
+  @extend %text--small;
+  margin-bottom: $base-padding;
+
+  .app-breadcrumbs__item {
+    display: inline-block;
+
+    &:before {
+      @extend %icon;
+      margin: 0 $icon-margin * 3;
+      content: $fa-var-angle-right;
+    }
+
+    &:first-child:before {
+      display: none;
+    }
+  }
+
+  a {
+    @extend %link--muted;
+  }
+}
+
 .app-navigation {
   border-top: 1px solid $dark-gray;
   background: $header-background-color;

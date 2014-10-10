@@ -2,6 +2,8 @@ section class="app-body"
   loading-indicator model="recipe.status.set" class="loading-indicator loading-indicator--large"
 
   article class="recipe-detail" ng-show="recipe.status.set"
+    ng-include src="'#{ asset_path('shared/_breadcrumbs.html') }'"
+
     div class="recipe-detail__image"
       img ng-src="{{ recipe.imageUrls.medium }}"
 
