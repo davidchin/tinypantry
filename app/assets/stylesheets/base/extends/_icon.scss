@@ -5,3 +5,11 @@
   font-weight: normal;
   font-style: normal;
 }
+
+%icon--left {
+  margin-right: $icon-margin;
+}
+
+%icon--right {
+  margin-left: $icon-margin;
+}

@@ -110,7 +110,7 @@
   line-height: $unitless-small-line-height;
 
   .fa {
-    margin-right: $icon-margin;
+    @extend %icon--left;
   }
 }
 

@@ -1,0 +1,12 @@
+nav slide-menu="account-slide-menu" class="app-slide-menu app-slide-menu--right"
+  loading-indicator model="categories.status.set" class="loading-indicator loading-indicator--large"
+
+  div class="app-slide-menu__item" ng-show="currentUser.status.loggedIn"
+    a class="app-slide-menu__item-link" ui-sref="sessions.destroy"
+      i class="fa fa-user"
+      | Logout
+
+  div class="app-slide-menu__item" ng-hide="currentUser.status.loggedIn"
+    a class="app-slide-menu__item-link" ng-click="openLogin()"
+      loading-indicator model="categories.status.set" type="inline" class="loading-indicator"
+      | Login

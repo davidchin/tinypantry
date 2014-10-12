@@ -42,7 +42,7 @@
   }
 
   > .fa {
-    margin-right: em(5);
+    @extend %icon--left;
   }
 }
 

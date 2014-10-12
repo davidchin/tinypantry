@@ -4,19 +4,21 @@ html
   head
     = render 'shared/head'
 
-  body
-    div class="app" ng-app="application"
+  body class="app" ng-app="application" slide-menu-container=""
+    div ng-controller="NavigationController"
+      ng-include src="'#{ asset_path('shared/_browse-menu.html') }'"
+      ng-include src="'#{ asset_path('shared/_account-menu.html') }'"
 
-      div class="app-container app-container--fixed-header"
+    div class="app-container app-container--fixed-header"
 
-        ng-include src="'#{ asset_path('shared/_header.html') }'"
+      ng-include src="'#{ asset_path('shared/_header.html') }'" ng-controller="NavigationController"
 
-        flash name="app"
+      flash name="app"
 
-        ui-view
+      ui-view
 
-        loading-indicator name="app" class="loading-indicator loading-indicator--overlay"
+      loading-indicator name="app" class="loading-indicator loading-indicator--overlay"
 
-      ng-include src="'#{ asset_path('shared/_footer.html') }'"
+    ng-include src="'#{ asset_path('shared/_footer.html') }'"
 
     = render 'shared/scripts'
