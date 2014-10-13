@@ -3,7 +3,9 @@
 }
 
 .app-container {
+  display: block;
   margin-bottom: -$footer-height;
+  background: $base-background-color;
   padding-bottom: $footer-height + ($base-padding * 2);
   min-height: 100%;
 }

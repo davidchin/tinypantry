@@ -8,13 +8,14 @@ angular.module('modal')
     find: (name) ->
       @routes[name]
 
-    $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, modalStack, modalBackground, loadingIndicatorManager) ->
+    $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, $document, modalStack, modalBackground, loadingIndicatorManager) ->
       provider = this
 
       class Modal
         constructor: (config) ->
           @config = _.extend {
-            parent: '.app-body'
+            body: $document.prop('body')
+            parent: $document.prop('body')
           }, config
 
         getTemplate: ->
@@ -68,6 +69,7 @@ angular.module('modal')
               @watch()
 
               # Attach
+              $animate.addClass(@config.body, 'modal-body--is-opened')
               $animate.enter(@element, parentElement, lastElement)
 
         close: ->
@@ -76,6 +78,8 @@ angular.module('modal')
           # Detach background
           modalBackground.leave()
 
+          # Remove
+          $animate.removeClass(@config.body, 'modal-body--is-opened')
           $animate.leave(@element)
             .then =>
               # Clean up
@@ -94,6 +98,7 @@ angular.module('modal')
           $animate.addClass(@element, 'ng-hide') if @element
 
         watch: ->
+          $rootScope.$on '$stateChangeStart', => @close()
           @scope?.$on 'modalBackground:click', => @close()
 
   .factory 'modalBackground', ($rootScope, $animate, $timeout) ->

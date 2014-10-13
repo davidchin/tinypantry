@@ -4,12 +4,12 @@ html
   head
     = render 'shared/head'
 
-  body class="app" ng-app="application" slide-menu-container=""
+  body class="app" ng-app="application" slide-menu-group=""
     div ng-controller="NavigationController"
       ng-include src="'#{ asset_path('shared/_browse-menu.html') }'"
       ng-include src="'#{ asset_path('shared/_account-menu.html') }'"
 
-    div class="app-container app-container--fixed-header"
+    slide-menu-content class="app-container app-container--fixed-header"
 
       ng-include src="'#{ asset_path('shared/_header.html') }'" ng-controller="NavigationController"
 

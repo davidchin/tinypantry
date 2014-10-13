@@ -1,15 +1,15 @@
-nav slide-menu="browse-slide-menu" class="app-slide-menu app-slide-menu--left"
+nav slide-menu="browse-slide-menu" class="app-slide-menu"
   div class="app-slide-menu__item" ng-if="currentUser.status.admin"
-    a class="app-slide-menu__item-link" ui-sref="feeds.index" ui-sref-active="is-active"
+    a class="app-slide-menu__item-link" ui-sref="feeds.index" ui-sref-active="is-active" slide-menu-toggle=""
       | Feeds
   div class="app-slide-menu__item" ng-if="currentUser.status.admin"
-    a class="app-slide-menu__item-link" ui-sref="categories.index" ui-sref-active="is-active"
+    a class="app-slide-menu__item-link" ui-sref="categories.index" ui-sref-active="is-active" slide-menu-toggle=""
       | Categories
 
   div class="app-slide-menu__item"
-    a class="app-slide-menu__item-link" ui-sref="bookmarks.index" ui-sref-active-eq="is-active" ng-show="currentUser.status.loggedIn"
+    a class="app-slide-menu__item-link" ng-show="currentUser.status.loggedIn" ui-sref="bookmarks.index" ui-sref-active-eq="is-active" slide-menu-toggle=""
       | Bookmarks
   div class="app-slide-menu__item"
-    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: null })" ui-sref-active-eq="is-active" All
+    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: null })" ui-sref-active-eq="is-active" slide-menu-toggle="" All
   div class="app-slide-menu__item" ng-repeat="category in categories.items"
-    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: category.slug })" ui-sref-active="is-active" {{ category.name }}
+    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: category.slug })" ui-sref-active="is-active" slide-menu-toggle="" {{ category.name }}

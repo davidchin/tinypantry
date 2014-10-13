@@ -1,15 +1,30 @@
-$slide-menu-width: strip-unit(flex-grid(3, $grid-columns)) * $max-width / 100;
-$slide-menu-transition: transform 400ms ease;
+$slide-menu-width: strip-units(flex-grid(3, $grid-columns)) * $max-width / 100;
+
+.app {
+  &.is-opened-add-active,
+  &.is-opened-remove-active {
+    @include transition($slide-menu-transition);
+  }
+
+  &.is-opened,
+  &.is-opened-add {
+    overflow: hidden;
+  }
+}
 
 .app-slide-menu {
+  @include transition($slide-menu-transition);
   position: fixed;
   top: 0;
   bottom: 0;
-  z-index: 100;
   background: $dark-gray;
   width: $slide-menu-width;
   overflow-y: auto;
   box-sizing: border-box;
+
+  &.is-closed {
+    z-index: -100;
+  }
 
   &.is-closed:not(.is-closed-add) {
     visibility: hidden;
@@ -17,46 +32,36 @@ $slide-menu-transition: transform 400ms ease;
 }
 
 .app-slide-menu,
-.app-slide-menu--left {
+.browse-slide-menu {
   right: auto;
   left: 0;
-
-  &.is-opened-add-active,
-  &.is-opened-remove-active {
-    @include transition($slide-menu-transition);
-  }
-
-  &.is-opened-add-active,
-  &.is-opened {
-    @include transform(translateX(0%));
-  }
-
-  &.is-opened-remove-active,
-  &.is-closed {
-    @include transform(translateX(-100%));
-  }
 }
 
-.app-slide-menu--right {
+.account-slide-menu {
   right: 0;
   left: auto;
+}
 
+.app-container {
   &.is-opened-add-active,
   &.is-opened-remove-active {
     @include transition($slide-menu-transition);
   }
 
-  &.is-opened-add-active,
-  &.is-opened {
-    @include transform(translateX(0%));
+  &.is-opened-remove-active {
+    @include transform(translate3d(0, 0, 0));
   }
 
-  &.is-opened-remove-active,
-  &.is-closed {
-    @include transform(translateX(100%));
+  &.browse-slide-menu-is-opened {
+    @include transform(translate3d($slide-menu-width, 0, 0));
+  }
+
+  &.account-slide-menu-is-opened {
+    @include transform(translate3d(-$slide-menu-width, 0, 0));
   }
 }
 
+// Slide menu link
 .app-slide-menu__item {
   border-bottom: 1px solid lighten($dark-gray, 10%);
 }
@@ -66,40 +71,48 @@ $slide-menu-transition: transform 400ms ease;
   display: block;
   padding: ($medium-padding * 2/3) $medium-padding;
   font-weight: bold;
-}
 
-.browse-slide-menu--is-opened,
-.account-slide-menu--is-opened {
-  overflow: hidden;
-}
-
-.browse-slide-menu--is-opened-add-active,
-.browse-slide-menu--is-opened-remove-active,
-.account-slide-menu--is-opened-add-active,
-.account-slide-menu--is-opened-remove-active {
-  &,
-  .app-container {
-    @include transition($slide-menu-transition);
+  &.is-active {
+    color: $dark-aqua-blue;
   }
 }
 
-.browse-slide-menu--is-opened-add-active,
-.browse-slide-menu--is-opened {
+@media only screen and (min-width: $max-width + $slide-menu-width * 2) {
   .app-container {
-    @include transform(translateX($slide-menu-width));
-  }
-}
+    &.browse-slide-menu-is-opened {
+      @include transform(none);
+    }
 
-.account-slide-menu--is-opened-add-active,
-.account-slide-menu--is-opened {
-  .app-container {
-    @include transform(translateX(-$slide-menu-width));
+    &.account-slide-menu-is-opened {
+      @include transform(none);
+    }
   }
-}
 
-.browse-slide-menu--is-opened-remove-active,
-.account-slide-menu--is-opened-remove-active {
-  .app-container {
-    @include transform(translateX(0));
+  .app-slide-menu {
+    &.is-opened,
+    &.is-opened-remove {
+      z-index: 100;
+    }
+
+    &.is-opened-add-active,
+    &.is-opened-remove-active {
+      @include transition($slide-menu-transition);
+    }
+
+    &.is-opened-add-active {
+      @include transform(translate3d(0, 0, 0));
+    }
+  }
+
+  .browse-slide-menu {
+    &.is-closed {
+      @include transform(translate3d(-$slide-menu-width, 0, 0));
+    }
+  }
+
+  .account-slide-menu {
+    &.is-closed {
+      @include transform(translate3d($slide-menu-width, 0, 0));
+    }
   }
 }

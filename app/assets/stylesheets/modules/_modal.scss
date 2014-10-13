@@ -5,7 +5,7 @@
   left: 50%;
   z-index: 2000;
   background: $modal-background-color;
-  width: strip-unit(flex-grid(6, $grid-columns)) * $max-width / 100;
+  width: strip-units(flex-grid(6, $grid-columns)) * $max-width / 100;
   min-width: 300px;
   max-width: $max-width;
   height: auto;
@@ -28,15 +28,19 @@
 }
 
 .modal--large {
-  width: strip-unit(flex-grid(12, $grid-columns)) * $max-width / 100;
+  width: strip-units(flex-grid(12, $grid-columns)) * $max-width / 100;
 }
 
 .modal--small {
-  width: strip-unit(flex-grid(4, $grid-columns)) * $max-width / 100;
+  width: strip-units(flex-grid(4, $grid-columns)) * $max-width / 100;
 }
 
 .modal--footerless {
   padding-bottom: $modal-padding;
+}
+
+.modal-body--is-opened {
+  overflow: hidden;
 }
 
 .modal__header {
