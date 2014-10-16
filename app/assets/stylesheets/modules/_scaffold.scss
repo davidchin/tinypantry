@@ -16,7 +16,7 @@
 
 .app-body {
   @extend %outer-container;
-  padding: $base-padding 0;
+  padding: $base-padding;
 }
 
 .app-footer {

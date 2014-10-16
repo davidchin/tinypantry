@@ -5,6 +5,7 @@
 
   .recipe-nav-bar__container {
     @extend %outer-container;
+    padding: 0 $base-padding;
   }
 
   .recipe-filters {
@@ -52,12 +53,39 @@
   @extend %outer-container;
 
   .recipe-tile {
-    @include span-columns(3);
-    @include omega(4n);
     margin-top: $base-padding * 2;
+  }
 
-    &:nth-of-type(-n+4) {
-      margin-top: 0;
+  @include media($small-screen) {
+    .recipe-tile {
+      @include span-columns(6);
+      @include omega(2n);;
+
+      &:nth-of-type(-n+2) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  @include media($medium-screen) {
+    .recipe-tile {
+      @include span-columns(4);
+      @include omega(3n);
+
+      &:nth-of-type(-n+3) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  @include media($large-screen-up) {
+    .recipe-tile {
+      @include span-columns(3);
+      @include omega(4n);
+
+      &:nth-of-type(-n+4) {
+        margin-top: 0;
+      }
     }
   }
 }

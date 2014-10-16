@@ -1,11 +1,15 @@
 // Bitters v0.10.0
 // http://bitters.bourbon.io
 
+// Neat Settings
+@import 'grid-settings';
+
+// Neat
+@import 'neat';
+@import 'neat-helpers';
+
 // Variables
 @import 'variables';
-
-// Neat Settings -- uncomment if using Neat -- must be imported before Neat
-@import 'grid-settings';
 
 // Extends
 @import 'extends/extends';

@@ -15,6 +15,7 @@
 
 .app-header__container {
   @extend %outer-container;
+  padding: 0 $base-padding;
 }
 
 .app-header__logo {

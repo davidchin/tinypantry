@@ -1,4 +1,4 @@
-$slide-menu-width: column-width(3);
+$slide-menu-width: column-width($slide-menu-columns);
 
 .app {
   &.is-opened-add-active,
@@ -77,7 +77,7 @@ $slide-menu-width: column-width(3);
   }
 }
 
-@media only screen and (min-width: $max-width + $slide-menu-width * 2) {
+@include media(new-breakpoint(min-width $max-width + $slide-menu-width * 2)) {
   .app-container {
     &.browse-slide-menu-is-opened {
       @include transform(none);

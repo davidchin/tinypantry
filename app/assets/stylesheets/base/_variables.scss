@@ -82,9 +82,6 @@ $form-font-family: $base-font-family;
 // Icons
 $icon-margin: em(5);
 
-// Grid
-$max-width: 1088px;
-
 // Paddings
 $small-padding: 15px;
 $medium-padding: 20px;
@@ -100,6 +97,7 @@ $modal-overlay-background-color: transparentize($black, .2);
 // Dimensions
 $header-height: 50px;
 $footer-height: 55px;
+$slide-menu-columns: 3;
 
 // Transitions
 $slide-menu-transition: transform 500ms ease;

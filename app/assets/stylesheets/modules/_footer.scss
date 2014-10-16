@@ -19,6 +19,7 @@
 .app-footer__container {
   @extend %outer-container;
   @include clearfix;
+  padding: 0 $base-padding;
 }
 
 .app-footer__section-left {
