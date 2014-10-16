@@ -1,11 +1,7 @@
-div class="modal"
-  div class="modal__header"
-    | Login
+div class="modal modal--footerless"
+  div class="modal__header modal__header--plain"
     a class="modal__close-btn" ng-click="loginModal.close()"
       i class="fa fa-times"
 
   div class="modal__body"
     ng-include src="'#{ asset_path('sessions/new.html') }'"
-
-  div class="modal__footer"
-    button type="button" ng-click="loginModal.close()" Close

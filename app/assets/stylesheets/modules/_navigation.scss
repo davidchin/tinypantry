@@ -1,4 +1,4 @@
-$slide-menu-width: strip-units(flex-grid(3, $grid-columns)) * $max-width / 100;
+$slide-menu-width: column-width(3);
 
 .app {
   &.is-opened-add-active,

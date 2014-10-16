@@ -6,9 +6,9 @@
   @extend %button--light;
 }
 
+.button--block,
 .block-button {
-  display: block;
-  width: 100%;
+  @extend %button--block;
 }
 
 .load-button {

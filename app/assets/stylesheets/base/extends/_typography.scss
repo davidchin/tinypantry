@@ -41,6 +41,10 @@
   color: $muted-font-color;
 }
 
+%text--bold {
+  font-weight: bold;
+}
+
 %text--large {
   font-size: $large-font-size;
 }

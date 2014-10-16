@@ -1,0 +1,21 @@
+.session-new__title {
+  margin-bottom: $base-padding;
+  text-align: center;
+}
+
+.session-form {
+  margin: 0 auto;
+  width: column-width(3);
+}
+
+.session-form__footer {
+  @extend %text--small;
+  @extend %text--muted;
+  margin-top: $base-padding;
+  text-align: center;
+
+  a {
+    @extend %text--muted;
+    @extend %text--bold;
+  }
+}

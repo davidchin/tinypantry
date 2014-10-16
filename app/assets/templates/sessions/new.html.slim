@@ -1,7 +1,17 @@
-h1 Login
+section class="app-body"
+  div class="session-new"
+    header
+      h1 class="session-new__title" Log In
 
-form name="form" ng-submit="login()"
-  input type="email" placeholder="E-mail" ng-model="currentUser.email"
-  input type="password" placeholder="Password" ng-model="currentUser.password"
+    form name="form" class="session-form" ng-submit="login()"
+      input type="email" placeholder="E-mail" ng-model="currentUser.email"
+      input type="password" placeholder="Password" ng-model="currentUser.password"
 
-  button type="submit" Submit
+      button type="submit" class="button button--block" Submit
+
+      div class="session-form__footer"
+        div
+          a ui-sref="passwords.create" Forgot password?
+        div
+          | Don't have an account? 
+          a ui-sref="users.new" Sign up now!
