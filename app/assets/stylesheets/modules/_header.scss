@@ -23,7 +23,7 @@
   position: absolute;
   top: 0;
   left: 50%;
-  margin: ($header-height - 28px) * .5 0;
+  margin: ($header-height - em(28)) * .5 0;
   margin-left: -144px * .5;
 
   &,
@@ -45,7 +45,7 @@
 
   > .fa {
     @extend %icon--left;
-    font-size: em($large-font-size);
+    font-size: $large-font-size;
   }
 }
 
@@ -87,7 +87,7 @@
 
   .app-header__link {
     > .fa {
-      font-size: em($base-font-size);
+      font-size: $base-font-size;
     }
   }
 }

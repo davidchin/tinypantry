@@ -2,7 +2,7 @@
 .recipe-nav-bar {
   border-bottom: 1px solid $light-gray;
   background: $light-whitesmoke;
-  font-size: em($small-font-size);
+  font-size: $small-font-size;
 
   .recipe-filters {
     @include span-columns(9);
@@ -34,7 +34,7 @@
   }
 
   > li {
-    margin-left: em($base-font-size);
+    margin-left: $base-font-size;
   }
 }
 
@@ -143,7 +143,7 @@
 }
 
 .recipe-detail__description {
-  margin: em($base-line-height) 0;
+  margin: $base-line-height 0;
 }
 
 // --------------------------------------------------
@@ -180,7 +180,7 @@
 // Medium screen up
 @include media($medium-screen-up) {
   .recipe-nav-bar {
-    font-size: em($base-font-size);
+    font-size: $base-font-size;
   }
 
   .recipe-nav-bar__container {

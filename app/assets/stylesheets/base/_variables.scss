@@ -5,10 +5,10 @@ $base-font-family: $sans-serif;
 $header-font-family: $sans-serif;
 
 // Font Size
-$base-font-size: 16px;
-$mini-font-size: round($base-font-size * .8125);
-$small-font-size: round($base-font-size * .875);
-$large-font-size: round($base-font-size * 1.25);
+$base-font-size: em(16);
+$mini-font-size: $base-font-size * .8125;
+$small-font-size: $base-font-size * .875;
+$large-font-size: $base-font-size * 1.25;
 
 // Line Height
 $unitless-line-height: 1.5;
@@ -89,9 +89,9 @@ $form-font-family: $base-font-family;
 $icon-margin: em(5);
 
 // Paddings
-$small-padding: 15px;
-$medium-padding: 20px;
-$base-padding: 25px;
+$small-padding: em(15);
+$medium-padding: em(20);
+$base-padding: em(25);
 
 // Modal
 $modal-background-color: $white;
@@ -101,8 +101,8 @@ $modal-padding: 30px;
 $modal-overlay-background-color: transparentize($black, .2);
 
 // Dimensions
-$header-height: 50px;
-$footer-height: 55px;
+$header-height: em(50);
+$footer-height: em(55);
 $slide-menu-columns: 3;
 
 // Transitions

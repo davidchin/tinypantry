@@ -46,7 +46,7 @@
 .modal__header {
   border-bottom: 1px solid $modal-header-border-color;
   padding: 15px $modal-padding;
-  min-height: 30px + $base-line-height;
+  min-height: em(30) + $base-line-height;
   text-align: center;
   box-sizing: border-box;
 }
