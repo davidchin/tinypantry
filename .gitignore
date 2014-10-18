@@ -6,6 +6,7 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
+.DS_Store
 /log/*.log
 /tmp
 
@@ -14,6 +15,9 @@ config/database.yml
 
 # Ignore system assets
 public/system
+
+# Ignore node modules
+node_modules
 
 # Ignore environment variables
 .env

@@ -16,7 +16,7 @@
 
 .app-body {
   @extend %outer-container;
-  padding: $base-padding;
+  padding: $small-padding;
 }
 
 .app-footer {
@@ -29,4 +29,12 @@
 
 .outer-container {
   @extend %outer-container;
+}
+
+// --------------------------------------------------
+// Medium screen up
+@include media($medium-screen-up) {
+  .app-body {
+    padding: $base-padding;
+  }
 }

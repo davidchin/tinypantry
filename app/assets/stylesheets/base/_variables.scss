@@ -4,17 +4,23 @@ $serif: Bitter, Georgia, Cambria, Times, serif;
 $base-font-family: $sans-serif;
 $header-font-family: $sans-serif;
 
-// Sizes
+// Font Size
+$base-font-size: 16px;
+$mini-font-size: round($base-font-size * .8125);
+$small-font-size: round($base-font-size * .875);
+$large-font-size: round($base-font-size * 1.25);
+
+// Line Height
 $unitless-line-height: 1.5;
 $unitless-small-line-height: 1.3;
 $unitless-header-line-height: $unitless-small-line-height;
-$base-font-size: 16px;
 $base-line-height: $base-font-size * $unitless-line-height;
 $small-line-height: $base-font-size * $unitless-header-line-height;
+
+// Border Radius
+$small-border-radius: em(1.5);
 $base-border-radius: em(3);
-$large-font-size: round($base-font-size * 1.25);
-$small-font-size: round($base-font-size * .875);
-$mini-font-size: round($base-font-size * .8125);
+$large-border-radius: em(6);
 
 // Colors
 $white: #fff;

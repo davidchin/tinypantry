@@ -15,7 +15,7 @@
 
 .app-header__container {
   @extend %outer-container;
-  padding: 0 $base-padding;
+  padding: 0 $small-padding;
 }
 
 .app-header__logo {
@@ -45,7 +45,12 @@
 
   > .fa {
     @extend %icon--left;
+    font-size: em($large-font-size);
   }
+}
+
+.app-header__link-caption {
+  display: none;
 }
 
 .app-header__section-left {
@@ -71,4 +76,26 @@
 
 .headroom--unpinned {
   @include transform(translateY(-100%));
+}
+
+// --------------------------------------------------
+// Small screen up
+@include media($small-screen-up) {
+  .app-header__link-caption {
+    display: inline-block;
+  }
+
+  .app-header__link {
+    > .fa {
+      font-size: em($base-font-size);
+    }
+  }
+}
+
+// --------------------------------------------------
+// Medium screen up
+@include media($medium-screen-up) {
+  .app-header__container {
+    padding: 0 $base-padding;
+  }
 }

@@ -2,17 +2,12 @@
 .recipe-nav-bar {
   border-bottom: 1px solid $light-gray;
   background: $light-whitesmoke;
-
-  .recipe-nav-bar__container {
-    @extend %outer-container;
-    padding: 0 $base-padding;
-  }
+  font-size: em($small-font-size);
 
   .recipe-filters {
     @include span-columns(9);
     margin-top: 12px;
     margin-bottom: 12px;
-    color: $medium-gray;
   }
 
   .recipe-search {
@@ -22,7 +17,16 @@
   }
 }
 
+.recipe-nav-bar__container {
+  @extend %outer-container;
+  padding: 0 $small-padding;
+}
+
 // Recipe filter
+.recipe-filtres {
+  color: $medium-gray;
+}
+
 .recipe-filters__list {
   &,
   > li {
@@ -54,39 +58,6 @@
 
   .recipe-tile {
     margin-top: $base-padding * 2;
-  }
-
-  @include media($small-screen) {
-    .recipe-tile {
-      @include span-columns(6);
-      @include omega(2n);;
-
-      &:nth-of-type(-n+2) {
-        margin-top: 0;
-      }
-    }
-  }
-
-  @include media($medium-screen) {
-    .recipe-tile {
-      @include span-columns(4);
-      @include omega(3n);
-
-      &:nth-of-type(-n+3) {
-        margin-top: 0;
-      }
-    }
-  }
-
-  @include media($large-screen-up) {
-    .recipe-tile {
-      @include span-columns(3);
-      @include omega(4n);
-
-      &:nth-of-type(-n+4) {
-        margin-top: 0;
-      }
-    }
   }
 }
 
@@ -173,4 +144,57 @@
 
 .recipe-detail__description {
   margin: em($base-line-height) 0;
+}
+
+// --------------------------------------------------
+// Small screen
+@include media($small-screen) {
+  .recipe-tiles {
+    .recipe-tile {
+      @include span-columns(6);
+      @include omega(2n);;
+
+      &:nth-of-type(-n+2) {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Medium screen
+@include media($medium-screen) {
+  .recipe-tiles {
+    .recipe-tile {
+      @include span-columns(4);
+      @include omega(3n);
+
+      &:nth-of-type(-n+3) {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+// --------------------------------------------------
+// Medium screen up
+@include media($medium-screen-up) {
+  .recipe-nav-bar {
+    font-size: em($base-font-size);
+  }
+
+  .recipe-nav-bar__container {
+    padding: 0 $base-padding;
+  }
+
+  .recipe-tiles {
+    .recipe-tile {
+      @include span-columns(3);
+      @include omega(4n);
+
+      &:nth-of-type(-n+4) {
+        margin-top: 0;
+      }
+    }
+  }
 }
