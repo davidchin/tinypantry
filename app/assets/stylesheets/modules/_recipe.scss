@@ -2,16 +2,16 @@
 .recipe-nav-bar {
   border-bottom: 1px solid $light-gray;
   background: $light-whitesmoke;
+  line-height: $unitless-mini-line-height;
   font-size: $small-font-size;
 
-  .recipe-filters {
-    @include span-columns(9);
+  .recipe-filters,
+  .recipe-search__form-toggle {
     margin-top: 12px;
     margin-bottom: 12px;
   }
 
-  .recipe-search {
-    @include span-columns(3);
+  .recipe-search__form {
     margin-top: 5px;
     margin-bottom: 5px;
   }
@@ -19,11 +19,13 @@
 
 .recipe-nav-bar__container {
   @extend %outer-container;
+  @extend %clearfix;
   padding: 0 $small-padding;
 }
 
 // Recipe filter
-.recipe-filtres {
+.recipe-filters {
+  float: left;
   color: $medium-gray;
 }
 
@@ -34,7 +36,11 @@
   }
 
   > li {
-    margin-left: $base-font-size;
+    margin-right: $base-font-size;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
   }
 }
 
@@ -50,6 +56,23 @@
       content: $fa-var-caret-down;
     }
   }
+}
+
+.recipe-filters__label {
+  margin-right: $base-font-size;
+}
+
+// Recipe search
+.recipe-search__form {
+  position: absolute;
+  right: $small-padding;
+  left: $small-padding;
+}
+
+.recipe-search__form-toggle {
+  float: right;
+  padding: 0;
+  font-size: $large-font-size;
 }
 
 // Recipe tile
@@ -96,7 +119,7 @@
 }
 
 .recipe-tile__title {
-  @extend %text--base;
+  @extend %text--small;
   display: block;
   margin: em(6) 0;
 }
@@ -104,7 +127,7 @@
 // Recipe meta
 .recipe-meta {
   @extend %text--muted;
-  @extend %text--small;
+  @extend %text--mini;
   margin: em(6) 0;
   line-height: $unitless-small-line-height;
 
@@ -148,7 +171,7 @@
 
 // --------------------------------------------------
 // Small screen
-@include media($small-screen) {
+@include media($small-screen-down) {
   .recipe-tiles {
     .recipe-tile {
       @include span-columns(6);
@@ -158,6 +181,14 @@
         margin-top: 0;
       }
     }
+  }
+}
+
+// --------------------------------------------------
+// Small screen up
+@include media($small-screen-up) {
+  .recipe-tile__title {
+    font-size: $base-font-size;
   }
 }
 
@@ -196,5 +227,27 @@
         margin-top: 0;
       }
     }
+  }
+
+  .recipe-filters {
+    @include span-columns(9);
+  }
+
+  .recipe-search {
+    @include span-columns(3);
+  }
+
+  .recipe-search__form {
+    position: static;
+    right: auto;
+    left: auto;
+
+    &.ng-hide {
+      display: block !important;
+    }
+  }
+
+  .recipe-search__form-toggle {
+    display: none;
   }
 }

@@ -19,12 +19,12 @@
 }
 
 .app-header__logo {
-  @include logo(144px, 28px);
+  @include logo(123px, 24px);
   position: absolute;
   top: 0;
   left: 50%;
-  margin: ($header-height - em(28)) * .5 0;
-  margin-left: -144px * .5;
+  margin: ($header-height - em(24)) * .5 0;
+  margin-left: -123px * .5;
 
   &,
   &:hover {
@@ -95,7 +95,21 @@
 // --------------------------------------------------
 // Medium screen up
 @include media($medium-screen-up) {
+  .app-header {
+    height: $large-header-height;
+  }
+
+  .app-header__link {
+    line-height: $large-header-height;
+  }
+
   .app-header__container {
     padding: 0 $base-padding;
+  }
+
+  .app-header__logo {
+    @include logo(144px, 28px);
+    margin: ($large-header-height - em(28)) * .5 0;
+    margin-left: -144px * .5;
   }
 }

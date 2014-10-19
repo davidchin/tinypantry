@@ -13,9 +13,11 @@ $large-font-size: $base-font-size * 1.25;
 // Line Height
 $unitless-line-height: 1.5;
 $unitless-small-line-height: 1.3;
+$unitless-mini-line-height: 1;
 $unitless-header-line-height: $unitless-small-line-height;
 $base-line-height: $base-font-size * $unitless-line-height;
-$small-line-height: $base-font-size * $unitless-header-line-height;
+$small-line-height: $base-font-size * $unitless-small-line-height;
+$mini-line-height: $base-font-size * $unitless-mini-line-height;
 
 // Border Radius
 $small-border-radius: em(1.5);
@@ -101,7 +103,8 @@ $modal-padding: 30px;
 $modal-overlay-background-color: transparentize($black, .2);
 
 // Dimensions
-$header-height: em(50);
+$header-height: em(45);
+$large-header-height: em(50);
 $footer-height: em(55);
 $slide-menu-columns: 3;
 

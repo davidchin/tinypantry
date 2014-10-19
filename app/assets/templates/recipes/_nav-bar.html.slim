@@ -1,12 +1,15 @@
 div class="recipe-nav-bar__container"
   div class="recipe-filters"
-    | Order by
+    span class="recipe-filters__label" Order by
     ul class="recipe-filters__list"
       li ng-repeat="type in recipes.config.orderTypes"
         a class="recipe-filters__link" ng-class="{ 'is-active': type.key == recipes.status.orderedBy }" ng-click="orderBy(type.key)"
           | {{ type.name }}
 
   div class="recipe-search" ng-submit="search()"
-    form name="form"
+    form class="recipe-search__form" name="searchForm" ng-show="searchForm.visible"
       div class="search-input-container"
         input type="text" placeholder="Search" class="search-input" autocorrect="false" autocapitalize="off" ng-model="recipes.query"
+
+    button class="recipe-search__form-toggle" ng-click="searchForm.visible = !searchForm.visible"
+      i class="fa fa-search"

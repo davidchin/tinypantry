@@ -34,6 +34,10 @@
 // --------------------------------------------------
 // Medium screen up
 @include media($medium-screen-up) {
+  .app-container--fixed-header {
+    padding-top: $large-header-height;
+  }
+
   .app-body {
     padding: $base-padding;
   }
