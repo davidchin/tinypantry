@@ -154,19 +154,22 @@
   }
 }
 
-.recipe-detail__image,
-.recipe-detail__body {
-  @include span-columns(6);
-}
-
 .recipe-detail__image {
   > img {
     display: block;
   }
 }
 
+.recipe-detail__body {
+  margin-top: $modal-padding;
+}
+
 .recipe-detail__description {
   margin: $base-line-height 0;
+}
+
+.recipe-detail__title {
+  font-size: $base-font-size * 1.25;
 }
 
 // --------------------------------------------------
@@ -249,5 +252,18 @@
 
   .recipe-search__form-toggle {
     display: none;
+  }
+
+  .recipe-detail__image,
+  .recipe-detail__body {
+    @include span-columns(6);
+  }
+
+  .recipe-detail__body {
+    margin-top: 0;
+  }
+
+  .recipe-detail__title {
+    font-size: $base-font-size * 2.25;
   }
 }

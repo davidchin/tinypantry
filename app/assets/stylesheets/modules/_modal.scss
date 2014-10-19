@@ -1,11 +1,13 @@
 .modal {
-  @include transform(translateX(-50%) translateY(-50%));
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 2000;
   background: $modal-background-color;
-  width: column-width(6);
+  padding: $modal-header-height 0 $modal-footer-height;
+  width: 100%;
   min-width: 300px;
   max-width: $max-width;
   height: auto;
@@ -27,28 +29,30 @@
   }
 }
 
-.modal--large {
-  width: column-width(12);
-}
-
-.modal--small {
-  width: column-width(4);
-}
-
-.modal--footerless {
-  padding-bottom: $modal-padding;
-}
-
 .modal-body--is-opened {
   overflow: hidden;
 }
 
+.modal--without-footer {
+  padding-bottom: 0;
+}
+
 .modal__header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
   border-bottom: 1px solid $modal-header-border-color;
-  padding: 15px $modal-padding;
-  min-height: em(30) + $base-line-height;
+  background: $modal-header-background-color;
+  padding: em(15) $modal-padding;
+  min-height: $modal-padding + $base-line-height;
   text-align: center;
   box-sizing: border-box;
+}
+
+.modal--with-plain-header {
+  padding-top: $modal-header-height - $modal-padding;
 }
 
 .modal__header--plain {
@@ -56,14 +60,18 @@
 }
 
 .modal__footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: $modal-footer-background-color;
-  padding: 15px $modal-padding;
+  padding: em(15) $modal-padding;
 }
 
 .modal__body {
   position: relative;
   padding: $modal-padding;
-  max-height: 600px;
+  max-height: 100%;
   overflow: auto;
 
   .app-body {
@@ -100,5 +108,45 @@
   &.ng-enter.ng-enter-active,
   &.ng-leave {
     opacity: 1;
+  }
+}
+
+// --------------------------------------------------
+// Medium screen up
+@include media($medium-screen-up) {
+  .modal {
+    @include transform(translateX(-50%) translateY(-50%));
+    top: 50%;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: column-width(6);
+  }
+
+  .modal--large {
+    width: column-width(12);
+  }
+
+  .modal--small {
+    width: column-width(4);
+  }
+
+  .modal__header {
+    padding: em(15) $large-modal-padding;
+    min-height: $large-modal-padding + $base-line-height;
+  }
+
+  .modal__body {
+    padding: $large-modal-padding;
+    max-height: em(600);
+  }
+
+  .modal__footer {
+    padding: em(15) $large-modal-padding;
+  }
+
+  .modal__close-btn {
+    top: $large-modal-padding / 2;
+    right: $large-modal-padding / 2;
   }
 }

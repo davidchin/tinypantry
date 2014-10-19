@@ -1,30 +1,4 @@
-// Typography
-$sans-serif: Lato, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
-$serif: Bitter, Georgia, Cambria, Times, serif;
-$base-font-family: $sans-serif;
-$header-font-family: $sans-serif;
-
-// Font Size
-$base-font-size: em(16);
-$mini-font-size: $base-font-size * .8125;
-$small-font-size: $base-font-size * .875;
-$large-font-size: $base-font-size * 1.25;
-
-// Line Height
-$unitless-line-height: 1.5;
-$unitless-small-line-height: 1.3;
-$unitless-mini-line-height: 1;
-$unitless-header-line-height: $unitless-small-line-height;
-$base-line-height: $base-font-size * $unitless-line-height;
-$small-line-height: $base-font-size * $unitless-small-line-height;
-$mini-line-height: $base-font-size * $unitless-mini-line-height;
-
-// Border Radius
-$small-border-radius: em(1.5);
-$base-border-radius: em(3);
-$large-border-radius: em(6);
-
-// Colors
+// Colour
 $white: #fff;
 $black: #000;
 $light-aqua-blue: #c3f5fe;
@@ -42,71 +16,103 @@ $yellow: #ffd600;
 $whitesmoke: #efefef;
 $light-whitesmoke: #f7f7f7;
 
-// Brand Colors
+// Typography
+$sans-serif: Lato, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$serif: Bitter, Georgia, Cambria, Times, serif;
+$base-font-family: $sans-serif;
+$header-font-family: $sans-serif;
+
+// Font Colour
+$base-font-color: $dark-gray;
+$base-accent-color: $aqua-blue;
+$muted-font-color: $medium-gray;
+
+// Font Size
+$base-font-size: em(16);
+$mini-font-size: $base-font-size * .8125;
+$small-font-size: $base-font-size * .875;
+$large-font-size: $base-font-size * 1.25;
+
+// Line Height
+$unitless-line-height: 1.5;
+$unitless-small-line-height: 1.3;
+$unitless-mini-line-height: 1;
+$unitless-header-line-height: $unitless-small-line-height;
+$base-line-height: $base-font-size * $unitless-line-height;
+$small-line-height: $base-font-size * $unitless-small-line-height;
+$mini-line-height: $base-font-size * $unitless-mini-line-height;
+
+// Feedback
+$alert-color: $light-yellow;
+$error-color: $light-red;
+$notice-color: $light-yellow;
+$success-color: $light-green;
+
+// Branding
 $base-brand-color: $aqua-blue;
 
-// Background Colors
+// Background
 $base-background-color: $white;
-$header-background-color: $base-brand-color;
 
-// Font Colors
-$base-font-color: $dark-gray;
-$header-font-color: $white;
-$muted-font-color: $medium-gray;
-$base-accent-color: $aqua-blue;
-
-// Link Colors
+// Link
 $base-link-color: $base-accent-color;
 $hover-link-color: darken($base-accent-color, 15);
-$header-link-color: $header-font-color;
-$header-hover-link-color: $light-aqua-blue;
 
-// Button Colors
+// Padding
+$small-padding: em(15);
+$medium-padding: em(20);
+$base-padding: em(25);
+
+// Border
+$base-border-color: $light-gray;
+$small-border-radius: em(1.5);
+$base-border-radius: em(3);
+$large-border-radius: em(6);
+
+// Button
+$button-padding: em(10) em(20);
+$button-height: $base-line-height + 2 * nth($button-padding, 1);
 $base-button-color: $base-link-color;
 $hover-button-color: $hover-link-color;
 $light-button-color: $whitesmoke;
 $hover-light-button-color: darken($light-button-color, 10);
 $disabled-button-color: $light-gray;
 
-// Border Colors
-$base-border-color: $light-gray;
-
-// Flash Colors
-$alert-color: $light-yellow;
-$error-color: $light-red;
-$notice-color: $light-yellow;
-$success-color: $light-green;
-
-// Forms
+// Form
+$form-border-radius: $base-border-radius;
 $form-border-color: $base-border-color;
 $form-border-color-hover: darken($base-border-color, 10);
 $form-border-color-focus: $base-accent-color;
-$form-border-radius: $base-border-radius;
-$form-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .06);
-$form-box-shadow-focus: $form-box-shadow, 0 0 5px rgba(darken($form-border-color-focus, 5), .7);
 $form-font-size: $base-font-size;
 $form-font-family: $base-font-family;
+$form-box-shadow: inset 0 1px 3px rgba(0, 0, 0, .06);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px rgba(darken($form-border-color-focus, 5), .7);
 
-// Icons
+// Icon
 $icon-margin: em(5);
 
-// Paddings
-$small-padding: em(15);
-$medium-padding: em(20);
-$base-padding: em(25);
+// Header
+$header-background-color: $base-brand-color;
+$header-height: em(45);
+$large-header-height: em(50);
+$header-font-color: $white;
+$header-link-color: $header-font-color;
+$header-hover-link-color: $light-aqua-blue;
+
+// Footer
+$footer-height: em(55);
 
 // Modal
 $modal-background-color: $white;
+$modal-header-background-color: $modal-background-color;
 $modal-footer-background-color: $whitesmoke;
 $modal-header-border-color: $whitesmoke;
-$modal-padding: 30px;
 $modal-overlay-background-color: transparentize($black, .2);
+$modal-padding: em(20);
+$large-modal-padding: em(30);
+$modal-header-height: $modal-padding + $base-line-height;
+$modal-footer-height: $modal-padding + $button-height;
 
-// Dimensions
-$header-height: em(45);
-$large-header-height: em(50);
-$footer-height: em(55);
+// Slide menu
 $slide-menu-columns: 3;
-
-// Transitions
 $slide-menu-transition: transform 500ms ease;
