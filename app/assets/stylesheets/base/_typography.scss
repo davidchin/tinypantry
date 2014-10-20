@@ -20,27 +20,27 @@ h6 {
 }
 
 h1 {
-  font-size: $base-font-size * 2.25; // 36px
+  font-size: $h1-font-size;
 }
 
 h2 {
-  font-size: $base-font-size * 1.75; // 28px
+  font-size: $h2-font-size;
 }
 
 h3 {
-  font-size: $base-font-size * 1.25; // 20px
+  font-size: $h3-font-size;
 }
 
 h4 {
-  font-size: $base-font-size * 1.125; // 18px
+  font-size: $h4-font-size;
 }
 
 h5 {
-  font-size: $base-font-size;
+  font-size: $h5-font-size;
 }
 
 h6 {
-  font-size: $base-font-size;
+  font-size: $h6-font-size;
 }
 
 p {

@@ -1,0 +1,14 @@
+.sign-up__title {
+  @extend %text--center;
+  margin-bottom: em-to-px($base-padding);
+}
+
+.sign-up-form {
+  margin: 0 auto;
+  width: column-width(3);
+}
+
+.sign-up-form__footer {
+  @extend %form-footer;
+  text-align: center;
+}

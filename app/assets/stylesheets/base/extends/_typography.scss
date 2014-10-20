@@ -60,3 +60,12 @@
 %text--mini {
   font-size: $mini-font-size;
 }
+
+%text--center {
+  text-align: center;
+}
+
+%hide-text {
+  @include hide-text;
+}
+

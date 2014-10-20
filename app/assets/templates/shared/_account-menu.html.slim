@@ -1,12 +1,15 @@
 nav slide-menu="account-slide-menu" class="app-slide-menu"
-  loading-indicator model="categories.status.set" class="loading-indicator loading-indicator--large"
+  loading-indicator model="currentUser.status.set" class="loading-indicator loading-indicator--large"
 
   div class="app-slide-menu__item" ng-show="currentUser.status.loggedIn"
     a class="app-slide-menu__item-link" ui-sref="sessions.destroy" slide-menu-toggle=""
       i class="fa fa-user"
-      | Logout
+      | Log Out
 
   div class="app-slide-menu__item" ng-hide="currentUser.status.loggedIn"
     a class="app-slide-menu__item-link" ng-click="openLogin()" slide-menu-toggle=""
-      loading-indicator model="categories.status.set" type="inline" class="loading-indicator"
-      | Login
+      | Log In
+
+  div class="app-slide-menu__item" ng-hide="currentUser.status.loggedIn"
+    a class="app-slide-menu__item-link" ng-click="openSignUp()" slide-menu-toggle=""
+      | Sign Up

@@ -13,3 +13,10 @@
 .flash--success {
   @extend %flash-success;
 }
+
+.app-flash {
+  .flash {
+    margin-bottom: 0;
+    text-align: center;
+  }
+}

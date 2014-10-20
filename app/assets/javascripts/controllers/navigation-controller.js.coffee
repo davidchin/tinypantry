@@ -4,6 +4,7 @@ angular.module('navigation')
       constructor: ->
         @categories = new Categories
         @loginModal = new Modal({ scope: $scope })
+        @signUpModal = new Modal({ scope: $scope })
         @currentUser = currentUser
 
         @read()
@@ -15,6 +16,12 @@ angular.module('navigation')
 
       closeLogin: ->
         @loginModal.close()
+
+      openSignUp: ->
+        @signUpModal.open('signup')
+
+      closeSignUp: ->
+        @signUpModal.close()
 
       read: ->
         @categories.read()

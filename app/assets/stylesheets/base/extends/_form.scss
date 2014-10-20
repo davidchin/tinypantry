@@ -1,0 +1,10 @@
+%form-footer {
+  @extend %text--small;
+  @extend %text--muted;
+  margin-top: $base-padding;
+
+  a {
+    @extend %text--muted;
+    @extend %text--bold;
+  }
+}

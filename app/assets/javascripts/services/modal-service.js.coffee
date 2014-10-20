@@ -83,7 +83,7 @@ angular.module('modal')
           $animate.leave(@element)
             .then =>
               # Clean up
-              @scope.$destroy()
+              @scope?.$destroy()
 
               # Remove from stack
               modalStack.remove(this)

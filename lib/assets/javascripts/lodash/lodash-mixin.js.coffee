@@ -22,4 +22,7 @@ _.mixin {
           value
     else
       return obj
+
+  hasValue: (obj, value) ->
+    !!_.findKey(obj, (attr) => attr == value)
 }

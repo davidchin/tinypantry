@@ -1,0 +1,11 @@
+@function em-to-px($em, $base: $em-base) {
+  @if not unitless($em) {
+    $em: strip-units($em);
+  }
+
+  @if not unitless($base) {
+    $base: strip-units($base);
+  }
+
+  @return ($em * $base) * 1px;
+}

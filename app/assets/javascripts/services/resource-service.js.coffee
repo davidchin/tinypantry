@@ -33,6 +33,7 @@ angular.module('resource')
 
     transformRequest = (config) ->
       config.params = _.underscoredObj(config.params)
+      config.data = _.underscoredObj(config.data)
 
       config
 

@@ -1,6 +1,6 @@
 .session-new__title {
-  margin-bottom: $base-padding;
-  text-align: center;
+  @extend %text--center;
+  margin-bottom: em-to-px($base-padding);
 }
 
 .session-form {
@@ -9,13 +9,6 @@
 }
 
 .session-form__footer {
-  @extend %text--small;
-  @extend %text--muted;
-  margin-top: $base-padding;
+  @extend %form-footer;
   text-align: center;
-
-  a {
-    @extend %text--muted;
-    @extend %text--bold;
-  }
 }

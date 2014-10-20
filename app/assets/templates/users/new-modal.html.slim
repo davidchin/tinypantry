@@ -1,0 +1,7 @@
+div class="modal modal--footerless"
+  div class="modal__header modal__header--plain"
+    a class="modal__close-btn" ng-click="signUpModal.close()"
+      i class="fa fa-times"
+
+  div class="modal__body"
+    ng-include src="'#{ asset_path('users/new.html') }'"

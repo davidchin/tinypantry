@@ -44,8 +44,12 @@ angular.module('model')
         if @dataAttrs?.length
           _.pick(@, @dataAttrs)
         else
-          self = _.omit(@, 'config', 'status', 'requests', 'headers', 'dataAttrs')
-          angular.fromJson(angular.toJson(self))
+          ignoreAttrs = ['config', 'status', 'requests', 'headers', 'dataAttrs']
+  
+          _.pick @, (value, attr) =>
+            return true if typeof value != 'function' &&
+                           attr not in ignoreAttrs &&
+                           !_.hasValue(value, @)
 
       store: (key, value) ->
         if value?

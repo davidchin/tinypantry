@@ -1,0 +1,21 @@
+angular.module('user')
+  .config ($stateProvider, ModalProvider) ->
+    $stateProvider
+      .state 'users',
+        abstract: true
+        template: '<ui-view />'
+
+      .state 'users.new',
+        url: '/sign-up'
+        templateUrl: '<%= asset_path("users/new.html") %>'
+        controller: 'UsersNewController'
+
+      .state 'users.edit',
+        url: '/users/:id/edit'
+        templateUrl: '<%= asset_path("users/edit.html") %>'
+        controller: 'UsersNewController'
+
+    ModalProvider
+      .when 'signup',
+        templateUrl: '<%= asset_path("users/new-modal.html") %>'
+        controller: 'UsersNewController'

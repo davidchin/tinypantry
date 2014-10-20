@@ -15,12 +15,13 @@ Rails.application.routes.draw do
         post 'login', to: 'sessions#create'
         delete 'logout', to: 'sessions#destroy'
         get 'verify', to: 'sessions#verify'
+        
+        resources :users, only: [:create, :update, :destroy],
+                          controller: 'registrations'
       end
 
       scope module: 'devise' do
         resource :password, only: [:create, :update]
-        resources :users, only: [:create, :update, :destroy],
-                          controller: 'registrations'
       end
     end
   end
