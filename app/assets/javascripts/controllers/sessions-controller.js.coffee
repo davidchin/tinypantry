@@ -1,5 +1,5 @@
 angular.module('session')
-  .controller 'SessionsNewController', ($scope, $state, $timeout, currentUser, flash, modalStack, BaseController) ->
+  .controller 'SessionsNewController', ($scope, $state, currentUser, flash, modalStack, BaseController) ->
     class SessionsNewController extends BaseController
       constructor: ->
         @currentUser = currentUser
@@ -11,13 +11,14 @@ angular.module('session')
 
       login: ->
         @currentUser.login()
-          .then (user) ->
+          .then ->
             flash.set('You are successfully logged in.')
-
             modalStack.close()
-              .then -> $state.go('home', {}, { reload: true })
+          .then =>
+            $state.go('home', {}, { reload: true })
+            @currentUser.password = null
 
-            return user
+            return @currentUser
 
     new SessionsNewController
 

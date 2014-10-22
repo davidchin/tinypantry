@@ -1,20 +1,36 @@
 // Colour
+// -- Neutral
 $white: #fff;
 $black: #000;
+
+// -- Blue
 $light-aqua-blue: #c3f5fe;
 $aqua-blue: #73cde1;
 $dark-aqua-blue: #148296;
+
+// -- Gray
 $dark-gray: #333;
 $dark-medium-gray: #666;
 $medium-gray: #999;
 $gray: #bbb;
 $light-gray: #ddd;
-$light-red: #fbe3e4;
-$light-yellow: #fff6bf;
-$light-green: #e6efc2;
-$yellow: #ffd600;
 $whitesmoke: #efefef;
 $light-whitesmoke: #f7f7f7;
+
+// -- Red
+$light-red: #fbe3e4;
+$red: #f00;
+$dark-red: darken($light-red, 50);
+
+// -- Yellow
+$light-yellow: #fff6bf;
+$dark-yellow: darken($light-yellow, 50);
+$yellow: #ffd600;
+
+// -- Green
+$light-green: #e6efc2;
+$green: #4aa800;
+$dark-green: darken($light-green, 50);
 
 // Typography
 $sans-serif: Lato, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
@@ -26,6 +42,10 @@ $header-font-family: $sans-serif;
 $base-font-color: $dark-gray;
 $base-accent-color: $aqua-blue;
 $muted-font-color: $medium-gray;
+$alert-font-color: $dark-yellow;
+$error-font-color: $red;
+$notice-font-color: $dark-yellow;
+$success-font-color: $green;
 
 // Font Size
 $base-font-size: em(16);
@@ -47,18 +67,17 @@ $unitless-header-line-height: $unitless-small-line-height;
 $base-line-height: $base-font-size * $unitless-line-height;
 $small-line-height: $base-font-size * $unitless-small-line-height;
 $mini-line-height: $base-font-size * $unitless-mini-line-height;
-
-// Feedback
-$alert-color: $light-yellow;
-$error-color: $light-red;
-$notice-color: $light-yellow;
-$success-color: $light-green;
+$half-base-line-height: $base-line-height * .5;
 
 // Branding
 $base-brand-color: $aqua-blue;
 
 // Background
 $base-background-color: $white;
+$alert-background-color: $light-yellow;
+$error-background-color: $light-red;
+$notice-background-color: $light-yellow;
+$success-background-color: $light-green;
 
 // Link
 $base-link-color: $base-accent-color;

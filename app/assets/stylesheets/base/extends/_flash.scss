@@ -14,17 +14,17 @@
 }
 
 %flash-alert {
-  @include flash($alert-color);
+  @include flash($alert-background-color);
 }
 
 %flash-error {
-  @include flash($error-color);
+  @include flash($error-background-color);
 }
 
 %flash-notice {
-  @include flash($notice-color);
+  @include flash($notice-background-color);
 }
 
 %flash-success {
-  @include flash($success-color);
+  @include flash($success-background-color);
 }

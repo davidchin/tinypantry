@@ -5,6 +5,7 @@ angular.module 'application', [
   'error'
   'form'
   'loading'
+  'message'
   'sanitize'
   'touch'
 

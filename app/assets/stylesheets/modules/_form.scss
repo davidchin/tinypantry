@@ -2,6 +2,29 @@ textarea,
 #{$all-text-inputs},
 select[multiple=multiple] {
   &.ng-dirty.ng-invalid.ng-touched:not(:focus) {
-    border: 1px solid #f00;
+    border: 1px solid $error-font-color;
   }
+}
+
+.input-message {
+  display: block;
+  margin-top: -$half-base-line-height;
+  margin-bottom: $half-base-line-height;
+  font-size: $small-font-size;
+}
+
+.input-message--notice {
+  color: $notice-font-color;
+}
+
+.input-message--success {
+  color: $success-font-color;
+}
+
+.input-message--error {
+  color: $error-font-color;
+}
+
+.input-message--muted {
+  color: $muted-font-color;
 }

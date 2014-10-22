@@ -27,7 +27,7 @@ angular.module('user')
 
             return user
 
-  .factory 'CurrentUser', ($q, userService, User, Session) ->
+  .factory 'CurrentUser', ($q, $timeout, userService, User, Session) ->
     class CurrentUser extends User
       constructor: ->
         @session = new Session
@@ -48,7 +48,6 @@ angular.module('user')
         @session.create({}, { email, password })
           .finally =>
             @status.loggedIn = true
-            @password = null
 
       logout: ->
         @session.destroy()

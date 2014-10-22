@@ -3,9 +3,19 @@ section class="app-body"
     header
       h1 class="session-new__title" Log In
 
-    form name="form" class="session-form" ng-submit="login()"
-      input type="email" placeholder="E-mail" ng-model="currentUser.email"
-      input type="password" placeholder="Password" ng-model="currentUser.password"
+    form name="sessionForm" class="session-form" ng-submit="login()"
+      input type="email" name="email" placeholder="E-mail" ng-model="currentUser.email" ng-required="true"
+
+      ng-messages error-for="sessionForm.email" class="input-message input-message--error"
+        ng-message when="email" Your input must be an email
+        ng-message when="required" Your email must be entered
+
+      input type="password" name="password" placeholder="Password" ng-model="currentUser.password" ng-required="true" ng-minlength="6" ng-maxlength="128"
+
+      ng-messages error-for="sessionForm.password" class="input-message input-message--error"
+        ng-message when="required" Your password must be entered
+        ng-message when="minlength" Your password must be more than 6 characters
+        ng-message when="maxlength" Your password must be less than 128 characters
 
       button type="submit" class="button button--block" Submit
 
