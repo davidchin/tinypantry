@@ -47,6 +47,7 @@ angular.module('user')
       login: (email = @email, password = @password) ->
         @session.create({}, { email, password })
           .finally =>
+            @status.loggedIn = true
             @password = null
 
       logout: ->

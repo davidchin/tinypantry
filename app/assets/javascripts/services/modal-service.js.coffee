@@ -8,7 +8,7 @@ angular.module('modal')
     find: (name) ->
       @routes[name]
 
-    $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, $document, modalStack, modalBackground, loadingIndicatorManager) ->
+    $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, $document, $timeout, modalStack, modalBackground, loadingIndicatorManager) ->
       provider = this
 
       class Modal
@@ -35,7 +35,7 @@ angular.module('modal')
             return @close()
               .then => @open(name, params)
 
-          _.defaults(@config, provider.find(name))
+          _.defaults(@config, { name }, provider.find(name))
 
           loadingIndicatorManager.start('app')
 
@@ -50,6 +50,9 @@ angular.module('modal')
               # Loading indicator
               loadingIndicatorManager.stop('app')
 
+              # Add to stack
+              modalStack.push(this)
+
               # Controller
               if @config.controller
                 locals = { $scope: @scope, $stateParams: params }
@@ -58,9 +61,6 @@ angular.module('modal')
 
               # Compile
               $compile(@element)(@scope)
-
-              # Add to stack
-              modalStack.push(this)
 
               # Attach background
               modalBackground.enter(parentElement)
@@ -71,6 +71,10 @@ angular.module('modal')
               # Attach
               $animate.addClass(@config.body, 'modal-body--is-opened')
               $animate.enter(@element, parentElement, lastElement)
+                .then =>
+                  # Notify
+                  $timeout => @notify('open', this)
+
 
         close: ->
           return $q.when() unless modalStack.has(this)
@@ -91,6 +95,9 @@ angular.module('modal')
               delete @element
               delete @scope
 
+              # Notify
+              $timeout => @notify('close', this)
+
         show: ->
           $animate.removeClass(@element, 'ng-hide') if @element
 
@@ -100,6 +107,9 @@ angular.module('modal')
         watch: ->
           $rootScope.$on '$stateChangeStart', => @close()
           @scope?.$on 'modalBackground:click', => @close()
+
+        notify: (event, args...) ->
+          $rootScope.$broadcast("modal:#{ event }", args...)
 
   .factory 'modalBackground', ($rootScope, $animate, $timeout) ->
     class ModalBackground
@@ -114,14 +124,14 @@ angular.module('modal')
         $animate.enter(@element, parent)
 
         @element.on 'click', =>
-          $timeout => @notify('click')
+          $timeout => @notify('click', this)
 
       leave: ->
         $animate.leave(@element)
 
     return new ModalBackground
 
-  .factory 'modalStack', ->
+  .factory 'modalStack', ($q) ->
     class ModalStack
       constructor: ->
         @modals = []
@@ -144,8 +154,21 @@ angular.module('modal')
       has: (modal) ->
         modal in @modals
 
+      is: (name) ->
+        @current()?.config.name == name
+
       last: ->
         @modals[@modals.length - 1]
 
+      current: ->
+        @last.apply(@, arguments)
+
+      close: ->
+        modal = @current()
+
+        if modal?
+          modal.close()
+        else
+          $q.when()
 
     return new ModalStack

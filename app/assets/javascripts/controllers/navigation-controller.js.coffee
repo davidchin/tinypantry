@@ -18,7 +18,7 @@ angular.module('navigation')
         @loginModal.close()
 
       openSignUp: ->
-        @signUpModal.open('signup')
+        @signUpModal.open('signUp')
 
       closeSignUp: ->
         @signUpModal.close()

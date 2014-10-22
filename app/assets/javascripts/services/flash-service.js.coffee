@@ -67,8 +67,8 @@ angular.module('flash')
       clear: ->
         flash.clear() for flash in @flashes
 
-    $rootScope.$on '$stateChangeSuccess', ->
-      flashFactory.show()
+    $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+      flashFactory.show() unless fromState.abstract
 
     return flashFactory
 

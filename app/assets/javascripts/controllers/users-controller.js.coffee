@@ -1,5 +1,5 @@
 angular.module('user')
-  .controller 'UsersNewController', ($scope, $state, flash, currentUser, BaseController) ->
+  .controller 'UsersNewController', ($scope, $state, flash, currentUser, modalStack, BaseController) ->
     class UsersNewController extends BaseController
       constructor: ->
         @user = currentUser
@@ -8,10 +8,12 @@ angular.module('user')
 
       signUp: ->
         @user.create()
-          .then -> @user.login()
+          .then => @user.login()
           .then (user) ->
             flash.set('You are successfully signed up.')
-            $state.go('home')
+
+            modalStack.close()
+              .then -> $state.go('home', {}, { reload: true })
 
             return user
 

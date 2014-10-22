@@ -34,7 +34,7 @@ angular.module('recipe')
         @read(params, true) if params.page
 
       orderBy: (key) ->
-        $state.go($state.current, { orderBy: key })
+        $state.go('recipes.index', { orderBy: key })
 
       bookmarked: ->
         currentUser.ready()
