@@ -54,6 +54,7 @@ angular.module('user')
           .finally =>
             @status.loggedIn = false
             @status.admin = false
+            @unset()
 
       hasRole: (roleName) ->
         _.any @roles, (role) ->
