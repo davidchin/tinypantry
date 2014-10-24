@@ -14,6 +14,7 @@ angular.module('session')
           .then ->
             flash.set('You are successfully logged in.')
             modalStack.close()
+
           .then =>
             $state.go('home', {}, { reload: true })
             @currentUser.password = null

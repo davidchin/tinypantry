@@ -14,6 +14,7 @@ angular.module 'application', [
   'category'
   'feed'
   'navigation'
+  'password'
   'recipe'
   'session'
   'user'
