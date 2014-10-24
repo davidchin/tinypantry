@@ -4,6 +4,8 @@ angular.module('message')
       directive = $delegate[0]
       link = directive.link
 
+      directive.scope = true
+
       directive.compile = ->
         (scope, element, attrs) ->
           if attrs.errorFor
@@ -23,6 +25,9 @@ angular.module('message')
             scope.$watch visibleExp, (visible) ->
               method = if visible then 'removeClass' else 'addClass'
               $animate[method](element, 'ng-hide')
+
+            scope.$watch "#{ attrs.errorFor }.$remoteError", (errors) ->
+              scope.$remoteError = errors
 
           # Call super method
           link.apply(@, arguments)

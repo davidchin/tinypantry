@@ -29,7 +29,7 @@ angular.module('category')
 
     new CategoriesNewController
 
-  .controller 'CategoriesShowController', ($scope, $stateParams, catchNotFoundError, BaseController, Category) ->
+  .controller 'CategoriesShowController', ($scope, $stateParams, BaseController, Category) ->
     class CategoriesShowController extends BaseController
       constructor: ->
         @category = new Category
@@ -42,11 +42,11 @@ angular.module('category')
         @category.read({ id: $stateParams.id })
           .then =>
             @category.keywords.push({ name: '' })
-          .catch(catchNotFoundError)
+          .catch(@catchNotFoundError)
 
     new CategoriesShowController
 
-  .controller 'CategoriesEditController', ($scope, $stateParams, catchNotFoundError, BaseController, Category) ->
+  .controller 'CategoriesEditController', ($scope, $stateParams, BaseController, Category) ->
     class CategoriesEditController extends BaseController
       constructor: ->
         @category = new Category
@@ -59,7 +59,7 @@ angular.module('category')
         @category.read({ id: $stateParams.id })
           .then =>
             @category.keywords.push({ name: '' })
-          .catch(catchNotFoundError)
+          .catch(@catchNotFoundError)
 
       submit: ->
         @category.update()

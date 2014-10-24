@@ -1,1 +1,3 @@
-angular.module 'controller', []
+angular.module 'controller', [
+  'flash'
+]

@@ -60,7 +60,7 @@ angular.module('recipe')
 
     new RecipesIndexController
 
-  .controller 'RecipesShowController', ($scope, $state, $stateParams, $q, currentUser, flash, ga, catchNotFoundError, breadcrumbs, BaseController, Recipe) ->
+  .controller 'RecipesShowController', ($scope, $state, $stateParams, $q, currentUser, flash, ga, breadcrumbs, BaseController, Recipe) ->
     class RecipesShowController extends BaseController
       constructor: ->
         @currentUser = currentUser
@@ -81,7 +81,7 @@ angular.module('recipe')
             currentUser.ready()
               .then => @recipe.bookmarked(currentUser)
           .then => @recipe.data()
-          .catch(catchNotFoundError)
+          .catch(@catchNotFoundError)
 
       bookmark: ->
         currentUser.ready()
@@ -103,7 +103,7 @@ angular.module('recipe')
 
     new RecipesShowController
 
-  .controller 'RecipesEditController', ($scope, $state, $stateParams, flash, catchNotFoundError, BaseController, Recipe) ->
+  .controller 'RecipesEditController', ($scope, $state, $stateParams, flash, BaseController, Recipe) ->
     class RecipesEditController extends BaseController
       constructor: ->
         @recipe = new Recipe
@@ -114,7 +114,7 @@ angular.module('recipe')
 
       read: ->
         @recipe.read({ id: $stateParams.id })
-          .catch(catchNotFoundError)
+          .catch(@catchNotFoundError)
 
       submit: ->
         @recipe.update()

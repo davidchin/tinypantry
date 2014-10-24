@@ -8,7 +8,12 @@ angular.module('user')
 
       signUp: ->
         @user.create()
-          .then => @user.login()
+          .catch (error) =>
+            @catchValidationError(error, @signUpForm)
+
+          .then =>
+            @user.login()
+
           .then (user) ->
             flash.set('You are successfully signed up.')
 
@@ -30,7 +35,7 @@ angular.module('user')
 
       read: ->
         @user.read({ id: $stateParams.id })
-          .catch(catchNotFoundError)
+          .catch(@catchNotFoundError)
 
       submit: ->
         @user.update()
