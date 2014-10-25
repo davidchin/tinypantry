@@ -22,6 +22,10 @@ angular.module('message')
                          "#{ attrs.errorFor }.$dirty && " +
                          "#{ attrs.errorFor }.$touched"
 
+            # Determine form name
+            if formExp = attrs.errorFor.replace(/\.[\w\d_]+$/, '')
+              visibleExp = "(#{ visibleExp }) || #{ formExp }.$submitted"
+
             scope.$watch visibleExp, (visible) ->
               method = if visible then 'removeClass' else 'addClass'
               $animate[method](element, 'ng-hide')

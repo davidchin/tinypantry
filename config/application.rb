@@ -37,5 +37,9 @@ module Tinypantry
     # Generators config
     config.generators.assets = false
     config.generators.helper = false
+
+    # Mailer config
+    config.action_mailer.default_url_options = { host: 'tinypantry.com' }
+    config.action_mailer.delivery_method = :sendmail
   end
 end

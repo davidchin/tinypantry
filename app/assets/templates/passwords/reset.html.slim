@@ -1,0 +1,19 @@
+session class="app-body"
+  div class="password-reset"
+    header
+      h1 class="password-reset__title" Password
+
+    form name="passwordResetForm" class="password-reset-form" ng-submit="submit()"
+      p You can reset your password by entering your email below.
+      input type="email" name="email" placeholder="E-mail" ng-model="password.email" ng-required="true"
+
+      ng-messages error-for="passwordResetForm.email" class="input-message input-message--error"
+        ng-message when="email" Your input must be an email
+        ng-message when="required" Your email must be entered
+        ng-message when="remote"
+          div ng-repeat="error in $remoteError" Email {{ error }}
+
+      button type="submit" class="button button--block" Submit
+
+      div class="password-reset-form__footer"
+        a modal-close-button="" ui-sref="home" Cancel

@@ -45,11 +45,17 @@ angular.module('model')
           _.pick(@, @dataAttrs)
         else
           ignoreAttrs = ['config', 'status', 'requests', 'headers', 'dataAttrs']
+          ignoreAttrs = ignoreAttrs.concat(@config.dependency)
   
-          _.pick @, (value, attr) =>
-            return true if typeof value != 'function' &&
-                           attr not in ignoreAttrs &&
-                           !_.hasValue(value, @)
+          _.transform @, (output, value, attr) =>
+            return if typeof value == 'function' ||
+                      attr in ignoreAttrs ||
+                      _.hasValue(value, @)
+
+            if _.isFunction(value?.data)
+              output[attr] = value.data()
+            else
+              output[attr] = value
 
       store: (key, value) ->
         if value?
@@ -63,6 +69,10 @@ angular.module('model')
       configure: (config = {}) ->
         @config ||= {}
 
+        # Set dependency as an array of keys
+        @config.dependency = _.union(_.keys(config.dependency), @config.dependency)
+
+        # Extend config
         _.extend(@config, _.omit(config, 'dependency'))
         _.defaults(this, config.dependency)
 
@@ -101,12 +111,11 @@ angular.module('model')
         params = _.extend({}, @params(), params)
 
         # Data - set additional keys for nested attributes
-        data = _.reduce data, (output, value, attr) ->
+        data = _.transform data, (output, value, attr) ->
           if _.isArray(value) || _.isObject(value)
             output["#{ attr }_attributes"] = value
-
-          return output
-        , _.pick(data, (value, attr) -> /^(?!\$)/.test(attr))
+          else if /^(?!\$)/.test(attr)
+            output[attr] = value
 
         # Call ngResource
         onSuccess = (response, headers) =>

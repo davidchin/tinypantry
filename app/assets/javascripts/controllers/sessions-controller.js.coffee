@@ -12,7 +12,7 @@ angular.module('session')
       login: ->
         @currentUser.login()
           .then ->
-            flash.set('You are successfully logged in.')
+            flash.set('You are successfully logged in.', { type: 'success' })
             modalStack.close()
 
           .then =>
@@ -35,7 +35,7 @@ angular.module('session')
       logout: ->
         @currentUser.logout()
           .then (user) ->
-            flash.set('You are successfully logged out.')
+            flash.set('You are successfully logged out.', { type: 'success' })
             $state.go('home')
 
             return user

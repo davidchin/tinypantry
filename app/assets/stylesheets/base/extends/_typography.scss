@@ -24,6 +24,10 @@
 
 %link--muted {
   color: $muted-font-color;
+
+  &:hover {
+    color: darken($muted-font-color, 20%);
+  }
 }
 
 %title {

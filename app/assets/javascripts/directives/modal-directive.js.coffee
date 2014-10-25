@@ -18,3 +18,9 @@ angular.module('modal')
 
       # Assign to scope
       scope[name] = modal
+
+  .directive 'modalCloseButton', ($timeout, modalStack) ->
+    restrict: 'EA'
+    link: (scope, element) ->
+      element.on 'click', ->
+        $timeout -> modalStack.close()

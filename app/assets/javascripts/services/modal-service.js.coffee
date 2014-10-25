@@ -5,6 +5,8 @@ angular.module('modal')
     when: (name, config) ->
       @routes[name] = _.extend({}, config)
 
+      return this
+
     find: (name) ->
       @routes[name]
 

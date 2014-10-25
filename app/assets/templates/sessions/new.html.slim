@@ -25,7 +25,7 @@ section class="app-body"
 
       div class="session-form__footer"
         div
-          a ui-sref="passwords.create" Forgot password?
+          a modal-button="passwordReset" ui-sref="users.password.reset" Forgot password?
         div
           | Don't have an account? 
-          a ui-sref="users.new" Sign up now!
+          a modal-button="signUp" ui-sref="users.new" Sign up now!

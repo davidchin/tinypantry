@@ -11,7 +11,7 @@ angular.module('controller')
           return $q.reject(response)
 
       catchValidationError: (response, form) ->
-        data = response.data
+        data = response?.data
 
         if data?.errors
           for key, errors of data.errors

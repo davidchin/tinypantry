@@ -2,16 +2,35 @@ angular.module('user')
   .config ($stateProvider, ModalProvider) ->
     $stateProvider
       .state 'users',
+        url: '/users'
         abstract: true
         template: '<ui-view />'
 
+      .state 'users.password',
+        url: '/password'
+        abstract: true
+        template: '<ui-view />'
+
+      .state 'users.password.reset',
+        url: '/reset'
+        templateUrl: '<%= asset_path("passwords/reset.html") %>'
+        controller: 'PasswordsResetController'
+
+      .state 'users.password.edit',
+        url: '/edit?reset_password_token'
+        templateUrl: '<%= asset_path("passwords/edit.html") %>'
+        controller: 'PasswordsEditController'
+        resolve:
+          assertPasswordResetToken: ($stateParams, assertPasswordResetToken) ->
+            assertPasswordResetToken($stateParams.reset_password_token)
+
       .state 'users.new',
-        url: '/sign-up'
+        url: '^/sign-up'
         templateUrl: '<%= asset_path("users/new.html") %>'
         controller: 'UsersNewController'
 
       .state 'users.edit',
-        url: '/users/:id/edit'
+        url: '/:id/edit'
         templateUrl: '<%= asset_path("users/edit.html") %>'
         controller: 'UsersNewController'
 
@@ -19,3 +38,7 @@ angular.module('user')
       .when 'signUp',
         templateUrl: '<%= asset_path("users/new-modal.html") %>'
         controller: 'UsersNewController'
+
+      .when 'passwordReset',
+        templateUrl: '<%= asset_path("passwords/reset-modal.html") %>'
+        controller: 'PasswordsResetController'

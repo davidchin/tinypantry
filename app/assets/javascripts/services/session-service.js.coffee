@@ -1,10 +1,4 @@
 angular.module('session')
-  .run ($rootScope, $cacheFactory) ->
-    $rootScope.$on '$stateChangeSuccess', ->
-      httpCache = $cacheFactory.get('$http')
-
-      httpCache.removeAll()
-
   .factory 'sessionService', ($http) ->
     create: (params, data) ->
       $http.post('/api/login', data)

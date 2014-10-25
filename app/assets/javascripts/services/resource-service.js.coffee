@@ -25,6 +25,12 @@ angular.module('resource')
         actions = _.extend({}, actions, restfulActions)
 
         $delegate(url, params, actions)
+  
+  .run ($rootScope, $cacheFactory) ->
+    $rootScope.$on '$stateChangeSuccess', ->
+      httpCache = $cacheFactory.get('$http')
+
+      httpCache.removeAll()
 
   .factory 'attributeInterceptor', ($q) ->
     fromJson = (value) ->

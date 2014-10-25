@@ -1,0 +1,37 @@
+session class="app-body"
+  div class="password-reset"
+    header
+      h1 class="password-reset__title" Password
+
+    form name="passwordEditForm" class="password-reset-form" ng-submit="submit()"
+      p You can change your password by entering your new password below.
+
+      input type="password" name="password" placeholder="Password" ng-model="password.password" ng-required="true" ng-minlength="6" ng-maxlength="128"
+
+      ng-messages error-for="passwordEditForm.password" class="input-message input-message--error"
+        ng-message when="required" Your password must be entered
+        ng-message when="minlength" Your password must be more than 6 characters
+        ng-message when="maxlength" Your password must be less than 128 characters
+        ng-message when="remote"
+          div ng-repeat="error in $remoteError" Password {{ error }}
+
+      input type="password" name="passwordConfirmation" placeholder="Confirm Password" ng-model="password.passwordConfirmation" ng-required="true" ng-minlength="6" ng-maxlength="128"
+
+      ng-messages error-for="passwordEditForm.passwordConfirmation" class="input-message input-message--error"
+        ng-message when="required" Your password must be entered
+        ng-message when="minlength" Your password must be more than 6 characters
+        ng-message when="maxlength" Your password must be less than 128 characters
+        ng-message when="remote"
+          div ng-repeat="error in $remoteError" Password confirmation {{ error }}
+
+      input type="hidden" name="resetPasswordToken" ng-model="password.resetPasswordToken" ng-required="true"
+
+      ng-messages error-for="passwordEditForm.resetPasswordToken" class="input-message input-message--error"
+        ng-message when="required" Your reset token must be present
+        ng-message when="remote"
+          div ng-repeat="error in $remoteError" Password reset token {{ error }}
+
+      button type="submit" class="button button--block" Submit
+
+      div class="password-reset-form__footer"
+        a modal-close-button="" ui-sref="home" Cancel

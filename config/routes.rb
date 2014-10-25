@@ -18,9 +18,7 @@ Rails.application.routes.draw do
         
         resources :users, only: [:create, :update, :destroy],
                           controller: 'registrations'
-      end
 
-      scope module: 'devise' do
         resource :password, only: [:create, :update]
       end
     end
@@ -49,6 +47,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/users/password/edit', to: 'pages#app', as: 'edit_password'
   get '/*path', to: 'pages#app', constraints: { path: /(?!\bapi\b\/?).*/ }
 
   root to: 'pages#app'
