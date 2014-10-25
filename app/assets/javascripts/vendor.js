@@ -10,3 +10,4 @@
 //= require spin.js/spin
 //= require headroom.js/dist/headroom
 //= require headroom.js/dist/angular.headroom
+//= require fastclick/lib/fastclick
