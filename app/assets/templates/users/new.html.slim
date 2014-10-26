@@ -12,21 +12,23 @@ section class="app-body"
         ng-message when="remote"
           div ng-repeat="error in $remoteError" Email {{ error }}
 
-      input type="password" name="password" placeholder="Password" ng-model="user.password" ng-required="true" ng-minlength="6" ng-maxlength="128"
+      input type="password" name="password" placeholder="Password" ng-model="user.password" ng-required="true" ng-minlength="6" ng-maxlength="128" validate="user.assertPassword"
 
       ng-messages error-for="signUpForm.password" class="input-message input-message--error"
         ng-message when="required" Your password must be entered
         ng-message when="minlength" Your password must be more than 6 characters
         ng-message when="maxlength" Your password must be less than 128 characters
+        ng-message when="assertPassword" Password must be the same as Password confirmation
         ng-message when="remote"
           div ng-repeat="error in $remoteError" Password {{ error }}
 
-      input type="password" name="passwordConfirmation" placeholder="Confirm Password" ng-model="user.passwordConfirmation" ng-required="true" ng-minlength="6" ng-maxlength="128"
+      input type="password" name="passwordConfirmation" placeholder="Confirm Password" ng-model="user.passwordConfirmation" ng-required="true" ng-minlength="6" ng-maxlength="128" validate="user.assertPasswordConfirmation"
 
       ng-messages error-for="signUpForm.passwordConfirmation" class="input-message input-message--error"
         ng-message when="required" Your password must be entered
         ng-message when="minlength" Your password must be more than 6 characters
         ng-message when="maxlength" Your password must be less than 128 characters
+        ng-message when="assertPasswordConfirmation" Password confirmation must be the same as Password
         ng-message when="remote"
           div ng-repeat="error in $remoteError" Password confirmation {{ error }}
 

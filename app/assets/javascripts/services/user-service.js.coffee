@@ -10,7 +10,7 @@ angular.module('user')
 
     return user
 
-  .factory 'User', (userService, Model, Bookmarks, BookmarkedRecipes) ->
+  .factory 'User', ($q, userService, Model, Bookmarks, BookmarkedRecipes) ->
     class User extends Model
       constructor: ->
         @configure(resource: userService)
@@ -26,6 +26,16 @@ angular.module('user')
             @status.admin = _.any(user.roles, { name: 'Admin' })
 
             return user
+
+      assertPassword: (modelValue, viewValue) ->
+        password = modelValue || viewValue
+
+        return !@passwordConfirmation || password == @passwordConfirmation
+
+      assertPasswordConfirmation: (modelValue, viewValue) ->
+        passwordConfirmation = modelValue || viewValue
+
+        return !@password || passwordConfirmation == @password
 
   .factory 'CurrentUser', ($q, $timeout, userService, User, Session) ->
     class CurrentUser extends User
