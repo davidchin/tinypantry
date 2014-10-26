@@ -84,21 +84,22 @@ angular.module('modal')
           # Detach background
           modalBackground.leave()
 
-          # Remove
+          # Remove from stack
+          modalStack.remove(this)
+
+          # Remove from DOM
           $animate.removeClass(@config.body, 'modal-body--is-opened')
           $animate.leave(@element)
             .then =>
               # Clean up
               @scope?.$destroy()
 
-              # Remove from stack
-              modalStack.remove(this)
-
               delete @element
               delete @scope
 
               # Notify
-              $timeout => @notify('close', this)
+              $timeout =>
+                @notify('close', this)
 
         show: ->
           $animate.removeClass(@element, 'ng-hide') if @element

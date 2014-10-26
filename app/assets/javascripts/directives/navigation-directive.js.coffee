@@ -75,8 +75,8 @@ angular.module('navigation')
             $scope.$broadcast('slideMenuGroup:openStart')
 
             $q.all([
-              $animate.addClass($element, 'is-opened')
-              $animate.removeClass($element, 'is-closed')
+              $animate.addClass($element, 'is-slide-menu-opened')
+              $animate.removeClass($element, 'is-slide-menu-closed')
             ]).then ->
               $scope.$broadcast('slideMenuGroup:openEnd')
           else
@@ -90,8 +90,8 @@ angular.module('navigation')
             $scope.$broadcast('slideMenuGroup:closeStart')
 
             $q.all([
-              $animate.addClass($element, 'is-closed')
-              $animate.removeClass($element, 'is-opened')
+              $animate.addClass($element, 'is-slide-menu-closed')
+              $animate.removeClass($element, 'is-slide-menu-opened')
             ]).then ->
               $scope.$broadcast('slideMenuGroup:closeEnd')
 
@@ -165,11 +165,11 @@ angular.module('navigation')
 
           # Add/remove class
           if active
-            $animate.addClass(element, 'is-opened')
-            $animate.removeClass(element, 'is-closed')
+            $animate.addClass(element, 'is-slide-menu-opened')
+            $animate.removeClass(element, 'is-slide-menu-closed')
           else
-            $animate.addClass(element, 'is-closed')
-            $animate.removeClass(element, 'is-opened')
+            $animate.addClass(element, 'is-slide-menu-closed')
+            $animate.removeClass(element, 'is-slide-menu-opened')
 
           return this
 
@@ -234,14 +234,14 @@ angular.module('navigation')
 
           # Add/remove class
           if active
-            $animate.addClass(element, "is-opened #{ id }-is-opened")
-            $animate.removeClass(element, "is-closed #{ id }-is-closed")
+            $animate.addClass(element, "is-slide-menu-opened is-#{ id }-opened")
+            $animate.removeClass(element, "is-slide-menu-closed is-#{ id }-closed")
 
             # Block interaction
             @block()
           else
-            $animate.addClass(element, "is-closed #{ id }-is-closed")
-            $animate.removeClass(element, "is-opened #{ id }-is-opened")
+            $animate.addClass(element, "is-slide-menu-closed is-#{ id }-closed")
+            $animate.removeClass(element, "is-slide-menu-opened is-#{ id }-opened")
 
             # Unblock interaction
             @unblock()
