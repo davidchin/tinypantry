@@ -8,9 +8,12 @@ select[multiple=multiple] {
 
 .input-message {
   display: block;
-  margin-top: -$half-base-line-height;
-  margin-bottom: $half-base-line-height;
   font-size: $small-font-size;
+
+  &.ng-active {
+    margin-top: -$half-base-line-height;
+    margin-bottom: $half-base-line-height;
+  }
 }
 
 .input-message--notice {
