@@ -78,6 +78,11 @@ $slide-menu-width: column-width($slide-menu-columns);
   }
 }
 
+.app-slide-menu__item-meta {
+  @extend %text--muted;
+  float: right;
+}
+
 // --------------------------------------------------
 // Medium screen up
 @include media($medium-screen-up) {

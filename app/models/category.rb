@@ -12,4 +12,16 @@ class Category < ActiveRecord::Base
   friendly_id :name, use: :slugged
 
   accepts_nested_attributes_for :keywords, allow_destroy: true
+
+  def self.update_all_recipes_count
+    transaction do
+      where(nil).each do |category|
+        category.update_recipes_count
+      end
+    end
+  end
+
+  def update_recipes_count
+    update_columns(recipes_count: recipes.uniq.size)
+  end
 end
