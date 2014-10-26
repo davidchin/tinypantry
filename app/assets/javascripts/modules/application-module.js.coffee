@@ -1,6 +1,8 @@
 angular.module 'application', [
   # Global
+  'analytics'
   'animate'
+  'asset'
   'config'
   'error'
   'form'
