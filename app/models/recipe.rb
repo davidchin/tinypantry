@@ -6,9 +6,9 @@ class Recipe < ActiveRecord::Base
   extend FriendlyId
 
   has_attached_file :image, styles: { thumb: '160x160#',
-                                      small: '253x253#',
-                                      medium: '532x532#',
-                                      large: '810x810#' }
+                                      small: '308x308#',
+                                      medium: '640x640#',
+                                      large: '860x860#' }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   after_create :categorise
