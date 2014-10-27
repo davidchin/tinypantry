@@ -13,7 +13,6 @@ a ui-sref="recipes.show({ id: recipe.id })" class="recipe-tile__link" ng-click="
     p class="recipe-meta"
       span class="recipe-meta__item"
         i class="fa fa-bookmark"
-        i class="fa fa-check" ng-show="recipe.status.bookmarked"
         | {{ recipe.bookmarks_count || 0 }}
       span class="recipe-meta__item"
         i class="fa fa-eye"

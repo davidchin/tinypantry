@@ -5,7 +5,17 @@ section class="app-body"
     ng-include src="'#{ asset_path('shared/_breadcrumbs.html') }'"
 
     div class="recipe-detail__image"
-      img ng-src="{{ recipe.imageUrls.medium }}"
+      a target="_blank" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams"
+        img ng-src="{{ recipe.imageUrls.medium }}"
+
+      div class="recipe-detail__image-action" ng-show="currentUser.status.loggedIn"
+        button type="button" class="button button--light button--small ng-animate--disabled" ng-click="bookmark()" ng-hide="recipe.status.bookmarked"
+          loading-indicator model="!currentUser.bookmarks.status.createPending" type="inline"
+          i class="fa fa-bookmark"
+
+        button type="button" class="button button--success button--small ng-animate--disabled" ng-click="destroyBookmark()" ng-show="recipe.status.bookmarked"
+          loading-indicator model="!currentUser.bookmarks.status.destroyPending" type="inline"
+          i class="fa fa-check"
 
     div class="recipe-detail__body"
       header
@@ -17,7 +27,6 @@ section class="app-body"
       p class="recipe-meta"
         span class="recipe-meta__item"
           i class="fa fa-bookmark"
-          i class="fa fa-check" ng-show="recipe.status.bookmarked"
           | {{ recipe.bookmarks_count || 0 }}
         span class="recipe-meta__item"
           i class="fa fa-eye"
@@ -25,15 +34,15 @@ section class="app-body"
 
       div class="recipe-detail__description" ng-bind-html="recipe.description"
 
-      div
-        a target="_blank" class="button" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams"
+      div class="recipe-detail__action"
+        a class="button" target="_blank" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams"
           | View
 
-        button type="button" class="button button--light" ng-click="bookmark()" ng-hide="recipe.status.bookmarked"
+        button type="button" class="button button--light" ng-click="bookmark()" ng-show="currentUser.status.loggedIn && !recipe.status.bookmarked"
           loading-indicator model="!currentUser.bookmarks.status.createPending" type="inline"
           | Bookmark
 
-        button type="button" class="button button--light" ng-click="destroyBookmark()" ng-show="recipe.status.bookmarked"
+        button type="button" class="button button--light" ng-click="destroyBookmark()" ng-show="currentUser.status.loggedIn && recipe.status.bookmarked"
           loading-indicator model="!currentUser.bookmarks.status.destroyPending" type="inline"
           | Remove
 

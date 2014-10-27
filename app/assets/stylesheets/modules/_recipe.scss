@@ -75,6 +75,15 @@
   font-size: $large-font-size;
 }
 
+.recipe-search__form-hide-toggle {
+  @extend %link--muted;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  font-size: $mini-font-size;
+}
+
 // Recipe tile
 .recipe-tiles {
   @extend %outer-container;
@@ -155,8 +164,18 @@
 }
 
 .recipe-detail__image {
-  > img {
+  display: block;
+  position: relative;
+  overflow: hidden;
+
+  > a {
     display: block;
+  }
+
+  > img,
+  > a > img {
+    display: block;
+    width: 100%;
   }
 }
 
@@ -172,17 +191,34 @@
   font-size: $base-font-size * 1.25;
 }
 
+.recipe-detail__action {
+  display: none;
+}
+
+.recipe-detail__image-action {
+  position: absolute;
+  right: $small-padding;
+  bottom: $small-padding;
+}
+
 // --------------------------------------------------
 // Small screen
 @include media($small-screen-down) {
   .recipe-tiles {
     .recipe-tile {
       @include span-columns(6);
-      @include omega(2n);;
+      @include omega(2n);
 
       &:nth-of-type(-n+2) {
         margin-top: 0;
       }
+    }
+  }
+
+  .modal {
+    .recipe-detail__image {
+      margin-right: -$modal-padding;
+      margin-left: -$modal-padding;
     }
   }
 }
@@ -192,6 +228,34 @@
 @include media($small-screen-up) {
   .recipe-tile__title {
     font-size: $base-font-size;
+  }
+
+  .recipe-filters {
+    @include span-columns(8);
+  }
+
+  .recipe-search {
+    @include span-columns(4);
+  }
+
+  .recipe-search__form {
+    position: static;
+    right: auto;
+    left: auto;
+
+    &.ng-hide {
+      display: block !important;
+    }
+  }
+
+  .recipe-detail__image-action,
+  .recipe-search__form-toggle,
+  .recipe-search__form-hide-toggle {
+    display: none;
+  }
+
+  .recipe-detail__action {
+    display: block;
   }
 }
 
@@ -207,6 +271,10 @@
         margin-top: 0;
       }
     }
+  }
+
+  .recipe-detail {
+    max-width: column-width(6);
   }
 }
 
@@ -238,20 +306,6 @@
 
   .recipe-search {
     @include span-columns(3);
-  }
-
-  .recipe-search__form {
-    position: static;
-    right: auto;
-    left: auto;
-
-    &.ng-hide {
-      display: block !important;
-    }
-  }
-
-  .recipe-search__form-toggle {
-    display: none;
   }
 
   .recipe-detail__image,

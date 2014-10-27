@@ -130,7 +130,7 @@
   }
 
   .modal--large {
-    width: column-width(12);
+    width: column-width(9);
   }
 
   .modal--small {
@@ -154,5 +154,13 @@
   .modal__close-btn {
     top: $large-modal-padding / 2;
     right: $large-modal-padding / 2;
+  }
+}
+
+// --------------------------------------------------
+// Large screen up
+@include media($large-screen-up) {
+  .modal--large {
+    width: column-width(12);
   }
 }

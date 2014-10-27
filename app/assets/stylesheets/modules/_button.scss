@@ -2,8 +2,16 @@
   @extend %button;
 }
 
+.button--small {
+  @extend %button--small;
+}
+
 .button--light {
   @extend %button--light;
+}
+
+.button--success {
+  @extend %button--success;
 }
 
 .button--block,

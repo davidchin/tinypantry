@@ -29,6 +29,10 @@
   }
 }
 
+%button--small {
+  padding: $small-button-padding;
+}
+
 %button--light {
   border: 1px solid $light-gray;
 
@@ -36,12 +40,28 @@
   &:disabled,
   &:disabled:hover {
     background-color: $light-button-color;
-    color: $dark-medium-gray;
+    color: $light-button-font-color;
   }
 
   &:hover {
     background-color: $hover-light-button-color;
-    color: $dark-gray;
+    color: darken($light-button-font-color, 10%);
+  }
+}
+
+%button--success {
+  border: 1px solid darken($success-button-color, 5%);
+
+  &,
+  &:disabled,
+  &:disabled:hover {
+    background-color: $success-button-color;
+    color: $success-button-font-color;
+  }
+
+  &:hover {
+    background-color: $hover-success-button-color;
+    color: darken($success-button-font-color, 10%);
   }
 }
 

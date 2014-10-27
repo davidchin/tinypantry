@@ -10,6 +10,8 @@ div class="recipe-nav-bar__container"
     form class="recipe-search__form" name="searchForm" ng-show="searchForm.visible"
       div class="search-input-container"
         input type="text" placeholder="Search" class="search-input" autocorrect="false" autocapitalize="off" ng-model="recipes.query"
+      button type="button" class="recipe-search__form-hide-toggle" ng-click="searchForm.visible = false"
+        i class="fa fa-times"
 
     button class="recipe-search__form-toggle" ng-click="searchForm.visible = !searchForm.visible"
       i class="fa fa-search"
