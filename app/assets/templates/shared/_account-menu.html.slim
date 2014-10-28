@@ -6,9 +6,9 @@ nav slide-menu="account-slide-menu" class="app-slide-menu"
       | Log Out
 
   div class="app-slide-menu__item" ng-hide="currentUser.status.loggedIn"
-    a class="app-slide-menu__item-link" ui-sref="sessions.new" ui-sref-active="is-active" ng-click="openLogin()" slide-menu-toggle=""
+    a class="app-slide-menu__item-link" ui-sref="sessions.new" ui-sref-active="is-active" ng-click="openLogin($event)" slide-menu-toggle=""
       | Log In
 
   div class="app-slide-menu__item" ng-hide="currentUser.status.loggedIn"
-    a class="app-slide-menu__item-link" ui-sref="users.new" ui-sref-active="is-active" ng-click="openSignUp()" slide-menu-toggle=""
+    a class="app-slide-menu__item-link" ui-sref="users.new" ui-sref-active="is-active" ng-click="openSignUp($event)" slide-menu-toggle=""
       | Sign Up

@@ -11,13 +11,15 @@ angular.module('navigation')
 
         super($scope)
 
-      openLogin: ->
+      openLogin: (event) ->
+        event.preventDefault() if event
         @loginModal.open('login')
 
       closeLogin: ->
         @loginModal.close()
 
-      openSignUp: ->
+      openSignUp: (event) ->
+        event.preventDefault() if event
         @signUpModal.open('signUp')
 
       closeSignUp: ->
