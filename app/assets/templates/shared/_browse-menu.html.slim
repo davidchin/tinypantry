@@ -10,7 +10,7 @@ nav slide-menu="browse-slide-menu" class="app-slide-menu"
     a class="app-slide-menu__item-link" ng-show="currentUser.status.loggedIn" ui-sref="bookmarks.index" ui-sref-active-eq="is-active" slide-menu-toggle=""
       | Bookmarks
   div class="app-slide-menu__item"
-    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: null })" ui-sref-active-eq="is-active" slide-menu-toggle=""
+    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: null })" ui-sref-active-eq="is-active" ui-sref-alias="home" slide-menu-toggle=""
       small class="app-slide-menu__item-meta" {{ categories.totalRecipesCount }}
       | All
   div class="app-slide-menu__item" ng-repeat="category in categories.items"
