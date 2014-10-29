@@ -1,0 +1,32 @@
+{
+  "name": "angular-ra-pageload",
+  "version": "0.1.0",
+  "description": "AngularJS service for triggering document ready event",
+  "author": {
+    "name": "David Chin",
+    "email": "davidchin.yf@gmail.com"
+  },
+  "keywords": [
+    "angular",
+    "pageload"
+  ],
+  "main": "angular-ra-pageload.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "test",
+    "bower.json",
+    "Gruntfile.js",
+    "karma.conf.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": ">=1.2.22"
+  },
+  "devDependencies": {
+    "angular-mocks": ">=1.2.22"
+  }
+}

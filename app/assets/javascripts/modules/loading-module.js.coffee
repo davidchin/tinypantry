@@ -1,1 +1,3 @@
-angular.module('loading', [])
+angular.module('loading', [
+  'ra.pageload'
+])

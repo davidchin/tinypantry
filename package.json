@@ -1,0 +1,9 @@
+{
+  "name": "tinypantry",
+  "homepage": "http://tinypantry.com",
+  "private": true,
+  "dependencies": {
+    "phantomjs": "^1.9.12"
+  },
+  "devDependencies": {}
+}

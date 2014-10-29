@@ -1,6 +1,7 @@
 // Angular dependencies
 //= require ui-router/release/angular-ui-router
 //= require angular-local-storage/angular-local-storage
+//= require angular-ra-pageload/angular-ra-pageload
 
 // Other dependencies
 //= require es5-shim/es5-shim
