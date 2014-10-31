@@ -16,3 +16,9 @@ angular.module('config')
 
   .config ($animateProvider) ->
     $animateProvider.classNameFilter(/^(?:(?!ng-animate--disabled).)*$/)
+
+  .config ($sceDelegateProvider) ->
+    $sceDelegateProvider.resourceUrlWhitelist [
+      'self'
+      '//*.tinypantry.com/**'
+    ]

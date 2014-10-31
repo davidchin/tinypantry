@@ -20,15 +20,6 @@ module Tinypantry
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.paperclip_defaults = {
-      storage: :s3,
-      s3_credentials: {
-        bucket:            Rails.application.secrets.s3_bucket_name,
-        access_key_id:     Rails.application.secrets.s3_key,
-        secret_access_key: Rails.application.secrets.s3_secret
-      }
-    }
-
     # Exception handling
     config.exceptions_app = lambda do |env|
       ErrorsController.action(:show).call(env)
@@ -37,18 +28,5 @@ module Tinypantry
     # Generators config
     config.generators.assets = false
     config.generators.helper = false
-
-    # Mailer config
-    config.action_mailer.default_url_options = { host: 'tinypantry.com' }
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      address:              'smtp.sendgrid.net',
-      port:                 '587',
-      authentication:       :plain,
-      user_name:            ENV['SENDGRID_USERNAME'],
-      password:             ENV['SENDGRID_PASSWORD'],
-      domain:               'heroku.com',
-      enable_starttls_auto: true
-    }
   end
 end
