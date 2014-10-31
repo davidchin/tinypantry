@@ -1,3 +1,3 @@
 require 'snapshot/renderer'
 
-Tinypantry::Application.config.middleware.insert_before(Rack::Lock, Snapshot::Renderer)
+Tinypantry::Application.config.middleware.use(Snapshot::Renderer)
