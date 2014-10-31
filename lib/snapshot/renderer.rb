@@ -44,9 +44,11 @@ module Snapshot
       url = "#{ env['rack.url_scheme'] }://#{ env['HTTP_HOST'] }#{ fragment[:path] }"
       url += "?#{ fragment[:query] }" if fragment[:query].present?
 
-      output = `node_modules/.bin/phantomjs lib/snapshot/browser.js #{ url } --load-images=false`
+      body = `node_modules/.bin/phantomjs lib/snapshot/browser.js #{ url } --load-images=false`
 
-      Rack::Response.new(output, 200, [])
+      status, headers = @app.call(env)
+      response = Rack::Response.new(body, status, headers)
+      response.finish
     end
 
     def bot_request?(env)
