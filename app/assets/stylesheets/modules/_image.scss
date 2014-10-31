@@ -1,0 +1,12 @@
+.image--is-loading,
+.image--is-loading-remove {
+  opacity: 0;
+}
+
+.image--is-loading-remove {
+  @include transition(opacity .5s ease-out);
+
+  &.image--is-loading-remove-active {
+    opacity: 1;
+  }
+}

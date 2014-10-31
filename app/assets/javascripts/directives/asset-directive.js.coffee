@@ -1,6 +1,6 @@
 angular.module('asset')
   .config ($provide) ->
-    $provide.decorator 'ngSrcDirective', ($delegate) ->
+    $provide.decorator 'ngSrcDirective', ($delegate, $animate, $timeout) ->
       directive = $delegate[0]
       link = directive.link
 
@@ -12,7 +12,16 @@ angular.module('asset')
           attrs.$observe 'ngSrc', (src) ->
             return if !src
 
+            # Set data attribute for lazyloading
             attrs.$set('data-original', src)
-            element.lazyload()
+
+            # Add 'loading' class
+            $animate.addClass(element, 'image--is-loading')
+
+            # Init lazyload
+            element.lazyload
+              threshold: 100,
+              skip_invisible: false
+              load: -> $timeout -> $animate.removeClass(element, 'image--is-loading')
 
       return $delegate
