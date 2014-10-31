@@ -2,6 +2,9 @@
   "name": "tinypantry",
   "homepage": "http://tinypantry.com",
   "private": true,
+  "engines": {
+    "node": "0.10.26"
+  },
   "dependencies": {
     "phantomjs": "^1.9.12"
   },
