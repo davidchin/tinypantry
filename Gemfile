@@ -72,6 +72,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'dalli'
 gem 'memcachier'
 
+# CORS
+gem 'rack-cors', require: 'rack/cors'
+
 # Dev tool
 gem 'spring', group: :development
 gem 'rails_best_practices', require: false

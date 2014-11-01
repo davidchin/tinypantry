@@ -28,5 +28,13 @@ module Tinypantry
     # Generators config
     config.generators.assets = false
     config.generators.helper = false
+
+    # CORS
+    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+      allow do
+        origins 'tinypantry.com'
+        resource '*', headers: :any, methods: [:get, :options, :head]
+      end
+    end
   end
 end
