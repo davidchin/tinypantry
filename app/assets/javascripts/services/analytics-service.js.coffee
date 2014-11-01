@@ -3,6 +3,9 @@ angular.module('analytics')
     $rootScope.$on '$viewContentLoaded', ->
       ga.pageview({ page: $location.path() })
 
+    $rootScope.$on 'modal:open', (event, modal) ->
+      ga.pageview({ page: modal.href })
+
   .factory 'ga', ($window, $q) ->
     send: (args...) ->
       deferred = $q.defer()

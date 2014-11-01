@@ -10,7 +10,7 @@ angular.module('modal')
     find: (name) ->
       @routes[name]
 
-    $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, $document, $timeout, modalStack, modalBackground, loadingIndicatorManager) ->
+    $get: ($rootScope, $controller, $compile, $q, $http, $animate, $templateCache, $document, $timeout, $state, modalStack, modalBackground, loadingIndicatorManager) ->
       provider = this
 
       class Modal
@@ -32,15 +32,30 @@ angular.module('modal')
 
           return promise
 
+        configure: (name) ->
+          # Set config
+          _.defaults(@config, { name }, provider.find(name))
+
+          # Set undefined
+          @config.controller = $state.get(@config.state)?.controller unless @config.controller
+
+          return @config
+
         open: (name, params) ->
           if modalStack.has(this)
             return @close()
               .then => @open(name, params)
 
-          _.defaults(@config, { name }, provider.find(name))
+          # Configure
+          @configure(name)
 
+          # Determine equivalent href
+          @href = $state.href(@config.state, params) if @config.state
+
+          # Start loading indicator
           loadingIndicatorManager.start('app')
 
+          # Get HTML template
           @getTemplate()
             .then (template) =>
               lastElement = modalStack.last()?.element

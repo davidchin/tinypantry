@@ -36,9 +36,9 @@ angular.module('user')
 
     ModalProvider
       .when 'signUp',
+        state: 'users.new'
         templateUrl: '<%= asset_path("users/new-modal.html") %>'
-        controller: 'UsersNewController'
 
       .when 'passwordReset',
+        state: 'users.password.reset'
         templateUrl: '<%= asset_path("passwords/reset-modal.html") %>'
-        controller: 'PasswordsResetController'

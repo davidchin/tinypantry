@@ -2,3 +2,6 @@ linters:
   PropertySortOrder:
     order: concentric
     ignore_unspecified: true
+
+  NameFormat:
+    convention: BEM

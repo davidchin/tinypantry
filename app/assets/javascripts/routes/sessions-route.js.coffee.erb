@@ -17,5 +17,5 @@ angular.module('session')
 
     ModalProvider
       .when 'login',
+        state: 'sessions.new'
         templateUrl: '<%= asset_path("sessions/new-modal.html") %>'
-        controller:  'SessionsNewController'
