@@ -1,4 +1,11 @@
 angular.module('config')
+  .config ($sceDelegateProvider) ->
+    $sceDelegateProvider.resourceUrlWhitelist [
+      'self'
+      'http://assets.tinypantry.com/**'
+      'https://assets.tinypantry.com/**'
+    ]
+
   .config ($locationProvider) ->
     $locationProvider.hashPrefix('!')
     $locationProvider.html5Mode(true)
@@ -16,9 +23,3 @@ angular.module('config')
 
   .config ($animateProvider) ->
     $animateProvider.classNameFilter(/^(?:(?!ng-animate--disabled).)*$/)
-
-  .config ($sceDelegateProvider) ->
-    $sceDelegateProvider.resourceUrlWhitelist [
-      'self'
-      '//*.tinypantry.com/**'
-    ]
