@@ -11,5 +11,5 @@ class Keyword < ActiveRecord::Base
            source: :keywordable,
            source_type: 'Category'
 
-  validates :name, uniqueness: true
+  validates :name, uniqueness: true, presence: true
 end

@@ -2,7 +2,9 @@ class Category < ActiveRecord::Base
   include FriendlyId
 
   has_many :categorisations, as: :keywordable, dependent: :destroy
-  has_many :keywords, through: :categorisations
+  has_many :keywords,
+           -> { order(created_at: :asc) },
+           through: :categorisations
   has_many :recipes,
            -> { group('recipes.id').order('count(recipes.id) desc') },
            through: :keywords
@@ -18,6 +20,15 @@ class Category < ActiveRecord::Base
       where(nil).each do |category|
         category.update_recipes_count
       end
+    end
+  end
+
+  def self.order_by(key = 'name')
+    case key
+    when 'id'
+      order(id: :asc)
+    else
+      order(name: :asc)
     end
   end
 

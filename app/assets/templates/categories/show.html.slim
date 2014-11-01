@@ -12,9 +12,7 @@ section class="app-body"
 
     tr
       td {{ category.name }}
-      td
-        p ng-repeat="keyword in category.keywords"
-          | {{ keyword.name }}
+      td {{ category.keywordsAll }}
 
   div class="form__footer"
     a class="button" ui-sref="categories.edit({ id: category.id })" Edit

@@ -36,7 +36,8 @@ module Api
       private
 
       def find_categories
-        @categories = Category.page(params[:page])
+        @categories = Category.order_by(params[:order_by])
+                              .page(params[:page])
       end
 
       def find_category

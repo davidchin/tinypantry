@@ -12,6 +12,17 @@ angular.module('category')
 
         super
 
+      set: ->
+        _.tap super, =>
+          @keywordsAll = _.pluck(@keywords, 'name').join(', ')
+
+      data: ->
+        output = super
+
+        output.keywords = _.filter(output.keywords, 'name')
+
+        return output
+
   .factory 'Categories', (categoryResource, Collection, Category) ->
     class Categories extends Collection
       constructor: ->

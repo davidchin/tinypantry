@@ -9,7 +9,7 @@ angular.module('category')
         super($scope)
 
       read: ->
-        @categories.read()
+        @categories.read({ orderBy: 'id' })
 
     new CategoriesIndexController
 
@@ -52,7 +52,7 @@ angular.module('category')
 
     new CategoriesShowController
 
-  .controller 'CategoriesEditController', ($scope, $stateParams, breadcrumbs, BaseController, Category) ->
+  .controller 'CategoriesEditController', ($scope, $state, $stateParams, breadcrumbs, BaseController, Category) ->
     class CategoriesEditController extends BaseController
       constructor: ->
         @category = new Category
