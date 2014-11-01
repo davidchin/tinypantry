@@ -34,10 +34,14 @@
   float: right;
 }
 
+.app-footer__span,
 .app-footer__link {
-  @extend %button-link;
   padding-right: .7em;
   padding-left: .7em;
+}
+
+.app-footer__link {
+  @extend %button-link;
 }
 
 .app-action-footer {

@@ -32,11 +32,3 @@ angular.module('category')
         }
 
         super
-
-      read: ->
-        super
-          .then (categories) =>
-            @totalRecipesCount = 0
-            @totalRecipesCount += category.recipesCount for category in @items
-
-            return categories

@@ -1,8 +1,9 @@
 angular.module('navigation')
-  .controller 'NavigationController', ($scope, currentUser, BaseController, Categories, Modal) ->
+  .controller 'NavigationController', ($scope, currentUser, BaseController, Categories, Recipes, Modal) ->
     class NavigationController extends BaseController
       constructor: ->
         @categories = new Categories
+        @recipes = new Recipes
         @loginModal = new Modal({ scope: $scope })
         @signUpModal = new Modal({ scope: $scope })
         @currentUser = currentUser
@@ -27,6 +28,7 @@ angular.module('navigation')
 
       read: ->
         @categories.read()
+        @recipes.read()
         @currentUser.read()
 
     new NavigationController
