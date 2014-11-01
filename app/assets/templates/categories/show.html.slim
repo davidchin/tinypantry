@@ -1,14 +1,18 @@
-h1 {{ category.name }}
+section class="app-body"
+  loading-indicator model="category.status.set" class="loading-indicator loading-indicator--large"
 
-loading-indicator model="category.status.set" class="loading-indicator loading-indicator--large"
+  h1 class="title" {{ category.name }}
 
-ul
-  li
-    strong Name
-    p {{ category.name }}
-  li
-    strong Keywords
-    p ng-repeat="keyword in category.keywords"
-      | {{ keyword.name }}
+  table
+    tr
+      th Name
+      th Keywords
 
-a ui-sref="categories.edit({ id: category.id })" Edit
+    tr
+      td {{ category.name }}
+      td
+        p ng-repeat="keyword in category.keywords"
+          | {{ keyword.name }}
+
+  div class="form__footer"
+    a class="button" ui-sref="categories.edit({ id: category.id })" Edit

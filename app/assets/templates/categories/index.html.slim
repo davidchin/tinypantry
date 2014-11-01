@@ -1,11 +1,22 @@
-h1 Categories
+section class="app-body"
+  loading-indicator model="categories.status.set" class="loading-indicator loading-indicator--large"
 
-loading-indicator model="categories.status.set" class="loading-indicator loading-indicator--large"
+  div class="title"
+    h1 class="title--inline" Categories
+    a class="button" ui-sref="categories.new"
+      i class="fa fa-plus"
+      | New
 
-section
-  div ng-hide="categories.status.empty"
-    div ng-repeat="category in categories.items"
-      a ui-sref="categories.show({ id: category.id })" {{ category.name }}
+  div ng-show="categories.status.set && !categories.status.empty"
+    table
+      thead
+        tr
+          th Name
+
+      tbody
+        tr ng-repeat="category in categories.items"
+          td
+            a ui-sref="categories.show({ id: category.id })" {{ category.name }}
 
   div ng-show="categories.status.set && categories.status.empty"
     | Nothing to see here, move along&hellip;

@@ -6,9 +6,9 @@ a ui-sref="recipes.show({ id: recipe.id })" class="recipe-tile__link" ng-click="
     h2 class="recipe-tile__title" {{ recipe.name }}
 
     p ng-if="currentUser.status.admin"
-      a ui-sref="recipes.edit({ id: recipe.id })" Edit
-      label
-        input type="checkbox" name="recipeApproved{{ recipe.id }}" ng-model="recipe.approved" Approved
+      a class="button button--light button--small" ui-sref="recipes.edit({ id: recipe.id })" Edit
+      label class="button button--light button--small" ng-class="{ 'button--is-active': recipe.approved }"
+        input type="checkbox" name="recipeApproved{{ recipe.id }}" ng-model="recipe.approved" Approve
 
     p class="recipe-meta"
       span class="recipe-meta__item"

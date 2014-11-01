@@ -32,6 +32,18 @@
 
 %title {
   margin-bottom: $small-font-size;
+
+  %button {
+    margin-top: -1 * em(12);
+    padding: $small-button-padding;
+    font-size: $small-font-size;
+  }
+}
+
+%title__subtitle {
+  @extend %text--muted;
+  display: block;
+  font-size: .7em;
 }
 
 %text {
@@ -43,6 +55,10 @@
 
 %text--muted {
   color: $muted-font-color;
+}
+
+%text--inline {
+  display: inline;
 }
 
 %text--bold {
@@ -72,4 +88,3 @@
 %hide-text {
   @include hide-text;
 }
-

@@ -21,10 +21,13 @@ angular.module('feed')
 
     new FeedsIndexController
 
-  .controller 'FeedsNewController', ($scope, $state, flash, BaseController, Feed) ->
+  .controller 'FeedsNewController', ($scope, $state, flash, breadcrumbs, BaseController, Feed) ->
     class FeedsNewController extends BaseController
       constructor: ->
         @feed = new Feed
+
+        breadcrumbs.reset()
+          .add('Feeds', 'feeds.index')
 
         super($scope)
 
@@ -38,12 +41,15 @@ angular.module('feed')
 
     new FeedsNewController
 
-  .controller 'FeedsShowController', ($scope, $stateParams, flash, BaseController, Feed) ->
+  .controller 'FeedsShowController', ($scope, $stateParams, flash, breadcrumbs, BaseController, Feed) ->
     class FeedsShowController extends BaseController
       constructor: ->
         @feed = new Feed
 
         @read()
+
+        breadcrumbs.reset()
+          .add('Feeds', 'feeds.index')
 
         super($scope)
 
@@ -53,17 +59,21 @@ angular.module('feed')
 
     new FeedsShowController
 
-  .controller 'FeedsEditController', ($scope, $state, $stateParams, flash, BaseController, Feed) ->
+  .controller 'FeedsEditController', ($scope, $state, $stateParams, flash, breadcrumbs, BaseController, Feed) ->
     class FeedsEditController extends BaseController
       constructor: ->
         @feed = new Feed
 
         @read()
 
+        breadcrumbs.reset()
+          .add('Feeds', 'feeds.index')
+
         super($scope)
 
       read: ->
         @feed.read({ id: $stateParams.id })
+          .then => breadcrumbs.add(@feed.name, 'feeds.show', { id: @feed.id })
           .catch(@catchNotFoundError)
 
       submit: ->

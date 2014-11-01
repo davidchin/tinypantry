@@ -1,5 +1,8 @@
-h1 Edit {{ category.name }}
+section class="app-body"
+  loading-indicator model="category.status.set" class="loading-indicator loading-indicator--large"
 
-loading-indicator model="category.status.set" class="loading-indicator loading-indicator--large"
+  h1 class="title"
+    | Edit Category
+    small class="title__subtitle" {{ category.name }}
 
-ng-include src="'#{ asset_path('categories/_form.html') }'"
+  ng-include src="'#{ asset_path('categories/_form.html') }'"

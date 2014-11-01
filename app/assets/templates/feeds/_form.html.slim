@@ -1,4 +1,4 @@
-form ng-submit="submit()"
+form class="form" ng-submit="submit()"
   label Name
   input type="text" ng-model="feed.name"
 
@@ -8,5 +8,6 @@ form ng-submit="submit()"
   label RSS
   input type="url" ng-model="feed.rss"
 
-  button type="submit" Submit
-  button type="button" ng-show="feed.id" ng-click="destroy()" Delete
+  div class="form__footer"
+    button type="submit" class="button" Submit
+    button type="button" class="button button--danger" ng-show="feed.id" ng-click="destroy()" Delete

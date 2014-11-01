@@ -1,7 +1,10 @@
-h1 Edit {{ recipe.name }}
+section class="app-body"
+  loading-indicator model="recipe.status.set" class="loading-indicator loading-indicator--large"
 
-flash name="app"
+  ng-include src="'#{ asset_path('shared/_breadcrumbs.html') }'"
 
-loading-indicator model="recipe.status.set" class="loading-indicator loading-indicator--large"
+  h1 class="title"
+    | Edit Recipe
+    small class="title__subtitle" {{ recipe.name }}
 
-ng-include src="'#{ asset_path('recipes/_form.html') }'"
+  ng-include src="'#{ asset_path('recipes/_form.html') }'"

@@ -6,6 +6,10 @@ select[multiple=multiple] {
   }
 }
 
+label.button {
+  margin-bottom: 0;
+}
+
 .input-message {
   display: block;
   font-size: $small-font-size;
@@ -30,4 +34,8 @@ select[multiple=multiple] {
 
 .input-message--muted {
   color: $muted-font-color;
+}
+
+.form__footer {
+  margin-top: $base-padding;
 }

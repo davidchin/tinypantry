@@ -1,15 +1,26 @@
-h1 Feeds
+section class="app-body"
+  loading-indicator model="feeds.status.set" class="loading-indicator loading-indicator--large"
 
-loading-indicator model="feeds.status.set" class="loading-indicator loading-indicator--large"
+  div class="title"
+    h1 class="title--inline" Feeds
+    a class="button" ui-sref="feeds.new"
+      i class="fa fa-plus"
+      | New
 
-section
-  div ng-hide="feeds.status.empty"
-    div ng-repeat="feed in feeds.items"
-      a ui-sref="feeds.edit({ id: feed.id })" {{ feed.name }}
+  div ng-show="feeds.status.set && !feeds.status.empty"
+    table
+      thead
+        tr
+          th Name
+          th URL
 
-  button class="button-block" ng-show="feeds.pagination.nextPage" ng-click="next()" Load More
+      tbody
+        tr ng-repeat="feed in feeds.items"
+          td
+            a ui-sref="feeds.edit({ id: feed.id })" {{ feed.name }}
+          td {{ feed.url }}
+
+    button class="load-button load-button--without-divider" ng-show="feeds.pagination.nextPage" ng-click="next()" Load More
 
   div ng-show="feeds.status.set && feeds.status.empty"
     | Nothing to see here, move along&hellip;
-
-  a class="button" ui-sref="feeds.new" New

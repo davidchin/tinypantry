@@ -2,7 +2,6 @@
   border-top: 1px solid $light-gray;
   padding: $small-padding 0;
   height: $footer-height;
-  font-size: $mini-font-size;
   box-sizing: border-box;
 
   &,
@@ -22,6 +21,11 @@
   padding: 0 $base-padding;
 }
 
+.app-footer__section-left,
+.app-footer__section-right {
+  font-size: $mini-font-size;
+}
+
 .app-footer__section-left {
   float: left;
 }
@@ -34,4 +38,36 @@
   @extend %button-link;
   padding-right: .7em;
   padding-left: .7em;
+}
+
+.app-action-footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  border-top: 1px solid $light-gray;
+  background: transparentize($light-whitesmoke, .1);
+  padding: $mini-padding 0;
+  text-align: right;
+
+  &.ng-enter,
+  &.ng-leave {
+    @include transition(transform .5s ease-out);
+  }
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    @include transform(translateY(100%));
+  }
+
+  &.ng-leave,
+  &.ng-enter.ng-enter-active {
+    @include transform(translateY(0));
+  }
+}
+
+.app-action-footer__container {
+  @extend %outer-container;
+  padding: 0 $base-padding;
 }

@@ -8,7 +8,7 @@
 
     &:before {
       @extend %icon;
-      margin: 0 $icon-margin * 3;
+      margin: 0 $icon-margin * 2;
       content: $fa-var-angle-right;
     }
 

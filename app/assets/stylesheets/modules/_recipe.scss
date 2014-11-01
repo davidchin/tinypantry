@@ -117,7 +117,7 @@
 
 .recipe-tile {
   &,
-  a {
+  a:not(.button) {
     color: $base-font-color;
   }
 }

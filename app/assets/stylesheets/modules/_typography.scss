@@ -1,3 +1,11 @@
 .title {
   @extend %title;
 }
+
+.title--inline {
+  @extend %text--inline;
+}
+
+.title__subtitle {
+  @extend %title__subtitle;
+}

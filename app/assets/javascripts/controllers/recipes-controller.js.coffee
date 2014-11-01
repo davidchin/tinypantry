@@ -103,17 +103,21 @@ angular.module('recipe')
 
     new RecipesShowController
 
-  .controller 'RecipesEditController', ($scope, $state, $stateParams, flash, BaseController, Recipe) ->
+  .controller 'RecipesEditController', ($scope, $state, $stateParams, flash, breadcrumbs, BaseController, Recipe) ->
     class RecipesEditController extends BaseController
       constructor: ->
         @recipe = new Recipe
 
         @read()
 
+        breadcrumbs.reset()
+          .add('Recipes', 'recipes.index')
+
         super($scope)
 
       read: ->
         @recipe.read({ id: $stateParams.id })
+          .then => breadcrumbs.add(@recipe.name, 'recipes.show', { id: @recipe.id })
           .catch(@catchNotFoundError)
 
       submit: ->
