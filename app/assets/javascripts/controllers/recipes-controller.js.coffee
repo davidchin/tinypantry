@@ -50,13 +50,14 @@ angular.module('recipe')
 
         promises = (@recipes.find({ id: parseId(control) })?.update() \
           for attr, control of $scope.recipesForm \
-          when control.$dirty)
+          when control?.$dirty)
 
         promises.push($q.reject(error: 'Please select a recipe.')) unless _.any(promises)
 
         $q.all(promises)
           .then ->
-            flash.set('Recipe was successfully updated.', { requests: 0, type: 'success' })
+            flash.set('Recipes were successfully updated.', { requests: 0, type: 'success' })
+            $scope.recipesForm?.$setPristine()
           .catch (response) ->
             flash.set(response.error, { requests: 0, type: 'alert' })
 
