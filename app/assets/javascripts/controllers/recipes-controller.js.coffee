@@ -6,6 +6,8 @@ angular.module('recipe')
         @recipeModal = new Modal({ scope: $scope })
         @currentUser = currentUser
 
+        @recipes.query = $stateParams.query
+
         @read()
 
         super($scope)

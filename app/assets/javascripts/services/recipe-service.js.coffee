@@ -66,7 +66,7 @@ angular.module('recipe')
           .then (recipes) => @set(recipes)
 
       read: (params) ->
-        promise = if params?.query?
+        promise = if params?.query
           @search(params)
         else
           super
