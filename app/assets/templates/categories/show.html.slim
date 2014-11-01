@@ -1,6 +1,8 @@
 section class="app-body"
   loading-indicator model="category.status.set" class="loading-indicator loading-indicator--large"
 
+  ng-include src="'#{ asset_path('shared/_breadcrumbs.html') }'"
+
   h1 class="title" {{ category.name }}
 
   table

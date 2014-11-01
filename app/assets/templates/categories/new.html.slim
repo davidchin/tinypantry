@@ -1,4 +1,6 @@
 section class="app-body"
+  ng-include src="'#{ asset_path('shared/_breadcrumbs.html') }'"
+
   h1 class="title" New Feed
 
   ng-include src="'#{ asset_path('categories/_form.html') }'"
