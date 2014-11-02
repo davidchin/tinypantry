@@ -4,5 +4,7 @@ module CacheKeyHelper
 
     keys.unshift(current_user.role_names.map(&:downcase).join('-'))
         .reject!(&:empty?)
+
+    keys
   end
 end

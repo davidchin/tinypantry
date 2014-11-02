@@ -63,7 +63,7 @@ module Api
         @recipes = Recipe
         @recipes = @recipes.approved unless can?(:manage, :recipe)
         @recipes = @recipes.by_category(params[:category]) if params[:category]
-        @recipes = @recipes.page(params[:page]).order_by(params[:order_by])
+        @recipes = @recipes.order_by(params[:order_by]).page(params[:page])
       end
 
       def recipe_params

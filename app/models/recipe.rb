@@ -12,6 +12,7 @@ class Recipe < ActiveRecord::Base
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
   after_create :categorise
+  after_save :update_counter
 
   belongs_to :feed
 
@@ -91,6 +92,10 @@ class Recipe < ActiveRecord::Base
     image.styles.keys.each_with_object({}) do |key, result|
       result[key] = image.url(key)
     end
+  end
+
+  def update_counter
+    categories.update_all_recipes_count if approved_changed?
   end
 
   private

@@ -11,7 +11,7 @@ nav slide-menu="browse-slide-menu" class="app-slide-menu"
       | Bookmarks
   div class="app-slide-menu__item"
     a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: null })" ui-sref-active-eq="is-active" ui-sref-alias="home" slide-menu-toggle=""
-      small class="app-slide-menu__item-meta" {{ recipes.pagination.totalItems }}
+      small class="app-slide-menu__item-meta" {{ recipes.pagination.totalCount }}
       | All
   div class="app-slide-menu__item" ng-repeat="category in categories.items"
     a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: category.slug })" ui-sref-active="is-active" slide-menu-toggle=""
