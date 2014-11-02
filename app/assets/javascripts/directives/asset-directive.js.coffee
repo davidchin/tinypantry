@@ -9,7 +9,23 @@ angular.module('asset')
           if !attrs.hasOwnProperty('lazyload') || attrs.lazyload == 'false'
             return link.apply(null, arguments)
 
-          attrs.$observe 'ngSrc', (src) ->
+          setPreloadSize = ->
+            return unless attrs.preloadSize || element.css('height')
+
+            # Determine preload width/height ratio
+            regexpMatch = attrs.preloadSize.match(/(\d+)x(\d+)/)
+            size = { width: regexpMatch[1], height: regexpMatch[2] }
+            ratio = parseInt(size.width, 10) / parseInt(size.height, 10)
+
+            # Determine element height
+            elementWidth = element.parent().width() || 0
+            elementHeight = elementWidth * ratio
+
+            attrs.$set('height', elementHeight) if elementHeight
+
+            return elementHeight
+
+          lazyloadImage = (src) ->
             return if !src
 
             # Set data attribute for lazyloading
@@ -18,33 +34,19 @@ angular.module('asset')
             # Add 'loading' class
             $animate.addClass(element, 'image--is-loading')
 
+            # Set preload size
+            preloadSize = setPreloadSize()
+
             # Init lazyload
             element.lazyload
               threshold: 100,
               skip_invisible: false
-              load: -> $timeout -> $animate.removeClass(element, 'image--is-loading')
+              load: ->
+                $timeout ->
+                  $animate.removeClass(element, 'image--is-loading')
+                    .then -> attrs.$set('height', null) if preloadSize
+
+          # Observe src
+          attrs.$observe 'ngSrc', lazyloadImage
 
       return $delegate
-
-  .directive 'preloadSize', ($timeout) ->
-    restrict: 'A'
-    link: (scope, element, attrs) ->
-      return unless attrs.preloadSize || element.css('height')
-
-      $timeout ->
-        return if element.loaded
-
-        # Determine preload width/height ratio
-        regexpMatch = attrs.preloadSize.match(/(\d+)x(\d+)/)
-        size = { width: regexpMatch[1], height: regexpMatch[2] }
-        ratio = parseInt(size.width, 10) / parseInt(size.height, 10)
-
-        elementWidth = element.parent().width() || 0
-        elementHeight = elementWidth * ratio
-
-        if elementHeight
-          attrs.$set('height', elementHeight)
-
-          element
-            .on 'load', ->
-              $timeout -> attrs.$set('height', null)
