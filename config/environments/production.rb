@@ -63,6 +63,7 @@ Rails.application.configure do
   # Paperclip config
   config.paperclip_defaults = {
     storage: :s3,
+    url: ':asset_host',
     s3_credentials: {
       bucket:            Rails.application.secrets.s3_bucket_name,
       access_key_id:     Rails.application.secrets.s3_key,

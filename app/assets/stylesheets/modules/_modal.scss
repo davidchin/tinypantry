@@ -75,6 +75,7 @@
 }
 
 .modal__body {
+  @include prefixer(overflow-scrolling, touch, webkit spec);
   position: relative;
   padding: $modal-padding;
   height: 100%;
