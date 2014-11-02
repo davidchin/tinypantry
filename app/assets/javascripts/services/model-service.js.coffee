@@ -101,10 +101,6 @@ angular.module('model')
 
       destroy: (params) ->
         @request('destroy', params)
-          .then (response) =>
-            @unset()
-
-            return response
 
       request: (action, params, data) ->
         # Params
@@ -185,6 +181,15 @@ angular.module('model')
         super(params, data)
           .then (response) => @set(response)
 
+      destroy: (params) ->
+        params = _.defaults(params, @pick('id'))
+
+        super(params)
+          .then (response) =>
+            @unset()
+
+            return response
+
   .factory 'Collection', (BaseModel, Model) ->
     class Collection extends BaseModel
       constructor: (config) ->
@@ -252,3 +257,7 @@ angular.module('model')
         @request('index', params)
           .then (response) =>
             @add(@transform(item)) for item in response
+
+      destroy: (params) ->
+        super(params)
+          .then => @remove(@find(params))

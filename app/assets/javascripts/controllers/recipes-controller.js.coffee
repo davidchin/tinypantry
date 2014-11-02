@@ -42,6 +42,11 @@ angular.module('recipe')
         currentUser.ready()
           .then => $q.all(@recipes.invoke('bookmarked', currentUser))
 
+      destroy: (recipe) ->
+        @recipes.destroy({ id: recipe.id })
+          .then ->
+            flash.set('Recipe was successfully destroyed.', { requests: 0, type: 'success' })
+
       approve: ->
         return $q.reject() unless $scope.recipesForm
 
@@ -132,7 +137,7 @@ angular.module('recipe')
             return recipe
 
       destroy: ->
-        @recipe.destroy
+        @recipe.destroy()
           .then (recipe) ->
             flash.set('Recipe was successfully destroyed.')
             $state.go('recipes.index')

@@ -9,6 +9,7 @@ a ui-sref="recipes.show({ id: recipe.id })" class="recipe-tile__link" ng-click="
       a class="button button--light button--small" ui-sref="recipes.edit({ id: recipe.id })" Edit
       label class="button button--light button--small" ng-class="{ 'button--is-active': recipe.approved }"
         input type="checkbox" name="recipeApproved{{ recipe.id }}" ng-model="recipe.approved" Approve
+      a class="button button--danger button--small" ng-click="destroy(recipe)" Delete
 
     p class="recipe-meta"
       span class="recipe-meta__item"
