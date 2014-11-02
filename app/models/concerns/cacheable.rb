@@ -8,6 +8,8 @@ module Cacheable
       keys = ['all']
       keys << scoped.current_page if scoped.respond_to?(:current_page)
       keys << scoped.count(:all)
+      keys << scoped.first.id
+      keys << scoped.last.id
       keys << last_updated_at.utc.try(:to_s, :nsec) if last_updated_at.respond_to?(:utc)
 
       "#{ model_name.cache_key }/#{ keys.join('-') }"
