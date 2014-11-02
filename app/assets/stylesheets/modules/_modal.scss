@@ -36,6 +36,7 @@
 }
 
 .modal-body--is-opened {
+  position: fixed;
   overflow: hidden;
 }
 
@@ -88,9 +89,12 @@
 
 .modal__close-btn {
   position: absolute;
-  top: $modal-padding / 2;
-  right: $modal-padding / 2;
+  top: 0;
+  right: 0;
+  padding: $modal-padding / 2;
+  width: $base-line-height;
   color: $base-font-color;
+  box-sizing: content-box;
 }
 
 .modal-overlay {

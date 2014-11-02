@@ -7,13 +7,13 @@
 
   .recipe-filters,
   .recipe-search__form-toggle {
-    margin-top: 12px;
-    margin-bottom: 12px;
+    padding-top: em(12);
+    padding-bottom: em(12);
   }
 
   .recipe-search__form {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: em(5);
+    margin-bottom: em(5);
   }
 }
 
@@ -71,17 +71,18 @@
 
 .recipe-search__form-toggle {
   float: right;
-  padding: 0;
+  margin-right: -$small-padding;
+  padding: 0 $small-padding;
   font-size: $large-font-size;
 }
 
 .recipe-search__form-hide-toggle {
   @extend %link--muted;
   position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 5px;
-  font-size: $mini-font-size;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  font-size: $small-font-size;
 }
 
 // Recipe tile

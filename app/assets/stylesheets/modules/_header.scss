@@ -34,8 +34,7 @@
 
 .app-header__link {
   @extend %button-link;
-  margin-right: 1em;
-  padding: 0;
+  padding: 0 $small-padding;
   line-height: $header-height;
   color: $header-link-color;
 
@@ -44,7 +43,6 @@
   }
 
   > .fa {
-    @extend %icon--left;
     font-size: $large-font-size;
   }
 }
@@ -55,14 +53,17 @@
 
 .app-header__section-left {
   float: left;
+
+  .app-header__link {
+    margin-left: -$small-padding;
+  }
 }
 
 .app-header__section-right {
   float: right;
 
   .app-header__link {
-    margin-right: 0;
-    margin-left: 1em;
+    margin-right: -$small-padding;
   }
 }
 
@@ -87,6 +88,7 @@
 
   .app-header__link {
     > .fa {
+      margin-right: $icon-margin;
       font-size: $base-font-size;
     }
   }

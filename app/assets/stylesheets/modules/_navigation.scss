@@ -14,6 +14,7 @@ $slide-menu-width: column-width($slide-menu-columns);
 
 .app-slide-menu {
   @include transition($slide-menu-transition);
+  @include prefixer(overflow-scrolling, touch, webkit spec);
   position: fixed;
   top: 0;
   bottom: 0;
