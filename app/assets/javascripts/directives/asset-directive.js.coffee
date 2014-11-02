@@ -25,3 +25,26 @@ angular.module('asset')
               load: -> $timeout -> $animate.removeClass(element, 'image--is-loading')
 
       return $delegate
+
+  .directive 'preloadSize', ($timeout) ->
+    restrict: 'A'
+    link: (scope, element, attrs) ->
+      return unless attrs.preloadSize || element.css('height')
+
+      $timeout ->
+        return if element.loaded
+
+        # Determine preload width/height ratio
+        regexpMatch = attrs.preloadSize.match(/(\d+)x(\d+)/)
+        size = { width: regexpMatch[1], height: regexpMatch[2] }
+        ratio = parseInt(size.width, 10) / parseInt(size.height, 10)
+
+        elementWidth = element.parent().width() || 0
+        elementHeight = elementWidth * ratio
+
+        if elementHeight
+          attrs.$set('height', elementHeight)
+
+          element
+            .on 'load', ->
+              $timeout -> attrs.$set('height', null)

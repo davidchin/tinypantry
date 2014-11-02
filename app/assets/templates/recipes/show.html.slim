@@ -6,7 +6,7 @@ section class="app-body"
 
     div class="recipe-detail__image"
       a target="_blank" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams"
-        img ng-src="{{ recipe.imageUrls.medium }}"
+        img ng-src="{{ recipe.imageUrls.medium }}" lazyload="" preload-size="640x640"
 
       div class="recipe-detail__image-action" ng-show="currentUser.status.loggedIn"
         button type="button" class="button button--light button--small ng-animate--disabled" ng-click="bookmark()" ng-hide="recipe.status.bookmarked"

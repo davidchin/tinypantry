@@ -124,6 +124,7 @@
 
 .recipe-tile__image {
   display: block;
+  background: $light-whitesmoke;
   overflow: hidden;
 }
 
@@ -166,6 +167,7 @@
 .recipe-detail__image {
   display: block;
   position: relative;
+  background: $light-whitesmoke;
   overflow: hidden;
 
   > a {
