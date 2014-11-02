@@ -193,10 +193,6 @@
   font-size: $base-font-size * 1.25;
 }
 
-.recipe-detail__action {
-  display: none;
-}
-
 .recipe-detail__image-action {
   position: absolute;
   right: $small-padding;
@@ -254,10 +250,6 @@
   .recipe-search__form-toggle,
   .recipe-search__form-hide-toggle {
     display: none;
-  }
-
-  .recipe-detail__action {
-    display: block;
   }
 }
 
