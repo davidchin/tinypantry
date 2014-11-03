@@ -216,7 +216,7 @@ angular.module('navigation')
               width: '100%'
             }
 
-            @blocker.on 'touchstart', (event) ->
+            @blocker.on 'touchstart click', (event) ->
               event.preventDefault()
 
               $timeout ->
