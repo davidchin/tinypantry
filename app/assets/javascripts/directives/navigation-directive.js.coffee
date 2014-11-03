@@ -202,7 +202,7 @@ angular.module('navigation')
 
         block: ->
           unless @blocker?
-            @blocker = angular.element('<slide-menu-toggle>')
+            @blocker = angular.element('<div>')
             
             @blocker.css {
               display: 'block'
@@ -211,9 +211,16 @@ angular.module('navigation')
               right: 0
               bottom: 0
               left: 0
+              zIndex: 9999
               cursor: 'default'
               width: '100%'
             }
+
+            @blocker.on 'touchstart', (event) ->
+              event.preventDefault()
+
+              $timeout ->
+                slideMenuGroup.toggle(slideMenuGroup.activeMenu, false)
 
             element.append(@blocker)
 

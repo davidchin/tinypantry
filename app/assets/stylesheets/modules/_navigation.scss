@@ -18,7 +18,7 @@ $slide-menu-width: column-width($slide-menu-columns);
   position: fixed;
   top: 0;
   bottom: 0;
-  background: $dark-gray;
+  background: $slide-menu-background;
   width: $slide-menu-width;
   overflow-y: auto;
   box-sizing: border-box;
