@@ -21,7 +21,9 @@ section class="app-body"
         ng-message when="remote"
           div ng-repeat="error in $remoteError" Password {{ error }}
 
-      button type="submit" class="button button--block" Submit
+      button type="submit" class="button button--block"
+        loading-indicator model="!currentUser.session.status.createPending" type="inline"
+        | Submit
 
       div class="session-form__footer"
         div

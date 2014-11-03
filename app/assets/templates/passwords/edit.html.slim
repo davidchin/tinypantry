@@ -31,7 +31,9 @@ session class="app-body"
         ng-message when="remote"
           div ng-repeat="error in $remoteError" Password reset token {{ error }}
 
-      button type="submit" class="button button--block" Submit
+      button type="submit" class="button button--block"
+        loading-indicator model="!password.status.updatePending" type="inline"
+        | Submit
 
       div class="password-reset-form__footer"
         a modal-close-button="" ui-sref="home" Cancel

@@ -11,6 +11,9 @@ angular.module('session')
 
       login: ->
         @currentUser.login()
+          .catch (error) =>
+            @catchValidationError(error, @sessionForm)
+
           .then ->
             flash.set('You are successfully logged in.', { type: 'success' })
             modalStack.close()
