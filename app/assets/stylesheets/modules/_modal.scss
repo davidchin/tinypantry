@@ -149,6 +149,7 @@
 
   .modal__body {
     padding: $large-modal-padding;
+    min-height: em(200);
     max-height: em(600);
   }
 
