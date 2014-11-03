@@ -15,7 +15,12 @@ angular.module('analytics')
 
       _.extend(options, lastArg) if _.isObject(lastArg)
 
-      $window.ga.apply($window, args[0..-2].concat([options]))
+      # Modify arguments
+      args = args[0..-2]
+      args.push(options)
+      args.unshift('send')
+
+      $window.ga.apply($window, args)
 
       return deferred.promise
 
