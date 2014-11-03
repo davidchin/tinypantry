@@ -68,6 +68,7 @@ $slide-menu-width: column-width($slide-menu-columns);
 }
 
 .app-slide-menu__item-link {
+  @extend %clearfix;
   @extend %link--white;
   display: block;
   padding: 0 $medium-padding;
@@ -79,9 +80,35 @@ $slide-menu-width: column-width($slide-menu-columns);
   }
 }
 
+.app-slide-menu__item-span {
+  @extend %clearfix;
+  padding: ($medium-padding / 2) $medium-padding;
+}
+
 .app-slide-menu__item-meta {
   @extend %text--muted;
   float: right;
+}
+
+.app-slide-menu__user-image {
+  display: inline-block;
+  float: left;
+  width: em(50);
+  height: em(50);
+
+  > img {
+    display: block;
+    border-radius: 100%;
+    width: 100%;
+  }
+}
+
+.app-slide-menu__user-name {
+  @include ellipsis;
+  display: block;
+  margin-left: em(60);
+  line-height: em(50);
+  color: $white;
 }
 
 // --------------------------------------------------

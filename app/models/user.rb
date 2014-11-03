@@ -21,6 +21,14 @@ class User < ActiveRecord::Base
     roles.pluck(:name)
   end
 
+  def gravatar_id
+    Digest::MD5.hexdigest(email.downcase)
+  end
+
+  def display_name
+    @display_name ||= email.split('@')[0]
+  end
+
   def generate_auth_token
     auth_token = auth_tokens.create
     @auth_token_secret = auth_token.secret

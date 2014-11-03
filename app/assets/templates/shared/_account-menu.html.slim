@@ -2,6 +2,12 @@ nav slide-menu="account-slide-menu" class="app-slide-menu"
   loading-indicator model="currentUser.status.set" class="loading-indicator loading-indicator--large"
 
   div class="app-slide-menu__item" ng-show="currentUser.status.loggedIn"
+    div class="app-slide-menu__item-span"
+      span class="app-slide-menu__user-image"
+        img ng-src="http://www.gravatar.com/avatar/{{ currentUser.gravatarId }}"
+      span class="app-slide-menu__user-name" {{ currentUser.displayName }}
+
+  div class="app-slide-menu__item" ng-show="currentUser.status.loggedIn"
     a class="app-slide-menu__item-link" ui-sref="sessions.destroy" ui-sref-active="is-active" slide-menu-toggle=""
       | Log Out
 
