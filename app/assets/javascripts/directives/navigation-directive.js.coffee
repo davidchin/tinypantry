@@ -222,6 +222,9 @@ angular.module('navigation')
               $timeout ->
                 slideMenuGroup.toggle(slideMenuGroup.activeMenu, false)
 
+            @blocker.on 'touchend', (event) ->
+              event.preventDefault()
+
             element.append(@blocker)
 
             $compile(@blocker)(scope)

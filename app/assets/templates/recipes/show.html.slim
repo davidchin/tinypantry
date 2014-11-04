@@ -19,7 +19,7 @@ section class="app-body"
 
     div class="recipe-detail__body"
       header
-        small class="recipe-meta" ng-show="recipe.feed.name"
+        a class="recipe-meta" ng-href="{{ recipe.feed.url }}" ng-show="recipe.feed.name"
           | By 
           strong {{ recipe.feed.name }}
         h1 class="recipe-detail__title" {{ recipe.name }}

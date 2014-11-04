@@ -3,6 +3,10 @@ a ui-sref="recipes.show({ id: recipe.id })" class="recipe-tile__link" ng-click="
     img ng-src="{{ recipe.imageUrls.small }}" lazyload="" preload-size="308x308"
 
   div class="recipe-tile__body"
+    div class="recipe-meta" ng-show="recipe.feed.name"
+      | By 
+      strong {{ recipe.feed.name }}
+
     h2 class="recipe-tile__title" {{ recipe.name }}
 
     p ng-if="currentUser.status.admin"
