@@ -17,6 +17,7 @@ angular.module('category')
     class CategoriesNewController extends BaseController
       constructor: ->
         @category = new Category
+        @category.keywords = [{ name: '' }]
 
         breadcrumbs.reset()
           .add('Categories', 'categories.index')

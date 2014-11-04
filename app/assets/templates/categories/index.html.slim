@@ -3,9 +3,6 @@ section class="app-body"
 
   div class="title"
     h1 class="title--inline" Categories
-    a class="button" ui-sref="categories.new"
-      i class="fa fa-plus"
-      | New
 
   div ng-show="categories.status.set && !categories.status.empty"
     table
@@ -17,6 +14,11 @@ section class="app-body"
         tr ng-repeat="category in categories.items"
           td
             a ui-sref="categories.show({ id: category.id })" {{ category.name }}
+
+    div class="form__footer"
+      a class="button" ui-sref="categories.new"
+        i class="fa fa-plus"
+        | New
 
   div ng-show="categories.status.set && categories.status.empty"
     | Nothing to see here, move along&hellip;

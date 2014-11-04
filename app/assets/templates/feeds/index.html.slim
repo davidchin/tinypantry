@@ -3,9 +3,6 @@ section class="app-body"
 
   div class="title"
     h1 class="title--inline" Feeds
-    a class="button" ui-sref="feeds.new"
-      i class="fa fa-plus"
-      | New
 
   div ng-show="feeds.status.set && !feeds.status.empty"
     table
@@ -21,6 +18,11 @@ section class="app-body"
           td {{ feed.url }}
 
     button class="load-button load-button--without-divider" ng-show="feeds.pagination.nextPage" ng-click="next()" Load More
+
+    div class="form__footer"
+      a class="button" ui-sref="feeds.new"
+        i class="fa fa-plus"
+        | New
 
   div ng-show="feeds.status.set && feeds.status.empty"
     | Nothing to see here, move along&hellip;
