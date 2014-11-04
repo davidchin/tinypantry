@@ -33,6 +33,6 @@ class Category < ActiveRecord::Base
   end
 
   def update_recipes_count
-    update_columns(recipes_count: recipes.approved.uniq.size)
+    update_columns(recipes_count: recipes.approved.as_json.uniq.size)
   end
 end
