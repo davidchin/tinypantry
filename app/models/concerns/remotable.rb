@@ -47,7 +47,7 @@ module Remotable
       end
 
       @remote_image_srcs = srcs.map do |src|
-        URI.join(url, URI.encode(src.value)).to_s
+        URI.join(url, URI.encode(src.value, /[\{\}\|\\\^\~\[\]\`]/)).to_s rescue ''
       end
     end
 

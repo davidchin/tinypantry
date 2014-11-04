@@ -6,3 +6,6 @@ LineLength:
 
 MethodLength:
   Max: 20
+
+Style/RescueModifier:
+  Enabled: false
