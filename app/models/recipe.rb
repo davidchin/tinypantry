@@ -67,6 +67,10 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def self.categorise_all
+    delay.find_each(&:categorise)
+  end
+
   def remote_image_url=(url)
     if remote_image_url != url && url.present?
       self.image = URI.parse(URI.encode(url))
