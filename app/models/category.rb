@@ -6,7 +6,7 @@ class Category < ActiveRecord::Base
            -> { order(created_at: :asc) },
            through: :categorisations
   has_many :recipes,
-           -> { group('recipes.id').order('count(recipes.id) desc') },
+           -> { group('recipes.id, keywords.id').order('count(recipes.id) desc') },
            through: :keywords
 
   validates :name, uniqueness: true
