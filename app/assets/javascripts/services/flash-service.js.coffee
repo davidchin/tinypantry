@@ -1,5 +1,5 @@
 angular.module('flash')
-  .factory 'Flash', ->
+  .factory 'Flash', ($timeout) ->
     class Flash
       constructor: (@name) ->
         @messages = {
@@ -18,6 +18,10 @@ angular.module('flash')
           if message.requests == 0
             @now[type] = message
             @clear(type)
+
+            $timeout =>
+              @now = {}
+            , message.duration if message.duration
           else
             --message.requests
         else
@@ -28,6 +32,7 @@ angular.module('flash')
           text: text
           type: 'alert'
           requests: 1
+          duration: 5000
         }, options)
 
         @messages[message.type] = message

@@ -35,7 +35,8 @@
     margin-left: em(5);
   }
 
-  > .fa:first-child {
+  > .fa:first-child,
+  > .loading-indicator:first-child {
     margin-right: em(5);
   }
 }
