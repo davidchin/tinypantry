@@ -14,7 +14,7 @@ $slide-menu-width: column-width($slide-menu-columns);
       overflow: hidden;
     }
 
-    .app-header {
+    .app-header.headroom--pinned {
       opacity: 0;
     }
   }
