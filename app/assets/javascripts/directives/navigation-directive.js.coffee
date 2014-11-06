@@ -256,13 +256,17 @@ angular.module('navigation')
             }
 
             @blocker.on 'touchstart click', (event) ->
+              event.stopImmediatePropagation()
               event.preventDefault()
 
               $timeout ->
                 slideMenuGroup.toggle(slideMenuGroup.activeMenu, false)
 
-            @blocker.on 'touchend', (event) ->
+            @blocker.on 'touchmove touchend', (event) ->
+              event.stopImmediatePropagation()
               event.preventDefault()
+
+              return false
 
             element.append(@blocker)
 
@@ -287,19 +291,15 @@ angular.module('navigation')
             element.css('min-height', $window.innerHeight)
 
             $animate.addClass(element, "is-slide-menu-opened is-#{ id }-opened")
+              .then => @block()
             $animate.removeClass(element, "is-slide-menu-closed is-#{ id }-closed")
-
-            # Block interaction
-            @block()
           else
             # Set min-height
             element.css('min-height', '')
 
             $animate.addClass(element, "is-slide-menu-closed is-#{ id }-closed")
+              .then => @unblock()
             $animate.removeClass(element, "is-slide-menu-opened is-#{ id }-opened")
-
-            # Unblock interaction
-            @unblock()
 
           return this
 

@@ -9,16 +9,17 @@ html
       ng-include src="'#{ asset_path('shared/_browse-menu.html') }'"
       ng-include src="'#{ asset_path('shared/_account-menu.html') }'"
 
-    slide-menu-content class="app-slide-menu-content"
-      div class="app-container app-container--fixed-header"
-        ng-include src="'#{ asset_path('shared/_header.html') }'" ng-controller="NavigationController"
+    div class="app-slide-menu-content-container"
+      slide-menu-content class="app-slide-menu-content"
+        div class="app-container app-container--fixed-header"
+          ng-include src="'#{ asset_path('shared/_header.html') }'" ng-controller="NavigationController"
 
-        flash name="app" class="app-flash"
+          flash name="app" class="app-flash"
 
-        ui-view class="app-view"
+          ui-view class="app-view"
 
-        loading-indicator name="app" class="loading-indicator loading-indicator--overlay"
+          loading-indicator name="app" class="loading-indicator loading-indicator--overlay"
 
-      ng-include src="'#{ asset_path('shared/_footer.html') }'"
+        ng-include src="'#{ asset_path('shared/_footer.html') }'"
 
     = render 'shared/scripts'
