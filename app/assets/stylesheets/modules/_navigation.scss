@@ -13,6 +13,10 @@ $slide-menu-width: column-width($slide-menu-columns);
       height: auto;
       overflow: hidden;
     }
+
+    .app-header {
+      opacity: 0;
+    }
   }
 }
 
