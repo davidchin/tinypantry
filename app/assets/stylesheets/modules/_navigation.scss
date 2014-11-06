@@ -42,7 +42,10 @@ $slide-menu-width: column-width($slide-menu-columns);
   left: auto;
 }
 
-.app-container {
+.app-slide-menu-content {
+  display: block;
+  height: 100%;
+
   &.is-slide-menu-opened-add-active,
   &.is-slide-menu-opened-remove-active {
     @include transition($slide-menu-transition);
@@ -121,7 +124,7 @@ $slide-menu-width: column-width($slide-menu-columns);
 // --------------------------------------------------
 // Large screen up
 @include media(new-breakpoint(min-width $large-screen-max-width + $slide-menu-width * 2)) {
-  .app-container {
+  .app-slide-menu-content {
     &.is-browse-slide-menu-opened {
       @include transform(none);
     }
