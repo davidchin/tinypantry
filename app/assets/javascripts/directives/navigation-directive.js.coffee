@@ -26,7 +26,7 @@ angular.module('navigation')
 
       return $delegate
 
-  .directive 'slideMenuGroup', ($animate, $q) ->
+  .directive 'slideMenuGroup', ($animate, $q, $timeout) ->
     restrict: 'EA'
 
     controller: ($scope, $element) ->
@@ -63,6 +63,9 @@ angular.module('navigation')
           # Toggle active state unless active state is defined
           active = !menu.active unless active?
 
+          # Get HTML reference
+          html = $('html')
+
           if active
             @activeMenu = menu
             @activeMenu.open()
@@ -71,14 +74,18 @@ angular.module('navigation')
             # Close all
             menu.close() for menu in @menus when menu != @activeMenu
 
-            # Add Class
+            # Broadcast event
             $scope.$broadcast('slideMenuGroup:openStart', @activeMenu)
 
+            # Add Class
             $q.all([
               $animate.addClass($element, 'is-slide-menu-opened')
               $animate.removeClass($element, 'is-slide-menu-closed')
+              $animate.addClass(html, 'is-slide-menu-opened')
+              $animate.removeClass(html, 'is-slide-menu-closed')
             ]).then ->
               $scope.$broadcast('slideMenuGroup:openEnd', @activeMenu)
+
           else
             menu.close()
             @content.close(menu.id)
@@ -92,6 +99,8 @@ angular.module('navigation')
             $q.all([
               $animate.addClass($element, 'is-slide-menu-closed')
               $animate.removeClass($element, 'is-slide-menu-opened')
+              $animate.addClass(html, 'is-slide-menu-closed')
+              $animate.removeClass(html, 'is-slide-menu-opened')
             ]).then ->
               $scope.$broadcast('slideMenuGroup:closeEnd', menu)
 
@@ -211,7 +220,7 @@ angular.module('navigation')
 
       new SlideMenu
 
-  .directive 'slideMenuContent', ($animate, $timeout, $compile) ->
+  .directive 'slideMenuContent', ($animate, $timeout, $compile, $window) ->
     restrict: 'EA'
     require: '^slideMenuGroup'
 
@@ -274,12 +283,18 @@ angular.module('navigation')
 
           # Add/remove class
           if active
+            # Set min-height
+            element.css('min-height', $window.innerHeight)
+
             $animate.addClass(element, "is-slide-menu-opened is-#{ id }-opened")
             $animate.removeClass(element, "is-slide-menu-closed is-#{ id }-closed")
 
             # Block interaction
             @block()
           else
+            # Set min-height
+            element.css('min-height', '')
+
             $animate.addClass(element, "is-slide-menu-closed is-#{ id }-closed")
             $animate.removeClass(element, "is-slide-menu-opened is-#{ id }-opened")
 
