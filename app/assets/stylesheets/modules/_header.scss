@@ -42,6 +42,10 @@
     color: $header-hover-link-color;
   }
 
+  &.is-slide-menu-opened {
+    color: $header-active-link-color;
+  }
+
   > .fa {
     font-size: $large-font-size;
   }

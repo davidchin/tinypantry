@@ -132,6 +132,7 @@ $large-header-height: em(50);
 $header-font-color: $white;
 $header-link-color: $header-font-color;
 $header-hover-link-color: $light-aqua-blue;
+$header-active-link-color: darken($header-hover-link-color, 10%);
 
 // Footer
 $footer-height: em(55);

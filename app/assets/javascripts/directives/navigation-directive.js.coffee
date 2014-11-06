@@ -55,7 +55,7 @@ angular.module('navigation')
           menu in @menus
 
         toggle: (menu, active) ->
-          menu = _.find(@menus, { id: menu }) if _.isString(menu)
+          menu = @find(menu) if _.isString(menu)
 
           # Guard statement
           return unless menu? and @content?
@@ -72,13 +72,13 @@ angular.module('navigation')
             menu.close() for menu in @menus when menu != @activeMenu
 
             # Add Class
-            $scope.$broadcast('slideMenuGroup:openStart')
+            $scope.$broadcast('slideMenuGroup:openStart', @activeMenu)
 
             $q.all([
               $animate.addClass($element, 'is-slide-menu-opened')
               $animate.removeClass($element, 'is-slide-menu-closed')
             ]).then ->
-              $scope.$broadcast('slideMenuGroup:openEnd')
+              $scope.$broadcast('slideMenuGroup:openEnd', @activeMenu)
           else
             menu.close()
             @content.close(menu.id)
@@ -87,13 +87,13 @@ angular.module('navigation')
             @activeMenu = undefined if @activeMenu == menu
 
             # Remove Class
-            $scope.$broadcast('slideMenuGroup:closeStart')
+            $scope.$broadcast('slideMenuGroup:closeStart', menu)
 
             $q.all([
               $animate.addClass($element, 'is-slide-menu-closed')
               $animate.removeClass($element, 'is-slide-menu-opened')
             ]).then ->
-              $scope.$broadcast('slideMenuGroup:closeEnd')
+              $scope.$broadcast('slideMenuGroup:closeEnd', menu)
 
           return this
 
@@ -103,12 +103,18 @@ angular.module('navigation')
         close: (menu) ->
           @toggle(menu, false)
 
+        find: (menuId) ->
+          _.find(@menus, { id: menuId })
+
+        isActive: (menuId) ->
+          @activeMenu?.id == menuId
+
       # Extend controller
       slideMenuGroup = new SlideMenuGroup
 
       @[key] = slideMenuGroup[key] for key of slideMenuGroup
 
-  .directive 'slideMenuToggle', ->
+  .directive 'slideMenuToggle', ($animate) ->
     restrict: 'EA'
     scope: {}
     transclude: true
@@ -130,10 +136,34 @@ angular.module('navigation')
           @group = slideMenuGroup
           @targetId = attrs.slideMenuToggle || attrs.targetId
 
+          @watch()
+
         toggle: ->
           @group.toggle(@targetId || @group.activeMenu)
 
+          if @group.isActive(@targetId)
+            $animate.addClass(element, 'is-slide-menu-opened')
+            $animate.removeClass(element, 'is-slide-menu-closed')
+          else
+            $animate.addClass(element, 'is-slide-menu-closed')
+            $animate.removeClass(element, 'is-slide-menu-opened')
+
           return this
+
+        highlight: (highlight) ->
+          if highlight
+            $animate.addClass(element, 'is-slide-menu-opened')
+            $animate.removeClass(element, 'is-slide-menu-closed')
+          else
+            $animate.addClass(element, 'is-slide-menu-closed')
+            $animate.removeClass(element, 'is-slide-menu-opened')
+
+        watch: ->
+          scope.$on 'slideMenuGroup:openStart', =>
+            @highlight(@group.isActive(@targetId))
+
+          scope.$on 'slideMenuGroup:closeEnd', =>
+            @highlight(@group.isActive(@targetId))
 
       scope.slideMenuToggle = new SlideMenuToggle
 

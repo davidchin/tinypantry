@@ -2,6 +2,7 @@
 .recipe-nav-bar {
   border-bottom: 1px solid $light-gray;
   background: $light-whitesmoke;
+  min-height: em(42);
   line-height: $unitless-mini-line-height;
   font-size: $small-font-size;
 
@@ -50,6 +51,7 @@
 }
 
 .recipe-filters__link {
+  line-height: $unitless-line-height;
   color: $base-font-color;
 
   &.is-active {
