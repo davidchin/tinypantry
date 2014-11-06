@@ -11,7 +11,6 @@
   min-width: 300px;
   max-width: $max-width;
   height: auto;
-  box-sizing: border-box;
 
   &.ng-enter,
   &.ng-leave,
@@ -36,10 +35,13 @@
 }
 
 .modal-body--is-opened {
-  position: fixed;
   right: 0;
   left: 0;
   overflow: hidden;
+
+  .app-view {
+    visibility: hidden;
+  }
 }
 
 .modal--without-footer {
@@ -57,7 +59,6 @@
   padding: em(15) $modal-padding;
   min-height: $modal-padding + $base-line-height;
   text-align: center;
-  box-sizing: border-box;
 }
 
 .modal--with-plain-header {
@@ -162,6 +163,12 @@
   .modal__close-btn {
     top: $large-modal-padding / 2;
     right: $large-modal-padding / 2;
+  }
+
+  .modal-body--is-opened {
+    .app-view {
+      visibility: visible;
+    }
   }
 }
 

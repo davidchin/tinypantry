@@ -21,7 +21,6 @@ $slide-menu-width: column-width($slide-menu-columns);
   background: $slide-menu-background;
   width: $slide-menu-width;
   overflow-y: auto;
-  box-sizing: border-box;
 
   &.is-slide-menu-closed {
     z-index: -100;

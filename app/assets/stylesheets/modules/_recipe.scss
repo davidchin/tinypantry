@@ -21,6 +21,11 @@
   @extend %outer-container;
   @extend %clearfix;
   padding: 0 $small-padding;
+
+  .recipe-search__form-toggle {
+    position: absolute;
+    right: $small-padding;
+  }
 }
 
 // Recipe filter
@@ -70,7 +75,6 @@
 }
 
 .recipe-search__form-toggle {
-  float: right;
   margin-right: -$small-padding;
   padding: 0 $small-padding;
   font-size: $large-font-size;
@@ -90,7 +94,7 @@
   @extend %outer-container;
 
   .recipe-tile {
-    margin-top: $base-padding * 2;
+    margin-top: $base-padding * 1.5;
   }
 }
 
@@ -288,6 +292,7 @@
     .recipe-tile {
       @include span-columns(3);
       @include omega(4n);
+      margin-top: $base-padding * 2;
 
       &:nth-of-type(-n+4) {
         margin-top: 0;
