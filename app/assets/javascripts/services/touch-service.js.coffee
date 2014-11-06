@@ -1,6 +1,7 @@
 angular.module('touch')
-  .run ($document, $timeout, fastClick) ->
-    $timeout -> fastClick.attach($document.prop('body'))
+  .run ($document, $rootScope, fastClick) ->
+    $rootScope.$on '$viewContentLoaded', ->
+      fastClick.attach($document.prop('body'))
 
   .factory 'fastClick', ($window) ->
     $window.FastClick
