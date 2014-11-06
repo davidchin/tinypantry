@@ -1,1 +1,3 @@
-angular.module 'touch', []
+angular.module 'touch', [
+  'ngTouch'
+]
