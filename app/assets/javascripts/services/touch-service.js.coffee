@@ -1,6 +1,6 @@
 angular.module('touch')
-  .run ($document, fastClick) ->
-    fastClick.attach($document.prop('body'))
+  .run ($document, $timeout, fastClick) ->
+    $timeout -> fastClick.attach($document.prop('body'))
 
   .factory 'fastClick', ($window) ->
     $window.FastClick

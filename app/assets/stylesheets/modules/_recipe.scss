@@ -133,6 +133,10 @@
   display: block;
   background: $light-whitesmoke;
   overflow: hidden;
+
+  > img {
+    display: block;
+  }
 }
 
 .recipe-tile__title {
