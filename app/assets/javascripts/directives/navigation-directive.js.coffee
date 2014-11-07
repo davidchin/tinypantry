@@ -294,11 +294,16 @@ angular.module('navigation')
               .then => @block()
             $animate.removeClass(element, "is-slide-menu-closed is-#{ id }-closed")
           else
-            # Set min-height
-            element.css('min-height', '')
-
             $animate.addClass(element, "is-slide-menu-closed is-#{ id }-closed")
-              .then => @unblock()
+              .then =>
+                @unblock()
+
+                # Clear min-height
+                # KLUDGE: Needs a delay, otherwise, the screen flickers
+                $timeout ->
+                  element.css('min-height', '')
+                , 500
+
             $animate.removeClass(element, "is-slide-menu-opened is-#{ id }-opened")
 
           return this

@@ -14,9 +14,14 @@ $slide-menu-width: column-width($slide-menu-columns);
       overflow: hidden;
     }
 
+    .app-footer,
     .app-header.headroom--pinned.headroom--not-top {
       opacity: 0;
     }
+  }
+
+  &.is-slide-menu-opened-remove {
+    height: 100%;
   }
 }
 
@@ -59,6 +64,7 @@ $slide-menu-width: column-width($slide-menu-columns);
 
 .app-slide-menu-content {
   display: block;
+  background: $base-background-color;
   height: 100%;
 
   &.is-slide-menu-opened-add-active,
