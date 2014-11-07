@@ -6,7 +6,7 @@
   display: block;
   margin-bottom: -$footer-height;
   background: $base-background-color;
-  padding-bottom: $footer-height + ($base-padding * 2);
+  padding-bottom: $footer-height + $base-padding;
   min-height: 100%;
 }
 

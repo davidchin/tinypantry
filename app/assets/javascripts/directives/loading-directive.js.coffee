@@ -78,9 +78,9 @@ angular.module('loading')
           scope.$on '$destroy', => @stop()
 
           scope.$on 'loadingIndicator:start', (event, id) =>
-            @start() if id == attrs.name
+            $timeout => @start() if id == attrs.name
 
           scope.$on 'loadingIndicator:stop', (event, id) =>
-            @stop() if id == attrs.name
+            $timeout => @stop() if id == attrs.name
 
       scope.loadingIndicator = new LoadingIndicator

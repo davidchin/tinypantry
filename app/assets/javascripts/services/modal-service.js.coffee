@@ -79,18 +79,20 @@ angular.module('modal')
               # Compile
               $compile(@element)(@scope)
 
-              # Attach background
-              modalBackground.enter(parentElement)
-
               # Watch
               @watch()
 
-              # Attach
-              $animate.addClass(@config.body, 'modal-body--is-opened')
-              $animate.enter(@element, parentElement, lastElement)
-                .then =>
-                  # Notify
-                  $timeout => @notify('open', this)
+              # Attach background
+              modalBackground.enter(parentElement)
+
+              $timeout =>
+                # Attach
+                $animate.addClass(@config.body, 'modal-body--is-opened')
+                $animate.enter(@element, parentElement, lastElement)
+                  .then =>
+                    # Notify
+                    $timeout => @notify('open', this)
+              , 300
 
 
         close: ->
@@ -139,10 +141,10 @@ angular.module('modal')
         $rootScope.$broadcast("modalBackground:#{ event }", args...)
 
       enter: (parent) ->
-        $animate.enter(@element, parent)
-
         @element.on 'click', =>
           $timeout => @notify('click', this)
+
+        $animate.enter(@element, parent)
 
       leave: ->
         $animate.leave(@element)
