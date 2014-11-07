@@ -102,7 +102,7 @@ $button-height: $base-line-height + 2 * nth($button-padding, 1);
 $base-button-color: $base-link-color;
 $hover-button-color: $hover-link-color;
 $light-button-color: $whitesmoke;
-$hover-light-button-color: darken($light-button-color, 5);
+$hover-light-button-color: darken($light-button-color, 2.5);
 $light-button-font-color: $dark-medium-gray;
 $success-button-color: $green;
 $hover-success-button-color: darken($green, 5);

@@ -59,7 +59,7 @@
   &:hover,
   &:active,
   &.button--is-active {
-    border-color: darken($light-gray, 20%);
+    border-color: darken($light-gray, 10%);
     background-color: $hover-light-button-color;
     color: darken($light-button-font-color, 10%);
   }

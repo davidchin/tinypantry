@@ -24,12 +24,10 @@
 }
 
 .load-button {
-  display: block;
+  @extend %button;
+  @extend %button--block;
+  @extend %button--light;
   margin-top: $base-padding;
-  border-top: 1px solid $light-gray;
-  width: 100%;
-  color: $base-font-color;
-  font-weight: normal;
 
   &:after {
     @extend %icon;
