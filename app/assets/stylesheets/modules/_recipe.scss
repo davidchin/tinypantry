@@ -224,10 +224,30 @@
     }
   }
 
-  .modal {
+  .recipe-modal {
     .recipe-detail__image {
       margin-right: -$modal-padding;
       margin-left: -$modal-padding;
+    }
+
+    .modal__header {
+      background: transparent;
+    }
+
+    &,
+    .modal__body {
+      padding-top: 0;
+    }
+
+    .modal__close-btn {
+      > .fa {
+        border-radius: 100%;
+        background: transparentize($black, .5);
+        padding: em(5);
+        width: em(26);
+        height: em(26);
+        color: $white;
+      }
     }
   }
 }

@@ -34,7 +34,7 @@
   }
 }
 
-.modal-body--is-opened {
+.app.is-modal-opened {
   right: 0;
   left: 0;
   overflow: hidden;
@@ -165,7 +165,7 @@
     right: $large-modal-padding / 2;
   }
 
-  .modal-body--is-opened {
+  .app.is-modal-opened {
     .app-view {
       visibility: visible;
     }

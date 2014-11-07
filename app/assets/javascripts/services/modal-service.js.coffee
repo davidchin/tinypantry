@@ -87,7 +87,7 @@ angular.module('modal')
 
               $timeout =>
                 # Attach
-                $animate.addClass(@config.body, 'modal-body--is-opened')
+                $animate.addClass(@config.body, 'is-modal-opened')
                 $animate.enter(@element, parentElement, lastElement)
                   .then =>
                     # Notify
@@ -105,7 +105,7 @@ angular.module('modal')
           modalStack.remove(this)
 
           # Remove from DOM
-          $animate.removeClass(@config.body, 'modal-body--is-opened')
+          $animate.removeClass(@config.body, 'is-modal-opened')
           $animate.leave(@element)
             .then =>
               # Clean up
