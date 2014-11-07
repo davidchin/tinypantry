@@ -14,7 +14,7 @@ $slide-menu-width: column-width($slide-menu-columns);
       overflow: hidden;
     }
 
-    .app-header.headroom--pinned {
+    .app-header.headroom--pinned.headroom--not-top {
       opacity: 0;
     }
   }
@@ -26,7 +26,6 @@ $slide-menu-width: column-width($slide-menu-columns);
 
 .app-slide-menu {
   @include transition($slide-menu-transition);
-  @include prefixer(overflow-scrolling, touch, webkit spec);
   position: fixed;
   top: 0;
   bottom: 0;
@@ -35,11 +34,15 @@ $slide-menu-width: column-width($slide-menu-columns);
   overflow-y: auto;
 
   &.is-slide-menu-closed {
-    z-index: -100;
+    z-index: -10000;
   }
 
   &.is-slide-menu-closed:not(.is-slide-menu-closed-add) {
     visibility: hidden;
+  }
+
+  &.is-slide-menu-opened {
+    @include prefixer(overflow-scrolling, touch, webkit spec);
   }
 }
 
