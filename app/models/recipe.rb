@@ -23,7 +23,7 @@ class Recipe < ActiveRecord::Base
            through: :keywords
 
   has_many :related_recipes,
-           -> (recipe) { where.not(id: recipe.id) },
+           -> (recipe) { where.not(id: recipe.id).uniq },
            through: :keywords,
            source: :recipes
 
