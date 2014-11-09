@@ -12,7 +12,7 @@ class Feed < ActiveRecord::Base
 
   def import_rss
     new_recipes = fresh_items.map do |item|
-      recipes.new(extract_recipe_data(item))
+      recipes.new(Recipe.extract_content(item))
     end
 
     return if new_recipes.empty?
@@ -35,47 +35,5 @@ class Feed < ActiveRecord::Base
 
       urls.include?(link.try(:content))
     end
-  end
-
-  private
-
-  def node_to_html(node)
-    html = CGI.unescapeHTML(node.to_html)
-
-    Nokogiri::HTML.fragment(html)
-  end
-
-  def extract_img_src(node)
-    return if node.blank?
-
-    src = node.at_xpath('.//img/@src').try(:value)
-
-    URI.encode(src) if src.present?
-  end
-
-  def extract_recipe_data(node)
-    title = node.at_xpath('.//title')
-    link = node.at_xpath('.//link')
-    pub_date = node.at_xpath('.//pubDate')
-    description = node.at_xpath('.//description')
-
-    if description.present?
-      # Extract img src
-      description = node_to_html(description)
-      img_src = extract_img_src(description)
-
-      # Remove img from description
-      description.search('.//img').remove
-    end
-
-    {
-      name: title.try(:content).try(:titleize),
-      url: link.try(:content),
-      description: description.try(:content).try(:strip),
-      published_at: pub_date.try(:content),
-      imported_at: Time.now.in_time_zone,
-      content_xml: node.to_xml,
-      remote_image_url: img_src
-    }
   end
 end

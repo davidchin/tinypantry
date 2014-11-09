@@ -71,8 +71,34 @@ class Recipe < ActiveRecord::Base
     delay.find_each(&:categorise)
   end
 
-  def self.clean_all
-    find_each(&:clean)
+  def self.refresh_content_all
+    find_each(&:refresh_content)
+  end
+
+  def self.extract_content(node)
+    title = node.at_xpath('.//title')
+    link = node.at_xpath('.//link')
+    pub_date = node.at_xpath('.//pubDate')
+    description = node.at_xpath('.//description')
+
+    if description.present?
+      # Extract img src
+      description = node_to_html(description)
+      img_src = extract_img_src(description)
+
+      # Remove img from description
+      description.search('.//img').remove
+    end
+
+    {
+      name: title.try(:content).try(:titleize),
+      url: link.try(:content),
+      description: description.try(:content).try(:strip),
+      published_at: pub_date.try(:content),
+      imported_at: Time.now.in_time_zone,
+      content_xml: node.to_xml,
+      remote_image_url: img_src
+    }
   end
 
   def remote_image_url=(url)
@@ -106,20 +132,28 @@ class Recipe < ActiveRecord::Base
     categories.update_all_recipes_count if approved_changed?
   end
 
-  def clean
+  def refresh_content
     xml = Nokogiri::XML.fragment(content_xml)
-    description = xml.search('.//description')
-    title = xml.search('.//title')
+    data = self.class.extract_content(xml)
 
-    return unless description.present?
-
-    description = Nokogiri::HTML.fragment(CGI.unescapeHTML(description.inner_html))
-    description.search('.//img').remove
-
-    update(title: title.inner_text.titleize, description: description.content.strip)
+    update(name: data[:name], description: data[:description])
   end
 
   private
+
+  def self.node_to_html(node)
+    html = CGI.unescapeHTML(node.to_html)
+
+    Nokogiri::HTML.fragment(html)
+  end
+
+  def self.extract_img_src(node)
+    return if node.blank?
+
+    src = node.at_xpath('.//img/@src').try(:value)
+
+    URI.encode(src) if src.present?
+  end
 
   def matched_keywords
     name_matcher = FuzzyMatch.new(Keyword.all, read: :name, threshold: 0.25)
