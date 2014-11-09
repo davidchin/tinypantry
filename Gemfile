@@ -75,6 +75,9 @@ gem 'memcachier'
 # CORS
 gem 'rack-cors', require: 'rack/cors'
 
+# Gzip
+gem 'rack-zippy'
+
 # Dev tool
 gem 'spring', group: :development
 gem 'rails_best_practices', require: false
