@@ -46,7 +46,7 @@ $slide-menu-width: column-width($slide-menu-columns);
     visibility: hidden;
   }
 
-  &.is-slide-menu-opened {
+  &.is-slide-menu-opened:not(.is-slide-menu-closed-add) {
     @include prefixer(overflow-scrolling, touch, webkit spec);
   }
 }
