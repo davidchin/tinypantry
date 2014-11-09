@@ -71,6 +71,10 @@ class Recipe < ActiveRecord::Base
     delay.find_each(&:categorise)
   end
 
+  def self.clean_all
+    find_each(&:clean)
+  end
+
   def remote_image_url=(url)
     if remote_image_url != url && url.present?
       self.image = URI.parse(URI.encode(url))
@@ -100,6 +104,19 @@ class Recipe < ActiveRecord::Base
 
   def update_counter
     categories.update_all_recipes_count if approved_changed?
+  end
+
+  def clean
+    xml = Nokogiri::XML.fragment(content_xml)
+    description = xml.search('.//description')
+    title = xml.search('.//title')
+
+    return unless description.present?
+
+    description = Nokogiri::HTML.fragment(CGI.unescapeHTML(description.inner_html))
+    description.search('.//img').remove
+
+    update(title: title.inner_text.titleize, description: description.content.strip)
   end
 
   private

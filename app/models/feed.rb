@@ -39,12 +39,16 @@ class Feed < ActiveRecord::Base
 
   private
 
+  def node_to_html(node)
+    html = CGI.unescapeHTML(node.to_html)
+
+    Nokogiri::HTML.fragment(html)
+  end
+
   def extract_img_src(node)
     return if node.blank?
 
-    html = CGI.unescapeHTML(node.to_html)
-    html = Nokogiri::HTML.fragment(html)
-    src = html.at_xpath('.//img/@src').try(:value)
+    src = node.at_xpath('.//img/@src').try(:value)
 
     URI.encode(src) if src.present?
   end
@@ -52,16 +56,22 @@ class Feed < ActiveRecord::Base
   def extract_recipe_data(node)
     title = node.at_xpath('.//title')
     link = node.at_xpath('.//link')
-    description = node.at_xpath('.//description')
     pub_date = node.at_xpath('.//pubDate')
-    img_src = extract_img_src(description)
+    description = node.at_xpath('.//description')
 
-    description.search('.//img').remove if description.present?
+    if description.present?
+      # Extract img src
+      description = node_to_html(description)
+      img_src = extract_img_src(description)
+
+      # Remove img from description
+      description.search('.//img').remove
+    end
 
     {
-      name: title.try(:content),
+      name: title.try(:content).try(:titleize),
       url: link.try(:content),
-      description: description.try(:content),
+      description: description.try(:content).try(:strip),
       published_at: pub_date.try(:content),
       imported_at: Time.now.in_time_zone,
       content_xml: node.to_xml,
