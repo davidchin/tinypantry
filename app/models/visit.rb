@@ -9,7 +9,8 @@ class Visit < ActiveRecord::Base
   end
 
   def self.import_total_count(page = 1)
-    data = fetch_data(minimum(:updated_at) || 1.year.ago, page)
+    starts_at = minimum(:updated_at) || 1.year.ago
+    data = fetch_recipe_views(starts_at, page)
 
     data[:formated_rows].each do |row|
       visit = find_or_initialize_by(visitable_id: row[:visitable_id])
@@ -22,7 +23,8 @@ class Visit < ActiveRecord::Base
   end
 
   def self.import_last_30_days_count(page = 1)
-    data = fetch_data(30.days.ago, page)
+    starts_at = 30.days.ago
+    data = fetch_recipe_views(starts_at, page)
 
     data[:formated_rows].each do |row|
       visit = find_or_initialize_by(visitable_id: row[:visitable_id])
@@ -34,7 +36,28 @@ class Visit < ActiveRecord::Base
     import_last_30_days_count(page + 1) if num_page > page
   end
 
-  def self.fetch_data(start_date, page = 1)
+  def self.fetch_recipe_views(start_date, page = 1)
+    data = Google::AnalyticsClient.instance.get(
+      'metrics'     => 'ga:pageviews',
+      'dimensions'  => 'ga:pagePath',
+      'start-date'  => start_date.in_time_zone.strftime('%Y-%m-%d'),
+      'max-results' => 10_000,
+      'filters'     => 'ga:pagePath=~^/recipes',
+      'start-index' => (page - 1) * 10_000 + 1
+    ).data
+
+    # Insert additional data
+    data.tap do
+      data[:num_pages] = ((data['totalResults'] || 0) / (data['itemsPerPage'] || 1)).ceil
+      data[:formated_rows] = data['rows'].try(:map) do |row|
+        match = row[0].match(/(?:recipes\/)(\d+)/)
+        visitable_id = match[1].try(:to_i) if match
+        { visitable_id: visitable_id, count: row[1].to_i }
+      end || []
+    end
+  end
+
+  def self.fetch_outbound_recipe_views(start_date, page = 1)
     data = Google::AnalyticsClient.instance.get(
       'metrics'     => 'ga:totalEvents',
       'dimensions'  => 'ga:eventLabel',
@@ -46,11 +69,9 @@ class Visit < ActiveRecord::Base
 
     # Insert additional data
     data.tap do
-      total_results = data['totalResults'] || 0
-      items_per_page = data['itemsPerPage'] || 1
-      data[:num_pages] = (total_results / items_per_page).ceil
+      data[:num_pages] = ((data['totalResults'] || 0) / (data['itemsPerPage'] || 1)).ceil
       data[:formated_rows] = data['rows'].try(:map) do |row|
-        { visitable_id: row[0].to_i, count: row[1] }
+        { visitable_id: row[0].to_i, count: row[1].to_i }
       end || []
     end
   end
