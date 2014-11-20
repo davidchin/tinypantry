@@ -1,4 +1,8 @@
 angular.module('asset')
+  .run ($rootScope, $window) ->
+    $rootScope.$on 'modal:open', (event, modal) ->
+      $($window).resize()
+
   .config ($provide) ->
     $provide.decorator 'ngSrcDirective', ($delegate, $animate, $timeout) ->
       directive = $delegate[0]

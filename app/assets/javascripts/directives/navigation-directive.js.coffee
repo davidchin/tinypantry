@@ -13,14 +13,6 @@ angular.module('navigation')
             top: element.css('top')
           }
 
-          scope.$on 'slideMenuGroup:openStart', ->
-            top = element.offset().top
-
-            element.css {
-              position: 'absolute'
-              top: top
-            }
-
           scope.$on 'slideMenuGroup:closeEnd', ->
             element.css(defaults)
 
