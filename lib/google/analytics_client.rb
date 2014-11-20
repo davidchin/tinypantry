@@ -38,7 +38,7 @@ module Google
 
     def account
       @account ||= Google::APIClient::JWTAsserter.new(
-        '383848500300-lm0c75i5jsth8lv1o36nou3fe3899l3s@developer.gserviceaccount.com',
+        Rails.application.secrets.ga_service_account,
         ['https://www.googleapis.com/auth/analytics.readonly',
          'https://www.googleapis.com/auth/prediction'],
         key

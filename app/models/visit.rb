@@ -9,7 +9,7 @@ class Visit < ActiveRecord::Base
   end
 
   def self.import_total_count(page = 1)
-    data = fetch_data(maximum(:updated_at), page)
+    data = fetch_data(minimum(:updated_at) || 1.year.ago, page)
 
     data[:formated_rows].each do |row|
       visit = find_or_initialize_by(visitable_id: row[:visitable_id])
@@ -17,7 +17,8 @@ class Visit < ActiveRecord::Base
       visit.save
     end
 
-    import_total_count(page + 1) if data['num-pages'] > page
+    num_page = data[:num_pages] || 0
+    import_total_count(page + 1) if num_page > page
   end
 
   def self.import_last_30_days_count(page = 1)
@@ -29,7 +30,8 @@ class Visit < ActiveRecord::Base
       visit.save
     end
 
-    import_last_30_days_count(page + 1) if data['num-pages'] > page
+    num_page = data[:num_pages] || 0
+    import_last_30_days_count(page + 1) if num_page > page
   end
 
   def self.fetch_data(start_date, page = 1)
@@ -38,13 +40,15 @@ class Visit < ActiveRecord::Base
       'dimensions'  => 'ga:eventLabel',
       'start-date'  => start_date.in_time_zone.strftime('%Y-%m-%d'),
       'max-results' => 10_000,
-      'filters'     => 'ga.eventCategory==Recipe, ga.eventAction==Outbound',
+      'filters'     => 'ga:eventCategory==Recipe, ga:eventAction==Outbound',
       'start-index' => (page - 1) * 10_000 + 1
     ).data
 
     # Insert additional data
     data.tap do
-      data[:num_pages] = (data['totalResults'] / data['itemsPerPage']).ceil
+      total_results = data['totalResults'] || 0
+      items_per_page = data['itemsPerPage'] || 1
+      data[:num_pages] = (total_results / items_per_page).ceil
       data[:formated_rows] = data['rows'].try(:map) do |row|
         { visitable_id: row[0].to_i, count: row[1] }
       end || []
