@@ -1,10 +1,10 @@
 doctype html
 
-html
-  head
+html ng-app="application"
+  head ng-controller="HeadController"
     = render 'shared/head'
 
-  body class="app" data-ready="{{ loadingProgress.ready }}" ng-app="application" slide-menu-group=""
+  body class="app" data-ready="{{ loadingProgress.ready }}" slide-menu-group=""
     div ng-controller="NavigationController"
       ng-include src="'#{ asset_path('shared/_browse-menu.html') }'"
       ng-include src="'#{ asset_path('shared/_account-menu.html') }'"

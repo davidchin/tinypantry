@@ -68,7 +68,7 @@ angular.module('recipe')
 
     new RecipesIndexController
 
-  .controller 'RecipesShowController', ($scope, $state, $stateParams, $q, currentUser, flash, ga, breadcrumbs, BaseController, Recipe) ->
+  .controller 'RecipesShowController', ($scope, $state, $stateParams, $q, currentUser, flash, ga, breadcrumbs, head, BaseController, Recipe) ->
     class RecipesShowController extends BaseController
       constructor: ->
         @currentUser = currentUser
@@ -84,6 +84,7 @@ angular.module('recipe')
       read: ->
         @recipe.read($stateParams)
           .then =>
+            head.set(@recipe.name, @recipe.description)
             @recipe.related()
           .then =>
             currentUser.ready()

@@ -1,8 +1,6 @@
 nav class="recipe-nav-bar" ng-include="'#{ asset_path('recipes/_nav-bar.html') }'"
 
-div
-  flash name="app"
-
+section class="app-body"
   loading-indicator model="recipes.status.set" class="loading-indicator loading-indicator--large"
 
   div ng-hide="recipes.status.empty"
