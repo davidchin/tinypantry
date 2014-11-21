@@ -14,7 +14,7 @@ class Visit < ActiveRecord::Base
 
     data[:formated_rows].each do |row|
       next unless row[:visitable_id]
-      visit = find_or_initialize_by(visitable_id: row[:visitable_id])
+      visit = find_or_initialize_by(visitable_id: row[:visitable_id], visitable_type: 'Recipe')
       visit.total_count = visit.total_count.to_i + row[:count]
       visit.save
     end
@@ -29,7 +29,7 @@ class Visit < ActiveRecord::Base
 
     data[:formated_rows].each do |row|
       next unless row[:visitable_id]
-      visit = find_or_initialize_by(visitable_id: row[:visitable_id])
+      visit = find_or_initialize_by(visitable_id: row[:visitable_id], visitable_type: 'Recipe')
       visit.last_30_days_count = row[:count]
       visit.save
     end

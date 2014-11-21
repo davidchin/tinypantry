@@ -7,7 +7,9 @@ json.cache! ['v1', recipe] do
                         :url,
                         :bookmarks_count,
                         :image_urls,
-                        :approved
+                        :approved,
+                        :visits_count
+
   json.feed do
     json.partial! 'api/v1/feeds/feed', feed: recipe.feed
   end

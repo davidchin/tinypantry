@@ -30,13 +30,13 @@ class Recipe < ActiveRecord::Base
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_users, through: :bookmarks, source: :user
 
-  has_many :visits, as: :visitable
+  has_one :visit, as: :visitable
 
   scope :recent, -> (time_ago = 7.days.ago) { where('created_at >= ?', time_ago) }
 
   scope :most_recent, -> { order(created_at: :desc) }
   scope :most_bookmarked, -> { order(bookmarks_count: :desc, created_at: :desc) }
-  scope :most_viewed, -> { includes(:visits).order('visits.total_count DESC NULLS LAST, recipes.created_at DESC') }
+  scope :most_viewed, -> { includes(:visit).order('visits.total_count DESC NULLS LAST, recipes.created_at DESC') }
 
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where.not(approved: true) }
@@ -137,6 +137,14 @@ class Recipe < ActiveRecord::Base
     data = self.class.extract_content(xml)
 
     update(name: data[:name], description: data[:description])
+  end
+
+  def visits_count
+    visit.try(:total_count) || 0 
+  end
+
+  def visits_last_30_days_count
+    visit.try(:last_30_days_count) || 0 
   end
 
   private
