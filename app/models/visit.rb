@@ -13,6 +13,7 @@ class Visit < ActiveRecord::Base
     data = fetch_recipe_views(starts_at, page)
 
     data[:formated_rows].each do |row|
+      next unless row[:visitable_id]
       visit = find_or_initialize_by(visitable_id: row[:visitable_id])
       visit.total_count = visit.total_count.to_i + row[:count]
       visit.save
@@ -27,6 +28,7 @@ class Visit < ActiveRecord::Base
     data = fetch_recipe_views(starts_at, page)
 
     data[:formated_rows].each do |row|
+      next unless row[:visitable_id]
       visit = find_or_initialize_by(visitable_id: row[:visitable_id])
       visit.last_30_days_count = row[:count]
       visit.save
