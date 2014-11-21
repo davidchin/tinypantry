@@ -1,7 +1,7 @@
 angular.module('asset')
-  .run ($rootScope, $window) ->
+  .run ($rootScope, $window, $timeout) ->
     $rootScope.$on 'modal:open', (event, modal) ->
-      $($window).resize()
+      $timeout -> $($window).resize()
 
   .config ($provide) ->
     $provide.decorator 'ngSrcDirective', ($delegate, $animate, $timeout) ->

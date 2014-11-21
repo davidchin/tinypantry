@@ -1,4 +1,4 @@
-angular.module('config')
+angular.module('seo')
   .run ($rootScope, head) ->
     $rootScope.$on '$stateChangeSuccess', ->
       head.reset()

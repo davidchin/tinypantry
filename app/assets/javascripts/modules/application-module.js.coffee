@@ -9,6 +9,7 @@ angular.module 'application', [
   'loading'
   'message'
   'sanitize'
+  'seo'
   'touch'
 
   # Features

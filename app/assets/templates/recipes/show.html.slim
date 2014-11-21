@@ -27,7 +27,7 @@ section class="app-body"
       p class="recipe-meta"
         span class="recipe-meta__item"
           i class="fa fa-bookmark"
-          | {{ recipe.bookmarks_count || 0 }}
+          | {{ recipe.bookmarksCount || 0 }}
         span class="recipe-meta__item"
           i class="fa fa-eye"
           | {{ recipe.visitsCount || 0 }}
@@ -38,11 +38,11 @@ section class="app-body"
         a class="button" target="_blank" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams"
           | View
 
-        button type="button" class="button button--light" ng-click="bookmark()" ng-show="currentUser.status.loggedIn && !recipe.status.bookmarked"
+        button type="button" class="button button--light ng-animate--disabled" ng-click="bookmark()" ng-show="currentUser.status.loggedIn && !recipe.status.bookmarked"
           loading-indicator model="!currentUser.bookmarks.status.createPending" type="inline"
           | Bookmark
 
-        button type="button" class="button button--light" ng-click="destroyBookmark()" ng-show="currentUser.status.loggedIn && recipe.status.bookmarked"
+        button type="button" class="button button--light ng-animate--disabled" ng-click="destroyBookmark()" ng-show="currentUser.status.loggedIn && recipe.status.bookmarked"
           loading-indicator model="!currentUser.bookmarks.status.destroyPending" type="inline"
           | Remove
 
