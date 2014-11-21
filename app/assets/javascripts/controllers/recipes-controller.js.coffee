@@ -8,9 +8,19 @@ angular.module('recipe')
 
         @recipes.query = $stateParams.query
 
+        @watch()
         @read()
 
         super($scope)
+
+      watch: ->
+        $scope.$on 'recipe:bookmarkCreate', (event, recipe) =>
+          recipe = @recipes.find({ id: recipe.id })
+          recipe.bookmarksCount += 1 if recipe
+
+        $scope.$on 'recipe:bookmarkDestroy', (event, recipe) =>
+          recipe = @recipes.find({ id: recipe.id })
+          recipe.bookmarksCount -= 1 if recipe
 
       search: ->
         $state.go('recipes.index', { query: @recipes.query })
@@ -98,6 +108,8 @@ angular.module('recipe')
           .then =>
             flash.set('Recipe was successfully bookmarked.', { requests: 0, type: 'success' })
 
+            $scope.$emit('recipe:bookmarkCreate', @recipe)
+
             @recipe.status.bookmarked = true
             @read()
 
@@ -106,6 +118,8 @@ angular.module('recipe')
           .then => currentUser.bookmarks.destroy({ id: @recipe.bookmark?.id })
           .then =>
             flash.set('Bookmark was successfully removed.', { requests: 0, type: 'success' })
+
+            $scope.$emit('recipe:bookmarkDestroy', @recipe)
 
             @recipe.status.bookmarked = false
             @read()
