@@ -1,7 +1,7 @@
 angular.module('asset')
   .run ($rootScope, $window, $timeout) ->
     $rootScope.$on 'modal:open', (event, modal) ->
-      $timeout -> $($window).resize()
+      $timeout -> $($window).trigger('scroll')
 
   .config ($provide) ->
     $provide.decorator 'ngSrcDirective', ($delegate, $animate, $timeout) ->

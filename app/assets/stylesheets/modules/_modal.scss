@@ -62,7 +62,11 @@
 }
 
 .modal--with-plain-header {
-  padding-top: $modal-header-height - $modal-padding;
+  padding-top: $modal-header-height;
+
+  .modal__body {
+    padding-top: 0;
+  }
 }
 
 .modal__header--plain {
@@ -161,8 +165,8 @@
   }
 
   .modal__close-btn {
-    top: $large-modal-padding / 2;
-    right: $large-modal-padding / 2;
+    top: $large-modal-padding / 2 - $modal-padding / 2;
+    right: $large-modal-padding / 2 - $modal-padding / 2;
   }
 
   .app.is-modal-opened {

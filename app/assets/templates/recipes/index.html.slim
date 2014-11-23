@@ -1,7 +1,7 @@
 nav class="recipe-nav-bar" ng-include="'#{ asset_path('recipes/_nav-bar.html') }'"
 
 section class="app-body" ng-form="recipesForm"
-  loading-indicator model="recipes.status.set" class="loading-indicator loading-indicator--large"
+  loading-indicator model="recipes.status.set" config="{ size: 32 }" class="loading-indicator"
 
   div class="app-action-footer" ng-if="currentUser.status.admin && recipesForm.$dirty"
     div class="app-action-footer__container"

@@ -145,8 +145,8 @@ $modal-header-border-color: $whitesmoke;
 $modal-overlay-background-color: transparentize($black, .2);
 $modal-padding: em(20);
 $large-modal-padding: em(30);
-$modal-header-height: $modal-padding + $base-line-height;
-$modal-footer-height: $modal-padding + $button-height;
+$modal-header-height: $modal-padding * 2 + $base-line-height;
+$modal-footer-height: $modal-padding * 2 + $button-height;
 
 // Slide menu
 $slide-menu-columns: 3;
