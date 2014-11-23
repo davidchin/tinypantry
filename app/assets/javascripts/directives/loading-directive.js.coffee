@@ -59,13 +59,13 @@ angular.module('loading')
             element.append(clone)
 
         start: ->
+          element.show()
           @spinner = new $window.Spinner(@config) unless @spinner
           @spinner.spin(element[0])
-          element.show()
 
         stop: ->
-          @spinner.stop() if @spinner
           element.hide()
+          @spinner.stop() if @spinner
 
         watch: ->
           if attrs.hasOwnProperty('model')
