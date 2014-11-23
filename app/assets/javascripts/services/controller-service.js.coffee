@@ -1,5 +1,5 @@
 angular.module('controller')
-  .factory 'BaseController', ($q, flash) ->
+  .factory 'BaseController', ($q, $state, flash) ->
     class BaseController
       constructor: (scope) ->
         scope[key] = @[key] for key of @

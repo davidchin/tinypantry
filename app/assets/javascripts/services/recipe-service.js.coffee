@@ -24,7 +24,9 @@ angular.module('recipe')
 
         super
 
-      read: ->
+      read: (params) ->
+        params?.id = parseInt(params?.id, 10)
+
         super
           .then (recipe) =>
             @trackingParams = {
@@ -34,6 +36,12 @@ angular.module('recipe')
             }
 
             return recipe
+
+      set: (data) ->
+        output = super(data)
+        @attr('slugId', [@id, @slug].join('-'))
+
+        return output
 
       bookmarked: (user) ->
         user.bookmarks.bookmarked(this)
