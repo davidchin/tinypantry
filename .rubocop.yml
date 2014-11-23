@@ -1,11 +1,14 @@
 Documentation:
   Enabled: false
 
-LineLength:
+Metrics/LineLength:
   Max: 150
 
-MethodLength:
+Metrics/MethodLength:
   Max: 20
+
+Metrics/ClassLength:
+  Max: 150
 
 Style/RescueModifier:
   Enabled: false

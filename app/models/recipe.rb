@@ -140,11 +140,11 @@ class Recipe < ActiveRecord::Base
   end
 
   def visits_count
-    visit.try(:total_count) || 0 
+    visit.try(:total_count) || 0
   end
 
   def visits_last_30_days_count
-    visit.try(:last_30_days_count) || 0 
+    visit.try(:last_30_days_count) || 0
   end
 
   private

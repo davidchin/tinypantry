@@ -24,12 +24,13 @@ class Visit < ActiveRecord::Base
     num_page = data[:num_pages] || 0
     import_total_count(page + 1) if num_page > page
 
-    return visits
+    visits
   end
 
   def self.import_last_30_days_count(page = 1)
     starts_at = 30.days.ago
     data = fetch_recipe_views(starts_at, page)
+    visits = []
 
     data[:formated_rows].each do |row|
       next unless row[:visitable_id]
@@ -42,7 +43,7 @@ class Visit < ActiveRecord::Base
     num_page = data[:num_pages] || 0
     import_last_30_days_count(page + 1) if num_page > page
 
-    return visits
+    visits
   end
 
   def self.fetch_recipe_views(start_date, page = 1)

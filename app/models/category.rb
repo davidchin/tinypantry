@@ -17,9 +17,7 @@ class Category < ActiveRecord::Base
 
   def self.update_all_recipes_count
     transaction do
-      where(nil).each do |category|
-        category.update_recipes_count
-      end
+      where(nil).each(&:update_recipes_count)
     end
   end
 

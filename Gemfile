@@ -82,7 +82,7 @@ gem 'rack-zippy'
 gem 'spring', group: :development
 gem 'rails_best_practices', require: false
 gem 'foreman', require: false
-gem 'rubocop', require: false
+gem 'rubocop', '~> 0.25.0', require: false
 gem 'hirb', require: false
 gem 'brakeman', require: false
 gem 'scss-lint', require: false
