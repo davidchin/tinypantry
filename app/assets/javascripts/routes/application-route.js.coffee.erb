@@ -2,9 +2,8 @@ angular.module('application')
   .config ($stateProvider, $urlRouterProvider) ->
     $urlRouterProvider
       .otherwise '/errors/404'
+      .when '/', '/recipes'
 
     $stateProvider
       .state 'home',
         url: '/'
-        templateUrl: '<%= asset_path("recipes/index.html") %>'
-        controller: 'RecipesIndexController'

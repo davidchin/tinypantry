@@ -2,14 +2,14 @@ angular.module('recipe')
   .config ($stateProvider, ModalProvider) ->
     $stateProvider
       .state 'recipes',
-        url: '/recipes'
+        url: '/recipes?category&page&orderBy&query'
         abstract: true
         template: '<ui-view />'
+        controller: 'RecipesIndexController'
 
       .state 'recipes.index',
-        url: '?category&page&orderBy&query'
+        url: ''
         templateUrl: '<%= asset_path("recipes/index.html") %>'
-        controller: 'RecipesIndexController'
 
       .state 'recipes.show',
         url: '/:id'
