@@ -1,9 +1,11 @@
 angular.module('application')
   .config ($stateProvider, $urlRouterProvider) ->
-    $urlRouterProvider
-      .otherwise '/errors/404'
-      .when '/', '/recipes'
-
     $stateProvider
       .state 'home',
-        url: '/'
+        onEnter: ['$timeout', '$state', ($timeout, $state) ->
+          $timeout -> $state.go 'recipes.index'
+        ]
+
+    $urlRouterProvider
+      .when '/recipes', '/'
+      .otherwise '/errors/404'

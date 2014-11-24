@@ -60,6 +60,8 @@ angular.module('recipe')
       approve: ->
         return $q.reject() unless $scope.recipesForm
 
+        @recipes.flag('update', 'pending')
+
         parseId = (control) ->
           parseInt(/\d+$/.exec(control.$name), 10)
 
@@ -70,10 +72,14 @@ angular.module('recipe')
         promises.push($q.reject(error: 'Please select a recipe.')) unless _.any(promises)
 
         $q.all(promises)
-          .then ->
+          .then =>
+            @recipes.flag('update', 'success')
+
             flash.set('Recipes were successfully updated.', { requests: 0, type: 'success' })
             $scope.recipesForm?.$setPristine()
-          .catch (response) ->
+          .catch (response) =>
+            @recipes.flag('update', 'error')
+
             flash.set(response.error, { requests: 0, type: 'alert' })
 
     new RecipesIndexController
