@@ -23,7 +23,10 @@ module Snapshot
     def call(env)
       fragment = parse_fragment(env)
 
-      if fragment || (bot_request?(env) && page_request?(env))
+      if fragment
+        render_fragment(env, fragment)
+      elsif bot_request?(env) && page_request?(env)
+        fragment = { path: env['REQUEST_PATH'], query: env['QUERY_STRING'] }
         render_fragment(env, fragment)
       else
         @app.call(env)
@@ -52,16 +55,16 @@ module Snapshot
     end
 
     def bot_request?(env)
-      user_agent = env['HTTP_USER_AGENT'] || ''
-      buffer_agent = env['X-BUFFERBOT'] || ''
+      user_agent = env['HTTP_USER_AGENT']
+      buffer_agent = env['X-BUFFERBOT']
 
-      buffer_agent || BOTS.any? { |bot| bot.include?(user_agent.downcase) }
+      buffer_agent || (user_agent && BOTS.any? { |bot| bot.include?(user_agent.downcase) })
     end
 
     def page_request?(env)
-      method = env['REQUEST_METHOD'] || ''
-      accept = env['HTTP_ACCEPT'] || ''
-      path = env['REQUEST_PATH'] || ''
+      method = env['REQUEST_METHOD'] || 'GET'
+      accept = env['HTTP_ACCEPT']
+      path = env['REQUEST_PATH']
 
       method.upcase == 'GET' &&
       accept =~ /text\/html/ &&
