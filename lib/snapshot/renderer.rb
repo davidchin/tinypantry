@@ -52,16 +52,16 @@ module Snapshot
     end
 
     def bot_request?(env)
-      user_agent = env['HTTP_USER_AGENT']
-      buffer_agent = env['X-BUFFERBOT']
+      user_agent = env['HTTP_USER_AGENT'] || ''
+      buffer_agent = env['X-BUFFERBOT'] || ''
 
       buffer_agent || BOTS.any? { |bot| bot.include?(user_agent.downcase) }
     end
 
     def page_request?(env)
-      method = env['REQUEST_METHOD']
-      accept = env['HTTP_ACCEPT']
-      path = env['REQUEST_PATH']
+      method = env['REQUEST_METHOD'] || ''
+      accept = env['HTTP_ACCEPT'] || ''
+      path = env['REQUEST_PATH'] || ''
 
       method.upcase == 'GET' &&
       accept =~ /text\/html/ &&
