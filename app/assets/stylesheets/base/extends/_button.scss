@@ -14,7 +14,7 @@
 
   &:hover,
   &:active,
-  &.button--is-active {
+  &.button--active {
     border-color: darken($base-button-color, 20%);
     background-color: $hover-button-color;
     color: $white;
@@ -27,7 +27,7 @@
   }
 
   &:active,
-  &.button--is-active {
+  &.button--active {
     box-shadow: inset 1px 1px 5px transparentize($black, .8);
   }
 
@@ -35,9 +35,13 @@
     margin-left: em(5);
   }
 
-  > .fa:first-child,
-  > .loading-indicator:first-child {
+  > .fa:first-child {
     margin-right: em(5);
+  }
+
+  > .fa:only-child {
+    margin-right: 0;
+    margin-left: 0;
   }
 }
 
@@ -58,7 +62,7 @@
 
   &:hover,
   &:active,
-  &.button--is-active {
+  &.button--active {
     border-color: darken($light-gray, 10%);
     background-color: $hover-light-button-color;
     color: darken($light-button-font-color, 10%);
@@ -77,10 +81,10 @@
 
   &:hover,
   &:active,
-  &.button--is-active {
+  &.button--active {
     border-color: darken($success-button-color, 10%);
     background-color: $hover-success-button-color;
-    color: darken($success-button-font-color, 10%);
+    color: $success-button-font-color;
   }
 }
 
@@ -96,7 +100,7 @@
 
   &:hover,
   &:active,
-  &.button--is-active {
+  &.button--active {
     border-color: darken($danger-button-color, 10%);
     background-color: $hover-danger-button-color;
     color: darken($danger-button-font-color, 10%);

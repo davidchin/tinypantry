@@ -10,10 +10,18 @@ a ui-sref="recipes.show({ id: recipe.slugId })" class="recipe-tile__link"
     h2 class="recipe-tile__title" {{ recipe.name }}
 
     p ng-if="currentUser.status.admin"
-      a class="button button--light button--small" ui-sref="recipes.edit({ id: recipe.id })" Edit
-      label class="button button--light button--small" ng-class="{ 'button--is-active': recipe.approved }"
-        input type="checkbox" name="recipeApproved{{ recipe.id }}" ng-model="recipe.approved" Approve
-      a class="button button--danger button--small" ng-click="destroy(recipe)" Delete
+      a class="button button--light button--small" ui-sref="recipes.edit({ id: recipe.id })"
+        i class="fa fa-edit"
+      a class="button button--light button--small" ng-class="{ 'button--success': recipe.approved, 'button--active': recipe.approved }" ng-click="approve(recipe)"
+        loading-indicator model="!recipe.status.updatePending" type="inline" class="loading-indicator loading-indicator--only-child"
+        span ng-if="!recipe.status.updatePending && !recipe.approved"
+          i class="fa fa-check"
+        span ng-if="!recipe.status.updatePending && recipe.approved"
+          i class="fa fa-check"
+      a class="button button--danger button--small" ng-click="destroy(recipe)"
+        loading-indicator model="!recipe.status.deletePending" type="inline" class="loading-indicator loading-indicator--only-child"
+        span ng-if="!recipe.status.deletePending"
+          i class="fa fa-times"
 
     p class="recipe-meta"
       span class="recipe-meta__item"

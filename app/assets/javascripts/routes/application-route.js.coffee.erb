@@ -2,8 +2,9 @@ angular.module('application')
   .config ($stateProvider, $urlRouterProvider) ->
     $stateProvider
       .state 'home',
+        url: '/'
         onEnter: ['$timeout', '$state', ($timeout, $state) ->
-          $timeout -> $state.go 'recipes.index'
+          $timeout -> $state.go 'recipes.index', { reload: true }
         ]
 
     $urlRouterProvider

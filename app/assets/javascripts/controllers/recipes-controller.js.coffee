@@ -57,30 +57,9 @@ angular.module('recipe')
           .then ->
             flash.set('Recipe was successfully destroyed.', { requests: 0, type: 'success' })
 
-      approve: ->
-        return $q.reject() unless $scope.recipesForm
-
-        @recipes.flag('update', 'pending')
-
-        parseId = (control) ->
-          parseInt(/\d+$/.exec(control.$name), 10)
-
-        promises = (@recipes.find({ id: parseId(control) })?.update() \
-          for attr, control of $scope.recipesForm \
-          when control?.$dirty)
-
-        promises.push($q.reject(error: 'Please select a recipe.')) unless _.any(promises)
-
-        $q.all(promises)
-          .then =>
-            @recipes.flag('update', 'success')
-
-            flash.set('Recipes were successfully updated.', { requests: 0, type: 'success' })
-            $scope.recipesForm?.$setPristine()
-          .catch (response) =>
-            @recipes.flag('update', 'error')
-
-            flash.set(response.error, { requests: 0, type: 'alert' })
+      approve: (recipe) ->
+        recipe.approved = !recipe.approved
+        recipe.update()
 
     new RecipesIndexController
 
