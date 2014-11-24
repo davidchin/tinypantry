@@ -19,6 +19,10 @@
   }
 }
 
+.loading-indicator--white {
+  color: $white;
+}
+
 .loading-indicator--large,
 .loading-indicator--overlay {
   font-size: em(40);
