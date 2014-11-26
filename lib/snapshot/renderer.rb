@@ -40,7 +40,7 @@ module Snapshot
       query = env['QUERY_STRING']
       match = regexp.match(query)
 
-      { path: match[1], query: query.sub(regexp, '') } if match
+      { path: URI.unescape(match[1]), query: query.sub(regexp, '') } if match
     end
 
     def render_fragment(env, fragment)
