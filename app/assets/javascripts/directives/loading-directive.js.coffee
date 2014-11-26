@@ -61,11 +61,11 @@ angular.module('loading')
         start: ->
           element.show()
           @spinner = new $window.Spinner(@config) unless @spinner
-          @spinner.spin(element[0])
+          $timeout => @spinner.spin(element[0])
 
         stop: ->
           element.hide()
-          @spinner.stop() if @spinner
+          $timeout => @spinner.stop() if @spinner
 
         watch: ->
           if attrs.hasOwnProperty('model')

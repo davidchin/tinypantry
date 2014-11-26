@@ -1,5 +1,6 @@
 .image--is-loading,
 .image--is-loading-remove {
+  @include prefixer(backface-visibility, hidden, webkit);
   opacity: 0;
 }
 

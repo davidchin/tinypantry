@@ -32,11 +32,11 @@ class Recipe < ActiveRecord::Base
 
   has_one :visit, as: :visitable
 
-  scope :recent, -> (time_ago = 7.days.ago) { where('created_at >= ?', time_ago) }
+  scope :recent, -> (time_ago = 7.days.ago) { where('published_at >= ?', time_ago) }
 
-  scope :most_recent, -> { order(created_at: :desc) }
-  scope :most_bookmarked, -> { order(bookmarks_count: :desc, created_at: :desc) }
-  scope :most_viewed, -> { includes(:visit).order('visits.total_count DESC NULLS LAST, recipes.created_at DESC') }
+  scope :most_recent, -> { order(published_at: :desc) }
+  scope :most_bookmarked, -> { order(bookmarks_count: :desc, published_at: :desc) }
+  scope :most_viewed, -> { includes(:visit).order('visits.total_count DESC NULLS LAST, recipes.published_at DESC') }
 
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where.not(approved: true) }
@@ -94,7 +94,7 @@ class Recipe < ActiveRecord::Base
       name: title.try(:content).try(:titleize),
       url: link.try(:content),
       description: description.try(:content).try(:strip),
-      published_at: pub_date.try(:content),
+      published_at: pub_date.try(:content) || Time.now.in_time_zone,
       imported_at: Time.now.in_time_zone,
       content_xml: node.to_xml,
       remote_image_url: img_src
