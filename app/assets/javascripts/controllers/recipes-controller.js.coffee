@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .controller 'RecipesIndexController', ($scope, $state, $stateParams, $q, currentUser, flash, BaseController, Recipes, Modal) ->
+  .controller 'RecipesIndexController', ($scope, $state, $stateParams, $location, $q, currentUser, flash, ga, query, BaseController, Recipes, Modal) ->
     class RecipesIndexController extends BaseController
       constructor: ->
         @recipes = new Recipes
@@ -43,7 +43,13 @@ angular.module('recipe')
       next: (params) ->
         params = _.defaults({ page: @recipes.pagination.nextPage }, params)
 
-        @read(params, true) if params.page
+        return unless params.page
+
+        @read(params, true)
+
+        # Track
+        path = query.appendParams($location.url(), { page: params.page })
+        ga.pageview({ page: path }) if params.page > 1
 
       orderBy: (key) ->
         $state.go('recipes.index', { orderBy: key })

@@ -1,7 +1,7 @@
 angular.module('analytics')
   .run ($rootScope, $location, ga) ->
     $rootScope.$on '$viewContentLoaded', ->
-      ga.pageview({ page: $location.path() })
+      ga.pageview({ page: $location.url() })
 
     $rootScope.$on 'modal:open', (event, modal) ->
       ga.pageview({ page: modal.href })
