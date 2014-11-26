@@ -47,8 +47,8 @@ angular.module('asset')
               skip_invisible: false
               load: ->
                 scope.$evalAsync ->
-                  attrs.$set('height', null) if preloadSize
                   $animate.removeClass(element, 'image--is-loading')
+                    .then -> attrs.$set('height', null) if preloadSize
 
           # Observe src
           attrs.$observe 'ngSrc', lazyloadImage
