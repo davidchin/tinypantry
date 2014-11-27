@@ -24,7 +24,7 @@ module Cacheable
     end
 
     def self.last_updated_at
-      @last_updated_at ||= where(nil).pluck(:updated_at).max
+      where(nil).pluck(:updated_at).max
     end
   end
 end
