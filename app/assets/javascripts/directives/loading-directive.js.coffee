@@ -65,7 +65,7 @@ angular.module('loading')
 
         stop: ->
           element.hide()
-          $timeout => @spinner.stop() if @spinner
+          # $timeout => @spinner.stop() if @spinner
 
         watch: ->
           if attrs.hasOwnProperty('model')
