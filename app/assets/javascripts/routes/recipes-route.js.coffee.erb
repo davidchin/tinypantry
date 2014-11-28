@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .config ($stateProvider, ModalProvider) ->
+  .config ($stateProvider, $urlRouterProvider, ModalProvider) ->
     $stateProvider
       .state 'recipes',
         url: '/?category&page&orderBy&query'
