@@ -9,7 +9,7 @@ xml.urlset 'xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9' do
 
   xml.url do
     xml.loc recipes_url
-    xml.lastmod @recipes.last_updated_at.to_json
+    xml.lastmod @recipes.last_updated_at.strftime('%FT%T%:z')
     xml.changefreq 'weekly'
     xml.priority 0.9
   end
@@ -19,7 +19,7 @@ xml.urlset 'xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9' do
       cache recipe do
         xml.url do
           xml.loc recipe_url(id: recipe.slug_id)
-          xml.lastmod recipe.updated_at.to_json
+          xml.lastmod recipe.updated_at.strftime('%FT%T%:z')
           xml.changefreq 'weekly'
           xml.priority 0.8
         end
@@ -32,7 +32,7 @@ xml.urlset 'xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9' do
       cache category do
         xml.url do
           xml.loc category_url(category)
-          xml.lastmod category.updated_at.to_json
+          xml.lastmod category.updated_at.strftime('%FT%T%:z')
           xml.changefreq 'weekly'
           xml.priority 0.8
         end
