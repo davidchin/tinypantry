@@ -1,7 +1,15 @@
 // Angular dependencies
-//= require ui-router/release/angular-ui-router
+//= require jquery/dist/jquery
+//= require angular/angular
+//= require angular-route/angular-route
+//= require angular-resource/angular-resource
+//= require angular-cookies/angular-cookies
+//= require angular-messages/angular-messages
+//= require angular-sanitize/angular-sanitize
+//= require angular-animate/angular-animate
 //= require angular-local-storage/angular-local-storage
 //= require angular-ra-pageload/angular-ra-pageload
+//= require ui-router/release/angular-ui-router
 
 // Other dependencies
 //= require es5-shim/es5-shim
