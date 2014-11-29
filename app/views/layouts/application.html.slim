@@ -4,7 +4,7 @@ html ng-app="application"
   head
     = render 'shared/head'
 
-  body class="app" data-ready="{{ loadingProgress.ready }}" slide-menu-group=""
+  body class="app" data-ready="{{ loadingProgress.ready }}" slide-menu-group="" itemscope="" itemtype="http://schema.org/WebPage"
     div ng-controller="NavigationController"
       ng-include src="'#{ asset_path('shared/_browse-menu.html') }'"
       ng-include src="'#{ asset_path('shared/_account-menu.html') }'"

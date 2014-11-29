@@ -1,4 +1,4 @@
-nav slide-menu="account-slide-menu" class="app-slide-menu"
+nav slide-menu="account-slide-menu" class="app-slide-menu" itemscope="" itemtype="http://schema.org/SiteNavigationElement"
   loading-indicator model="currentUser.status.set" config="{ size: 32 }" class="loading-indicator"
 
   div class="app-slide-menu__item" ng-show="currentUser.status.loggedIn"
@@ -8,13 +8,13 @@ nav slide-menu="account-slide-menu" class="app-slide-menu"
       span class="app-slide-menu__user-name" {{ currentUser.displayName }}
 
   div class="app-slide-menu__item" ng-show="currentUser.status.loggedIn"
-    a class="app-slide-menu__item-link" ui-sref="sessions.destroy" ui-sref-active="is-active" slide-menu-toggle=""
-      | Log Out
+    a class="app-slide-menu__item-link" ui-sref="sessions.destroy" ui-sref-active="is-active" slide-menu-toggle="" itemprop="url"
+      span itemprop="name" Log Out
 
   div class="app-slide-menu__item" ng-hide="currentUser.status.loggedIn"
-    a class="app-slide-menu__item-link" ui-sref="sessions.new" ui-sref-active="is-active" ng-click="openLogin($event)" slide-menu-toggle=""
-      | Log In
+    a class="app-slide-menu__item-link" ui-sref="sessions.new" ui-sref-active="is-active" ng-click="openLogin($event)" slide-menu-toggle="" itemprop="url"
+      span itemprop="name" Log In
 
   div class="app-slide-menu__item" ng-hide="currentUser.status.loggedIn"
-    a class="app-slide-menu__item-link" ui-sref="users.new" ui-sref-active="is-active" ng-click="openSignUp($event)" slide-menu-toggle=""
-      | Sign Up
+    a class="app-slide-menu__item-link" ui-sref="users.new" ui-sref-active="is-active" ng-click="openSignUp($event)" slide-menu-toggle="" itemprop="url"
+      span itemprop="name" Sign Up

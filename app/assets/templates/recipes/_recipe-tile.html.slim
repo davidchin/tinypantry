@@ -1,32 +1,33 @@
-a ui-sref="recipes.show({ id: recipe.slugId })" class="recipe-tile__link"
-  div class="recipe-tile__image"
-    img ng-src="{{ recipe.imageUrls.small }}" lazyload="" preload-size="308x308"
+article itemscope="" itemtype="http://schema.org/Recipe"
+  a ui-sref="recipes.show({ id: recipe.slugId })" class="recipe-tile__link"
+    div class="recipe-tile__image"
+      img ng-src="{{ recipe.imageUrls.small }}" lazyload="" preload-size="308x308" itemprop="image"
 
-  div class="recipe-tile__body"
-    div class="recipe-meta" ng-show="recipe.feed.name"
-      | By 
-      strong {{ recipe.feed.name }}
+    div class="recipe-tile__body"
+      div class="recipe-meta" ng-show="recipe.feed.name"
+        | By 
+        strong itemprop="author" {{ recipe.feed.name }}
 
-    h2 class="recipe-tile__title" {{ recipe.name }}
+      h2 class="recipe-tile__title" itemprop="name" {{ recipe.name }}
 
-    p ng-if="currentUser.status.admin"
-      a class="button button--light button--small" ui-sref="recipes.edit({ id: recipe.id })"
-        i class="fa fa-edit"
-      a class="button button--light button--small" ng-class="{ 'button--success': recipe.approved, 'button--active': recipe.approved }" ng-click="approve(recipe)"
-        loading-indicator model="!recipe.status.updatePending" type="inline" class="loading-indicator loading-indicator--white loading-indicator--only-child"
-        span ng-if="!recipe.status.updatePending && !recipe.approved"
-          i class="fa fa-check"
-        span ng-if="!recipe.status.updatePending && recipe.approved"
-          i class="fa fa-check"
-      a class="button button--danger button--small" ng-click="destroy(recipe)"
-        loading-indicator model="!recipe.status.deletePending" type="inline" class="loading-indicator loading-indicator--white loading-indicator--only-child"
-        span ng-if="!recipe.status.deletePending"
-          i class="fa fa-times"
+      p ng-if="currentUser.status.admin"
+        a class="button button--light button--small" ui-sref="recipes.edit({ id: recipe.id })"
+          i class="fa fa-edit"
+        a class="button button--light button--small" ng-class="{ 'button--success': recipe.approved, 'button--active': recipe.approved }" ng-click="approve(recipe)"
+          loading-indicator model="!recipe.status.updatePending" type="inline" class="loading-indicator loading-indicator--white loading-indicator--only-child"
+          span ng-if="!recipe.status.updatePending && !recipe.approved"
+            i class="fa fa-check"
+          span ng-if="!recipe.status.updatePending && recipe.approved"
+            i class="fa fa-check"
+        a class="button button--danger button--small" ng-click="destroy(recipe)"
+          loading-indicator model="!recipe.status.deletePending" type="inline" class="loading-indicator loading-indicator--white loading-indicator--only-child"
+          span ng-if="!recipe.status.deletePending"
+            i class="fa fa-times"
 
-    p class="recipe-meta"
-      span class="recipe-meta__item"
-        i class="fa fa-bookmark"
-        | {{ recipe.bookmarksCount || 0 }}
-      span class="recipe-meta__item"
-        i class="fa fa-eye"
-        | {{ recipe.visitsCount || 0 }}
+      p class="recipe-meta"
+        span class="recipe-meta__item"
+          i class="fa fa-bookmark"
+          | {{ recipe.bookmarksCount || 0 }}
+        span class="recipe-meta__item"
+          i class="fa fa-eye"
+          | {{ recipe.visitsCount || 0 }}

@@ -1,19 +1,19 @@
-nav slide-menu="browse-slide-menu" class="app-slide-menu"
+nav slide-menu="browse-slide-menu" class="app-slide-menu" itemscope="" itemtype="http://schema.org/SiteNavigationElement"
   div class="app-slide-menu__item" ng-if="currentUser.status.admin"
-    a class="app-slide-menu__item-link" ui-sref="feeds.index" ui-sref-active="is-active" slide-menu-toggle=""
-      | Feeds
+    a class="app-slide-menu__item-link" ui-sref="feeds.index" ui-sref-active="is-active" slide-menu-toggle="" itemprop="url"
+      span itemprop="name" Feeds
   div class="app-slide-menu__item" ng-if="currentUser.status.admin"
-    a class="app-slide-menu__item-link" ui-sref="categories.index" ui-sref-active="is-active" slide-menu-toggle=""
-      | Categories
+    a class="app-slide-menu__item-link" ui-sref="categories.index" ui-sref-active="is-active" slide-menu-toggle="" itemprop="url"
+      span itemprop="name" Categories
 
   div class="app-slide-menu__item"
-    a class="app-slide-menu__item-link" ng-show="currentUser.status.loggedIn" ui-sref="bookmarks.index" ui-sref-active-eq="is-active" slide-menu-toggle=""
-      | Bookmarks
+    a class="app-slide-menu__item-link" ng-show="currentUser.status.loggedIn" ui-sref="bookmarks.index" ui-sref-active-eq="is-active" slide-menu-toggle="" itemprop="url"
+      span itemprop="name" Bookmarks
   div class="app-slide-menu__item"
-    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: null })" ui-sref-active-eq="is-active" ui-sref-alias="home" slide-menu-toggle=""
+    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: null })" ui-sref-active-eq="is-active" ui-sref-alias="home" slide-menu-toggle="" itemprop="url"
       small class="app-slide-menu__item-meta" {{ recipes.pagination.totalCount }}
-      | All
+      span itemprop="name" All
   div class="app-slide-menu__item" ng-repeat="category in categories.items"
-    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: category.slug })" ui-sref-active="is-active" slide-menu-toggle=""
+    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: category.slug })" ui-sref-active="is-active" slide-menu-toggle="" itemprop="url"
       small class="app-slide-menu__item-meta" {{ category.recipesCount }}
-      | {{ category.name }}
+      span itemprop="name" {{ category.name }}

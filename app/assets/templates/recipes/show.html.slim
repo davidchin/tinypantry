@@ -1,12 +1,12 @@
 section class="app-body"
   loading-indicator model="recipe.status.set" config="{ size: 32 }" class="loading-indicator"
 
-  article class="recipe-detail" ng-show="recipe.status.set"
+  article class="recipe-detail" ng-show="recipe.status.set" itemscope="" itemtype="http://schema.org/Recipe"
     ng-include src="'#{ asset_path('shared/_breadcrumbs.html') }'"
 
     div class="recipe-detail__image"
       a target="_blank" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams"
-        img ng-src="{{ recipe.imageUrls.medium }}" lazyload="" preload-size="640x640"
+        img ng-src="{{ recipe.imageUrls.medium }}" lazyload="" preload-size="640x640" itemprop="image"
 
       div class="recipe-detail__image-action" ng-show="currentUser.status.loggedIn"
         button type="button" class="button button--light button--small ng-animate--disabled" ng-click="bookmark()" ng-hide="recipe.status.bookmarked"
@@ -21,8 +21,8 @@ section class="app-body"
       header
         a class="recipe-meta" ng-href="{{ recipe.feed.url }}" ng-show="recipe.feed.name"
           | By 
-          strong {{ recipe.feed.name }}
-        h1 class="recipe-detail__title" {{ recipe.name }}
+          strong itemprop="author" {{ recipe.feed.name }}
+        h1 class="recipe-detail__title" itemprop="name" {{ recipe.name }}
 
       p class="recipe-meta"
         span class="recipe-meta__item"
@@ -32,10 +32,10 @@ section class="app-body"
           i class="fa fa-eye"
           | {{ recipe.visitsCount || 0 }}
 
-      div class="recipe-detail__description" ng-bind-html="recipe.description"
+      div class="recipe-detail__description" ng-bind-html="recipe.description" itemprop="description"
 
       div class="recipe-detail__action"
-        a class="button" target="_blank" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams"
+        a class="button" target="_blank" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams" itemprop="url"
           | View
 
         button type="button" class="button button--light ng-animate--disabled" ng-click="bookmark()" ng-show="currentUser.status.loggedIn && !recipe.status.bookmarked"
@@ -50,4 +50,4 @@ section class="app-body"
         h3 class="title" You might also like
 
         div class="recipe-related-tiles"
-          article class="recipe-tile" ng-repeat="recipe in recipe.relatedRecipes | limitTo:3" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"
+          div class="recipe-tile" ng-repeat="recipe in recipe.relatedRecipes | limitTo:3" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"
