@@ -7,15 +7,15 @@ angular.module('session')
 
       .state 'sessions.new',
         url: '/login'
-        templateUrl: '<%= asset_path("sessions/new.html") %>'
+        templateUrl: 'sessions/new.html'
         controller: 'SessionsNewController'
 
       .state 'sessions.destroy',
         url: '/logout'
-        templateUrl: '<%= asset_path("sessions/destroy.html") %>'
+        templateUrl: 'sessions/destroy.html'
         controller: 'SessionsDestroyController'
 
     ModalProvider
       .when 'login',
         state: 'sessions.new'
-        templateUrl: '<%= asset_path("sessions/new-modal.html") %>'
+        templateUrl: 'sessions/new-modal.html'

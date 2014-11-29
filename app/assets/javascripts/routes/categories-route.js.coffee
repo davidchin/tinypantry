@@ -8,24 +8,24 @@ angular.module('category')
 
       .state 'categories.index',
         url: ''
-        templateUrl: '<%= asset_path("categories/index.html") %>'
+        templateUrl: 'categories/index.html'
         controller: 'CategoriesIndexController'
         resolve: authorize: (authorize) -> authorize('admin')
 
       .state 'categories.new',
         url: '/new'
-        templateUrl: '<%= asset_path("categories/new.html") %>'
+        templateUrl: 'categories/new.html'
         controller: 'CategoriesNewController'
         resolve: authorize: (authorize) -> authorize('admin')
 
       .state 'categories.show',
         url: '/:id'
-        templateUrl: '<%= asset_path("categories/show.html") %>'
+        templateUrl: 'categories/show.html'
         controller: 'CategoriesShowController'
         resolve: authorize: (authorize) -> authorize('admin')
 
       .state 'categories.edit',
         url: '/:id/edit'
-        templateUrl: '<%= asset_path("categories/edit.html") %>'
+        templateUrl: 'categories/edit.html'
         controller: 'CategoriesEditController'
         resolve: authorize: (authorize) -> authorize('admin')

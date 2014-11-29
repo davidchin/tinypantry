@@ -9,7 +9,7 @@ angular.module('recipe')
 
       .state 'recipes.index',
         url: ''
-        templateUrl: '<%= asset_path("recipes/index.html") %>'
+        templateUrl: 'recipes/index.html'
 
       .state 'recipes.category',
         url: 'recipes/:category/:id'
@@ -19,16 +19,16 @@ angular.module('recipe')
 
       .state 'recipes.show',
         url: 'recipes/:id'
-        templateUrl: '<%= asset_path("recipes/show.html") %>'
+        templateUrl: 'recipes/show.html'
         controller:  'RecipesShowController'
 
       .state 'recipes.edit',
         url: 'recipes/:id/edit'
-        templateUrl: '<%= asset_path("recipes/edit.html") %>'
+        templateUrl: 'recipes/edit.html'
         controller:  'RecipesEditController'
         resolve: authorize: (authorize) -> authorize('admin')
 
     ModalProvider
       .when 'recipe',
         state: 'recipes.show'
-        templateUrl: '<%= asset_path("recipes/show-modal.html") %>'
+        templateUrl: 'recipes/show-modal.html'

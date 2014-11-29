@@ -10,6 +10,7 @@ angular.module 'application', [
   'message'
   'sanitize'
   'seo'
+  'templates'
   'touch'
 
   # Features

@@ -8,5 +8,5 @@ angular.module('bookmark')
 
       .state 'bookmarks.index',
         url: '?category&page&orderBy&query'
-        templateUrl: '<%= asset_path("bookmarks/index.html") %>'
+        templateUrl: 'bookmarks/index.html'
         controller: 'BookmarksIndexController'

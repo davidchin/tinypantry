@@ -2,7 +2,7 @@ section class="app-body"
   loading-indicator model="recipe.status.set" config="{ size: 32 }" class="loading-indicator"
 
   article class="recipe-detail" ng-show="recipe.status.set" itemscope="" itemtype="http://schema.org/Recipe"
-    ng-include src="'#{ asset_path('shared/_breadcrumbs.html') }'"
+    ng-include src="'shared/_breadcrumbs.html'"
 
     div class="recipe-detail__image"
       a target="_blank" ng-href="{{ recipe.url }}" analytics-outbound="recipe.trackingParams"
@@ -50,4 +50,4 @@ section class="app-body"
         h3 class="title" You might also like
 
         div class="recipe-related-tiles"
-          div class="recipe-tile" ng-repeat="recipe in recipe.relatedRecipes | limitTo:3" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"
+          div class="recipe-tile" ng-repeat="recipe in recipe.relatedRecipes | limitTo:3" ng-include="'recipes/_recipe-tile.html'"

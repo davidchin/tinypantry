@@ -6,13 +6,13 @@ html ng-app="application"
 
   body class="app" data-ready="{{ loadingProgress.ready }}" slide-menu-group="" itemscope="" itemtype="http://schema.org/WebPage"
     div ng-controller="NavigationController"
-      ng-include src="'#{ asset_path('shared/_browse-menu.html') }'"
-      ng-include src="'#{ asset_path('shared/_account-menu.html') }'"
+      ng-include src="'shared/_browse-menu.html'"
+      ng-include src="'shared/_account-menu.html'"
 
     div class="app-slide-menu-content-container"
       slide-menu-content class="app-slide-menu-content"
         div class="app-container app-container--fixed-header"
-          ng-include src="'#{ asset_path('shared/_header.html') }'" ng-controller="NavigationController"
+          ng-include src="'shared/_header.html'" ng-controller="NavigationController"
 
           flash name="app" class="app-flash"
 
@@ -20,6 +20,6 @@ html ng-app="application"
 
           loading-indicator name="app" class="loading-indicator loading-indicator--overlay"
 
-        ng-include src="'#{ asset_path('shared/_footer.html') }'"
+        ng-include src="'shared/_footer.html'"
 
     = render 'shared/scripts'

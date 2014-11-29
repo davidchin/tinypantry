@@ -13,12 +13,12 @@ angular.module('user')
 
       .state 'users.password.reset',
         url: '/reset'
-        templateUrl: '<%= asset_path("passwords/reset.html") %>'
+        templateUrl: 'passwords/reset.html'
         controller: 'PasswordsResetController'
 
       .state 'users.password.edit',
         url: '/edit?reset_password_token'
-        templateUrl: '<%= asset_path("passwords/edit.html") %>'
+        templateUrl: 'passwords/edit.html'
         controller: 'PasswordsEditController'
         resolve:
           assertPasswordResetToken: ($stateParams, assertPasswordResetToken) ->
@@ -26,19 +26,19 @@ angular.module('user')
 
       .state 'users.new',
         url: '^/sign-up'
-        templateUrl: '<%= asset_path("users/new.html") %>'
+        templateUrl: 'users/new.html'
         controller: 'UsersNewController'
 
       .state 'users.edit',
         url: '/:id/edit'
-        templateUrl: '<%= asset_path("users/edit.html") %>'
+        templateUrl: 'users/edit.html'
         controller: 'UsersNewController'
 
     ModalProvider
       .when 'signUp',
         state: 'users.new'
-        templateUrl: '<%= asset_path("users/new-modal.html") %>'
+        templateUrl: 'users/new-modal.html'
 
       .when 'passwordReset',
         state: 'users.password.reset'
-        templateUrl: '<%= asset_path("passwords/reset-modal.html") %>'
+        templateUrl: 'passwords/reset-modal.html'

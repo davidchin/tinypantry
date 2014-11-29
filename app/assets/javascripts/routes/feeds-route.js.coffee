@@ -8,24 +8,24 @@ angular.module('feed')
 
       .state 'feeds.index',
         url: '?page'
-        templateUrl: '<%= asset_path("feeds/index.html") %>'
+        templateUrl: 'feeds/index.html'
         controller: 'FeedsIndexController'
         resolve: authorize: (authorize) -> authorize('admin')
 
       .state 'feeds.new',
         url: '/new'
-        templateUrl: '<%= asset_path("feeds/new.html") %>'
+        templateUrl: 'feeds/new.html'
         controller: 'FeedsNewController'
         resolve: authorize: (authorize) -> authorize('admin')
 
       .state 'feeds.show',
         url: '/:id'
-        templateUrl: '<%= asset_path("feeds/show.html") %>'
+        templateUrl: 'feeds/show.html'
         controller: 'FeedsShowController'
         resolve: authorize: (authorize) -> authorize('admin')
 
       .state 'feeds.edit',
         url: '/:id/edit'
-        templateUrl: '<%= asset_path("feeds/edit.html") %>'
+        templateUrl: 'feeds/edit.html'
         controller: 'FeedsEditController'
         resolve: authorize: (authorize) -> authorize('admin')

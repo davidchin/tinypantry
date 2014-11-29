@@ -1,11 +1,11 @@
-nav class="recipe-nav-bar" ng-include="'#{ asset_path('recipes/_nav-bar.html') }'"
+nav class="recipe-nav-bar" ng-include="'recipes/_nav-bar.html'"
 
 section class="app-body"
   loading-indicator model="recipes.status.set" config="{ size: 32 }" class="loading-indicator"
 
   div ng-hide="recipes.status.empty"
     section class="recipe-tiles"
-      div class="recipe-tile" ng-repeat="recipe in recipes.items" ng-include="'#{ asset_path('recipes/_recipe-tile.html') }'"
+      div class="recipe-tile" ng-repeat="recipe in recipes.items" ng-include="'recipes/_recipe-tile.html'"
 
     section
       button class="button-block" ng-show="recipes.pagination.nextPage" ng-click="next()" Load More

@@ -9,4 +9,4 @@ angular.module('error')
 
       .state 'errors.404',
         url: '/404'
-        templateUrl: '<%= asset_path("errors/404.html") %>'
+        templateUrl: 'errors/404.html'

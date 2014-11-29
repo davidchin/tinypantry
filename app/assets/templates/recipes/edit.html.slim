@@ -1,10 +1,10 @@
 section class="app-body"
   loading-indicator model="recipe.status.set" config="{ size: 32 }" class="loading-indicator"
 
-  ng-include src="'#{ asset_path('shared/_breadcrumbs.html') }'"
+  ng-include src="'shared/_breadcrumbs.html'"
 
   h1 class="title"
     | Edit Recipe
     small class="title__subtitle" {{ recipe.name }}
 
-  ng-include src="'#{ asset_path('recipes/_form.html') }'"
+  ng-include src="'recipes/_form.html'"

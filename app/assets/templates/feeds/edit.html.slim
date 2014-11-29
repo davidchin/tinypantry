@@ -1,10 +1,10 @@
 section class="app-body"
   loading-indicator model="feed.status.set" config="{ size: 32 }" class="loading-indicator"
 
-  ng-include src="'#{ asset_path('shared/_breadcrumbs.html') }'"
+  ng-include src="'shared/_breadcrumbs.html'"
 
   h1 class="title"
     | Edit Feed
     small class="title__subtitle" {{ feed.name }}
 
-  ng-include src="'#{ asset_path('feeds/_form.html') }'"
+  ng-include src="'feeds/_form.html'"

@@ -22,6 +22,7 @@ gem 'font-awesome-sass', '~> 4.1.0'
 # View
 gem 'jbuilder', '~> 2.1.3'
 gem 'slim', '~> 2.0.2'
+gem 'angular-rails-templates', '~> 0.1.3'
 
 # Doc
 gem 'sdoc', '~> 0.4.0', group: :doc
