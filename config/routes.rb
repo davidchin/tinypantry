@@ -47,8 +47,19 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/users/password/edit', to: 'pages#app', as: 'edit_password'
-  get '/*path', to: 'pages#app', constraints: { path: /(?!\bapi\b\/?).*/ }
+  # Sitemap
+  get 'sitemap.xml', to: 'sitemaps#show', defaults: { format: 'xml' }
 
+  # Named paths
+  get '/users/password/edit', to: 'pages#app', as: 'edit_password'
+
+  resources :recipes, to: 'pages#app', only: [:index, :show] do
+    collection do
+      resources :category, to: 'pages#app', only: [:show]
+    end
+  end
+
+  # Let SPA handle routing
+  get '/*path', to: 'pages#app', constraints: { path: /(?!\bapi\b\/?).*/ }
   root to: 'pages#app'
 end

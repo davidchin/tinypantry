@@ -11,6 +11,12 @@ angular.module('recipe')
         url: ''
         templateUrl: '<%= asset_path("recipes/index.html") %>'
 
+      .state 'recipes.category',
+        url: 'recipes/:category/:id'
+        onEnter: ['$timeout', '$state', ($timeout, $state) ->
+          $timeout -> $state.go 'recipes.index', { category: $state.params.id }
+        ]
+
       .state 'recipes.show',
         url: 'recipes/:id'
         templateUrl: '<%= asset_path("recipes/show.html") %>'

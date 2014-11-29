@@ -147,6 +147,10 @@ class Recipe < ActiveRecord::Base
     visit.try(:last_30_days_count) || 0
   end
 
+  def slug_id
+    "#{ id }-#{ slug }"
+  end
+
   private
 
   def self.node_to_html(node)

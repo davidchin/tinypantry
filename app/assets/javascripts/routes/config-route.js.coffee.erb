@@ -3,6 +3,7 @@ angular.module('config')
     $urlRouterProvider
       .otherwise '/errors/404'
       .when '/recipes', '/'
+
       .when '/', ($location) ->
         fragment = $location.search()['_escaped_fragment_']
 
@@ -15,5 +16,5 @@ angular.module('config')
       .state 'home',
         url: '/'
         onEnter: ['$timeout', '$state', ($timeout, $state) ->
-          $timeout -> $state.go 'recipes.index', { reload: true }
+          $timeout -> $state.go 'recipes.index', {}, { reload: true }
         ]
