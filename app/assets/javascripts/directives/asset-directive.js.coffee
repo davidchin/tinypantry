@@ -33,7 +33,7 @@ angular.module('asset')
             return if !src
 
             # Set data attribute for lazyloading
-            attrs.$set('data-original', src)
+            attrs.$set('data-src', src)
 
             # Add 'loading' class
             $animate.addClass(element, 'image--is-loading')
@@ -42,10 +42,8 @@ angular.module('asset')
             preloadSize = setPreloadSize()
 
             # Init lazyload
-            element.lazyload
-              threshold: 100,
-              skip_invisible: false
-              load: ->
+            element.unveil 100, ->
+              $(this).load ->
                 scope.$evalAsync ->
                   $animate.removeClass(element, 'image--is-loading')
                     .then -> attrs.$set('height', null) if preloadSize

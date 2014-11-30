@@ -22,4 +22,4 @@
 //= require headroom.js/dist/headroom
 //= require headroom.js/dist/angular.headroom
 //= require fastclick/lib/fastclick
-//= require jquery.lazyload/jquery.lazyload
+//= require unveil/jquery.unveil
