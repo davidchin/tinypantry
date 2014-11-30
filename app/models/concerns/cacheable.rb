@@ -25,7 +25,7 @@ module Cacheable
 
     def self.last_updated_at
       # where(nil).pluck(:updated_at).max
-      order_by(updated_at: :desc).first.try(:updated_at)
+      where(nil).order_by(updated_at: :desc).first.try(:updated_at)
     end
   end
 end
