@@ -14,7 +14,7 @@
 .loading-indicator--inline-left,
 .loading-indicator--inline-right {
   opacity: .8;
-  vertical-align: middle;
+  vertical-align: -10%;
 }
 
 .loading-indicator--inline-left {
@@ -26,7 +26,10 @@
 }
 
 .loading-indicator--white {
-  color: $white;
+  &,
+  svg {
+    color: $white;
+  }
 }
 
 .loading-indicator--large,
@@ -42,7 +45,11 @@
   background: $modal-overlay-background-color;
   width: 100%;
   height: 100%;
-  color: $white;
+  
+  &,
+  svg {
+    color: $white;
+  }
 
   &.ng-enter,
   &.ng-leave {

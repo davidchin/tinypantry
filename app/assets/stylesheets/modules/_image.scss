@@ -6,7 +6,7 @@
 
 .image--is-loading-remove {
   @include transition(opacity .5s ease-out);
-  @include transform(translate(0, 0));
+  @include transform(translate3d(0, 0, 0));
 
   &.image--is-loading-remove-active {
     opacity: 1;
