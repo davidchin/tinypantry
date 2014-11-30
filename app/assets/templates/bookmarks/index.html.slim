@@ -1,7 +1,7 @@
 nav class="recipe-nav-bar" ng-include="'recipes/_nav-bar.html'"
 
 section class="app-body"
-  loading-indicator model="recipes.status.set" config="{ size: 32 }" class="loading-indicator"
+  loading-indicator model="recipes.status.set" config="{ size: 32 }" class="loading-indicator loading-indicator--block"
 
   div ng-hide="recipes.status.empty"
     section class="recipe-tiles"

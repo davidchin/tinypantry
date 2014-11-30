@@ -14,7 +14,7 @@ session class="app-body"
           div ng-repeat="error in $remoteError" Email {{ error }}
 
       button type="submit" class="button button--block"
-        loading-indicator model="!password.status.createPending" type="inline"
+        loading-indicator model="!password.status.createPending" class="loading-indicator loading-indicator--inline-left"
         | Submit
 
       div class="password-reset-form__footer"

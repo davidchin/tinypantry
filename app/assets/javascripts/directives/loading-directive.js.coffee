@@ -16,43 +16,20 @@ angular.module('loading')
         configure: ->
           config = scope.$eval(attrs.config) || {}
 
-          fontSize = config.size || parseFloat(element.css('font-size') || 16) * .8
-          fontColor = element.css('color') || 'rgb(0, 0, 0)'
-          lineWidth = Math.round(fontSize / 8)
-          lineLength = Math.round(fontSize / 6)
-          verticalOffset = Math.round(fontSize / 8)
-          radius = Math.round(fontSize / 2) + verticalOffset
-          innerRadius = radius - lineWidth - lineLength
-          width = radius * 2
-          height = radius * 2
-          lines = Math.min(Math.round(fontSize * 3 / 5), 12)
-
-          defaultConfig =
-            lines: lines
-            length: lineLength
-            width: lineWidth
-            radius: innerRadius
-            color: fontColor
-            hwaccel: true
-
-          elementStyle = {}
+          iconHTML = '<i class="fa fa-spin fa-circle-o-notch" />'
+          size = Math.round(config.size || parseFloat(element.css('font-size') || 16))
           elementClass = 'loading-indicator'
+          elementStyle =
+            display: 'inline-block'
+            marginTop: size * -.5
+            marginLeft: size * -.5
+            width: size
+            height: size
+            fontSize: size
 
-          if attrs.type == 'inline'
-            elementStyle =
-              display: 'inline-block'
-              width: width
-              height: height
-              position: 'relative'
-              top: verticalOffset
-
-            elementClass = "#{ elementClass } loading-indicator--inline"
-
-          element
-            .css(elementStyle)
+          element.html(iconHTML)
             .addClass(elementClass)
-
-          @config = _.extend({}, defaultConfig, config)
+            .css(elementStyle)
 
         transclude: ->
           transclude (clone) ->
@@ -60,12 +37,9 @@ angular.module('loading')
 
         start: ->
           element.show()
-          @spinner = new $window.Spinner(@config) unless @spinner
-          $timeout => @spinner.spin(element[0])
 
         stop: ->
           element.hide()
-          # $timeout => @spinner.stop() if @spinner
 
         watch: ->
           if attrs.hasOwnProperty('model')

@@ -1,5 +1,5 @@
 section class="app-body"
-  loading-indicator model="recipe.status.set" config="{ size: 32 }" class="loading-indicator"
+  loading-indicator model="recipe.status.set" config="{ size: 32 }" class="loading-indicator loading-indicator--block"
 
   article class="recipe-detail" ng-show="recipe.status.set" itemscope="" itemtype="http://schema.org/Recipe"
     ng-include src="'shared/_breadcrumbs.html'"
@@ -10,11 +10,11 @@ section class="app-body"
 
       div class="recipe-detail__image-action" ng-show="currentUser.status.loggedIn"
         button type="button" class="button button--light button--small ng-animate--disabled" ng-click="bookmark()" ng-hide="recipe.status.bookmarked"
-          loading-indicator model="!currentUser.bookmarks.status.createPending" type="inline"
+          loading-indicator model="!currentUser.bookmarks.status.createPending" class="loading-indicator loading-indicator--inline"
           i class="fa fa-bookmark"
 
         button type="button" class="button button--success button--small ng-animate--disabled" ng-click="destroyBookmark()" ng-show="recipe.status.bookmarked"
-          loading-indicator model="!currentUser.bookmarks.status.destroyPending" type="inline"
+          loading-indicator model="!currentUser.bookmarks.status.destroyPending" class="loading-indicator loading-indicator--inline"
           i class="fa fa-check"
 
     div class="recipe-detail__body"
@@ -39,11 +39,11 @@ section class="app-body"
           | View
 
         button type="button" class="button button--light ng-animate--disabled" ng-click="bookmark()" ng-show="currentUser.status.loggedIn && !recipe.status.bookmarked"
-          loading-indicator model="!currentUser.bookmarks.status.createPending" type="inline"
+          loading-indicator model="!currentUser.bookmarks.status.createPending" class="loading-indicator loading-indicator--inline-left"
           | Bookmark
 
         button type="button" class="button button--light ng-animate--disabled" ng-click="destroyBookmark()" ng-show="currentUser.status.loggedIn && recipe.status.bookmarked"
-          loading-indicator model="!currentUser.bookmarks.status.destroyPending" type="inline"
+          loading-indicator model="!currentUser.bookmarks.status.destroyPending" class="loading-indicator loading-indicator--inline-left"
           | Remove
 
       aside class="app-section" ng-if="recipe.relatedRecipes.length"

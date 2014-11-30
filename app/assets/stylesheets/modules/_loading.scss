@@ -1,22 +1,28 @@
 .loading-indicator {
-  opacity: .4;
+  display: inline-block;
+  opacity: .3;
+  line-height: 1;
 }
 
-.loading-indicator--inline {
-  opacity: 1;
+.loading-indicator--block {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
 
-  &:first-child {
-    margin-right: em(5);
-  }
+.loading-indicator--inline,
+.loading-indicator--inline-left,
+.loading-indicator--inline-right {
+  opacity: .8;
+  vertical-align: middle;
+}
 
-  &:last-child {
-    margin-left: em(5);
-  }
+.loading-indicator--inline-left {
+  margin-right: em(4);
+}
 
-  &:only-child {
-    margin-right: 0;
-    margin-left: 0;
-  }
+.loading-indicator--inline-right {
+  margin-left: em(4);
 }
 
 .loading-indicator--white {

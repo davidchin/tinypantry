@@ -22,7 +22,7 @@ section class="app-body"
           div ng-repeat="error in $remoteError" Password {{ error }}
 
       button type="submit" class="button button--block"
-        loading-indicator model="!currentUser.session.status.createPending" type="inline"
+        loading-indicator model="!currentUser.session.status.createPending" class="loading-indicator loading-indicator--inline-left"
         | Submit
 
       div class="session-form__footer"
