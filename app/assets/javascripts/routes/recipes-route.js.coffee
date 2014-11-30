@@ -28,6 +28,12 @@ angular.module('recipe')
         controller:  'RecipesEditController'
         resolve: authorize: (authorize) -> authorize('admin')
 
+      .state 'home',
+        url: '/'
+        onEnter: ['$timeout', '$state', ($timeout, $state) ->
+          $timeout -> $state.go 'recipes.index', {}
+        ]
+
     ModalProvider
       .when 'recipe',
         state: 'recipes.show'
