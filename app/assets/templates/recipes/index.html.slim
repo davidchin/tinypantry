@@ -8,7 +8,7 @@ section class="app-body"
       div class="recipe-tile" ng-repeat="recipe in recipes.items" ng-include="'recipes/_recipe-tile.html'"
 
     button class="load-button" ng-show="recipes.pagination.nextPage" ng-click="next()"
-      loading-indicator model="!recipes.status.indexPending" type="inline" class="loading-indicator loading-indicator--block"
+      loading-indicator model="!recipes.status.indexPending" class="loading-indicator loading-indicator--inline-left"
       span More
 
   div ng-show="recipes.status.set && recipes.status.empty"
