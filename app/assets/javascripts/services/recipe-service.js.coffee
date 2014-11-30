@@ -56,7 +56,10 @@ angular.module('recipe')
       related: ->
         @request('related', { @id })
           .then (relatedRecipes) =>
-            @relatedRecipes = relatedRecipes
+            @relatedRecipes = for data in relatedRecipes
+              recipe = new Recipe
+              recipe.set(data)
+              recipe
 
   .factory 'Recipes', (recipeResource, Collection, Recipe, RecipeOrderTypes) ->
     class Recipes extends Collection
