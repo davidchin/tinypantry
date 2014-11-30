@@ -1,12 +1,10 @@
-.image--is-loading,
-.image--is-loading-remove {
-  @include prefixer(backface-visibility, hidden, webkit);
+.image--is-loading {
   opacity: 0;
 }
 
 .image--is-loading-remove {
+  @include prefixer(backface-visibility, hidden, webkit);
   @include transition(opacity .5s ease-out);
-  @include transform(translate3d(0, 0, 0));
 
   &.image--is-loading-remove-active {
     opacity: 1;
