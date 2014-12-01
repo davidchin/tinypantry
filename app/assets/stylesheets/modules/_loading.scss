@@ -8,6 +8,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
+
+  svg {
+    position: relative;
+  }
 }
 
 .loading-indicator--inline,
@@ -22,7 +26,7 @@
 }
 
 .loading-indicator--inline-right {
-  margin-left: em(4);
+  margin-left: em(4) !important;
 }
 
 .loading-indicator--white {
