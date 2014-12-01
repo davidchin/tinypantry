@@ -11,8 +11,12 @@ class Recipe < ActiveRecord::Base
                                       large: '860x860#' }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
+  validates :url, presence: true
+  validates :name, presence: true
+
   after_create :categorise
   after_save :update_counter
+  after_destroy :insert_deleted
 
   belongs_to :feed
 
@@ -149,6 +153,10 @@ class Recipe < ActiveRecord::Base
 
   def slug_id
     "#{ id }-#{ slug }"
+  end
+
+  def insert_deleted
+    DeletedRecipe.create(url: url, feed: feed)
   end
 
   private

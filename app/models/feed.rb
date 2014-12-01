@@ -1,5 +1,6 @@
 class Feed < ActiveRecord::Base
   has_many :recipes, dependent: :destroy
+  has_many :deleted_recipes, dependent: :destroy
 
   def self.import_all
     find_each(&:delay_import_rss)
@@ -29,6 +30,7 @@ class Feed < ActiveRecord::Base
 
   def fresh_items
     urls = recipes.pluck(:url)
+    urls += deleted_recipes.pluck(:url)
 
     parse_rss.xpath('//item').reject do |item|
       link = item.at_xpath('.//link')

@@ -258,6 +258,17 @@ angular.module('model')
           .then (response) =>
             @add(@transform(item)) for item in response
 
+      update: (params, data) ->
+        model = @find(_.pick(params, 'id'))
+
+        return $q.reject() unless model
+
+        model.update(params, data)
+
       destroy: (params) ->
-        super(params)
-          .then => @remove(@find(params))
+        model = @find(_.pick(params, 'id'))
+
+        return $q.reject() unless model
+
+        model.destroy(params)
+          .then => @remove(model)
