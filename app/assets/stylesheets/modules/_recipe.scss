@@ -179,6 +179,7 @@
   display: block;
   position: relative;
   background: $light-whitesmoke;
+  min-height: 1px;
   overflow: hidden;
 
   > a {

@@ -1,6 +1,9 @@
 angular.module('asset')
   .run ($rootScope, $window, $timeout) ->
-    $rootScope.$on 'modal:open', (event, modal) ->
+    $rootScope.$on 'pageload:ready', ->
+      $timeout -> $($window).trigger('scroll')
+
+    $rootScope.$on 'modal:open', ->
       $timeout -> $($window).trigger('scroll')
 
   .config ($provide) ->
@@ -39,14 +42,15 @@ angular.module('asset')
             $animate.addClass(element, 'image--is-loading')
 
             # Set preload size
-            preloadSize = setPreloadSize()
+            $timeout ->
+              preloadSize = setPreloadSize()
 
-            # Init lazyload
-            element.unveil 100, ->
-              $(this).load ->
-                scope.$evalAsync ->
-                  $animate.removeClass(element, 'image--is-loading')
-                    .then -> attrs.$set('height', null) if preloadSize
+              # Init lazyload
+              element.unveil 100, ->
+                $(this).load ->
+                  scope.$evalAsync ->
+                    $animate.removeClass(element, 'image--is-loading')
+                      .then -> attrs.$set('height', null) if preloadSize
 
           # Observe src
           attrs.$observe 'ngSrc', lazyloadImage
