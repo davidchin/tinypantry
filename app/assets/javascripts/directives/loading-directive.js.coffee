@@ -14,10 +14,9 @@ angular.module('loading')
             @watch()
 
         configure: ->
-          computedStyle = getComputedStyle(element.get(0))
           config = scope.$eval(attrs.config) || {}
           size = Math.round(config.size || parseFloat(element.css('font-size') || 16))
-          color = computedStyle && computedStyle.color || 'rgb(0, 0, 0)'
+          color = @computedStyle().color || config.color || 'rgb(0, 0, 0)'
           elementClass = 'loading-indicator'
           elementStyle =
             display: 'inline-block'
@@ -41,6 +40,9 @@ angular.module('loading')
           element.html(spinnerElement)
             .addClass(elementClass)
             .css(elementStyle)
+
+        computedStyle: ->
+          getComputedStyle(element.get(0)) || {}
 
         transclude: ->
           transclude (clone) ->
