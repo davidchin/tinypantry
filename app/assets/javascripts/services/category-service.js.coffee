@@ -19,7 +19,8 @@ angular.module('category')
       data: ->
         output = super
 
-        output.keywords = _.filter(output.keywords, 'name')
+        output.keywords = _.filter output.keywords, (keyword) ->
+          return true unless !keyword.id && !keyword.name
 
         return output
 

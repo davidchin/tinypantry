@@ -60,6 +60,8 @@ class Recipe < ActiveRecord::Base
 
   friendly_id :slug_candidates, use: :slugged
 
+  accepts_nested_attributes_for :keywords
+
   def self.order_by(key = 'date')
     case key
     when 'bookmark'
@@ -132,6 +134,13 @@ class Recipe < ActiveRecord::Base
     end
   end
 
+  def update(attributes)
+    Keyword.categorise(self, attributes[:keywords_attributes], { soft_delete: true })
+    attributes[:keywords_attributes] = []
+
+    super(attributes)
+  end
+
   def update_counter
     categories.update_all_recipes_count if approved_changed?
   end
@@ -149,6 +158,10 @@ class Recipe < ActiveRecord::Base
 
   def visits_last_30_days_count
     visit.try(:last_30_days_count) || 0
+  end
+
+  def all_keywords
+    categorisations.with_hidden.map(&:keyword)
   end
 
   def slug_id

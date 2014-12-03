@@ -131,7 +131,9 @@ angular.module('recipe')
 
       read: ->
         @recipe.read({ id: $stateParams.id })
-          .then => breadcrumbs.add(@recipe.name, 'recipes.show', { id: @recipe.id })
+          .then =>
+            @recipe.keywords.push({ name: '' })
+            breadcrumbs.add(@recipe.name, 'recipes.show', { id: @recipe.id })
           .catch(@catchNotFoundError)
 
       submit: ->

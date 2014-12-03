@@ -43,6 +43,14 @@ angular.module('recipe')
 
         return output
 
+      data: ->
+        output = super
+
+        output.keywords = _.filter output.keywords, (keyword) ->
+          return true unless !keyword.id && !keyword.name
+
+        return output
+
       bookmarked: (user) ->
         user.bookmarks.bookmarked(this)
           .then (bookmark) =>

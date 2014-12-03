@@ -50,6 +50,10 @@ select[multiple=multiple] {
     border-color: $form-border-color-focus;
     box-shadow: $form-box-shadow-focus;
   }
+
+  &:disabled {
+    background-color: $whitesmoke;
+  }
 }
 
 textarea {

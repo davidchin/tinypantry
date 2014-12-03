@@ -13,8 +13,12 @@ json.cache! ['v1', recipe] do
   json.feed do
     json.partial! 'api/v1/feeds/feed', feed: recipe.feed
   end
-  
+
   json.keywords do
-    json.array! recipe.keywords, :id, :name
+    json.array! recipe.keywords do |keyword|
+      json.id keyword.id
+      json.name keyword.name
+      json.hidden keyword.is_hidden(recipe)
+    end
   end
 end

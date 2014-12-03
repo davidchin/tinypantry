@@ -7,6 +7,8 @@ module Api
 
       set_pagination_header :recipes, only: [:index, :search, :related]
 
+      wrap_parameters :recipe, include: [*Category.attribute_names, :keywords_attributes]
+
       authorize_resource
 
       def index
@@ -76,7 +78,8 @@ module Api
       def recipe_params
         params.require(:recipe)
               .permit(:name, :description, :url,
-                      :image, :remote_image_url, :approved)
+                      :image, :remote_image_url, :approved,
+                      keywords_attributes: [:id, :name])
       end
     end
   end

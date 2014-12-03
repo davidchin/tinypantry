@@ -13,7 +13,7 @@ class Category < ActiveRecord::Base
 
   friendly_id :name, use: :slugged
 
-  accepts_nested_attributes_for :keywords, allow_destroy: true
+  accepts_nested_attributes_for :keywords
 
   def self.update_all_recipes_count
     transaction do
@@ -32,5 +32,12 @@ class Category < ActiveRecord::Base
 
   def update_recipes_count
     update(recipes_count: recipes.approved.as_json.uniq.size)
+  end
+
+  def update(attributes)
+    Keyword.categorise(self, attributes[:keywords_attributes])
+    attributes[:keywords_attributes] = []
+
+    super(attributes)
   end
 end

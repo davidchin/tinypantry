@@ -80,7 +80,7 @@ angular.module('category')
             return category
 
       destroy: ->
-        @category.destroy
+        @category.destroy()
           .then (category) ->
             $state.go('categories.index')
 

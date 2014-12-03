@@ -8,6 +8,10 @@ form class="form" ng-submit="submit()"
   label URL
   input type="url" ng-model="recipe.url"
 
+  label Keywords
+  p ng-repeat="keyword in recipe.keywords"
+    input type="text" placeholder="Keyword" ng-model="keyword.name" ng-disabled="keyword.hidden"
+
   div class="form__footer"
     button type="submit" class="button" Submit
     button type="button" class="button button--danger" ng-show="recipe.id" ng-click="destroy()" Delete

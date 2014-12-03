@@ -12,21 +12,21 @@ angular.module('recipe')
         templateUrl: 'recipes/index.html'
 
       .state 'recipes.category',
-        url: 'recipes/:category/:id'
+        url: 'recipes/category/:id'
         onEnter: ['$timeout', '$state', ($timeout, $state) ->
           $timeout -> $state.go 'recipes.index', { category: $state.params.id }
         ]
-
-      .state 'recipes.show',
-        url: 'recipes/:id'
-        templateUrl: 'recipes/show.html'
-        controller:  'RecipesShowController'
 
       .state 'recipes.edit',
         url: 'recipes/:id/edit'
         templateUrl: 'recipes/edit.html'
         controller:  'RecipesEditController'
         resolve: authorize: (authorize) -> authorize('admin')
+
+      .state 'recipes.show',
+        url: 'recipes/:id'
+        templateUrl: 'recipes/show.html'
+        controller:  'RecipesShowController'
 
       .state 'home',
         url: '/'
