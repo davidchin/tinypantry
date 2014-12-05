@@ -1,7 +1,14 @@
 angular.module('navigation')
-  .run ($rootScope, breadcrumbs) ->
+  .run ($rootScope, $window, $location, $document, breadcrumbs, historyStack) ->
     $rootScope.$on '$stateChangeSuccess', ->
       breadcrumbs.reset()
+
+    $($window).on 'popstate', ->
+      scrollTop = historyStack.scrollTop($location.url()) || 0
+      $document.scrollTop(scrollTop)
+
+    $rootScope.$on '$locationChangeStart', (event, toUrl, fromUrl) ->
+      historyStack.record(fromUrl)
 
   .factory 'breadcrumbs', ($state) ->
     class Breadcrumbs
@@ -28,3 +35,31 @@ angular.module('navigation')
         return @
 
     new Breadcrumbs
+
+  .factory 'historyStack', ($rootScope, $window, $document, $location) ->
+    class HistoryStack
+      constructor: ->
+        @items = []
+
+      find: (path) ->
+        _.find(@items, { path: path })
+
+      scrollTop: (url) ->
+        record = @find(url)
+
+        return record?.scrollTop
+
+      record: (url) ->
+        fromPath = _.last(url.split($window.location.host))
+        index = _.findIndex(@items, { path: fromPath })
+
+        if index >= 0
+          record = @items[index]
+          @items.splice(0, 1)
+        else
+          record = { path: fromPath }
+
+        record.scrollTop = $document.scrollTop()
+        @items.push(record)
+
+    new HistoryStack
