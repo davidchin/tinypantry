@@ -7,7 +7,7 @@ module Api
 
       set_pagination_header :recipes, only: [:index, :search, :related]
 
-      wrap_parameters :recipe, include: [*Category.attribute_names, :keywords_attributes]
+      wrap_parameters :recipe, include: [*Recipe.attribute_names, :keywords_attributes]
 
       authorize_resource
 
