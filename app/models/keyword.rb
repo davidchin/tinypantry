@@ -14,6 +14,8 @@ class Keyword < ActiveRecord::Base
   validates :name, uniqueness: true, presence: true
 
   def self.categorise(keywordable, keywords_attributes, options={})
+    return if keywords_attributes.blank?
+
     keywords_attributes.each do |attributes|
       if keyword = Keyword.find_by('id = ? OR name = ?', attributes[:id], attributes[:name])
         categorisation = keyword.categorisations.with_hidden.find_by(keywordable: keywordable)
