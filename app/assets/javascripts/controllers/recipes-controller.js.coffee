@@ -157,12 +157,3 @@ angular.module('recipe')
             return recipe
 
     new RecipesEditController
-
-  .controller 'RecipesCategoryController', ($scope, $stateParams, BaseController) ->
-    class RecipesCategoryController extends BaseController
-      constructor: ->
-        super($scope)
-
-        $scope.$parent?.read?($stateParams)
-
-    new RecipesCategoryController
