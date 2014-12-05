@@ -65,10 +65,14 @@ module Api
       def find_recipes
         @recipes = Recipe
 
-        @recipes = if can?(:manage, :recipe) && params[:unapproved]
-          @recipes.unapproved
+        if can?(:manage, :recipe)
+          if params[:unapproved]
+            @recipes = @recipes.unapproved
+          elsif params[:approved]
+            @recipes = @recipes.approved
+          end
         else
-          @recipes.approved
+          @recipes = @recipes.approved
         end
 
         @recipes = @recipes.by_category(params[:category]) if params[:category]
