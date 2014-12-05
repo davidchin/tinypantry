@@ -10,10 +10,10 @@ nav slide-menu="browse-slide-menu" class="app-slide-menu" itemscope="" itemtype=
     a class="app-slide-menu__item-link" ng-show="currentUser.status.loggedIn" ui-sref="bookmarks.index" ui-sref-active-eq="is-active" slide-menu-toggle="" itemprop="url"
       span itemprop="name" Bookmarks
   div class="app-slide-menu__item"
-    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: null })" ui-sref-active-eq="is-active" ui-sref-alias="home" slide-menu-toggle="" itemprop="url"
+    a class="app-slide-menu__item-link" ui-sref="recipes.index({ category: null })" ui-sref-active="is-active" ui-sref-alias="home" ui-sref-opts="{ reload: true }" slide-menu-toggle="" itemprop="url"
       small class="app-slide-menu__item-meta" {{ recipes.pagination.totalCount }}
       span itemprop="name" All
   div class="app-slide-menu__item" ng-repeat="category in categories.items"
-    a class="app-slide-menu__item-link" ui-sref="recipes.category({ id: category.slug })" ui-sref-active="is-active" slide-menu-toggle="" itemprop="url"
+    a class="app-slide-menu__item-link" ui-sref="recipes.category({ category: category.slug })" ui-sref-active="is-active" slide-menu-toggle="" itemprop="url"
       small class="app-slide-menu__item-meta" {{ category.recipesCount }}
       span itemprop="name" {{ category.name }}

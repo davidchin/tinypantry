@@ -33,10 +33,14 @@ angular.module('recipe')
         @recipeModal.close()
 
       read: (params, append) ->
-        params = _.defaults({}, params, $stateParams)
+        params = _.defaults({}, params, @params, $stateParams)
+
+        return $q.when(@recipes.data()) if angular.toJson(@params) == angular.toJson(params)
+
+        @params = params
         method = if append then 'append' else 'read'
 
-        @recipes[method](params)
+        @recipes[method](@params)
           .then => @bookmarked()
           .then => @recipes.data()
 
@@ -153,3 +157,12 @@ angular.module('recipe')
             return recipe
 
     new RecipesEditController
+
+  .controller 'RecipesCategoryController', ($scope, $stateParams, BaseController) ->
+    class RecipesCategoryController extends BaseController
+      constructor: ->
+        super($scope)
+
+        $scope.$parent?.read?($stateParams)
+
+    new RecipesCategoryController

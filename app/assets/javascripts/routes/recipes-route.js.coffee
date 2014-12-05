@@ -2,7 +2,7 @@ angular.module('recipe')
   .config ($stateProvider, $urlRouterProvider, ModalProvider) ->
     $stateProvider
       .state 'recipes',
-        url: '/?category&page&orderBy&query'
+        url: '/?page&orderBy&query'
         abstract: true
         template: '<ui-view />'
         controller: 'RecipesIndexController'
@@ -12,10 +12,9 @@ angular.module('recipe')
         templateUrl: 'recipes/index.html'
 
       .state 'recipes.category',
-        url: 'recipes/category/:id'
-        onEnter: ['$timeout', '$state', ($timeout, $state) ->
-          $timeout -> $state.go 'recipes.index', { category: $state.params.id }
-        ]
+        url: 'recipes/category/:category'
+        templateUrl: 'recipes/index.html'
+        controller: 'RecipesCategoryController'
 
       .state 'recipes.edit',
         url: 'recipes/:id/edit'
