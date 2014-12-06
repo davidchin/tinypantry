@@ -4,18 +4,17 @@ angular.module('recipe')
       .state 'recipes',
         abstract: true
         template: '<ui-view />'
+        controller: 'RecipesController'
 
       .state 'recipes.index',
         url: '/?page&orderBy&query'
         templateUrl: 'recipes/index.html'
         controller: 'RecipesIndexController'
-        reloadOnSearch: false
 
       .state 'recipes.category',
         url: '/recipes/category/:category?page&orderBy&query'
         templateUrl: 'recipes/index.html'
         controller: 'RecipesIndexController'
-        reloadOnSearch: false
 
       .state 'recipes.edit',
         url: '/recipes/:id/edit'

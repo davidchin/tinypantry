@@ -25,4 +25,10 @@ _.mixin {
 
   hasValue: (obj, value) ->
     !!_.findKey(obj, (attr) => attr == value)
+
+  emptyObj: (obj) ->
+    for key, value of obj
+      delete obj[key]
+
+    obj
 }

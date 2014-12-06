@@ -1,4 +1,13 @@
 angular.module('recipe')
+  .controller 'RecipesController', ($scope, $state, BaseController) ->
+    class RecipesController extends BaseController
+      constructor: ->
+        @params = {}
+
+        super($scope)
+
+    new RecipesController
+
   .controller 'RecipesIndexController', ($scope, $state, $stateParams, $location, $q, currentUser, flash, ga, query, BaseController, Recipes, Modal) ->
     class RecipesIndexController extends BaseController
       constructor: ->
@@ -33,14 +42,21 @@ angular.module('recipe')
         @recipeModal.close()
 
       read: (params, append) ->
-        params = _.defaults({}, params, @params, $stateParams)
+        params = _.defaults({}, params, $stateParams)
+        data = @recipes.data()
 
-        return $q.when(@recipes.data()) if angular.toJson(@params) == angular.toJson(params)
+        # If request is already fulfilled, return existing data
+        unless angular.toJson($scope.$parent.params) != angular.toJson(params) || _.isEmpty(data)
+          return $q.when(data)
 
-        @params = params
+        # Merge with parent params and retain
+        _.emptyObj($scope.$parent.params) if $scope.$parent.params.category != params.category
+        params = _.defaults($scope.$parent.params, params)
+
+        # Determine method
         method = if append then 'append' else 'read'
 
-        @recipes[method](@params)
+        @recipes[method](params)
           .then => @bookmarked()
           .then => @recipes.data()
 
@@ -49,7 +65,6 @@ angular.module('recipe')
 
         return unless params.page
 
-        $location.search(params)
         @read(params, true)
 
         # Track
