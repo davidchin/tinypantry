@@ -55,8 +55,21 @@ angular.module('recipe')
 
         # Determine method
         method = if append then 'append' else 'read'
+        promise = null
 
-        @recipes[method](params)
+        if method == 'read' && @recipes.pagination?.currentPage != params.page
+          for page in [1..params.page]
+            params = angular.copy(params)
+            params.page = page
+
+            if promise
+              promise = promise.then => @recipes.append(params)
+            else
+              promise = @recipes.append(params)
+        else
+          promise = @recipes[method](params)
+
+        promise
           .then => @bookmarked()
           .then => @recipes.data()
 
