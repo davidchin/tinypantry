@@ -9,11 +9,13 @@ angular.module('recipe')
         url: '/?page&orderBy&query'
         templateUrl: 'recipes/index.html'
         controller: 'RecipesIndexController'
+        reloadOnSearch: false
 
       .state 'recipes.category',
         url: '/recipes/category/:category?page&orderBy&query'
         templateUrl: 'recipes/index.html'
         controller: 'RecipesIndexController'
+        reloadOnSearch: false
 
       .state 'recipes.edit',
         url: '/recipes/:id/edit'

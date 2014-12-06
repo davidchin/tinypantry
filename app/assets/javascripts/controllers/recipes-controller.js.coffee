@@ -49,6 +49,7 @@ angular.module('recipe')
 
         return unless params.page
 
+        $location.search(params)
         @read(params, true)
 
         # Track
