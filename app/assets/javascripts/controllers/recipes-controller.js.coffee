@@ -42,32 +42,29 @@ angular.module('recipe')
         @recipeModal.close()
 
       read: (params, append) ->
+        parentParams = $scope.$parent.params
         params = _.defaults({}, params, $stateParams)
         data = @recipes.data()
 
         # If request is already fulfilled, return existing data
-        unless angular.toJson($scope.$parent.params) != angular.toJson(params) || _.isEmpty(data)
+        unless angular.toJson(parentParams) != angular.toJson(params) || _.isEmpty(data)
           return $q.when(data)
 
         # Merge with parent params and retain
-        _.emptyObj($scope.$parent.params) if $scope.$parent.params.category != params.category
-        params = _.defaults($scope.$parent.params, params)
+        unless parentParams.category == params.category &&
+               parentParams.orderBy == params.orderBy &&
+               parentParams.query == params.query
+          _.emptyObj(parentParams)
+
+        params = _.defaults(parentParams, params)
 
         # Determine method
         method = if append then 'append' else 'read'
-        promise = null
 
-        if method == 'read' && @recipes.pagination?.currentPage != params.page
-          for page in [1..params.page]
-            params = angular.copy(params)
-            params.page = page
-
-            if promise
-              promise = promise.then => @recipes.append(params)
-            else
-              promise = @recipes.append(params)
+        promise = if method == 'read' && @recipes.pagination?.currentPage != params.page
+          @recipes.readAll(params)
         else
-          promise = @recipes[method](params)
+          @recipes[method](params)
 
         promise
           .then => @bookmarked()
@@ -85,7 +82,10 @@ angular.module('recipe')
         ga.pageview({ page: path }) if params.page > 1
 
       orderBy: (key) ->
-        $state.go('recipes.index', { orderBy: key })
+        if @recipes.status.category
+          $state.go('recipes.category', { orderBy: key, category: @recipes.status.category })
+        else
+          $state.go('recipes.index', { orderBy: key })
 
       bookmarked: ->
         currentUser.ready()

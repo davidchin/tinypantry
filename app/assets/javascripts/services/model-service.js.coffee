@@ -253,6 +253,24 @@ angular.module('model')
         @request('index', params)
           .then (response) => @set(response)
 
+      readAll: (params) ->
+        promise = null
+        params.page = params.page || 1
+
+        for page in [1..params.page]
+          params = angular.copy(params)
+          params.page = page
+
+          if promise
+            promise = promise.then => @append(params)
+          else
+            promise = @append(params)
+
+          if page == params.page
+            promise.then => @status.set = true
+
+        promise
+
       append: (params) ->
         @request('index', params)
           .then (response) =>

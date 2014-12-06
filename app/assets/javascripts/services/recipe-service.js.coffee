@@ -85,18 +85,15 @@ angular.module('recipe')
           .then (recipes) => @set(recipes)
 
       read: (params) ->
+        @status.orderedBy = params?.orderBy || _.first(@config.orderTypes)?.key
+        @status.category = params?.category
+
         promise = if params?.query
           @search(params)
         else
           super
 
-        promise
-          .then (recipes) =>
-            defaultOrder = _.first(@config.orderTypes)
-
-            @status.orderedBy = params?.orderBy || defaultOrder.key
-
-            return recipes
+        return promise
 
   .value 'RecipeOrderTypes', [
     { key: 'date', name: 'Date' }
