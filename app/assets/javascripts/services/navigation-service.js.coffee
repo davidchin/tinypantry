@@ -1,14 +1,20 @@
 angular.module('navigation')
-  .run ($rootScope, $window, $location, $document, breadcrumbs, historyStack) ->
+  .run ($rootScope, $window, $location, $document, $timeout, breadcrumbs, historyStack) ->
+    scrollTop = null
+
     $rootScope.$on '$stateChangeSuccess', ->
       breadcrumbs.reset()
 
     $($window).on 'popstate', ->
-      scrollTop = historyStack.scrollTop($location.url()) || 0
+      scrollTop = historyStack.scrollTop($location.url())
       $document.scrollTop(scrollTop)
 
     $rootScope.$on '$locationChangeStart', (event, toUrl, fromUrl) ->
+      scrollTop = undefined
       historyStack.record(fromUrl)
+
+    $rootScope.$on 'pageload:ready', ->
+      $timeout -> $document.scrollTop(scrollTop) if scrollTop
 
   .factory 'breadcrumbs', ($state) ->
     class Breadcrumbs

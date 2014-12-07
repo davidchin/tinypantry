@@ -1,7 +1,8 @@
 angular.module('recipe')
-  .controller 'RecipesController', ($scope, BaseController) ->
+  .controller 'RecipesController', ($scope, Recipes, BaseController) ->
     class RecipesController extends BaseController
       constructor: ->
+        @recipes = new Recipes
         @params = {}
 
         super($scope)
@@ -11,7 +12,7 @@ angular.module('recipe')
   .controller 'RecipesIndexController', ($scope, $state, $stateParams, $location, $q, currentUser, flash, ga, query, breadcrumbs, BaseController, Recipes, Modal) ->
     class RecipesIndexController extends BaseController
       constructor: ->
-        @recipes = new Recipes
+        @recipes = $scope.$parent.recipes || new Recipes
         @recipeModal = new Modal({ scope: $scope })
         @currentUser = currentUser
 

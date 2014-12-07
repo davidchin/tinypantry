@@ -17,7 +17,7 @@ angular.module('bookmark')
 
         @recipeModal = new Modal({ scope: $scope })
 
-        @recipes.unset()
+        @recipes.status.set = false
         @read()
 
         super($scope)
