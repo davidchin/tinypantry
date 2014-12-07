@@ -18,7 +18,7 @@ json.cache! ['v1', recipe] do
     json.array! recipe.keywords do |keyword|
       json.id keyword.id
       json.name keyword.name
-      json.hidden keyword.is_hidden(recipe)
+      json.hidden keyword.hidden?(recipe)
     end
   end
 end

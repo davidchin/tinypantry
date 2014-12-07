@@ -13,11 +13,13 @@ class Keyword < ActiveRecord::Base
 
   validates :name, uniqueness: true, presence: true
 
-  def self.categorise(keywordable, keywords_attributes, options={})
+  def self.categorise(keywordable, keywords_attributes, options = {})
     return if keywords_attributes.blank?
 
     keywords_attributes.each do |attributes|
-      if keyword = Keyword.find_by('id = ? OR name = ?', attributes[:id], attributes[:name])
+      keyword = Keyword.find_by('id = ? OR name = ?', attributes[:id], attributes[:name])
+
+      if keyword
         categorisation = keyword.categorisations.with_hidden.find_by(keywordable: keywordable)
 
         if attributes[:name].blank? || attributes[:_destroy]
@@ -33,7 +35,7 @@ class Keyword < ActiveRecord::Base
     end
   end
 
-  def is_hidden(keywordable)
+  def hidden?(keywordable)
     categorisation = categorisations.with_hidden.find_by(keywordable: keywordable)
     categorisation.hidden? if categorisation
   end
