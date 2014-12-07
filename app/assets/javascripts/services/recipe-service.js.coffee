@@ -80,20 +80,20 @@ angular.module('recipe')
 
         super
 
-      search: (params) ->
-        @request('search', params)
-          .then (recipes) => @set(recipes)
+      request: (action, params, data) ->
+        action = 'search' if action == 'index' && params?.query
+
+        super(action, params, data)
 
       read: (params) ->
-        @status.orderedBy = params?.orderBy || _.first(@config.orderTypes)?.key
-        @status.category = params?.category
+        @orderBy = params?.orderBy || _.first(@config.orderTypes)?.key
+        @category = params?.category
+        @categoryName = _.str.humanize(@category)
 
-        promise = if params?.query
-          @search(params)
+        if params?.page > 1
+          @readAll(params)
         else
           super
-
-        return promise
 
   .value 'RecipeOrderTypes', [
     { key: 'date', name: 'Date' }

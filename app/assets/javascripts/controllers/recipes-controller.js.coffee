@@ -8,7 +8,7 @@ angular.module('recipe')
 
     new RecipesController
 
-  .controller 'RecipesIndexController', ($scope, $state, $stateParams, $location, $q, currentUser, flash, ga, query, BaseController, Recipes, Modal) ->
+  .controller 'RecipesIndexController', ($scope, $state, $stateParams, $location, $q, currentUser, flash, ga, query, breadcrumbs, BaseController, Recipes, Modal) ->
     class RecipesIndexController extends BaseController
       constructor: ->
         @recipes = new Recipes
@@ -51,24 +51,25 @@ angular.module('recipe')
           return $q.when(data)
 
         # Merge with parent params and retain
-        unless parentParams.category == params.category &&
-               parentParams.orderBy == params.orderBy &&
-               parentParams.query == params.query
+        unless _.compareObj(parentParams, params, ['category', 'orderBy', 'query'])
           _.emptyObj(parentParams)
 
         params = _.defaults(parentParams, params)
 
+        # Set breadcrumbs
+        breadcrumbs.reset()
+
         # Determine method
         method = if append then 'append' else 'read'
 
-        promise = if method == 'read' && @recipes.pagination?.currentPage != params.page
-          @recipes.readAll(params)
-        else
-          @recipes[method](params)
-
-        promise
+        promise = @recipes[method](params)
           .then => @bookmarked()
           .then => @recipes.data()
+
+        if params.category
+          breadcrumbs.add(@recipes.categoryName, 'recipes.category', { category: params.category })
+
+        return promise
 
       next: (params) ->
         params = _.defaults({ page: @recipes.pagination.nextPage }, params)
@@ -82,8 +83,8 @@ angular.module('recipe')
         ga.pageview({ page: path }) if params.page > 1
 
       orderBy: (key) ->
-        if @recipes.status.category
-          $state.go('recipes.category', { orderBy: key, category: @recipes.status.category })
+        if @recipes.category
+          $state.go('recipes.category', { orderBy: key, category: @recipes.category })
         else
           $state.go('recipes.index', { orderBy: key })
 

@@ -31,4 +31,12 @@ _.mixin {
       delete obj[key]
 
     obj
+
+  compareObj: (obj, obj2, keys) ->
+    keys = keys || _.keys(obj)
+
+    for key in keys
+      return false if obj[key] != obj2[key]
+
+    return true
 }

@@ -83,6 +83,6 @@ angular.module('bookmark')
           .then (recipes) =>
             defaultOrder = _.first(@config.orderTypes)
 
-            @status.orderedBy = params?.orderBy || defaultOrder.key
+            @orderBy = params?.orderBy || defaultOrder.key
 
             return recipes

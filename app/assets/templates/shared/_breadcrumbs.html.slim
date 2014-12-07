@@ -1,4 +1,7 @@
 nav class="app-breadcrumbs" ng-show="breadcrumbs.items.length" ng-controller="BreadcrumbsController"
   ul itemprop="breadcrumb"
     li class="app-breadcrumbs__item" ng-repeat="breadcrumb in breadcrumbs.items"
-      a ng-href="{{ breadcrumb.path }}" {{ breadcrumb.name }}
+      a ng-href="{{ breadcrumb.path }}"
+        span ng-if="breadcrumb.name != 'Home'" {{ breadcrumb.name }}
+        span ng-if="breadcrumb.name == 'Home'"
+          i class="fa fa-home"

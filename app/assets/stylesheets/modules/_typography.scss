@@ -9,3 +9,7 @@
 .title__subtitle {
   @extend %title__subtitle;
 }
+
+.text--hidden {
+  @extend %hide-text;
+}
