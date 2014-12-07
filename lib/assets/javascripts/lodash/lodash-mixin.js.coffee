@@ -33,7 +33,7 @@ _.mixin {
     obj
 
   compareObj: (obj, obj2, keys) ->
-    keys = keys || _.keys(obj)
+    keys = keys || _.union(_.keys(obj), _.keys(obj2))
 
     for key in keys
       return false if obj[key] != obj2[key]

@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .controller 'RecipesController', ($scope, $state, BaseController) ->
+  .controller 'RecipesController', ($scope, BaseController) ->
     class RecipesController extends BaseController
       constructor: ->
         @params = {}
@@ -47,29 +47,25 @@ angular.module('recipe')
         data = @recipes.data()
 
         # If request is already fulfilled, return existing data
-        unless angular.toJson(parentParams) != angular.toJson(params) || _.isEmpty(data)
-          return $q.when(data)
+        return $q.when(data) unless !_.compareObj(parentParams, params) || _.isEmpty(data)
 
         # Merge with parent params and retain
-        unless _.compareObj(parentParams, params, ['category', 'orderBy', 'query'])
-          _.emptyObj(parentParams)
+        _.emptyObj(parentParams) unless _.compareObj(parentParams, params, ['category', 'orderBy', 'query'])
 
         params = _.defaults(parentParams, params)
-
-        # Set breadcrumbs
-        breadcrumbs.reset()
 
         # Determine method
         method = if append then 'append' else 'read'
 
-        promise = @recipes[method](params)
+        @recipes[method](params)
           .then => @bookmarked()
           .then => @recipes.data()
 
+        # Set breadcrumbs
+        breadcrumbs.reset()
+
         if params.category
           breadcrumbs.add(@recipes.categoryName, 'recipes.category', { category: params.category })
-
-        return promise
 
       next: (params) ->
         params = _.defaults({ page: @recipes.pagination.nextPage }, params)
@@ -83,10 +79,7 @@ angular.module('recipe')
         ga.pageview({ page: path }) if params.page > 1
 
       orderBy: (key) ->
-        if @recipes.category
-          $state.go('recipes.category', { orderBy: key, category: @recipes.category })
-        else
-          $state.go('recipes.index', { orderBy: key })
+        $state.go($state.current, { orderBy: key, category: @recipes.category })
 
       bookmarked: ->
         currentUser.ready()

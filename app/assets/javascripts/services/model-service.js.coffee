@@ -86,6 +86,8 @@ angular.module('model')
           $q.when(@requests.read)
 
       read: (params) ->
+        @status.set = false
+
         @request('get', params)
           .then (response) => @set(response)
 
@@ -190,7 +192,7 @@ angular.module('model')
 
             return response
 
-  .factory 'Collection', (BaseModel, Model) ->
+  .factory 'Collection', ($q, BaseModel, Model) ->
     class Collection extends BaseModel
       constructor: (config) ->
         @items ||= []
@@ -250,6 +252,8 @@ angular.module('model')
         _.indexOf(@items, model)
 
       read: (params) ->
+        @status.set = false
+
         @request('index', params)
           .then (response) => @set(response)
 
@@ -277,16 +281,14 @@ angular.module('model')
             @add(@transform(item)) for item in response
 
       update: (params, data) ->
-        model = @find(_.pick(params, 'id'))
-
-        return $q.reject() unless model
-
-        model.update(params, data)
+        if model = @find(_.pick(params, 'id'))
+          model.update(params, data)
+        else
+          super(params, data)
 
       destroy: (params) ->
-        model = @find(_.pick(params, 'id'))
-
-        return $q.reject() unless model
-
-        model.destroy(params)
-          .then => @remove(model)
+        if model = @find(_.pick(params, 'id'))
+          model.destroy(params)
+            .then => @remove(model)
+        else
+          super(params)

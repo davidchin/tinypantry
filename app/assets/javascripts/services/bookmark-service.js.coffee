@@ -69,20 +69,17 @@ angular.module('bookmark')
       params: ->
         { userId: @user?.id }
 
-      search: (params) ->
-        @request('search', params)
-          .then (recipes) => @set(recipes)
+      request: (action, params, data) ->
+        action = 'search' if action == 'index' && params?.query
+
+        super(action, params, data)
 
       read: (params) ->
-        promise = if params?.query?
-          @search(params)
+        @orderBy = params?.orderBy || _.first(@config.orderTypes)?.key
+        @category = params?.category
+        @categoryName = _.str.humanize(@category)
+
+        if params?.page > 1
+          @readAll(params)
         else
           super
-
-        promise
-          .then (recipes) =>
-            defaultOrder = _.first(@config.orderTypes)
-
-            @orderBy = params?.orderBy || defaultOrder.key
-
-            return recipes

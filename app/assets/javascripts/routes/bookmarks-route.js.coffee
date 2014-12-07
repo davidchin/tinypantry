@@ -5,6 +5,7 @@ angular.module('bookmark')
         url: '/bookmarks'
         abstract: true
         template: '<ui-view />'
+        controller: 'BookmarksController'
 
       .state 'bookmarks.index',
         url: '?category&page&orderBy&query'

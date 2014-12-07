@@ -3,12 +3,13 @@ nav class="recipe-nav-bar" ng-include="'recipes/_nav-bar.html'"
 section class="app-body"
   loading-indicator model="recipes.status.set" config="{ size: 32 }" class="loading-indicator loading-indicator--block"
 
-  div ng-hide="recipes.status.empty"
-    section class="recipe-tiles"
+  div ng-show="recipes.status.set && !recipes.status.empty"
+    div class="recipe-tiles recipe-tiles--with-nav-bar"
       div class="recipe-tile" ng-repeat="recipe in recipes.items" ng-include="'recipes/_recipe-tile.html'"
 
-    section
-      button class="button-block" ng-show="recipes.pagination.nextPage" ng-click="next()" Load More
+    button class="button-block" ng-show="recipes.pagination.nextPage" ng-click="next()"
+      loading-indicator model="!recipes.status.indexPending" class="loading-indicator loading-indicator--inline-left"
+      span More
 
   div ng-show="recipes.status.set && recipes.status.empty"
     | Nothing to see here, move along&hellip;
