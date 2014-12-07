@@ -258,6 +258,8 @@ angular.module('model')
           .then (response) => @set(response)
 
       readAll: (params) ->
+        @status.set = false
+
         promise = null
         params.page = params.page || 1
 
