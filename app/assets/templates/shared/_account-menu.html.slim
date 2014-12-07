@@ -4,7 +4,7 @@ nav slide-menu="account-slide-menu" class="app-slide-menu" itemscope="" itemtype
   div class="app-slide-menu__item" ng-show="currentUser.status.loggedIn"
     div class="app-slide-menu__item-span"
       span class="app-slide-menu__user-image"
-        img ng-src="http://www.gravatar.com/avatar/{{ currentUser.gravatarId }}"
+        gravatar-img id="currentUser.gravatarId"
       span class="app-slide-menu__user-name" {{ currentUser.displayName }}
 
   div class="app-slide-menu__item" ng-show="currentUser.status.loggedIn"

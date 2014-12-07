@@ -56,3 +56,22 @@ angular.module('asset')
           attrs.$observe 'ngSrc', lazyloadImage
 
       return $delegate
+
+  .directive 'gravatarImg', ($http) ->
+    restrict: 'EA'
+    scope:
+      gravatarId: '=id'
+    link: (scope, element, attrs) ->
+      img = $('<img>')
+
+      scope.$watch 'gravatarId', (gravatarId) ->
+        return unless gravatarId
+
+        img.on 'error', (error) ->
+          html = '<div class="gravatar-placeholder"><i class="fa fa-user"></i></div>'
+          element.html(html)
+
+        img.on 'load', ->
+          element.html(img)
+
+        img.attr('src', "http://www.gravatar.com/avatar/#{ gravatarId }?d=404")

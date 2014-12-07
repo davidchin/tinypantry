@@ -121,14 +121,29 @@ $slide-menu-width: column-width($slide-menu-columns);
 .app-slide-menu__user-image {
   display: inline-block;
   float: left;
-  width: em(50);
-  height: em(50);
 
+  &,
+  .gravatar-placeholder {
+    width: em(50);
+    height: em(50);
+  }
+
+  > * > img,
   > img {
     display: block;
     border-radius: 100%;
     width: 100%;
   }
+}
+
+.gravatar-placeholder {
+  display: inline-block;
+  border-radius: 100%;
+  background: $dark-medium-gray;
+  width: em(50);
+  text-align: center;
+  line-height: em(50);
+  color: $white;
 }
 
 .app-slide-menu__user-name {
