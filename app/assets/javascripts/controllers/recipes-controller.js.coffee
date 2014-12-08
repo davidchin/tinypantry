@@ -1,18 +1,8 @@
 angular.module('recipe')
-  .controller 'RecipesController', ($scope, Recipes, BaseController) ->
-    class RecipesController extends BaseController
-      constructor: ->
-        @recipes = new Recipes
-        @params = {}
-
-        super($scope)
-
-    new RecipesController
-
   .controller 'RecipesIndexController', ($scope, $state, $stateParams, $location, $q, currentUser, flash, ga, query, breadcrumbs, BaseController, Recipes, Modal) ->
     class RecipesIndexController extends BaseController
       constructor: ->
-        @recipes = $scope.$parent.recipes || new Recipes
+        @recipes = new Recipes
         @recipeModal = new Modal({ scope: $scope })
         @currentUser = currentUser
 
@@ -43,17 +33,8 @@ angular.module('recipe')
         @recipeModal.close()
 
       read: (params, append) ->
-        parentParams = $scope.$parent.params
         params = _.defaults({}, params, $stateParams)
         data = @recipes.data()
-
-        # If request is already fulfilled, return existing data
-        return $q.when(data) unless !_.compareObj(parentParams, params) || _.isEmpty(data)
-
-        # Merge with parent params and retain
-        _.emptyObj(parentParams) unless _.compareObj(parentParams, params, ['category', 'orderBy', 'query'])
-
-        params = _.defaults(parentParams, params)
 
         # Determine method
         method = if append then 'append' else 'read'

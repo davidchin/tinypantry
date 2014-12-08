@@ -2,28 +2,27 @@ angular.module('recipe')
   .config ($stateProvider, $urlRouterProvider, ModalProvider) ->
     $stateProvider
       .state 'recipes',
+        url: '/?category&page&orderBy&query'
         abstract: true
         template: '<ui-view />'
-        controller: 'RecipesController'
+        controller: 'RecipesIndexController'
 
       .state 'recipes.index',
-        url: '/?page&orderBy&query'
+        url: ''
         templateUrl: 'recipes/index.html'
-        controller: 'RecipesIndexController'
 
       .state 'recipes.category',
-        url: '/recipes/category/:category?page&orderBy&query'
+        url: '^/recipes/category/:category?page&orderBy&query'
         templateUrl: 'recipes/index.html'
-        controller: 'RecipesIndexController'
 
       .state 'recipes.edit',
-        url: '/recipes/:id/edit'
+        url: '^/recipes/:id/edit'
         templateUrl: 'recipes/edit.html'
         controller:  'RecipesEditController'
         resolve: authorize: (authorize) -> authorize('admin')
 
       .state 'recipes.show',
-        url: '/recipes/:id'
+        url: '^/recipes/:id'
         templateUrl: 'recipes/show.html'
         controller:  'RecipesShowController'
 
