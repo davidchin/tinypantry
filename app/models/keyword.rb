@@ -23,7 +23,7 @@ class Keyword < ActiveRecord::Base
         categorisation = keyword.categorisations.with_hidden.find_by(keywordable: keywordable)
 
         if attributes[:name].blank? || attributes[:_destroy]
-          categorisation.send(options[:soft_delete] ? :hide : :destroy) if categorisation
+          categorisation.try(options[:soft_delete] ? :hide : :destroy)
         else
           categorisation.unhide if categorisation.try(:hidden?)
           keyword.update(attributes)
