@@ -7,9 +7,9 @@ angular.module('seo')
     set: (title, description) ->
       @title = title
 
-      if description.length > 150
+      if description?.length > 150
         @description = description.substr(0, 150) + '...'
-      else
+      else if description?
         @description = description
 
     reset: ->

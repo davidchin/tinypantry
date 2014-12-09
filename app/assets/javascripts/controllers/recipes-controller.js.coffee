@@ -1,5 +1,5 @@
 angular.module('recipe')
-  .controller 'RecipesIndexController', ($scope, $state, $stateParams, $location, $q, currentUser, flash, ga, query, breadcrumbs, BaseController, Recipes, Modal) ->
+  .controller 'RecipesIndexController', ($scope, $state, $stateParams, $location, $q, currentUser, flash, ga, query, breadcrumbs, head, BaseController, Recipes, Modal) ->
     class RecipesIndexController extends BaseController
       constructor: ->
         @recipes = new Recipes
@@ -47,6 +47,7 @@ angular.module('recipe')
         breadcrumbs.reset()
 
         if params.category
+          head.set("#{ @recipes.categoryName } Recipes")
           breadcrumbs.add(@recipes.categoryName, 'recipes.category', { category: params.category })
 
       next: (params) ->
