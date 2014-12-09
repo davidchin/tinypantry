@@ -28,7 +28,7 @@ angular.module('asset')
             elementWidth = element.parent().width() || 0
             elementHeight = elementWidth * ratio
 
-            attrs.$set('height', elementHeight) if elementHeight
+            attrs.$set('height', elementHeight) if elementHeight > 0
 
             return elementHeight
 
@@ -42,15 +42,15 @@ angular.module('asset')
             $animate.addClass(element, 'image--is-loading')
 
             # Set preload size
-            $timeout ->
-              preloadSize = setPreloadSize()
+            preloadSize = setPreloadSize()
+            $timeout -> preloadSize = setPreloadSize()
 
-              # Init lazyload
-              element.unveil 100, ->
-                $(this).load ->
-                  scope.$evalAsync ->
-                    $animate.removeClass(element, 'image--is-loading')
-                      .then -> attrs.$set('height', null) if preloadSize
+            # Init lazyload
+            element.unveil 100, ->
+              $(this).load ->
+                scope.$evalAsync ->
+                  $animate.removeClass(element, 'image--is-loading')
+                    .then -> attrs.$set('height', null) if preloadSize
 
           # Observe src
           attrs.$observe 'ngSrc', lazyloadImage

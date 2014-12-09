@@ -13,8 +13,8 @@ angular.module('navigation')
       scrollTop = undefined
       historyStack.record(fromUrl)
 
-    $rootScope.$on 'pageload:ready', ->
-      $timeout -> $document.scrollTop(scrollTop) if scrollTop
+    $rootScope.$on '$viewContentLoaded', ->
+      $timeout -> $document.scrollTop(scrollTop)
 
   .factory 'breadcrumbs', ($state) ->
     class Breadcrumbs
