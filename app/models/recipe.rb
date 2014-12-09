@@ -41,8 +41,7 @@ class Recipe < ActiveRecord::Base
   scope :most_recent, -> { order(published_at: :desc) }
   scope :most_bookmarked, -> { order(bookmarks_count: :desc, published_at: :desc) }
   scope :most_viewed, lambda {
-    joins('LEFT OUTER JOIN visits ON visits.visitable_id = recipes.id')
-      .where('visits.visitable_type = ?', 'Recipe')
+    joins("LEFT OUTER JOIN visits ON visits.visitable_id = recipes.id AND visits.visitable_type = 'Recipe'")
       .order('visits.total_count DESC NULLS LAST, recipes.published_at DESC')
   }
 
