@@ -25,6 +25,9 @@ module Cacheable
 
     def self.last_updated_at
       where(nil).pluck(:updated_at).max
+    rescue
+      # KLUDGE: for 'SELECT DISTINCT, ORDER BY...' error, where 'order' appears after 'distinct'
+      where(nil).to_a.sort_by { |m| -m.updated_at.to_i }.first.updated_at
     end
   end
 end
