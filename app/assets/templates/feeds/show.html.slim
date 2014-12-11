@@ -1,16 +1,17 @@
-h1 {{ feed.name }}
-
 loading-indicator model="feed.status.set" config="{ size: 32 }" class="loading-indicator loading-indicator--block"
 
-ul
-  li
-    strong URL
-    p {{ feed.url }}
-  li
-    strong RSS
-    p {{ feed.rss }}
-  li
-    strong Last imported
-    p {{ feed.lastImported }}
+div ng-show="feed.status.set"
+  h1 {{ feed.name }}
 
-a ui-sref="feeds.edit({ id: feed.id })" Edit
+  ul
+    li
+      strong URL
+      p {{ feed.url }}
+    li
+      strong RSS
+      p {{ feed.rss }}
+    li
+      strong Last imported
+      p {{ feed.lastImported }}
+
+  a ui-sref="feeds.edit({ id: feed.id })" Edit

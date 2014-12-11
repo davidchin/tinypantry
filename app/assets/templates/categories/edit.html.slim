@@ -3,8 +3,9 @@ section class="app-body"
 
   ng-include src="'shared/_breadcrumbs.html'"
 
-  h1 class="title"
-    | Edit Category
-    small class="title__subtitle" {{ category.name }}
+  div ng-show="category.status.set"
+    h1 class="title"
+      | Edit Category
+      small class="title__subtitle" {{ category.name }}
 
-  ng-include src="'categories/_form.html'"
+    ng-include src="'categories/_form.html'"

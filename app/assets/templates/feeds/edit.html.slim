@@ -3,8 +3,9 @@ section class="app-body"
 
   ng-include src="'shared/_breadcrumbs.html'"
 
-  h1 class="title"
-    | Edit Feed
-    small class="title__subtitle" {{ feed.name }}
+  div ng-show="feed.status.set"
+    h1 class="title"
+      | Edit Feed
+      small class="title__subtitle" {{ feed.name }}
 
-  ng-include src="'feeds/_form.html'"
+    ng-include src="'feeds/_form.html'"

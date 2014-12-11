@@ -3,16 +3,17 @@ section class="app-body"
 
   ng-include src="'shared/_breadcrumbs.html'"
 
-  h1 class="title" {{ category.name }}
+  div ng-show="category.status.set"
+    h1 class="title" {{ category.name }}
 
-  table
-    tr
-      th Name
-      th Keywords
+    table
+      tr
+        th Name
+        th Keywords
 
-    tr
-      td {{ category.name }}
-      td {{ category.keywordsAll }}
+      tr
+        td {{ category.name }}
+        td {{ category.keywordsAll }}
 
-  div class="form__footer"
-    a class="button" ui-sref="categories.edit({ id: category.id })" Edit
+    div class="form__footer"
+      a class="button" ui-sref="categories.edit({ id: category.id })" Edit
