@@ -25,9 +25,13 @@ class Keyword < ActiveRecord::Base
         if attributes[:name].blank? || attributes[:_destroy]
           categorisation.try(options[:soft_delete] ? :hide : :destroy)
         else
-          categorisation.unhide if categorisation.try(:hidden?)
+          if categorisation.try(:hidden?)
+            categorisation.unhide
+          elsif categorisation.blank?
+            keyword.categorisations.create(keywordable: keywordable)
+          end
+
           keyword.update(attributes)
-          keyword.categorisations.create(keywordable: keywordable)
         end
       elsif attributes[:name].present?
         keyword = Keyword.create(attributes)
