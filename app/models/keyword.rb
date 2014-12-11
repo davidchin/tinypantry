@@ -27,6 +27,7 @@ class Keyword < ActiveRecord::Base
         else
           categorisation.unhide if categorisation.try(:hidden?)
           keyword.update(attributes)
+          keyword.categorisations.create(keywordable: keywordable)
         end
       elsif attributes[:name].present?
         keyword = Keyword.create(attributes)

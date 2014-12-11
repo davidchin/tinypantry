@@ -184,7 +184,8 @@ angular.module('model')
           .then (response) => @set(response)
 
       destroy: (params) ->
-        params = _.defaults(params, @pick('id'))
+        params ||= {}
+        _.defaults(params, @pick('id'))
 
         super(params)
           .then (response) =>
