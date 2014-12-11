@@ -63,6 +63,7 @@ angular.module('feed')
     class FeedsEditController extends BaseController
       constructor: ->
         @feed = new Feed
+        @feed.status.editing = true
 
         @read()
 

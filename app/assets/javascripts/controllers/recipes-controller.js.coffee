@@ -131,6 +131,7 @@ angular.module('recipe')
     class RecipesEditController extends BaseController
       constructor: ->
         @recipe = new Recipe
+        @recipe.status.editing = true
 
         @read()
 

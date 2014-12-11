@@ -57,6 +57,7 @@ angular.module('category')
     class CategoriesEditController extends BaseController
       constructor: ->
         @category = new Category
+        @category.status.editing = true
 
         @read()
 
