@@ -37,8 +37,6 @@ module Api
 
       def find_categories
         @categories = Category.order_by(params[:order_by])
-                              .page(params[:page])
-                              .per(50)
       end
 
       def find_category
