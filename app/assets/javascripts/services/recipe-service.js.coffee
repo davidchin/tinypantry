@@ -38,6 +38,8 @@ angular.module('recipe')
             return recipe
 
       set: (data) ->
+        data.keywords = [] unless data.keywords
+
         output = super(data)
         @attr('slugId', [@id, @slug].join('-'))
 
