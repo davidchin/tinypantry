@@ -7,5 +7,9 @@ form class="form" ng-submit="submit()"
     input type="text" placeholder="Keyword" ng-model="keyword.name"
 
   div class="form__footer"
-    button type="submit" class="button" Submit
-    button type="button" class="button button--danger" ng-show="category.status.editing" ng-click="destroy()" Delete
+    button type="submit" class="button"
+      loading-indicator model="!category.status.submitPending" class="loading-indicator loading-indicator--inline-left"
+      | Submit
+    button type="button" class="button button--danger" ng-show="category.status.editing" ng-click="destroy()"
+      loading-indicator model="!category.status.destroyPending" class="loading-indicator loading-indicator--inline-left"
+      | Delete

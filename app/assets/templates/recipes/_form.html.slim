@@ -16,5 +16,9 @@ form class="form" ng-submit="submit()"
     input type="text" placeholder="Keyword" ng-model="keyword.name" ng-disabled="keyword.hidden"
 
   div class="form__footer"
-    button type="submit" class="button" Submit
-    button type="button" class="button button--danger" ng-show="recipe.status.editing" ng-click="destroy()" Delete
+    button type="submit" class="button"
+      loading-indicator model="!recipe.status.submitPending" class="loading-indicator loading-indicator--inline-left"
+      | Submit
+    button type="button" class="button button--danger" ng-show="recipe.status.editing" ng-click="destroy()"
+      loading-indicator model="!recipe.status.destroyPending" class="loading-indicator loading-indicator--inline-left"
+      | Delete

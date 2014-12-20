@@ -25,13 +25,13 @@ class Categorisation < ActiveRecord::Base
   end
 
   def hide
-    return self if hidden
+    return self if hidden?
 
     update(hidden_at: Time.now.in_time_zone)
   end
 
   def unhide
-    return self unless hidden
+    return self unless hidden?
 
     update(hidden_at: nil)
   end

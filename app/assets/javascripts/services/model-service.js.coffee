@@ -161,6 +161,9 @@ angular.module('model')
         for flag, value of flags[status]
           @status["#{ action }#{ _.string.capitalize(flag) }"] = value
 
+          if action in ['update', 'create']
+            @status["submit#{ _.string.capitalize(flag) }"] = value
+
         return @status
 
   .factory 'Model', (BaseModel) ->

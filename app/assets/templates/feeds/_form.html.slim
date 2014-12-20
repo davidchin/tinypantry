@@ -9,5 +9,9 @@ form class="form" ng-submit="submit()"
   input type="url" ng-model="feed.rss"
 
   div class="form__footer"
-    button type="submit" class="button" Submit
-    button type="button" class="button button--danger" ng-show="feed.status.editing" ng-click="destroy()" Delete
+    button type="submit" class="button"
+      loading-indicator model="!feed.status.submitPending" class="loading-indicator loading-indicator--inline-left"
+      | Submit
+    button type="button" class="button button--danger" ng-show="feed.status.editing" ng-click="destroy()"
+      loading-indicator model="!feed.status.destroyPending" class="loading-indicator loading-indicator--inline-left"
+      | Delete
