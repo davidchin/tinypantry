@@ -5,6 +5,7 @@ json.cache! ['v1', recipe] do
                         :published_at,
                         :slug,
                         :url,
+                        :remote_image_url,
                         :bookmarks_count,
                         :image_urls,
                         :approved,
