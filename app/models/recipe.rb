@@ -193,7 +193,7 @@ class Recipe < ActiveRecord::Base
 
   def matched_keywords
     name_matcher = FuzzyMatch.new(Keyword.all, read: :name, threshold: 0.25)
-    desc_matcher = FuzzyMatch.new(Keyword.all, read: :name, threshold: 0.1)
+    desc_matcher = FuzzyMatch.new(Keyword.all, read: :name, threshold: 0.05)
 
     (name_matcher.find_all(name) + desc_matcher.find_all(description)).uniq
   end
